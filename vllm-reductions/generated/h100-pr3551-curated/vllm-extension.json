@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "available": true,
+  "candidates": [
+    "/home/dev/helion/.venv/lib/python3.12/site-packages/vllm/_C_stable_libtorch.abi3.so"
+  ],
+  "extension": {
+    "path": "/home/dev/helion/.venv/lib/python3.12/site-packages/vllm/_C_stable_libtorch.abi3.so",
+    "required_ops": [
+      "dynamic_per_token_scaled_fp8_quant",
+      "per_token_group_fp8_quant",
+      "rms_norm_dynamic_per_token_quant",
+      "rms_norm_per_block_quant",
+      "silu_and_mul_per_block_quant",
+      "fused_qk_norm_rope"
+    ],
+    "sha256": "27f0779487e3cca6dcbcae9daa693ebd5a3ccd6af4ebf76b6056cb4d9fac0cdc"
+  },
+  "torch": "2.13.0.dev20260520+cu130",
+  "cuda_runtime": "13.0",
+  "cuda_visible_devices": "1",
+  "gpu": "NVIDIA H100 80GB HBM3"
+}
