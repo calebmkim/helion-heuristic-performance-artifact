@@ -21,9 +21,8 @@ Fix: append a random query string and send no-cache headers, e.g.
 Verify with `grep -o '<link rel="canonical"[^>]*>'` — the canonical must match the slug you asked for.
 (Both wrong-body responses had a canonical pointing at the *other* post, which is how I caught it.)
 
-Local verbatim transcripts I extracted (markdown, from the correct bodies) are alongside this file:
-`_source-intro-post.md`, `_source-foundation-post.md`, `_source-lfbo-post.md`,
-`_source-llm-autotune-post.md`, `_source-vllm-post.md`.
+I extracted verbatim markdown transcripts (from the correct bodies) while reading, but
+they are not committed here -- see `00-sources.md` for links to all eight posts.
 
 ### The full Helion series (chronological) — the new post is post #9
 

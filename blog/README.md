@@ -7,7 +7,7 @@ figures it uses and the notes the numbers were checked against.
 |---|---|
 | `BLOG_POST.md` | The draft. An HTML comment at the end lists every number with its source and the open questions before publication. |
 | `figures/` | The figures the draft references, with their generating scripts. |
-| `research/` | Notes from a verification pass: every headline number re-derived from raw result files, the heuristic implementation read against the traces, and the voice/positioning of the earlier posts in the series. |
+| `research/` | Notes from a verification pass: every headline number re-derived from raw result files, the heuristic implementation read against the traces, and the voice/positioning of the earlier posts in the series. `research/00-sources.md` links the eight published Helion posts the voice notes are based on. |
 
 ## Regenerating the figures
 
