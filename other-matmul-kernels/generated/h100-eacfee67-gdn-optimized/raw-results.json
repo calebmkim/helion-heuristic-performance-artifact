@@ -1,0 +1,2698 @@
+{
+  "schema_version": 2,
+  "profile": "h100-off-corpus-v1",
+  "manifest": "/home/dev/local/helion-heuristic-performance-artifact/other-matmul-kernels/shapes.json",
+  "manifest_sha256": "325b9822a42282444ddfdd5c64e8f11c2eaed79dcbb3a9874101c15722497afe",
+  "run_fingerprint": "7d6e5c7a75ec0d6dc7bacbd8da0f4ca6f66f0aee69bc979149d939fecb35d1d3",
+  "arms": [
+    "default",
+    "seed",
+    "torch_compile"
+  ],
+  "timing": {
+    "method": "Helion do_bench CUDA device timing; median within do_bench, then median of balanced outer rounds",
+    "outer_rounds": 3,
+    "arms_compiled_and_timed_together": true,
+    "fresh_process_per_shape": true
+  },
+  "selection": {
+    "default": "ConfigSpec._base_default_config()",
+    "seed": "ConfigSpec.default_config(), the promoted rank-0 compiler seed merged with base defaults",
+    "torch_compile": "natural PyTorch reference compiled with max-autotune-no-cudagraphs; TorchInductor GEMM/conv choices restricted to Triton and generated source audited",
+    "autotuning": "disabled",
+    "tuned_cache": "disabled"
+  },
+  "started_at_utc": "2026-09-03T23:28:04.721265+00:00",
+  "finished_at_utc": "2026-09-03T23:30:32.289462+00:00",
+  "requested_gpu": "0",
+  "helion_root": "/home/dev/local/helion-sm90-matmul-port",
+  "helion_git": {
+    "commit": "eacfee67c0fdbc5a1c068f16a3b2f9f15ce23eb7",
+    "branch": "sm90-matmul-b200-port",
+    "dirty": true
+  },
+  "environment": {
+    "host": "gpu-dev-a58be317",
+    "platform": "Linux-6.12.83-115.161.amzn2023.x86_64-x86_64-with-glibc2.39",
+    "versions": {
+      "python": "3.12.3",
+      "torch": "2.12.0+cu132",
+      "cuda_runtime": "13.2",
+      "helion_file": "/home/dev/local/helion-sm90-matmul-port/helion/__init__.py",
+      "triton": "3.7.0"
+    },
+    "gpu": {
+      "name": "NVIDIA H100 80GB HBM3",
+      "capability": [
+        9,
+        0
+      ],
+      "total_memory_bytes": 85019590656,
+      "visible_device": "0"
+    },
+    "helion_git": {
+      "commit": "eacfee67c0fdbc5a1c068f16a3b2f9f15ce23eb7",
+      "branch": "sm90-matmul-b200-port",
+      "dirty": true
+    }
+  },
+  "records": [
+    {
+      "cell_key": "gdn_forward_h:b1_t8192_h64_c64_d64_s128",
+      "family": "gdn_forward_h",
+      "family_label": "GDN forward-H",
+      "category": "multi_matmul",
+      "expected_heuristic": "triton_h100_multi_matmul",
+      "shape_id": "b1_t8192_h64_c64_d64_s128",
+      "shape_convention": [
+        "B",
+        "T",
+        "H",
+        "C",
+        "D",
+        "state"
+      ],
+      "values": [
+        1,
+        8192,
+        64,
+        64,
+        64,
+        128
+      ],
+      "dtype": "bfloat16",
+      "source": "published B200 held-out",
+      "body": "examples/gdn_fwd_h.py:helion_gdn_fwd_h",
+      "reference": "optimized PyTorch GDN scan with BF16 BMM and FP32 state arithmetic",
+      "environment": {
+        "host": "gpu-dev-a58be317",
+        "platform": "Linux-6.12.83-115.161.amzn2023.x86_64-x86_64-with-glibc2.39",
+        "versions": {
+          "python": "3.12.3",
+          "torch": "2.12.0+cu132",
+          "cuda_runtime": "13.2",
+          "helion_file": "/home/dev/local/helion-sm90-matmul-port/helion/__init__.py",
+          "triton": "3.7.0"
+        },
+        "gpu": {
+          "name": "NVIDIA H100 80GB HBM3",
+          "capability": [
+            9,
+            0
+          ],
+          "total_memory_bytes": 85019590656,
+          "visible_device": "0"
+        },
+        "helion_git": {
+          "commit": "eacfee67c0fdbc5a1c068f16a3b2f9f15ce23eb7",
+          "branch": "sm90-matmul-b200-port",
+          "dirty": true
+        }
+      },
+      "heuristics_fired": [
+        "triton_h100_multi_matmul"
+      ],
+      "expected_heuristic_fired": true,
+      "compiler_default_fragment": {
+        "block_sizes": [
+          64
+        ],
+        "num_warps": 8,
+        "num_stages": 6
+      },
+      "compiler_seed_count": 6,
+      "compiler_seed_configs": [
+        {
+          "block_sizes": [
+            64
+          ],
+          "num_warps": 8,
+          "num_stages": 6
+        },
+        {
+          "block_sizes": [
+            16
+          ],
+          "num_warps": 1,
+          "num_stages": 3
+        },
+        {
+          "block_sizes": [
+            32
+          ],
+          "num_warps": 2,
+          "num_stages": 5
+        },
+        {
+          "block_sizes": [
+            16
+          ],
+          "num_warps": 4,
+          "num_stages": 3
+        },
+        {
+          "block_sizes": [
+            128
+          ],
+          "loop_orders": [
+            [
+              0,
+              1,
+              2
+            ]
+          ],
+          "l2_groupings": [
+            1
+          ],
+          "range_unroll_factors": [
+            0,
+            0
+          ],
+          "range_warp_specializes": [],
+          "range_num_stages": [],
+          "range_multi_buffers": [
+            null,
+            null
+          ],
+          "range_flattens": [
+            null,
+            null
+          ],
+          "load_eviction_policies": [
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "num_warps": 8,
+          "num_stages": 4,
+          "indexing": [
+            "pointer",
+            "pointer",
+            "pointer",
+            "pointer",
+            "pointer",
+            "pointer"
+          ],
+          "atomic_indexing": [],
+          "pid_type": "flat"
+        },
+        {
+          "block_sizes": [
+            64
+          ],
+          "loop_orders": [
+            [
+              0,
+              1,
+              2
+            ]
+          ],
+          "l2_groupings": [
+            1
+          ],
+          "range_unroll_factors": [
+            0,
+            0
+          ],
+          "range_warp_specializes": [],
+          "range_num_stages": [],
+          "range_multi_buffers": [
+            null,
+            null
+          ],
+          "range_flattens": [
+            null,
+            null
+          ],
+          "load_eviction_policies": [
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "num_warps": 4,
+          "num_stages": 6,
+          "indexing": [
+            "pointer",
+            "pointer",
+            "pointer",
+            "pointer",
+            "pointer",
+            "pointer"
+          ],
+          "atomic_indexing": [],
+          "pid_type": "flat"
+        }
+      ],
+      "primary_seed_is_promoted_default": true,
+      "matmul_facts": [
+        {
+          "static_m": 8192,
+          "static_n": 128,
+          "static_k": 64,
+          "m_block_id": 3,
+          "n_block_id": 0,
+          "k_block_id": null
+        },
+        {
+          "static_m": 64,
+          "static_n": 128,
+          "static_k": 8192,
+          "m_block_id": null,
+          "n_block_id": 0,
+          "k_block_id": 3
+        }
+      ],
+      "arms": {
+        "default": {
+          "config": {
+            "block_sizes": [
+              32
+            ],
+            "loop_orders": [
+              [
+                0,
+                1,
+                2
+              ]
+            ],
+            "l2_groupings": [
+              1
+            ],
+            "range_unroll_factors": [
+              0,
+              0
+            ],
+            "range_warp_specializes": [],
+            "range_num_stages": [],
+            "range_multi_buffers": [
+              null,
+              null
+            ],
+            "range_flattens": [
+              null,
+              null
+            ],
+            "load_eviction_policies": [
+              "",
+              "",
+              "",
+              "",
+              ""
+            ],
+            "num_warps": 4,
+            "num_stages": 1,
+            "indexing": [
+              "pointer",
+              "pointer",
+              "pointer",
+              "pointer",
+              "pointer",
+              "pointer"
+            ],
+            "atomic_indexing": [],
+            "pid_type": "flat"
+          },
+          "config_source": "ConfigSpec._base_default_config()",
+          "status": "ok",
+          "correctness": {
+            "pass": true,
+            "outputs": [
+              {
+                "shape": [
+                  1,
+                  128,
+                  64,
+                  64,
+                  128
+                ],
+                "dtype": "bfloat16",
+                "finite": true
+              }
+            ]
+          },
+          "latency_us": 404.6719968318939,
+          "outer_round_samples_us": [
+            405.2160084247589,
+            404.6719968318939,
+            403.9359986782074
+          ]
+        },
+        "seed": {
+          "config": {
+            "block_sizes": [
+              64
+            ],
+            "loop_orders": [
+              [
+                0,
+                1,
+                2
+              ]
+            ],
+            "l2_groupings": [
+              1
+            ],
+            "range_unroll_factors": [
+              0,
+              0
+            ],
+            "range_multi_buffers": [
+              null,
+              null
+            ],
+            "range_flattens": [
+              null,
+              null
+            ],
+            "load_eviction_policies": [
+              "",
+              "",
+              "",
+              "",
+              ""
+            ],
+            "num_warps": 8,
+            "num_stages": 6,
+            "indexing": [
+              "pointer",
+              "pointer",
+              "pointer",
+              "pointer",
+              "pointer",
+              "pointer"
+            ],
+            "pid_type": "flat",
+            "atomic_indexing": [],
+            "range_warp_specializes": [],
+            "range_num_stages": []
+          },
+          "config_source": "ConfigSpec.default_config(): promoted rank-0 compiler seed layered over base defaults",
+          "status": "ok",
+          "correctness": {
+            "pass": true,
+            "criterion": "max_abs <= 0.1 or max_abs/max(reference_abs_max,1e-6) <= 0.05",
+            "outputs": [
+              {
+                "pass": true,
+                "shape": [
+                  1,
+                  128,
+                  64,
+                  64,
+                  128
+                ],
+                "dtype": "bfloat16",
+                "shape_matches": true,
+                "dtype_matches": true,
+                "finite": true,
+                "max_abs": 0.0,
+                "max_rel_to_output_max": 0.0
+              }
+            ]
+          },
+          "latency_us": 158.4320068359375,
+          "outer_round_samples_us": [
+            158.6879938840866,
+            158.4320068359375,
+            158.07999670505524
+          ]
+        },
+        "torch_compile": {
+          "config_source": "torch.compile(mode='max-autotune-no-cudagraphs', fullgraph=True)",
+          "reference": "optimized PyTorch GDN scan with BF16 BMM and FP32 state arithmetic",
+          "inductor_options": {
+            "max_autotune_gemm_backends": "TRITON",
+            "max_autotune_conv_backends": "TRITON",
+            "triton.autotune_cublasLt": false,
+            "fx_graph_cache": false,
+            "force_disable_caches": true,
+            "epilogue_fusion": false
+          },
+          "audit": {
+            "pass": true,
+            "policy": "Require generated Triton kernels and reject generated calls through ATen/extern_kernels or references to cuBLAS, cuDNN, CUTLASS, Flash/Efficient Attention, or NVGEMM.",
+            "inductor_options": {
+              "max_autotune_gemm_backends": "TRITON",
+              "max_autotune_conv_backends": "TRITON",
+              "triton.autotune_cublasLt": false,
+              "fx_graph_cache": false,
+              "force_disable_caches": true,
+              "epilogue_fusion": false
+            },
+            "generated_source_count": 1,
+            "generated_source_sha256": [
+              "3646bb6b0909ec874b488bbb8d709441021c8e4e1730c4ccbe3c46ac3eb08c17"
+            ],
+            "generated_source_bytes": [
+              61954
+            ],
+            "triton_kernel_count": 10,
+            "forbidden_matches": []
+          },
+          "status": "ok",
+          "correctness": {
+            "pass": true,
+            "criterion": "max_abs <= 0.1 or max_abs/max(reference_abs_max,1e-6) <= 0.05",
+            "outputs": [
+              {
+                "pass": true,
+                "shape": [
+                  1,
+                  128,
+                  64,
+                  64,
+                  128
+                ],
+                "dtype": "bfloat16",
+                "shape_matches": true,
+                "dtype_matches": true,
+                "finite": true,
+                "max_abs": 0.0001220703125,
+                "max_rel_to_output_max": 0.006622516556291391
+              }
+            ]
+          },
+          "latency_us": 9017.152309417725,
+          "outer_round_samples_us": [
+            8945.759773254395,
+            9165.664196014404,
+            9017.152309417725
+          ]
+        }
+      },
+      "run_fingerprint": "7d6e5c7a75ec0d6dc7bacbd8da0f4ca6f66f0aee69bc979149d939fecb35d1d3"
+    },
+    {
+      "cell_key": "gdn_forward_h:b2_t8192_h32_c128_d128_s256",
+      "family": "gdn_forward_h",
+      "family_label": "GDN forward-H",
+      "category": "multi_matmul",
+      "expected_heuristic": "triton_h100_multi_matmul",
+      "shape_id": "b2_t8192_h32_c128_d128_s256",
+      "shape_convention": [
+        "B",
+        "T",
+        "H",
+        "C",
+        "D",
+        "state"
+      ],
+      "values": [
+        2,
+        8192,
+        32,
+        128,
+        128,
+        256
+      ],
+      "dtype": "bfloat16",
+      "source": "published B200 held-out",
+      "body": "examples/gdn_fwd_h.py:helion_gdn_fwd_h",
+      "reference": "optimized PyTorch GDN scan with BF16 BMM and FP32 state arithmetic",
+      "environment": {
+        "host": "gpu-dev-a58be317",
+        "platform": "Linux-6.12.83-115.161.amzn2023.x86_64-x86_64-with-glibc2.39",
+        "versions": {
+          "python": "3.12.3",
+          "torch": "2.12.0+cu132",
+          "cuda_runtime": "13.2",
+          "helion_file": "/home/dev/local/helion-sm90-matmul-port/helion/__init__.py",
+          "triton": "3.7.0"
+        },
+        "gpu": {
+          "name": "NVIDIA H100 80GB HBM3",
+          "capability": [
+            9,
+            0
+          ],
+          "total_memory_bytes": 85019590656,
+          "visible_device": "0"
+        },
+        "helion_git": {
+          "commit": "eacfee67c0fdbc5a1c068f16a3b2f9f15ce23eb7",
+          "branch": "sm90-matmul-b200-port",
+          "dirty": true
+        }
+      },
+      "heuristics_fired": [
+        "triton_h100_multi_matmul"
+      ],
+      "expected_heuristic_fired": true,
+      "compiler_default_fragment": {
+        "block_sizes": [
+          128
+        ],
+        "num_warps": 8,
+        "num_stages": 2
+      },
+      "compiler_seed_count": 5,
+      "compiler_seed_configs": [
+        {
+          "block_sizes": [
+            128
+          ],
+          "num_warps": 8,
+          "num_stages": 2
+        },
+        {
+          "block_sizes": [
+            16
+          ],
+          "num_warps": 1,
+          "num_stages": 1
+        },
+        {
+          "block_sizes": [
+            32
+          ],
+          "num_warps": 2,
+          "num_stages": 1
+        },
+        {
+          "block_sizes": [
+            16
+          ],
+          "num_warps": 4,
+          "num_stages": 3
+        },
+        {
+          "block_sizes": [
+            128
+          ],
+          "loop_orders": [
+            [
+              0,
+              1,
+              2
+            ]
+          ],
+          "l2_groupings": [
+            1
+          ],
+          "range_unroll_factors": [
+            0,
+            0
+          ],
+          "range_warp_specializes": [],
+          "range_num_stages": [],
+          "range_multi_buffers": [
+            null,
+            null
+          ],
+          "range_flattens": [
+            null,
+            null
+          ],
+          "load_eviction_policies": [
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "num_warps": 8,
+          "num_stages": 6,
+          "indexing": [
+            "pointer",
+            "pointer",
+            "pointer",
+            "pointer",
+            "pointer",
+            "pointer"
+          ],
+          "atomic_indexing": [],
+          "pid_type": "flat"
+        }
+      ],
+      "primary_seed_is_promoted_default": true,
+      "matmul_facts": [
+        {
+          "static_m": 8192,
+          "static_n": 256,
+          "static_k": 128,
+          "m_block_id": 3,
+          "n_block_id": 0,
+          "k_block_id": null
+        },
+        {
+          "static_m": 128,
+          "static_n": 256,
+          "static_k": 8192,
+          "m_block_id": null,
+          "n_block_id": 0,
+          "k_block_id": 3
+        }
+      ],
+      "arms": {
+        "default": {
+          "config": {
+            "block_sizes": [
+              32
+            ],
+            "loop_orders": [
+              [
+                0,
+                1,
+                2
+              ]
+            ],
+            "l2_groupings": [
+              1
+            ],
+            "range_unroll_factors": [
+              0,
+              0
+            ],
+            "range_warp_specializes": [],
+            "range_num_stages": [],
+            "range_multi_buffers": [
+              null,
+              null
+            ],
+            "range_flattens": [
+              null,
+              null
+            ],
+            "load_eviction_policies": [
+              "",
+              "",
+              "",
+              "",
+              ""
+            ],
+            "num_warps": 4,
+            "num_stages": 1,
+            "indexing": [
+              "pointer",
+              "pointer",
+              "pointer",
+              "pointer",
+              "pointer",
+              "pointer"
+            ],
+            "atomic_indexing": [],
+            "pid_type": "flat"
+          },
+          "config_source": "ConfigSpec._base_default_config()",
+          "status": "ok",
+          "correctness": {
+            "pass": true,
+            "outputs": [
+              {
+                "shape": [
+                  2,
+                  64,
+                  32,
+                  128,
+                  256
+                ],
+                "dtype": "bfloat16",
+                "finite": true
+              }
+            ]
+          },
+          "latency_us": 753.2959878444672,
+          "outer_round_samples_us": [
+            752.9600262641907,
+            753.2959878444672,
+            754.4000148773193
+          ]
+        },
+        "seed": {
+          "config": {
+            "block_sizes": [
+              128
+            ],
+            "loop_orders": [
+              [
+                0,
+                1,
+                2
+              ]
+            ],
+            "l2_groupings": [
+              1
+            ],
+            "range_unroll_factors": [
+              0,
+              0
+            ],
+            "range_multi_buffers": [
+              null,
+              null
+            ],
+            "range_flattens": [
+              null,
+              null
+            ],
+            "load_eviction_policies": [
+              "",
+              "",
+              "",
+              "",
+              ""
+            ],
+            "num_warps": 8,
+            "num_stages": 2,
+            "indexing": [
+              "pointer",
+              "pointer",
+              "pointer",
+              "pointer",
+              "pointer",
+              "pointer"
+            ],
+            "pid_type": "flat",
+            "atomic_indexing": [],
+            "range_warp_specializes": [],
+            "range_num_stages": []
+          },
+          "config_source": "ConfigSpec.default_config(): promoted rank-0 compiler seed layered over base defaults",
+          "status": "ok",
+          "correctness": {
+            "pass": true,
+            "criterion": "max_abs <= 0.1 or max_abs/max(reference_abs_max,1e-6) <= 0.05",
+            "outputs": [
+              {
+                "pass": true,
+                "shape": [
+                  2,
+                  64,
+                  32,
+                  128,
+                  256
+                ],
+                "dtype": "bfloat16",
+                "shape_matches": true,
+                "dtype_matches": true,
+                "finite": true,
+                "max_abs": 0.0,
+                "max_rel_to_output_max": 0.0
+              }
+            ]
+          },
+          "latency_us": 287.3919904232025,
+          "outer_round_samples_us": [
+            286.96000576019287,
+            287.9999876022339,
+            287.3919904232025
+          ]
+        },
+        "torch_compile": {
+          "config_source": "torch.compile(mode='max-autotune-no-cudagraphs', fullgraph=True)",
+          "reference": "optimized PyTorch GDN scan with BF16 BMM and FP32 state arithmetic",
+          "inductor_options": {
+            "max_autotune_gemm_backends": "TRITON",
+            "max_autotune_conv_backends": "TRITON",
+            "triton.autotune_cublasLt": false,
+            "fx_graph_cache": false,
+            "force_disable_caches": true,
+            "epilogue_fusion": false
+          },
+          "audit": {
+            "pass": true,
+            "policy": "Require generated Triton kernels and reject generated calls through ATen/extern_kernels or references to cuBLAS, cuDNN, CUTLASS, Flash/Efficient Attention, or NVGEMM.",
+            "inductor_options": {
+              "max_autotune_gemm_backends": "TRITON",
+              "max_autotune_conv_backends": "TRITON",
+              "triton.autotune_cublasLt": false,
+              "fx_graph_cache": false,
+              "force_disable_caches": true,
+              "epilogue_fusion": false
+            },
+            "generated_source_count": 1,
+            "generated_source_sha256": [
+              "42475c8167e2991b56a05c0ebb8b25f8e4700935af50089de5cb34bc553c57bd"
+            ],
+            "generated_source_bytes": [
+              62223
+            ],
+            "triton_kernel_count": 10,
+            "forbidden_matches": []
+          },
+          "status": "ok",
+          "correctness": {
+            "pass": true,
+            "criterion": "max_abs <= 0.1 or max_abs/max(reference_abs_max,1e-6) <= 0.05",
+            "outputs": [
+              {
+                "pass": true,
+                "shape": [
+                  2,
+                  64,
+                  32,
+                  128,
+                  256
+                ],
+                "dtype": "bfloat16",
+                "shape_matches": true,
+                "dtype_matches": true,
+                "finite": true,
+                "max_abs": 0.0001220703125,
+                "max_rel_to_output_max": 0.006622516556291391
+              }
+            ]
+          },
+          "latency_us": 4721.61602973938,
+          "outer_round_samples_us": [
+            4641.488075256348,
+            4721.61602973938,
+            4727.359771728516
+          ]
+        }
+      },
+      "run_fingerprint": "7d6e5c7a75ec0d6dc7bacbd8da0f4ca6f66f0aee69bc979149d939fecb35d1d3"
+    },
+    {
+      "cell_key": "gdn_forward_h:b4_t4096_h64_c128_d64_s128",
+      "family": "gdn_forward_h",
+      "family_label": "GDN forward-H",
+      "category": "multi_matmul",
+      "expected_heuristic": "triton_h100_multi_matmul",
+      "shape_id": "b4_t4096_h64_c128_d64_s128",
+      "shape_convention": [
+        "B",
+        "T",
+        "H",
+        "C",
+        "D",
+        "state"
+      ],
+      "values": [
+        4,
+        4096,
+        64,
+        128,
+        64,
+        128
+      ],
+      "dtype": "bfloat16",
+      "source": "published B200 held-out",
+      "body": "examples/gdn_fwd_h.py:helion_gdn_fwd_h",
+      "reference": "optimized PyTorch GDN scan with BF16 BMM and FP32 state arithmetic",
+      "environment": {
+        "host": "gpu-dev-a58be317",
+        "platform": "Linux-6.12.83-115.161.amzn2023.x86_64-x86_64-with-glibc2.39",
+        "versions": {
+          "python": "3.12.3",
+          "torch": "2.12.0+cu132",
+          "cuda_runtime": "13.2",
+          "helion_file": "/home/dev/local/helion-sm90-matmul-port/helion/__init__.py",
+          "triton": "3.7.0"
+        },
+        "gpu": {
+          "name": "NVIDIA H100 80GB HBM3",
+          "capability": [
+            9,
+            0
+          ],
+          "total_memory_bytes": 85019590656,
+          "visible_device": "0"
+        },
+        "helion_git": {
+          "commit": "eacfee67c0fdbc5a1c068f16a3b2f9f15ce23eb7",
+          "branch": "sm90-matmul-b200-port",
+          "dirty": true
+        }
+      },
+      "heuristics_fired": [
+        "triton_h100_multi_matmul"
+      ],
+      "expected_heuristic_fired": true,
+      "compiler_default_fragment": {
+        "block_sizes": [
+          128
+        ],
+        "num_warps": 8,
+        "num_stages": 3
+      },
+      "compiler_seed_count": 7,
+      "compiler_seed_configs": [
+        {
+          "block_sizes": [
+            128
+          ],
+          "num_warps": 8,
+          "num_stages": 3
+        },
+        {
+          "block_sizes": [
+            16
+          ],
+          "num_warps": 1,
+          "num_stages": 1
+        },
+        {
+          "block_sizes": [
+            32
+          ],
+          "num_warps": 2,
+          "num_stages": 1
+        },
+        {
+          "block_sizes": [
+            16
+          ],
+          "num_warps": 4,
+          "num_stages": 3
+        },
+        {
+          "block_sizes": [
+            128
+          ],
+          "loop_orders": [
+            [
+              0,
+              1,
+              2
+            ]
+          ],
+          "l2_groupings": [
+            1
+          ],
+          "range_unroll_factors": [
+            0,
+            0
+          ],
+          "range_warp_specializes": [],
+          "range_multi_buffers": [
+            null,
+            null
+          ],
+          "range_flattens": [
+            null,
+            null
+          ],
+          "load_eviction_policies": [
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "num_warps": 8,
+          "num_stages": 3,
+          "indexing": [
+            "pointer",
+            "pointer",
+            "pointer",
+            "pointer",
+            "pointer",
+            "pointer"
+          ],
+          "atomic_indexing": [],
+          "pid_type": "persistent_blocked",
+          "num_sm_multiplier": 1
+        },
+        {
+          "block_sizes": [
+            128
+          ],
+          "loop_orders": [
+            [
+              0,
+              1,
+              2
+            ]
+          ],
+          "l2_groupings": [
+            1
+          ],
+          "range_unroll_factors": [
+            0,
+            0
+          ],
+          "range_warp_specializes": [],
+          "range_num_stages": [],
+          "range_multi_buffers": [
+            null,
+            null
+          ],
+          "range_flattens": [
+            null,
+            null
+          ],
+          "load_eviction_policies": [
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "num_warps": 8,
+          "num_stages": 4,
+          "indexing": [
+            "pointer",
+            "pointer",
+            "pointer",
+            "pointer",
+            "pointer",
+            "pointer"
+          ],
+          "atomic_indexing": [],
+          "pid_type": "flat"
+        },
+        {
+          "block_sizes": [
+            128
+          ],
+          "loop_orders": [
+            [
+              0,
+              1,
+              2
+            ]
+          ],
+          "l2_groupings": [
+            1
+          ],
+          "range_unroll_factors": [
+            0,
+            0
+          ],
+          "range_warp_specializes": [],
+          "range_num_stages": [],
+          "range_multi_buffers": [
+            null,
+            null
+          ],
+          "range_flattens": [
+            null,
+            null
+          ],
+          "load_eviction_policies": [
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "num_warps": 4,
+          "num_stages": 4,
+          "indexing": [
+            "pointer",
+            "pointer",
+            "pointer",
+            "pointer",
+            "pointer",
+            "pointer"
+          ],
+          "atomic_indexing": [],
+          "pid_type": "flat"
+        }
+      ],
+      "primary_seed_is_promoted_default": true,
+      "matmul_facts": [
+        {
+          "static_m": 4096,
+          "static_n": 128,
+          "static_k": 64,
+          "m_block_id": 3,
+          "n_block_id": 0,
+          "k_block_id": null
+        },
+        {
+          "static_m": 64,
+          "static_n": 128,
+          "static_k": 4096,
+          "m_block_id": null,
+          "n_block_id": 0,
+          "k_block_id": 3
+        }
+      ],
+      "arms": {
+        "default": {
+          "config": {
+            "block_sizes": [
+              32
+            ],
+            "loop_orders": [
+              [
+                0,
+                1,
+                2
+              ]
+            ],
+            "l2_groupings": [
+              1
+            ],
+            "range_unroll_factors": [
+              0,
+              0
+            ],
+            "range_warp_specializes": [],
+            "range_num_stages": [],
+            "range_multi_buffers": [
+              null,
+              null
+            ],
+            "range_flattens": [
+              null,
+              null
+            ],
+            "load_eviction_policies": [
+              "",
+              "",
+              "",
+              "",
+              ""
+            ],
+            "num_warps": 4,
+            "num_stages": 1,
+            "indexing": [
+              "pointer",
+              "pointer",
+              "pointer",
+              "pointer",
+              "pointer",
+              "pointer"
+            ],
+            "atomic_indexing": [],
+            "pid_type": "flat"
+          },
+          "config_source": "ConfigSpec._base_default_config()",
+          "status": "ok",
+          "correctness": {
+            "pass": true,
+            "outputs": [
+              {
+                "shape": [
+                  4,
+                  32,
+                  64,
+                  64,
+                  128
+                ],
+                "dtype": "bfloat16",
+                "finite": true
+              }
+            ]
+          },
+          "latency_us": 387.7599984407425,
+          "outer_round_samples_us": [
+            387.2640132904053,
+            387.7599984407425,
+            387.7759873867035
+          ]
+        },
+        "seed": {
+          "config": {
+            "block_sizes": [
+              128
+            ],
+            "loop_orders": [
+              [
+                0,
+                1,
+                2
+              ]
+            ],
+            "l2_groupings": [
+              1
+            ],
+            "range_unroll_factors": [
+              0,
+              0
+            ],
+            "range_multi_buffers": [
+              null,
+              null
+            ],
+            "range_flattens": [
+              null,
+              null
+            ],
+            "load_eviction_policies": [
+              "",
+              "",
+              "",
+              "",
+              ""
+            ],
+            "num_warps": 8,
+            "num_stages": 3,
+            "indexing": [
+              "pointer",
+              "pointer",
+              "pointer",
+              "pointer",
+              "pointer",
+              "pointer"
+            ],
+            "pid_type": "flat",
+            "atomic_indexing": [],
+            "range_warp_specializes": [],
+            "range_num_stages": []
+          },
+          "config_source": "ConfigSpec.default_config(): promoted rank-0 compiler seed layered over base defaults",
+          "status": "ok",
+          "correctness": {
+            "pass": true,
+            "criterion": "max_abs <= 0.1 or max_abs/max(reference_abs_max,1e-6) <= 0.05",
+            "outputs": [
+              {
+                "pass": true,
+                "shape": [
+                  4,
+                  32,
+                  64,
+                  64,
+                  128
+                ],
+                "dtype": "bfloat16",
+                "shape_matches": true,
+                "dtype_matches": true,
+                "finite": true,
+                "max_abs": 0.0,
+                "max_rel_to_output_max": 0.0
+              }
+            ]
+          },
+          "latency_us": 240.9759983420372,
+          "outer_round_samples_us": [
+            240.9759983420372,
+            241.07199907302856,
+            240.9600019454956
+          ]
+        },
+        "torch_compile": {
+          "config_source": "torch.compile(mode='max-autotune-no-cudagraphs', fullgraph=True)",
+          "reference": "optimized PyTorch GDN scan with BF16 BMM and FP32 state arithmetic",
+          "inductor_options": {
+            "max_autotune_gemm_backends": "TRITON",
+            "max_autotune_conv_backends": "TRITON",
+            "triton.autotune_cublasLt": false,
+            "fx_graph_cache": false,
+            "force_disable_caches": true,
+            "epilogue_fusion": false
+          },
+          "audit": {
+            "pass": true,
+            "policy": "Require generated Triton kernels and reject generated calls through ATen/extern_kernels or references to cuBLAS, cuDNN, CUTLASS, Flash/Efficient Attention, or NVGEMM.",
+            "inductor_options": {
+              "max_autotune_gemm_backends": "TRITON",
+              "max_autotune_conv_backends": "TRITON",
+              "triton.autotune_cublasLt": false,
+              "fx_graph_cache": false,
+              "force_disable_caches": true,
+              "epilogue_fusion": false
+            },
+            "generated_source_count": 1,
+            "generated_source_sha256": [
+              "cc516d97df11c776f62f07123806b2cd77f08ac5aca3d95a6a36b8479585bb31"
+            ],
+            "generated_source_bytes": [
+              62208
+            ],
+            "triton_kernel_count": 10,
+            "forbidden_matches": []
+          },
+          "status": "ok",
+          "correctness": {
+            "pass": true,
+            "criterion": "max_abs <= 0.1 or max_abs/max(reference_abs_max,1e-6) <= 0.05",
+            "outputs": [
+              {
+                "pass": true,
+                "shape": [
+                  4,
+                  32,
+                  64,
+                  64,
+                  128
+                ],
+                "dtype": "bfloat16",
+                "shape_matches": true,
+                "dtype_matches": true,
+                "finite": true,
+                "max_abs": 0.0001220703125,
+                "max_rel_to_output_max": 0.006622516556291391
+              }
+            ]
+          },
+          "latency_us": 2339.583992958069,
+          "outer_round_samples_us": [
+            2356.3520908355713,
+            2339.583992958069,
+            2317.375898361206
+          ]
+        }
+      },
+      "run_fingerprint": "7d6e5c7a75ec0d6dc7bacbd8da0f4ca6f66f0aee69bc979149d939fecb35d1d3"
+    },
+    {
+      "cell_key": "gdn_forward_h:b8_t2048_h32_c256_d64_s128",
+      "family": "gdn_forward_h",
+      "family_label": "GDN forward-H",
+      "category": "multi_matmul",
+      "expected_heuristic": "triton_h100_multi_matmul",
+      "shape_id": "b8_t2048_h32_c256_d64_s128",
+      "shape_convention": [
+        "B",
+        "T",
+        "H",
+        "C",
+        "D",
+        "state"
+      ],
+      "values": [
+        8,
+        2048,
+        32,
+        256,
+        64,
+        128
+      ],
+      "dtype": "bfloat16",
+      "source": "published B200 held-out",
+      "body": "examples/gdn_fwd_h.py:helion_gdn_fwd_h",
+      "reference": "optimized PyTorch GDN scan with BF16 BMM and FP32 state arithmetic",
+      "environment": {
+        "host": "gpu-dev-a58be317",
+        "platform": "Linux-6.12.83-115.161.amzn2023.x86_64-x86_64-with-glibc2.39",
+        "versions": {
+          "python": "3.12.3",
+          "torch": "2.12.0+cu132",
+          "cuda_runtime": "13.2",
+          "helion_file": "/home/dev/local/helion-sm90-matmul-port/helion/__init__.py",
+          "triton": "3.7.0"
+        },
+        "gpu": {
+          "name": "NVIDIA H100 80GB HBM3",
+          "capability": [
+            9,
+            0
+          ],
+          "total_memory_bytes": 85019590656,
+          "visible_device": "0"
+        },
+        "helion_git": {
+          "commit": "eacfee67c0fdbc5a1c068f16a3b2f9f15ce23eb7",
+          "branch": "sm90-matmul-b200-port",
+          "dirty": true
+        }
+      },
+      "heuristics_fired": [
+        "triton_h100_multi_matmul"
+      ],
+      "expected_heuristic_fired": true,
+      "compiler_default_fragment": {
+        "block_sizes": [
+          128
+        ],
+        "num_warps": 8,
+        "num_stages": 1
+      },
+      "compiler_seed_count": 7,
+      "compiler_seed_configs": [
+        {
+          "block_sizes": [
+            128
+          ],
+          "num_warps": 8,
+          "num_stages": 1
+        },
+        {
+          "block_sizes": [
+            16
+          ],
+          "num_warps": 1,
+          "num_stages": 1
+        },
+        {
+          "block_sizes": [
+            32
+          ],
+          "num_warps": 2,
+          "num_stages": 1
+        },
+        {
+          "block_sizes": [
+            16
+          ],
+          "num_warps": 4,
+          "num_stages": 3
+        },
+        {
+          "block_sizes": [
+            128
+          ],
+          "loop_orders": [
+            [
+              0,
+              1,
+              2
+            ]
+          ],
+          "l2_groupings": [
+            1
+          ],
+          "range_unroll_factors": [
+            0,
+            0
+          ],
+          "range_warp_specializes": [],
+          "range_multi_buffers": [
+            null,
+            null
+          ],
+          "range_flattens": [
+            null,
+            null
+          ],
+          "static_ranges": [
+            false
+          ],
+          "load_eviction_policies": [
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "num_warps": 8,
+          "num_stages": 1,
+          "indexing": [
+            "pointer",
+            "pointer",
+            "pointer",
+            "pointer",
+            "pointer",
+            "pointer"
+          ],
+          "atomic_indexing": [],
+          "pid_type": "persistent_blocked",
+          "num_sm_multiplier": 1
+        },
+        {
+          "block_sizes": [
+            128
+          ],
+          "loop_orders": [
+            [
+              0,
+              1,
+              2
+            ]
+          ],
+          "l2_groupings": [
+            1
+          ],
+          "range_unroll_factors": [
+            0,
+            0
+          ],
+          "range_warp_specializes": [],
+          "range_num_stages": [],
+          "range_multi_buffers": [
+            null,
+            null
+          ],
+          "range_flattens": [
+            null,
+            null
+          ],
+          "static_ranges": [
+            false
+          ],
+          "load_eviction_policies": [
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "num_warps": 8,
+          "num_stages": 4,
+          "indexing": [
+            "pointer",
+            "pointer",
+            "pointer",
+            "pointer",
+            "pointer",
+            "pointer"
+          ],
+          "atomic_indexing": [],
+          "pid_type": "flat"
+        },
+        {
+          "block_sizes": [
+            128
+          ],
+          "loop_orders": [
+            [
+              0,
+              1,
+              2
+            ]
+          ],
+          "l2_groupings": [
+            1
+          ],
+          "range_unroll_factors": [
+            0,
+            0
+          ],
+          "range_warp_specializes": [],
+          "range_num_stages": [],
+          "range_multi_buffers": [
+            null,
+            null
+          ],
+          "range_flattens": [
+            null,
+            null
+          ],
+          "static_ranges": [
+            false
+          ],
+          "load_eviction_policies": [
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "num_warps": 4,
+          "num_stages": 4,
+          "indexing": [
+            "pointer",
+            "pointer",
+            "pointer",
+            "pointer",
+            "pointer",
+            "pointer"
+          ],
+          "atomic_indexing": [],
+          "pid_type": "flat"
+        }
+      ],
+      "primary_seed_is_promoted_default": true,
+      "matmul_facts": [
+        {
+          "static_m": 2048,
+          "static_n": 128,
+          "static_k": 64,
+          "m_block_id": 3,
+          "n_block_id": 0,
+          "k_block_id": null
+        },
+        {
+          "static_m": 64,
+          "static_n": 128,
+          "static_k": 2048,
+          "m_block_id": null,
+          "n_block_id": 0,
+          "k_block_id": 3
+        }
+      ],
+      "arms": {
+        "default": {
+          "config": {
+            "block_sizes": [
+              32
+            ],
+            "loop_orders": [
+              [
+                0,
+                1,
+                2
+              ]
+            ],
+            "l2_groupings": [
+              1
+            ],
+            "range_unroll_factors": [
+              0,
+              0
+            ],
+            "range_warp_specializes": [],
+            "range_num_stages": [],
+            "range_multi_buffers": [
+              null,
+              null
+            ],
+            "range_flattens": [
+              null,
+              null
+            ],
+            "static_ranges": [
+              false
+            ],
+            "load_eviction_policies": [
+              "",
+              "",
+              "",
+              "",
+              ""
+            ],
+            "num_warps": 4,
+            "num_stages": 1,
+            "indexing": [
+              "pointer",
+              "pointer",
+              "pointer",
+              "pointer",
+              "pointer",
+              "pointer"
+            ],
+            "atomic_indexing": [],
+            "pid_type": "flat"
+          },
+          "config_source": "ConfigSpec._base_default_config()",
+          "status": "ok",
+          "correctness": {
+            "pass": true,
+            "outputs": [
+              {
+                "shape": [
+                  8,
+                  8,
+                  32,
+                  64,
+                  128
+                ],
+                "dtype": "bfloat16",
+                "finite": true
+              }
+            ]
+          },
+          "latency_us": 222.59199619293213,
+          "outer_round_samples_us": [
+            222.59199619293213,
+            223.03999960422516,
+            222.4320024251938
+          ]
+        },
+        "seed": {
+          "config": {
+            "block_sizes": [
+              128
+            ],
+            "loop_orders": [
+              [
+                0,
+                1,
+                2
+              ]
+            ],
+            "l2_groupings": [
+              1
+            ],
+            "range_unroll_factors": [
+              0,
+              0
+            ],
+            "range_multi_buffers": [
+              null,
+              null
+            ],
+            "range_flattens": [
+              null,
+              null
+            ],
+            "static_ranges": [
+              false
+            ],
+            "load_eviction_policies": [
+              "",
+              "",
+              "",
+              "",
+              ""
+            ],
+            "num_warps": 8,
+            "num_stages": 1,
+            "indexing": [
+              "pointer",
+              "pointer",
+              "pointer",
+              "pointer",
+              "pointer",
+              "pointer"
+            ],
+            "pid_type": "flat",
+            "atomic_indexing": [],
+            "range_warp_specializes": [],
+            "range_num_stages": []
+          },
+          "config_source": "ConfigSpec.default_config(): promoted rank-0 compiler seed layered over base defaults",
+          "status": "ok",
+          "correctness": {
+            "pass": true,
+            "criterion": "max_abs <= 0.1 or max_abs/max(reference_abs_max,1e-6) <= 0.05",
+            "outputs": [
+              {
+                "pass": true,
+                "shape": [
+                  8,
+                  8,
+                  32,
+                  64,
+                  128
+                ],
+                "dtype": "bfloat16",
+                "shape_matches": true,
+                "dtype_matches": true,
+                "finite": true,
+                "max_abs": 0.0,
+                "max_rel_to_output_max": 0.0
+              }
+            ]
+          },
+          "latency_us": 167.29600727558136,
+          "outer_round_samples_us": [
+            167.35999286174774,
+            167.29600727558136,
+            166.84800386428833
+          ]
+        },
+        "torch_compile": {
+          "config_source": "torch.compile(mode='max-autotune-no-cudagraphs', fullgraph=True)",
+          "reference": "optimized PyTorch GDN scan with BF16 BMM and FP32 state arithmetic",
+          "inductor_options": {
+            "max_autotune_gemm_backends": "TRITON",
+            "max_autotune_conv_backends": "TRITON",
+            "triton.autotune_cublasLt": false,
+            "fx_graph_cache": false,
+            "force_disable_caches": true,
+            "epilogue_fusion": false
+          },
+          "audit": {
+            "pass": true,
+            "policy": "Require generated Triton kernels and reject generated calls through ATen/extern_kernels or references to cuBLAS, cuDNN, CUTLASS, Flash/Efficient Attention, or NVGEMM.",
+            "inductor_options": {
+              "max_autotune_gemm_backends": "TRITON",
+              "max_autotune_conv_backends": "TRITON",
+              "triton.autotune_cublasLt": false,
+              "fx_graph_cache": false,
+              "force_disable_caches": true,
+              "epilogue_fusion": false
+            },
+            "generated_source_count": 1,
+            "generated_source_sha256": [
+              "4bd8546275be59879e824b385c57c96082c0ca6a8a62551defd6580166fd00a9"
+            ],
+            "generated_source_bytes": [
+              62106
+            ],
+            "triton_kernel_count": 10,
+            "forbidden_matches": []
+          },
+          "status": "ok",
+          "correctness": {
+            "pass": true,
+            "criterion": "max_abs <= 0.1 or max_abs/max(reference_abs_max,1e-6) <= 0.05",
+            "outputs": [
+              {
+                "pass": true,
+                "shape": [
+                  8,
+                  8,
+                  32,
+                  64,
+                  128
+                ],
+                "dtype": "bfloat16",
+                "shape_matches": true,
+                "dtype_matches": true,
+                "finite": true,
+                "max_abs": 6.103515625e-05,
+                "max_rel_to_output_max": 0.0035971223021582736
+              }
+            ]
+          },
+          "latency_us": 732.7520251274109,
+          "outer_round_samples_us": [
+            734.4320118427277,
+            732.7520251274109,
+            719.0879881381989
+          ]
+        }
+      },
+      "run_fingerprint": "7d6e5c7a75ec0d6dc7bacbd8da0f4ca6f66f0aee69bc979149d939fecb35d1d3"
+    },
+    {
+      "cell_key": "gdn_forward_h:b8_t4096_h80_c256_d64_s128",
+      "family": "gdn_forward_h",
+      "family_label": "GDN forward-H",
+      "category": "multi_matmul",
+      "expected_heuristic": "triton_h100_multi_matmul",
+      "shape_id": "b8_t4096_h80_c256_d64_s128",
+      "shape_convention": [
+        "B",
+        "T",
+        "H",
+        "C",
+        "D",
+        "state"
+      ],
+      "values": [
+        8,
+        4096,
+        80,
+        256,
+        64,
+        128
+      ],
+      "dtype": "bfloat16",
+      "source": "published B200 held-out",
+      "body": "examples/gdn_fwd_h.py:helion_gdn_fwd_h",
+      "reference": "optimized PyTorch GDN scan with BF16 BMM and FP32 state arithmetic",
+      "environment": {
+        "host": "gpu-dev-a58be317",
+        "platform": "Linux-6.12.83-115.161.amzn2023.x86_64-x86_64-with-glibc2.39",
+        "versions": {
+          "python": "3.12.3",
+          "torch": "2.12.0+cu132",
+          "cuda_runtime": "13.2",
+          "helion_file": "/home/dev/local/helion-sm90-matmul-port/helion/__init__.py",
+          "triton": "3.7.0"
+        },
+        "gpu": {
+          "name": "NVIDIA H100 80GB HBM3",
+          "capability": [
+            9,
+            0
+          ],
+          "total_memory_bytes": 85019590656,
+          "visible_device": "0"
+        },
+        "helion_git": {
+          "commit": "eacfee67c0fdbc5a1c068f16a3b2f9f15ce23eb7",
+          "branch": "sm90-matmul-b200-port",
+          "dirty": true
+        }
+      },
+      "heuristics_fired": [
+        "triton_h100_multi_matmul"
+      ],
+      "expected_heuristic_fired": true,
+      "compiler_default_fragment": {
+        "block_sizes": [
+          128
+        ],
+        "num_warps": 8,
+        "num_stages": 1
+      },
+      "compiler_seed_count": 7,
+      "compiler_seed_configs": [
+        {
+          "block_sizes": [
+            128
+          ],
+          "num_warps": 8,
+          "num_stages": 1
+        },
+        {
+          "block_sizes": [
+            16
+          ],
+          "num_warps": 1,
+          "num_stages": 1
+        },
+        {
+          "block_sizes": [
+            32
+          ],
+          "num_warps": 2,
+          "num_stages": 1
+        },
+        {
+          "block_sizes": [
+            16
+          ],
+          "num_warps": 4,
+          "num_stages": 3
+        },
+        {
+          "block_sizes": [
+            128
+          ],
+          "loop_orders": [
+            [
+              0,
+              1,
+              2
+            ]
+          ],
+          "l2_groupings": [
+            1
+          ],
+          "range_unroll_factors": [
+            0,
+            0
+          ],
+          "range_warp_specializes": [],
+          "range_multi_buffers": [
+            null,
+            null
+          ],
+          "range_flattens": [
+            null,
+            null
+          ],
+          "load_eviction_policies": [
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "num_warps": 8,
+          "num_stages": 1,
+          "indexing": [
+            "pointer",
+            "pointer",
+            "pointer",
+            "pointer",
+            "pointer",
+            "pointer"
+          ],
+          "atomic_indexing": [],
+          "pid_type": "persistent_blocked",
+          "num_sm_multiplier": 1
+        },
+        {
+          "block_sizes": [
+            128
+          ],
+          "loop_orders": [
+            [
+              0,
+              1,
+              2
+            ]
+          ],
+          "l2_groupings": [
+            1
+          ],
+          "range_unroll_factors": [
+            0,
+            0
+          ],
+          "range_warp_specializes": [],
+          "range_num_stages": [],
+          "range_multi_buffers": [
+            null,
+            null
+          ],
+          "range_flattens": [
+            null,
+            null
+          ],
+          "load_eviction_policies": [
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "num_warps": 8,
+          "num_stages": 2,
+          "indexing": [
+            "pointer",
+            "pointer",
+            "pointer",
+            "pointer",
+            "pointer",
+            "pointer"
+          ],
+          "atomic_indexing": [],
+          "pid_type": "flat"
+        },
+        {
+          "block_sizes": [
+            128
+          ],
+          "loop_orders": [
+            [
+              0,
+              1,
+              2
+            ]
+          ],
+          "l2_groupings": [
+            1
+          ],
+          "range_unroll_factors": [
+            0,
+            0
+          ],
+          "range_warp_specializes": [],
+          "range_num_stages": [],
+          "range_multi_buffers": [
+            null,
+            null
+          ],
+          "range_flattens": [
+            null,
+            null
+          ],
+          "load_eviction_policies": [
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "num_warps": 4,
+          "num_stages": 2,
+          "indexing": [
+            "pointer",
+            "pointer",
+            "pointer",
+            "pointer",
+            "pointer",
+            "pointer"
+          ],
+          "atomic_indexing": [],
+          "pid_type": "flat"
+        }
+      ],
+      "primary_seed_is_promoted_default": true,
+      "matmul_facts": [
+        {
+          "static_m": 4096,
+          "static_n": 128,
+          "static_k": 64,
+          "m_block_id": 3,
+          "n_block_id": 0,
+          "k_block_id": null
+        },
+        {
+          "static_m": 64,
+          "static_n": 128,
+          "static_k": 4096,
+          "m_block_id": null,
+          "n_block_id": 0,
+          "k_block_id": 3
+        }
+      ],
+      "arms": {
+        "default": {
+          "config": {
+            "block_sizes": [
+              32
+            ],
+            "loop_orders": [
+              [
+                0,
+                1,
+                2
+              ]
+            ],
+            "l2_groupings": [
+              1
+            ],
+            "range_unroll_factors": [
+              0,
+              0
+            ],
+            "range_warp_specializes": [],
+            "range_num_stages": [],
+            "range_multi_buffers": [
+              null,
+              null
+            ],
+            "range_flattens": [
+              null,
+              null
+            ],
+            "load_eviction_policies": [
+              "",
+              "",
+              "",
+              "",
+              ""
+            ],
+            "num_warps": 4,
+            "num_stages": 1,
+            "indexing": [
+              "pointer",
+              "pointer",
+              "pointer",
+              "pointer",
+              "pointer",
+              "pointer"
+            ],
+            "atomic_indexing": [],
+            "pid_type": "flat"
+          },
+          "config_source": "ConfigSpec._base_default_config()",
+          "status": "ok",
+          "correctness": {
+            "pass": true,
+            "outputs": [
+              {
+                "shape": [
+                  8,
+                  16,
+                  80,
+                  64,
+                  128
+                ],
+                "dtype": "bfloat16",
+                "finite": true
+              }
+            ]
+          },
+          "latency_us": 1438.7199878692627,
+          "outer_round_samples_us": [
+            1438.7199878692627,
+            1437.1520280838013,
+            1439.296007156372
+          ]
+        },
+        "seed": {
+          "config": {
+            "block_sizes": [
+              128
+            ],
+            "loop_orders": [
+              [
+                0,
+                1,
+                2
+              ]
+            ],
+            "l2_groupings": [
+              1
+            ],
+            "range_unroll_factors": [
+              0,
+              0
+            ],
+            "range_multi_buffers": [
+              null,
+              null
+            ],
+            "range_flattens": [
+              null,
+              null
+            ],
+            "load_eviction_policies": [
+              "",
+              "",
+              "",
+              "",
+              ""
+            ],
+            "num_warps": 8,
+            "num_stages": 1,
+            "indexing": [
+              "pointer",
+              "pointer",
+              "pointer",
+              "pointer",
+              "pointer",
+              "pointer"
+            ],
+            "pid_type": "flat",
+            "atomic_indexing": [],
+            "range_warp_specializes": [],
+            "range_num_stages": []
+          },
+          "config_source": "ConfigSpec.default_config(): promoted rank-0 compiler seed layered over base defaults",
+          "status": "ok",
+          "correctness": {
+            "pass": true,
+            "criterion": "max_abs <= 0.1 or max_abs/max(reference_abs_max,1e-6) <= 0.05",
+            "outputs": [
+              {
+                "pass": true,
+                "shape": [
+                  8,
+                  16,
+                  80,
+                  64,
+                  128
+                ],
+                "dtype": "bfloat16",
+                "shape_matches": true,
+                "dtype_matches": true,
+                "finite": true,
+                "max_abs": 0.0,
+                "max_rel_to_output_max": 0.0
+              }
+            ]
+          },
+          "latency_us": 804.9760162830353,
+          "outer_round_samples_us": [
+            806.2079846858978,
+            804.8639893531799,
+            804.9760162830353
+          ]
+        },
+        "torch_compile": {
+          "config_source": "torch.compile(mode='max-autotune-no-cudagraphs', fullgraph=True)",
+          "reference": "optimized PyTorch GDN scan with BF16 BMM and FP32 state arithmetic",
+          "inductor_options": {
+            "max_autotune_gemm_backends": "TRITON",
+            "max_autotune_conv_backends": "TRITON",
+            "triton.autotune_cublasLt": false,
+            "fx_graph_cache": false,
+            "force_disable_caches": true,
+            "epilogue_fusion": false
+          },
+          "audit": {
+            "pass": true,
+            "policy": "Require generated Triton kernels and reject generated calls through ATen/extern_kernels or references to cuBLAS, cuDNN, CUTLASS, Flash/Efficient Attention, or NVGEMM.",
+            "inductor_options": {
+              "max_autotune_gemm_backends": "TRITON",
+              "max_autotune_conv_backends": "TRITON",
+              "triton.autotune_cublasLt": false,
+              "fx_graph_cache": false,
+              "force_disable_caches": true,
+              "epilogue_fusion": false
+            },
+            "generated_source_count": 1,
+            "generated_source_sha256": [
+              "5fe6f43417151c6ba650c411e40008b3617dfbaa4419783d3fb496a0827a61af"
+            ],
+            "generated_source_bytes": [
+              62246
+            ],
+            "triton_kernel_count": 10,
+            "forbidden_matches": []
+          },
+          "status": "ok",
+          "correctness": {
+            "pass": true,
+            "criterion": "max_abs <= 0.1 or max_abs/max(reference_abs_max,1e-6) <= 0.05",
+            "outputs": [
+              {
+                "pass": true,
+                "shape": [
+                  8,
+                  16,
+                  80,
+                  64,
+                  128
+                ],
+                "dtype": "bfloat16",
+                "shape_matches": true,
+                "dtype_matches": true,
+                "finite": true,
+                "max_abs": 0.0001220703125,
+                "max_rel_to_output_max": 0.0072992700729927005
+              }
+            ]
+          },
+          "latency_us": 3033.1519842147827,
+          "outer_round_samples_us": [
+            3033.1519842147827,
+            3031.5840244293213,
+            3034.6399545669556
+          ]
+        }
+      },
+      "run_fingerprint": "7d6e5c7a75ec0d6dc7bacbd8da0f4ca6f66f0aee69bc979149d939fecb35d1d3"
+    },
+    {
+      "cell_key": "gdn_forward_h:b1_t4096_h32_c64_d128_s256",
+      "family": "gdn_forward_h",
+      "family_label": "GDN forward-H",
+      "category": "multi_matmul",
+      "expected_heuristic": "triton_h100_multi_matmul",
+      "shape_id": "b1_t4096_h32_c64_d128_s256",
+      "shape_convention": [
+        "B",
+        "T",
+        "H",
+        "C",
+        "D",
+        "state"
+      ],
+      "values": [
+        1,
+        4096,
+        32,
+        64,
+        128,
+        256
+      ],
+      "dtype": "bfloat16",
+      "source": "H100 breadth supplement",
+      "body": "examples/gdn_fwd_h.py:helion_gdn_fwd_h",
+      "reference": "optimized PyTorch GDN scan with BF16 BMM and FP32 state arithmetic",
+      "environment": {
+        "host": "gpu-dev-a58be317",
+        "platform": "Linux-6.12.83-115.161.amzn2023.x86_64-x86_64-with-glibc2.39",
+        "versions": {
+          "python": "3.12.3",
+          "torch": "2.12.0+cu132",
+          "cuda_runtime": "13.2",
+          "helion_file": "/home/dev/local/helion-sm90-matmul-port/helion/__init__.py",
+          "triton": "3.7.0"
+        },
+        "gpu": {
+          "name": "NVIDIA H100 80GB HBM3",
+          "capability": [
+            9,
+            0
+          ],
+          "total_memory_bytes": 85019590656,
+          "visible_device": "0"
+        },
+        "helion_git": {
+          "commit": "eacfee67c0fdbc5a1c068f16a3b2f9f15ce23eb7",
+          "branch": "sm90-matmul-b200-port",
+          "dirty": true
+        }
+      },
+      "heuristics_fired": [
+        "triton_h100_multi_matmul"
+      ],
+      "expected_heuristic_fired": true,
+      "compiler_default_fragment": {
+        "block_sizes": [
+          64
+        ],
+        "num_warps": 8,
+        "num_stages": 5
+      },
+      "compiler_seed_count": 5,
+      "compiler_seed_configs": [
+        {
+          "block_sizes": [
+            64
+          ],
+          "num_warps": 8,
+          "num_stages": 5
+        },
+        {
+          "block_sizes": [
+            16
+          ],
+          "num_warps": 1,
+          "num_stages": 1
+        },
+        {
+          "block_sizes": [
+            32
+          ],
+          "num_warps": 2,
+          "num_stages": 2
+        },
+        {
+          "block_sizes": [
+            16
+          ],
+          "num_warps": 4,
+          "num_stages": 3
+        },
+        {
+          "block_sizes": [
+            64
+          ],
+          "loop_orders": [
+            [
+              0,
+              1,
+              2
+            ]
+          ],
+          "l2_groupings": [
+            1
+          ],
+          "range_unroll_factors": [
+            0,
+            0
+          ],
+          "range_warp_specializes": [],
+          "range_num_stages": [],
+          "range_multi_buffers": [
+            null,
+            null
+          ],
+          "range_flattens": [
+            null,
+            null
+          ],
+          "load_eviction_policies": [
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "num_warps": 4,
+          "num_stages": 4,
+          "indexing": [
+            "pointer",
+            "pointer",
+            "pointer",
+            "pointer",
+            "pointer",
+            "pointer"
+          ],
+          "atomic_indexing": [],
+          "pid_type": "flat"
+        }
+      ],
+      "primary_seed_is_promoted_default": true,
+      "matmul_facts": [
+        {
+          "static_m": 4096,
+          "static_n": 256,
+          "static_k": 128,
+          "m_block_id": 3,
+          "n_block_id": 0,
+          "k_block_id": null
+        },
+        {
+          "static_m": 128,
+          "static_n": 256,
+          "static_k": 4096,
+          "m_block_id": null,
+          "n_block_id": 0,
+          "k_block_id": 3
+        }
+      ],
+      "arms": {
+        "default": {
+          "config": {
+            "block_sizes": [
+              32
+            ],
+            "loop_orders": [
+              [
+                0,
+                1,
+                2
+              ]
+            ],
+            "l2_groupings": [
+              1
+            ],
+            "range_unroll_factors": [
+              0,
+              0
+            ],
+            "range_warp_specializes": [],
+            "range_num_stages": [],
+            "range_multi_buffers": [
+              null,
+              null
+            ],
+            "range_flattens": [
+              null,
+              null
+            ],
+            "load_eviction_policies": [
+              "",
+              "",
+              "",
+              "",
+              ""
+            ],
+            "num_warps": 4,
+            "num_stages": 1,
+            "indexing": [
+              "pointer",
+              "pointer",
+              "pointer",
+              "pointer",
+              "pointer",
+              "pointer"
+            ],
+            "atomic_indexing": [],
+            "pid_type": "flat"
+          },
+          "config_source": "ConfigSpec._base_default_config()",
+          "status": "ok",
+          "correctness": {
+            "pass": true,
+            "outputs": [
+              {
+                "shape": [
+                  1,
+                  64,
+                  32,
+                  128,
+                  256
+                ],
+                "dtype": "bfloat16",
+                "finite": true
+              }
+            ]
+          },
+          "latency_us": 241.16799980401993,
+          "outer_round_samples_us": [
+            241.29600077867508,
+            238.62400650978088,
+            241.16799980401993
+          ]
+        },
+        "seed": {
+          "config": {
+            "block_sizes": [
+              64
+            ],
+            "loop_orders": [
+              [
+                0,
+                1,
+                2
+              ]
+            ],
+            "l2_groupings": [
+              1
+            ],
+            "range_unroll_factors": [
+              0,
+              0
+            ],
+            "range_multi_buffers": [
+              null,
+              null
+            ],
+            "range_flattens": [
+              null,
+              null
+            ],
+            "load_eviction_policies": [
+              "",
+              "",
+              "",
+              "",
+              ""
+            ],
+            "num_warps": 8,
+            "num_stages": 5,
+            "indexing": [
+              "pointer",
+              "pointer",
+              "pointer",
+              "pointer",
+              "pointer",
+              "pointer"
+            ],
+            "pid_type": "flat",
+            "atomic_indexing": [],
+            "range_warp_specializes": [],
+            "range_num_stages": []
+          },
+          "config_source": "ConfigSpec.default_config(): promoted rank-0 compiler seed layered over base defaults",
+          "status": "ok",
+          "correctness": {
+            "pass": true,
+            "criterion": "max_abs <= 0.1 or max_abs/max(reference_abs_max,1e-6) <= 0.05",
+            "outputs": [
+              {
+                "pass": true,
+                "shape": [
+                  1,
+                  64,
+                  32,
+                  128,
+                  256
+                ],
+                "dtype": "bfloat16",
+                "shape_matches": true,
+                "dtype_matches": true,
+                "finite": true,
+                "max_abs": 0.0,
+                "max_rel_to_output_max": 0.0
+              }
+            ]
+          },
+          "latency_us": 118.48000064492226,
+          "outer_round_samples_us": [
+            118.48000064492226,
+            117.27999895811081,
+            119.6800023317337
+          ]
+        },
+        "torch_compile": {
+          "config_source": "torch.compile(mode='max-autotune-no-cudagraphs', fullgraph=True)",
+          "reference": "optimized PyTorch GDN scan with BF16 BMM and FP32 state arithmetic",
+          "inductor_options": {
+            "max_autotune_gemm_backends": "TRITON",
+            "max_autotune_conv_backends": "TRITON",
+            "triton.autotune_cublasLt": false,
+            "fx_graph_cache": false,
+            "force_disable_caches": true,
+            "epilogue_fusion": false
+          },
+          "audit": {
+            "pass": true,
+            "policy": "Require generated Triton kernels and reject generated calls through ATen/extern_kernels or references to cuBLAS, cuDNN, CUTLASS, Flash/Efficient Attention, or NVGEMM.",
+            "inductor_options": {
+              "max_autotune_gemm_backends": "TRITON",
+              "max_autotune_conv_backends": "TRITON",
+              "triton.autotune_cublasLt": false,
+              "fx_graph_cache": false,
+              "force_disable_caches": true,
+              "epilogue_fusion": false
+            },
+            "generated_source_count": 1,
+            "generated_source_sha256": [
+              "2210cb4eeb823e86d46ebb09fb59bff829753400ae07233f31bdf9a395722848"
+            ],
+            "generated_source_bytes": [
+              61993
+            ],
+            "triton_kernel_count": 10,
+            "forbidden_matches": []
+          },
+          "status": "ok",
+          "correctness": {
+            "pass": true,
+            "criterion": "max_abs <= 0.1 or max_abs/max(reference_abs_max,1e-6) <= 0.05",
+            "outputs": [
+              {
+                "pass": true,
+                "shape": [
+                  1,
+                  64,
+                  32,
+                  128,
+                  256
+                ],
+                "dtype": "bfloat16",
+                "shape_matches": true,
+                "dtype_matches": true,
+                "finite": true,
+                "max_abs": 0.0001220703125,
+                "max_rel_to_output_max": 0.006622516556291391
+              }
+            ]
+          },
+          "latency_us": 5037.15181350708,
+          "outer_round_samples_us": [
+            4932.960033416748,
+            5160.064220428467,
+            5037.15181350708
+          ]
+        }
+      },
+      "run_fingerprint": "7d6e5c7a75ec0d6dc7bacbd8da0f4ca6f66f0aee69bc979149d939fecb35d1d3"
+    }
+  ]
+}

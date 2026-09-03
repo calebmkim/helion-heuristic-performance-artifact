@@ -1,0 +1,375 @@
+{
+  "schema_version": 1,
+  "profile": "liger-mixed",
+  "description": "Liger-derived model dimensions plus narrowly scoped supplements for kernel regimes absent from Liger's fixed benchmark shapes.",
+  "liger_source": {
+    "repository": "https://github.com/linkedin/Liger-Kernel",
+    "commit": "64594266bbed8db2c428575f46298d77da94f7a7",
+    "model_registry": "benchmark/scripts/benchmark_model_configs.py",
+    "grpo_benchmark": "benchmark/scripts/benchmark_grpo_loss_kernel.py"
+  },
+  "shape_groups": {
+    "normalization": {
+      "shape_convention": [
+        "rows",
+        "hidden"
+      ],
+      "description": "Six unique hidden sizes from Liger's model registry, plus small and large row-count variants at a real Llama hidden size.",
+      "shapes": [
+        {
+          "shape": [
+            2048,
+            2048
+          ],
+          "source": "liger_model_config",
+          "model": "deepseek_v2_lite"
+        },
+        {
+          "shape": [
+            2048,
+            3584
+          ],
+          "source": "liger_model_config",
+          "model": "qwen2.5_7b"
+        },
+        {
+          "shape": [
+            2048,
+            4096
+          ],
+          "source": "liger_model_config",
+          "model": "llama_3_8b"
+        },
+        {
+          "shape": [
+            2048,
+            5120
+          ],
+          "source": "liger_model_config",
+          "model": "qwen2.5_14b"
+        },
+        {
+          "shape": [
+            2048,
+            7168
+          ],
+          "source": "liger_model_config",
+          "model": "deepseek_v3"
+        },
+        {
+          "shape": [
+            2048,
+            8192
+          ],
+          "source": "liger_model_config",
+          "model": "qwen2.5_72b"
+        },
+        {
+          "shape": [
+            128,
+            4096
+          ],
+          "source": "model_anchored_supplement",
+          "basis": "Llama hidden size",
+          "reason": "Liger's fixed model sweep does not cover a small row population."
+        },
+        {
+          "shape": [
+            8192,
+            4096
+          ],
+          "source": "model_anchored_supplement",
+          "basis": "Llama hidden size",
+          "reason": "Liger's fixed model sweep does not cover a large row population."
+        }
+      ]
+    },
+    "softmax": {
+      "shape_convention": [
+        "rows",
+        "reduction_width"
+      ],
+      "description": "Liger hidden-size softmax widths, row-count variants, and short/long attention-width regimes that Liger does not exercise.",
+      "shapes": [
+        {
+          "shape": [
+            2048,
+            2048
+          ],
+          "source": "liger_model_config",
+          "model": "deepseek_v2_lite"
+        },
+        {
+          "shape": [
+            2048,
+            3584
+          ],
+          "source": "liger_model_config",
+          "model": "qwen2.5_7b"
+        },
+        {
+          "shape": [
+            2048,
+            5120
+          ],
+          "source": "liger_model_config",
+          "model": "qwen2.5_14b"
+        },
+        {
+          "shape": [
+            2048,
+            8192
+          ],
+          "source": "liger_model_config",
+          "model": "qwen2.5_72b"
+        },
+        {
+          "shape": [
+            128,
+            4096
+          ],
+          "source": "model_anchored_supplement",
+          "basis": "Llama hidden size",
+          "reason": "Liger's fixed softmax sweep does not cover a small row population."
+        },
+        {
+          "shape": [
+            8192,
+            4096
+          ],
+          "source": "model_anchored_supplement",
+          "basis": "Llama hidden size",
+          "reason": "Liger's fixed softmax sweep does not cover a large row population."
+        },
+        {
+          "shape": [
+            4096,
+            256
+          ],
+          "source": "synthetic_real_regime",
+          "basis": "short attention context",
+          "reason": "Liger treats hidden size as the softmax width and omits short attention reductions."
+        },
+        {
+          "shape": [
+            2048,
+            32768
+          ],
+          "source": "model_anchored_supplement",
+          "basis": "Qwen 2.5 maximum context length",
+          "reason": "Liger's softmax benchmark does not exercise a long-context reduction width."
+        }
+      ]
+    },
+    "vocabulary": {
+      "shape_convention": [
+        "tokens",
+        "vocab"
+      ],
+      "description": "Every unique Liger vocabulary size, token-count variants at Llama 3 vocabulary, and a real 256k-vocabulary regime absent from Liger's registry.",
+      "shapes": [
+        {
+          "shape": [
+            2048,
+            32000
+          ],
+          "source": "liger_model_config",
+          "model": "llama_2_7b"
+        },
+        {
+          "shape": [
+            2048,
+            102400
+          ],
+          "source": "liger_model_config",
+          "model": "deepseek_v2_lite"
+        },
+        {
+          "shape": [
+            2048,
+            128256
+          ],
+          "source": "liger_model_config",
+          "model": "llama_3_8b"
+        },
+        {
+          "shape": [
+            2048,
+            129280
+          ],
+          "source": "liger_model_config",
+          "model": "deepseek_v3"
+        },
+        {
+          "shape": [
+            2048,
+            152064
+          ],
+          "source": "liger_model_config",
+          "model": "qwen2.5"
+        },
+        {
+          "shape": [
+            128,
+            128256
+          ],
+          "source": "model_anchored_supplement",
+          "basis": "Llama 3 vocabulary",
+          "reason": "Liger's fixed model sweep does not cover a small token population."
+        },
+        {
+          "shape": [
+            8192,
+            128256
+          ],
+          "source": "model_anchored_supplement",
+          "basis": "Llama 3 vocabulary",
+          "reason": "Liger's fixed model sweep does not cover a large token population."
+        },
+        {
+          "shape": [
+            2048,
+            256000
+          ],
+          "source": "synthetic_real_regime",
+          "basis": "256k-vocabulary language models",
+          "reason": "Liger's model registry tops out at 152064 and omits this common wider-vocabulary regime."
+        }
+      ]
+    },
+    "grpo": {
+      "shape_convention": [
+        "batch",
+        "sequence",
+        "vocab"
+      ],
+      "description": "The four explicit low-level Liger GRPO shapes plus model-derived vocabulary and longer-completion regimes absent from that benchmark.",
+      "shapes": [
+        {
+          "shape": [
+            2,
+            512,
+            32000
+          ],
+          "source": "liger_grpo_kernel"
+        },
+        {
+          "shape": [
+            4,
+            512,
+            32000
+          ],
+          "source": "liger_grpo_kernel"
+        },
+        {
+          "shape": [
+            8,
+            512,
+            32000
+          ],
+          "source": "liger_grpo_kernel"
+        },
+        {
+          "shape": [
+            16,
+            512,
+            32000
+          ],
+          "source": "liger_grpo_kernel"
+        },
+        {
+          "shape": [
+            4,
+            1024,
+            102400
+          ],
+          "source": "model_anchored_supplement",
+          "basis": "DeepSeek V2 Lite vocabulary",
+          "reason": "Liger's low-level GRPO benchmark fixes both sequence length and vocabulary."
+        },
+        {
+          "shape": [
+            4,
+            1024,
+            128256
+          ],
+          "source": "model_anchored_supplement",
+          "basis": "Llama 3 vocabulary",
+          "reason": "Liger's low-level GRPO benchmark fixes both sequence length and vocabulary."
+        },
+        {
+          "shape": [
+            8,
+            1024,
+            152064
+          ],
+          "source": "model_anchored_supplement",
+          "basis": "Qwen 2.5 vocabulary",
+          "reason": "Liger's low-level GRPO benchmark fixes both sequence length and vocabulary."
+        },
+        {
+          "shape": [
+            4,
+            2048,
+            128256
+          ],
+          "source": "model_anchored_supplement",
+          "basis": "Llama 3 vocabulary with a longer completion",
+          "reason": "Liger's low-level GRPO benchmark fixes the completion length at 512."
+        }
+      ]
+    }
+  },
+  "kernels": {
+    "rms_norm": {
+      "body": "pretuned_kernels/rms_norm/rms_norm.py:rms_norm",
+      "dtype": "bfloat16",
+      "shape_group": "normalization"
+    },
+    "layer_norm": {
+      "body": "pretuned_kernels/layer_norm/layer_norm.py:layer_norm",
+      "dtype": "float16",
+      "shape_group": "normalization"
+    },
+    "softmax": {
+      "body": "pretuned_kernels/softmax/softmax.py:softmax",
+      "dtype": "float16",
+      "shape_group": "softmax"
+    },
+    "cross_entropy": {
+      "body": "pretuned_kernels/cross_entropy/cross_entropy.py:cross_entropy",
+      "dtype": "bfloat16",
+      "shape_group": "vocabulary"
+    },
+    "kl_div": {
+      "body": "examples/kl_div.py:kl_div_forward",
+      "dtype": "bfloat16",
+      "shape_group": "vocabulary"
+    },
+    "jsd": {
+      "body": "examples/jsd.py:jsd_forward",
+      "dtype": "bfloat16",
+      "shape_group": "vocabulary"
+    },
+    "fused_linear_jsd": {
+      "body": "examples/fused_linear_jsd.py:jsd_kernel",
+      "dtype": "bfloat16",
+      "shape_group": "vocabulary"
+    },
+    "grpo": {
+      "body": "examples/grpo_loss.py:grpo_loss_forward",
+      "dtype": "bfloat16",
+      "shape_group": "grpo"
+    },
+    "rms_norm_bwd": {
+      "body": "examples/rms_norm.py:rms_norm_bwd",
+      "dtype": "bfloat16",
+      "shape_group": "normalization"
+    },
+    "layer_norm_bwd": {
+      "body": "examples/layer_norm.py:layer_norm_bwd",
+      "dtype": "bfloat16",
+      "shape_group": "normalization"
+    }
+  }
+}

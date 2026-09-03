@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "profile": "h100-off-corpus-v1",
+  "description": "Formula-matmul and multi-matmul examples outside the linear-attention corpus. Most shapes come from the published B200 held-out population; supplements broaden regimes that were sparse or did not compile on H100.",
+  "families": {
+    "plain_matmul": {
+      "label": "Plain BF16 matmul",
+      "category": "formula_matmul",
+      "expected_heuristic": "triton_h100_formula_matmul",
+      "shape_convention": ["M", "K", "N"],
+      "shapes": [
+        {"id": "m1_k4096_n4096", "values": [1, 4096, 4096], "source": "model-regime synthetic"},
+        {"id": "m32_k4096_n11008", "values": [32, 4096, 11008], "source": "model-regime synthetic"},
+        {"id": "m512_k4096_n4096", "values": [512, 4096, 4096], "source": "model-regime synthetic"},
+        {"id": "m4096_k4096_n11008", "values": [4096, 4096, 11008], "source": "model-regime synthetic"},
+        {"id": "m4096_k11008_n4096", "values": [4096, 11008, 4096], "source": "model-regime synthetic"}
+      ]
+    },
+    "bf16xint16_gemm": {
+      "label": "BF16 x INT16 GEMM",
+      "category": "formula_matmul",
+      "expected_heuristic": "triton_h100_formula_matmul",
+      "shape_convention": ["M", "K", "N"],
+      "shapes": [
+        {"id": "m1_k4096_n4096", "values": [1, 4096, 4096], "source": "published B200 held-out"},
+        {"id": "m32_k4096_n11008", "values": [32, 4096, 11008], "source": "published B200 held-out"},
+        {"id": "m512_k4096_n4096", "values": [512, 4096, 4096], "source": "published B200 held-out"},
+        {"id": "m4096_k4096_n11008", "values": [4096, 4096, 11008], "source": "published B200 held-out"},
+        {"id": "m65536_k1024_n1280", "values": [65536, 1024, 1280], "source": "published B200 held-out"}
+      ]
+    },
+    "broadcast_matmul": {
+      "label": "Broadcast matmul",
+      "category": "formula_matmul",
+      "expected_heuristic": "triton_h100_formula_matmul",
+      "shape_convention": ["B", "M", "K", "N"],
+      "shapes": [
+        {"id": "b32_m1_k4096_n4096", "values": [32, 1, 4096, 4096], "source": "published B200 held-out"},
+        {"id": "b8_m128_k4096_n11008", "values": [8, 128, 4096, 11008], "source": "published B200 held-out"},
+        {"id": "b16_m512_k768_n1024", "values": [16, 512, 768, 1024], "source": "published B200 held-out"},
+        {"id": "b4_m1024_k4096_n4096", "values": [4, 1024, 4096, 4096], "source": "published B200 held-out"},
+        {"id": "b64_m16_k1024_n4096", "values": [64, 16, 1024, 4096], "source": "published B200 held-out"}
+      ]
+    },
+    "gather_gemv": {
+      "label": "Gather GEMV",
+      "category": "formula_matmul",
+      "expected_heuristic": "triton_h100_formula_matmul",
+      "shape_convention": ["B", "S", "N"],
+      "shapes": [
+        {"id": "b8_s2048_n2", "values": [8, 2048, 2], "source": "published B200 held-out diagnostic"},
+        {"id": "b8_s4096_n2", "values": [8, 4096, 2], "source": "published B200 held-out diagnostic"},
+        {"id": "b8_s8192_n2", "values": [8, 8192, 2], "source": "published B200 held-out diagnostic"},
+        {"id": "b8_s14336_n2", "values": [8, 14336, 2], "source": "published B200 held-out diagnostic"},
+        {"id": "b64_s4096_n8", "values": [64, 4096, 8], "source": "published B200 held-out diagnostic"}
+      ]
+    },
+    "mamba2_chunk_state": {
+      "label": "Mamba-2 chunk state",
+      "category": "formula_matmul",
+      "expected_heuristic": "triton_h100_formula_matmul",
+      "shape_convention": ["B", "H", "G", "T", "C", "D", "state"],
+      "shapes": [
+        {"id": "b1_h64_g8_t8192_c64_d64_s128", "values": [1, 64, 8, 8192, 64, 64, 128], "source": "published state-space regime"},
+        {"id": "b2_h32_g8_t8192_c128_d128_s256", "values": [2, 32, 8, 8192, 128, 128, 256], "source": "published state-space regime"},
+        {"id": "b4_h64_g8_t4096_c128_d64_s128", "values": [4, 64, 8, 4096, 128, 64, 128], "source": "published state-space regime"},
+        {"id": "b8_h32_g4_t2048_c256_d64_s128", "values": [8, 32, 4, 2048, 256, 64, 128], "source": "published state-space regime"},
+        {"id": "b8_h80_g1_t4096_c256_d64_s128", "values": [8, 80, 1, 4096, 256, 64, 128], "source": "published state-space regime"},
+        {"id": "b1_h128_g8_t2048_c256_d64_s128", "values": [1, 128, 8, 2048, 256, 64, 128], "source": "H100 breadth supplement"}
+      ]
+    },
+    "dense_attention": {
+      "label": "Dense attention forward",
+      "category": "multi_matmul",
+      "expected_heuristic": "triton_h100_multi_matmul",
+      "shape_convention": ["B", "H", "M", "N", "D"],
+      "shapes": [
+        {"id": "b1_h4_m512_n512_d64_f16", "values": [1, 4, 512, 512, 64], "dtype": "float16", "source": "published B200 held-out"},
+        {"id": "b2_h32_m1024_n1024_d64_f16", "values": [2, 32, 1024, 1024, 64], "dtype": "float16", "source": "published B200 held-out"},
+        {"id": "b8_h16_m2048_n2048_d64_bf16", "values": [8, 16, 2048, 2048, 64], "dtype": "bfloat16", "source": "published B200 held-out"},
+        {"id": "b4_h32_m4096_n4096_d128_bf16", "values": [4, 32, 4096, 4096, 128], "dtype": "bfloat16", "source": "published B200 held-out"},
+        {"id": "b4_h16_m128_n4096_d64_bf16", "values": [4, 16, 128, 4096, 64], "dtype": "bfloat16", "source": "published B200 held-out"}
+      ]
+    },
+    "causal_attention": {
+      "label": "Causal attention forward",
+      "category": "multi_matmul",
+      "expected_heuristic": "triton_h100_multi_matmul",
+      "shape_convention": ["B", "H", "S", "D"],
+      "shapes": [
+        {"id": "b1_h8_s512_d128_f16", "values": [1, 8, 512, 128], "dtype": "float16", "source": "H100 compilable supplement"},
+        {"id": "b2_h32_s1024_d128_f16", "values": [2, 32, 1024, 128], "dtype": "float16", "source": "H100 compilable supplement"},
+        {"id": "b8_h16_s2048_d128_bf16", "values": [8, 16, 2048, 128], "dtype": "bfloat16", "source": "H100 compilable supplement"},
+        {"id": "b4_h32_s4096_d128_bf16", "values": [4, 32, 4096, 128], "dtype": "bfloat16", "source": "published B200 held-out"},
+        {"id": "b1_h16_s8192_d128_bf16", "values": [1, 16, 8192, 128], "dtype": "bfloat16", "source": "published B200 held-out"}
+      ]
+    },
+    "biased_attention": {
+      "label": "Biased attention forward",
+      "category": "multi_matmul",
+      "expected_heuristic": "triton_h100_multi_matmul",
+      "shape_convention": ["B", "H", "M", "N", "D"],
+      "shapes": [
+        {"id": "b1_h4_m128_n128_d64_f16", "values": [1, 4, 128, 128, 64], "dtype": "float16", "source": "published B200 held-out"},
+        {"id": "b2_h8_m512_n512_d64_f16", "values": [2, 8, 512, 512, 64], "dtype": "float16", "source": "published B200 held-out"},
+        {"id": "b2_h16_m1024_n1024_d64_f16", "values": [2, 16, 1024, 1024, 64], "dtype": "float16", "source": "published B200 held-out"},
+        {"id": "b1_h16_m1024_n2048_d128_bf16", "values": [1, 16, 1024, 2048, 128], "dtype": "bfloat16", "source": "published B200 held-out"},
+        {"id": "b4_h8_m256_n1024_d64_bf16", "values": [4, 8, 256, 1024, 64], "dtype": "bfloat16", "source": "published B200 held-out"}
+      ]
+    },
+    "attention_backward": {
+      "label": "Attention backward",
+      "category": "multi_matmul",
+      "expected_heuristic": "triton_h100_multi_matmul",
+      "shape_convention": ["B", "H", "S", "D"],
+      "shapes": [
+        {"id": "b1_h4_s256_d64_f16", "values": [1, 4, 256, 64], "dtype": "float16", "source": "published B200 held-out"},
+        {"id": "b2_h16_s512_d64_f16", "values": [2, 16, 512, 64], "dtype": "float16", "source": "published B200 held-out"},
+        {"id": "b2_h32_s1024_d64_f16", "values": [2, 32, 1024, 64], "dtype": "float16", "source": "published B200 held-out"},
+        {"id": "b4_h32_s2048_d128_bf16", "values": [4, 32, 2048, 128], "dtype": "bfloat16", "source": "published B200 held-out"},
+        {"id": "b1_h16_s4096_d128_bf16", "values": [1, 16, 4096, 128], "dtype": "bfloat16", "source": "published B200 held-out"}
+      ]
+    },
+    "jagged_hstu": {
+      "label": "Jagged HSTU attention",
+      "category": "multi_matmul",
+      "expected_heuristic": "triton_h100_multi_matmul",
+      "shape_convention": ["H", "D", "max_seq_len", "lengths"],
+      "shapes": [
+        {"id": "b4_l320_max128_h8_d64", "values": [8, 64, 128], "lengths": [128, 96, 64, 32], "source": "published B200 held-out"},
+        {"id": "b16_l3440_max512_h16_d64", "values": [16, 64, 512], "lengths": [512, 480, 448, 384, 320, 256, 224, 192, 160, 128, 96, 80, 64, 48, 32, 16], "source": "published B200 held-out"},
+        {"id": "b8_l6656_max2048_h32_d128", "values": [32, 128, 2048], "lengths": [2048, 1536, 1024, 768, 512, 384, 256, 128], "source": "published B200 held-out"},
+        {"id": "b32_l2485_max256_h8_d128", "values": [8, 128, 256], "lengths": [256, 240, 224, 208, 192, 176, 160, 144, 128, 112, 96, 80, 72, 64, 56, 48, 40, 32, 28, 24, 20, 16, 14, 12, 10, 8, 8, 6, 4, 4, 2, 1], "source": "published B200 held-out"},
+        {"id": "b2_l7168_max4096_h16_d64", "values": [16, 64, 4096], "lengths": [4096, 3072], "source": "published B200 held-out"},
+        {"id": "b128_l131072_max1024_h4_d128", "values": [4, 128, 1024], "lengths_repeat": [1024, 128], "source": "H100 breadth supplement"}
+      ]
+    },
+    "squeeze_excitation": {
+      "label": "Squeeze-and-excitation forward",
+      "category": "multi_matmul",
+      "expected_heuristic": "triton_h100_multi_matmul",
+      "shape_convention": ["M", "N", "K"],
+      "shapes": [
+        {"id": "m256_n256_k16", "values": [256, 256, 16], "source": "published B200 held-out"},
+        {"id": "m256_n512_k32", "values": [256, 512, 32], "source": "published B200 held-out"},
+        {"id": "m128_n1024_k64", "values": [128, 1024, 64], "source": "published B200 held-out"},
+        {"id": "m64_n2048_k128", "values": [64, 2048, 128], "source": "published B200 held-out"},
+        {"id": "m1024_n1024_k256", "values": [1024, 1024, 256], "source": "published B200 held-out"},
+        {"id": "m1_n256_k16", "values": [1, 256, 16], "source": "H100 small-M supplement"}
+      ]
+    },
+    "gdn_forward_h": {
+      "label": "GDN forward-H",
+      "category": "multi_matmul",
+      "expected_heuristic": "triton_h100_multi_matmul",
+      "shape_convention": ["B", "T", "H", "C", "D", "state"],
+      "shapes": [
+        {"id": "b1_t8192_h64_c64_d64_s128", "values": [1, 8192, 64, 64, 64, 128], "source": "published B200 held-out"},
+        {"id": "b2_t8192_h32_c128_d128_s256", "values": [2, 8192, 32, 128, 128, 256], "source": "published B200 held-out"},
+        {"id": "b4_t4096_h64_c128_d64_s128", "values": [4, 4096, 64, 128, 64, 128], "source": "published B200 held-out"},
+        {"id": "b8_t2048_h32_c256_d64_s128", "values": [8, 2048, 32, 256, 64, 128], "source": "published B200 held-out"},
+        {"id": "b8_t4096_h80_c256_d64_s128", "values": [8, 4096, 80, 256, 64, 128], "source": "published B200 held-out"},
+        {"id": "b1_t4096_h32_c64_d128_s256", "values": [1, 4096, 32, 64, 128, 256], "source": "H100 breadth supplement"}
+      ]
+    },
+    "mamba2_chunk_scan": {
+      "label": "Mamba-2 chunk scan",
+      "category": "multi_matmul",
+      "expected_heuristic": "triton_h100_multi_matmul",
+      "shape_convention": ["B", "H", "G", "T", "C", "D", "state"],
+      "shapes": [
+        {"id": "b1_h64_g8_t8192_c64_d64_s128", "values": [1, 64, 8, 8192, 64, 64, 128], "source": "published B200 held-out"},
+        {"id": "b2_h32_g8_t8192_c128_d128_s256", "values": [2, 32, 8, 8192, 128, 128, 256], "source": "published B200 held-out"},
+        {"id": "b4_h64_g8_t4096_c128_d64_s128", "values": [4, 64, 8, 4096, 128, 64, 128], "source": "published B200 held-out"},
+        {"id": "b8_h32_g4_t2048_c256_d64_s128", "values": [8, 32, 4, 2048, 256, 64, 128], "source": "published B200 held-out"},
+        {"id": "b8_h80_g1_t4096_c256_d64_s128", "values": [8, 80, 1, 4096, 256, 64, 128], "source": "published B200 held-out"},
+        {"id": "b1_h128_g8_t2048_c256_d64_s128", "values": [1, 128, 8, 2048, 256, 64, 128], "source": "H100 breadth supplement"}
+      ]
+    }
+  }
+}

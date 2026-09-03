@@ -14,8 +14,8 @@ adaptations with the results.
 |---|---|---|
 | [Linear attention vs FLA](linear-attention-fla/README.md) | Helion default, FLA Triton, heuristic seed, AOT-tuned Helion | Ready |
 | [vLLM reductions](vllm-reductions/README.md) | Helion default, heuristic seed, exact AOT-tuned Helion, vLLM CUDA/C++ | Ready |
-| Matmul | To be added | Planned |
-| Multi-matmul | To be added | Planned |
+| [Example reductions](example-reductions/README.md) | Helion default, heuristic seed, torch.compile max-autotune | Ready |
+| [Other matmul kernels](other-matmul-kernels/README.md) | Helion raw default, formula/multi-matmul heuristic seed, Triton-only torch.compile max-autotune | Ready |
 
 ## Use
 

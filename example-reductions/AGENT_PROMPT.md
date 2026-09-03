@@ -1,0 +1,90 @@
+# Agent Prompt: Reproduce Example Reduction Performance
+
+## Inputs
+
+```text
+HELION_ROOT=<existing Helion checkout>
+HELION_REVISION=<revision to measure>
+ARTIFACT_ROOT=<this repository>
+OUTPUT_DIR=<directory for adapted scripts, raw results, and report>
+CUDA_VISIBLE_DEVICES=<exactly one GPU index>
+```
+
+## Important
+
+The scripts reflect one Helion revision. Inspect the requested checkout and
+adapt imports or kernel APIs when they change. Do not edit Helion's production
+kernels or heuristic implementation to make the benchmark run.
+
+## Task
+
+Compare all three arms over every cell in `shapes.json`:
+
+1. `default`: `ConfigSpec._base_default_config()`, explicitly replayed so
+   heuristic promotion cannot alter it;
+2. `seed`: the compiler heuristic's first seed with search and all tuned cache
+   lookup disabled, explicitly replayed;
+3. `torch_compile`: the complete Torch reference compiled with
+   `mode="max-autotune-no-cudagraphs"`.
+
+Normalize to `torch_compile = 1.00x`; higher is faster.
+
+## Shape Policy
+
+The `liger-mixed` manifest is fixed and carries provenance for every shape.
+Liger model dimensions are the anchor. Supplements are included only where
+Liger omits an operational regime used by the corresponding kernel family:
+short/long attention softmax, wider vocabularies, varied outer populations,
+and wider/longer low-level GRPO.
+
+Do not silently substitute a different shape. Record an unavailable kernel or
+unsupported cell as a failure.
+
+## Procedure
+
+### 1. Pin and inspect
+
+- Resolve the requested revision to an immutable commit.
+- Record dirty state without discarding changes.
+- Verify every body named in `shapes.json`.
+- Record Python, Torch, Triton, CUDA, GPU model, compute capability, and
+  imported package paths.
+
+### 2. Isolate the arms
+
+Set `HELION_AUTOTUNE_EFFORT=none`, `HELION_SKIP_CACHE=1`, and disable AOT/local/
+remote tuned cache lookup. Obtain both Helion configs from the same bound
+kernel, then construct explicit fixed-config kernels for timing.
+
+Compile Torch only after constructing the exact reference and inputs for the
+cell. Compilation and warmup are not timed.
+
+### 3. Correctness and timing
+
+Run each arm against the eager Torch result before timing. Multi-output kernels
+must compare every observable output, including JSD gradients, GRPO LSE, and
+normalization parameter gradients.
+
+All arms for one cell must be compiled and captured in the same child process.
+Time their graph replays together using the shared balanced timer from
+`pretuned_kernels/_bench.py`: rotating/reversed order, cold L2, and CUDA events.
+Report CUDA device time. CPU graph-launch overhead is excluded.
+
+Run one cell per child process to release compiled code and large tensors
+between shapes. Honor the supplied `CUDA_VISIBLE_DEVICES`.
+
+### 4. Report
+
+For each cell, retain:
+
+- absolute latency in microseconds;
+- `torch_compile / arm_latency`, so higher is faster;
+- default and seed configs and fired heuristic names;
+- correctness and errors;
+- shape provenance;
+- environment and exact revision;
+- all outer-round samples.
+
+Geometric means use only cells valid in all three arms. Leave failures visible.
+Produce a combined JSON result, per-cell CSV, Markdown report, and per-kernel
+graph.
