@@ -18,7 +18,7 @@ ROUNDS="${ROUNDS:-3}"
 REPETITIONS="${REPETITIONS:-100}"
 REFERENCE="${REFERENCE:-auto}"
 
-"$PYTHON_BIN" "$REPO_ROOT/scripts/check_primary_stack.py" \
+"$PYTHON_BIN" "$REPO_ROOT/check_primary_stack.py" \
   --context "vLLM reductions" \
   --helion-root "$HELION_ROOT"
 

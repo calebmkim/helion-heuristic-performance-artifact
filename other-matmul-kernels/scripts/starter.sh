@@ -15,7 +15,7 @@ CELL_TIMEOUT="${CELL_TIMEOUT:-1800}"
 DEFER_CELLS="${DEFER_CELLS:-}"
 OUTPUT_DIR="${OUTPUT_DIR:-$COMPARISON_ROOT/generated/$(date -u +%Y%m%d-%H%M%S)}"
 
-"$PYTHON_BIN" "$REPO_ROOT/scripts/check_primary_stack.py" \
+"$PYTHON_BIN" "$REPO_ROOT/check_primary_stack.py" \
   --context "other matmul kernels" \
   --helion-root "$HELION_ROOT"
 

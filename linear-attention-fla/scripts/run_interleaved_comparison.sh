@@ -18,7 +18,7 @@ PYTHON_BIN="${PYTHON_BIN:-python}"
 ROUNDS="${ROUNDS:-1}"
 RESUME="${RESUME:-0}"
 
-"$PYTHON_BIN" "$REPO_ROOT/scripts/check_primary_stack.py" \
+"$PYTHON_BIN" "$REPO_ROOT/check_primary_stack.py" \
   --context "linear attention" \
   --helion-root "$HELION_ROOT"
 

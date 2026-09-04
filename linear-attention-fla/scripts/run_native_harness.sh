@@ -21,7 +21,7 @@ mkdir -p "$OUTPUT_DIR"
 OUTPUT_DIR="$(cd -- "$OUTPUT_DIR" && pwd)"
 
 PYTHON_BIN="$(command -v "${PYTHON_BIN:-python}")"
-"$PYTHON_BIN" "$REPO_ROOT/scripts/check_primary_stack.py" \
+"$PYTHON_BIN" "$REPO_ROOT/check_primary_stack.py" \
   --context "linear attention native harness" \
   --helion-root "$HELION_ROOT"
 

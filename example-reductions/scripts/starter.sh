@@ -18,7 +18,7 @@ ROUNDS="${ROUNDS:-3}"
 REPETITIONS="${REPETITIONS:-100}"
 TORCH_COMPILE_MODE="${TORCH_COMPILE_MODE:-max-autotune-no-cudagraphs}"
 
-"$PYTHON_BIN" "$REPO_ROOT/scripts/check_primary_stack.py" \
+"$PYTHON_BIN" "$REPO_ROOT/check_primary_stack.py" \
   --context "example reductions" \
   --helion-root "$HELION_ROOT"
 
