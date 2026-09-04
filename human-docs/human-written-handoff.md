@@ -46,7 +46,7 @@ NOTE: before https://github.com/pytorch/helion/pull/3551, there were separate h1
 If I remember correctly, the heuristics were similar in structure, it's just that the num warps ramp needed to be adjusted a bit.
 
 However, that PR rewrote and simplified the reduction heuristics. 
-The overall structure of the heuristic is specified here: https://github.com/calebmkim/helion-heuristic-performance-artifact/blob/main/heuristic-traces/REDUCTION_HEURISTIC_HIGH_LEVEL_TRACE.md.
+The overall structure of the heuristic is specified here: https://github.com/calebmkim/helion-heuristic-performance-artifact/blob/main/human-docs/REDUCTION_HEURISTIC_HIGH_LEVEL_TRACE.md.
 
 When you port the heuristic over, you should keep the same structure. 
 You should only tune constants, cutoffs, ramps, etc. 
@@ -70,7 +70,7 @@ Come up with an explanation as to why it is underperforming, based on what's goi
 Propose an adjustment to a constants, cutoffs, ramps, etc. that reflect this.
 NOTE: your changes should never smuggle kernel identity into the heuristic, e.g., don't add a gate that specifically checks for a very narrow type of kernel as an escape hatch for a poorly performing cell. 
 Just honestly report it.
-Structural changes are not allowed -- the general structure of https://github.com/calebmkim/helion-heuristic-performance-artifact/blob/main/heuristic-traces/REDUCTION_HEURISTIC_HIGH_LEVEL_TRACE.md should be the same across hardware backends.
+Structural changes are not allowed -- the general structure of https://github.com/calebmkim/helion-heuristic-performance-artifact/blob/main/human-docs/REDUCTION_HEURISTIC_HIGH_LEVEL_TRACE.md should be the same across hardware backends.
 Once you have made the change, go back to (2) -- if performance regresses then you should revert the change. 
 
 (4) Eventually, once the constants and ramps are tuned to your local max, or you've done the best you can, then stop, and report the performance results for both vllm-reduction and examples-reduction.

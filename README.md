@@ -17,6 +17,11 @@ adaptations with the results.
 | [Example reductions](example-reductions/README.md) | Helion default, heuristic seed, torch.compile max-autotune | Ready |
 | [Other matmul kernels](other-matmul-kernels/README.md) | Helion raw default, formula/multi-matmul heuristic seed, Triton-only torch.compile max-autotune | Ready |
 
+## Documentation
+
+- [Human-written documentation](human-docs/README.md) -- how each heuristic works, and the outstanding benchmarking and porting work.
+- [Blog post and supporting material](blog/README.md) -- the draft write-up, its figures, and the notes its numbers were checked against.
+
 ## Use
 
 Assume the project being measured is already cloned. Open the comparison
