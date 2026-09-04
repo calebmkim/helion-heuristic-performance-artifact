@@ -1,6 +1,22 @@
-# Starter Scripts
+# Linear-Attention Scripts
 
-These scripts form an adaptable pipeline:
+## Native Helion Harness
+
+`run_native_harness.sh` is a thin launcher for the target checkout's own
+`benchmarks.run_linattn` entry point. Use it to reproduce results that were
+claimed using Helion's native benchmark methodology. It deliberately leaves
+Helion config selection to the caller's environment and produces the native
+`helionbench.json` format.
+
+The native harness measures one active Helion configuration against FLA. It
+does not co-measure default, seed, and AOT, and separate native invocations
+should not be merged into a purported same-process four-arm comparison.
+Use a fresh `OUTPUT_DIR`: some revisions of the native writer append to an
+existing `helionbench.json`.
+
+## Controlled Four-Arm Comparison
+
+The remaining scripts form an adaptable pipeline:
 
 1. `discover_manifest.py` reads the workload from the target Helion checkout.
 2. `materialize_configs.py` discovers default, seed, and existing AOT selections
@@ -11,7 +27,7 @@ These scripts form an adaptable pipeline:
 5. `plot_results.py` plots per-kernel geometric means relative to FLA.
 6. `plot_blog_figures.py` creates the blog-style H100 figure and can combine it
    with the B200 per-cell CSV.
-7. `starter.sh` shows how those pieces are composed.
+7. `run_interleaved_comparison.sh` shows how those pieces are composed.
 
 The materializer and runner reuse Helion's example harness for workload
 construction, FLA calls, gradients, tolerances, and timing conventions. The
@@ -27,9 +43,10 @@ backward gradients outside its timed region.
 These are starting points, not stable interfaces. Inspect the current Helion
 harness and adapt moved imports or semantics. Checkout paths are supplied
 through CLI flags or `HELION_ROOT`/`FLA_ROOT`; no checkout layout is assumed.
-Use a fresh output directory for a different revision. `starter.sh` resumes
-only when explicitly invoked with `RESUME=1`; doing so is valid only when the
-checkouts and workload are unchanged.
+Use a fresh output directory for a different revision.
+`run_interleaved_comparison.sh` resumes only when explicitly invoked with
+`RESUME=1`; doing so is valid only when the checkouts and workload are
+unchanged.
 
 The plot has separate forward and forward-plus-backward panels. Each kernel is
 a cluster with default, seed, and AOT-tuned bars, where bar height is

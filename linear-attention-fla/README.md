@@ -16,20 +16,31 @@ equivalent and follow its imports rather than assuming that path or API is
 unchanged. FLA is available at
 <https://github.com/fla-org/flash-linear-attention>.
 
-## Reproduce
+## Choose a Workflow
 
 Give [AGENT_PROMPT.md](AGENT_PROMPT.md) to an agent with the requested Helion
-and FLA revisions. The [scripts](scripts/README.md) are the adapters used for
-the included run. They discover checkouts and output locations at runtime, and
-should be adapted when the current Helion or FLA APIs differ.
+and FLA revisions. There are two intentionally different workflows.
 
-No particular checkout layout is required. Script inputs come from command-line
-arguments or environment variables; [scripts/starter.sh](scripts/starter.sh)
-shows one composition of the pipeline.
+### Native Helion Harness
 
-## Measurement Strategy
+Use [scripts/run_native_harness.sh](scripts/run_native_harness.sh) when the goal
+is to reproduce a performance claim made with Helion's own linear-attention
+runner. It invokes the checkout's runner directly and preserves its workload,
+timing order, and output format. The native runner measures FLA against the one
+Helion configuration selected by that checkout and its environment; it does
+not compare default, seed, and AOT in one invocation.
 
-The pipeline has two phases:
+Pin the Helion, FLA, PyTorch, and Triton revisions used by the claim. Also
+preserve its Helion configuration environment: the native runner does not
+label or change the active config. Do not combine separate native invocations
+into a four-arm result and describe it as same-process measurement.
+
+### Controlled Four-Arm Comparison
+
+Use
+[scripts/run_interleaved_comparison.sh](scripts/run_interleaved_comparison.sh)
+when the goal is to compare default, FLA, seed, and AOT under one controlled
+measurement protocol. The pipeline has two phases:
 
 1. In isolated discovery processes, record the default and heuristic-seed
    configs and resolve the existing architecture AOT selector for every
@@ -70,11 +81,20 @@ configuration with another baseline.
 
 ## Included H100 Run
 
-The authoritative H100 run used Helion
-`eacfee67c0fdbc5a1c068f16a3b2f9f15ce23eb7`, FLA
-`6bd90692588c81fe102ee6e12ac70686359658a2` (`0.5.2`), and an NVIDIA H100
-80GB HBM3. All 96 workload cells completed successfully, with all replayed
-Helion arms passing correctness. It includes the
+The authoritative H100 run used:
+
+| Component | Version or revision |
+|---|---|
+| Helion | `eacfee67c0fdbc5a1c068f16a3b2f9f15ce23eb7` |
+| FLA | `0.5.2` at `6bd90692588c81fe102ee6e12ac70686359658a2` |
+| PyTorch | `2.12.0+cu132` |
+| Triton | `3.7.1` |
+| PyTorch CUDA build | `13.2` |
+| GPU | NVIDIA H100 80GB HBM3, compute capability 9.0 |
+
+All 96 workload cells completed successfully, with all replayed Helion arms
+passing correctness. This is a controlled four-arm run, not a native-harness
+run. It includes the
 [summary](generated/h100-same-process/summary.md),
 [per-kernel graph](generated/h100-same-process/per-kernel-bars.png),
 [blog-style graph](generated/h100-same-process/blog-figures/results-linattn-h100.png),

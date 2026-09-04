@@ -23,7 +23,23 @@ Use a fresh `OUTPUT_DIR` for a new revision or environment. Set `RESUME=1` only
 when continuing the same run with the same Helion, FLA, and workload
 revisions; replaying stale materialized configs invalidates the comparison.
 
-## Task
+## Choose the Workflow
+
+Use Helion's native linear-attention runner directly when the requested goal is
+to reproduce a claim from the main Helion repository. Around PR #3546,
+`benchmarks/run_linattn.py` was the entry point, but locate its current
+equivalent. `scripts/run_native_harness.sh` is a thin starting point. Preserve
+the target claim's revision, package versions, configuration environment,
+workload, timing order, and output semantics. The native harness measures FLA
+against one environment-selected Helion configuration; do not represent
+separate native runs as a same-process four-arm comparison.
+
+Use the controlled interleaved workflow when the goal is to compare all four
+arms fairly in one measurement process. The remainder of this prompt describes
+that workflow, whose orchestrator is
+`scripts/run_interleaved_comparison.sh`.
+
+## Controlled Comparison
 
 Reproduce the current Helion linear-attention workload on the requested GPU and
 compare:
@@ -35,19 +51,18 @@ compare:
 4. Helion's architecture-specific AOT-tuned configuration.
 
 Start by inspecting Helion's current linear-attention benchmark and its FLA
-integration. Around PR #3546, `benchmarks/run_linattn.py` was the main entry
-point, but use the current equivalent. Reuse the workload, input generation,
-correctness checks, and timing utilities already present in Helion.
+integration. Reuse the workload, input generation, correctness checks, and
+timing utilities already present in Helion.
 
 Use mutually compatible FLA and Triton revisions. In particular, do not
 classify backward operations as inherently unavailable when an older FLA
 version merely guards them on Hopper. Update the comparison environment or
 record it as an environment incompatibility.
 
-Use the files in `linear-attention-fla/scripts/` as starting points. The
-orchestrator is `scripts/starter.sh`; modify or replace any adapter that no
-longer matches the current checkout. The scripts show the intended arm
-selection, but do not prove that those settings still have the same behavior.
+Use the files in `linear-attention-fla/scripts/` as starting points. Modify or
+replace any adapter that no longer matches the current checkout. The scripts
+show the intended arm selection, but do not prove that those settings still
+have the same behavior.
 
 Use the current benchmark population rather than a shape list copied from this
 artifact. Include forward and forward-plus-backward operation measurements

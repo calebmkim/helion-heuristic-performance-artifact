@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# STARTING POINT, NOT A STABLE BENCHMARK INTERFACE.
+# CONTROLLED FOUR-ARM STARTING POINT, NOT A STABLE BENCHMARK INTERFACE.
 #
 # Inspect the target Helion/FLA revisions first. Adapt these scripts when APIs
 # or arm-selection semantics have changed, and retain that adapted copy with
