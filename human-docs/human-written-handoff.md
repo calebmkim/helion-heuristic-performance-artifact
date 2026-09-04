@@ -1,3 +1,13 @@
+## Releases
+
+I pinned specific versions for the different systems we use.
+These are the “official” versions to reproduce the performance numbers.
+Helion fa2f62eb, FLA 0.5.2 at 6bd90692, and vLLM 0.24.0 source at ee0da84a
+Torch 2.13.0, Triton 3.7.1, cuda 13.2.
+
+Most of these the performance numbers could be recreated using different versions — so it’s probably fine to use different versions if you want.
+I did notice certain regressions sometimes based on Triton version and Torch versions.
+
 ## BENCHMARKING TODO
 
 Currently we have comparisons for.
@@ -23,6 +33,20 @@ example reductions (e.g., rms norm, layer norm, cross entropy, etc.):
 - only for h100
 - TODO: get b200 numbers
 - OPTIONAL TODO (will tkae a long time): run autotuning on each shape and obtain configs for each shape
+
+## A note on linear attention timing
+
+So I got a little bit paranoid about the fla timing, because the helion repo times things like this:
+- comapre fla vs. helion aot tuned config
+And my work basically did:
+- comapre fla vs. helion aot tuned config
+- use the same function to compare fla vs. helion seed heuristic config
+- use the same function to compare fla vs. hellion default config
+But as you can see they’re not all being benchmarked in the same process. So I added something, which allows you to optionally ditch the existing pytorch/helion:main timing infra and do:
+- compare fla vs. helion aot tuned vs. helion seed heuristic config  vs. hellion default config all in one process, with interleaved timing.
+Results are very similar, although the backwards pass is a little bit slower using the all-in-on-process timing.
+Graphs visually look nearly identical though.
+Essentially there are two options: using the native helion harness or using the controlled four-arm comparison.
 
 ## ANOTHER TODO (NON-TRIVIAL, COULD TAKE LONGER)
 
@@ -87,4 +111,3 @@ Guidelines:
 - Please implement this in an overnight, autonomous, run.
 
 Now, please go ahead and begin. Implement this change.
-
