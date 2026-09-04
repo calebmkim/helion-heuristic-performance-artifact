@@ -19,7 +19,14 @@ adaptations with the results.
 
 ## Documentation
 
-- [Human-written documentation](human-docs/README.md) -- how each heuristic works, and the outstanding benchmarking and porting work.
+Prose written to be read, as opposed to the generated `REPORT.md` and `summary.md`
+files under each comparison's `generated/` directory. The two traces describe the
+*structure* of each heuristic, which a port should preserve; the constants, cutoffs
+and ramps in them are what a port is expected to re-fit.
+
+- [Matmul heuristic trace](human-docs/MATMUL_HEURISTIC_HIGH_LEVEL_TRACE.md) -- the matmul and multi-matmul heuristics in decision order: what each stage knows, what it sets, and what a later stage may correct.
+- [Reduction heuristic trace](human-docs/REDUCTION_HEURISTIC_HIGH_LEVEL_TRACE.md) -- the reduction heuristic after the candidate-resolved liveness rewrite, stage by stage.
+- [Handoff](human-docs/human-written-handoff.md) -- what is benchmarked today, what is missing, and a prompt for porting the reduction heuristic to sm100/b200.
 - [Blog post and supporting material](blog/README.md) -- the draft write-up, its figures, and the notes its numbers were checked against.
 
 ## Use
