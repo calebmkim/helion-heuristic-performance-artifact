@@ -15,7 +15,7 @@ and arms ``pre_change`` / ``post_change`` / ``pretuned``) than this artifact's
 
 Usage:
     python plot_blog_figures.py \
-        --h100 ../generated/h100-corrected-aot/results.json \
+        --h100 ../generated/h100-same-process/results.json \
         --b200 /path/to/e2e_fla_v3/results.json \
         --outdir ../generated/blog-figures
 

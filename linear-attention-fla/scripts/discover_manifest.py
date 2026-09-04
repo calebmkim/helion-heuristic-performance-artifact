@@ -116,7 +116,7 @@ def main() -> None:
     output = args.output.expanduser().resolve()
     output.parent.mkdir(parents=True, exist_ok=True)
     with output.open("w", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=FIELDS)
+        writer = csv.DictWriter(handle, fieldnames=FIELDS, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
     mode_names = {str(row["mode"]) for row in rows}

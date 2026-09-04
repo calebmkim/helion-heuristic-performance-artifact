@@ -14,10 +14,10 @@ set -euo pipefail
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 PYTHON_BIN="${PYTHON_BIN:-python}"
 ROUNDS="${ROUNDS:-1}"
-RUN_AOT_TUNED="${RUN_AOT_TUNED:-1}"
 
 mkdir -p "$OUTPUT_DIR"
 MANIFEST="$OUTPUT_DIR/manifest.csv"
+CONFIGS="$OUTPUT_DIR/config-replay.json"
 
 checkout_args=(--helion-root "$HELION_ROOT")
 if [[ -n "${FLA_ROOT:-}" ]]; then
@@ -32,35 +32,23 @@ fi
   --helion-root "$HELION_ROOT" \
   --output "$MANIFEST"
 
-inputs=()
-run_arm() {
-  local arm="$1"
-  local output="$OUTPUT_DIR/${arm}.json"
-  "$PYTHON_BIN" "$SCRIPT_DIR/run_benchmark.py" \
-    --action all \
-    --manifest "$MANIFEST" \
-    --arm "$arm" \
-    --mode all \
-    --rounds "$ROUNDS" \
-    --out "$output" \
-    --resume \
-    "${checkout_args[@]}" \
-    "${aot_args[@]}"
-  inputs+=(--input "$arm=$output")
-}
-
-for arm in default seed; do
-  run_arm "$arm"
-done
-if [[ "$RUN_AOT_TUNED" != "0" ]]; then
-  run_arm aot_tuned
-fi
+"$PYTHON_BIN" "$SCRIPT_DIR/materialize_configs.py" \
+  --manifest "$MANIFEST" \
+  --out "$CONFIGS" \
+  --resume \
+  "${checkout_args[@]}" \
+  "${aot_args[@]}"
 
 COMBINED="$OUTPUT_DIR/results.json"
-"$PYTHON_BIN" "$SCRIPT_DIR/combine_results.py" \
+"$PYTHON_BIN" "$SCRIPT_DIR/run_benchmark.py" \
+  --action all \
   --manifest "$MANIFEST" \
-  "${inputs[@]}" \
-  --output "$COMBINED"
+  --configs "$CONFIGS" \
+  --mode all \
+  --rounds "$ROUNDS" \
+  --out "$COMBINED" \
+  --resume \
+  "${checkout_args[@]}"
 "$PYTHON_BIN" "$SCRIPT_DIR/summarize_results.py" \
   "$COMBINED" \
   --output "$OUTPUT_DIR/summary.md"

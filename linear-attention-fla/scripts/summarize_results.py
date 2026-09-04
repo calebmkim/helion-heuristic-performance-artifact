@@ -8,6 +8,7 @@ from typing import Any
 
 from result_utils import display_name
 from result_utils import load_result
+from result_utils import relative_to_fla
 from result_utils import seed_speedup
 from result_utils import variants
 
@@ -16,7 +17,19 @@ def _fmt(value: float | None, count: int) -> str:
     return "NA (0)" if value is None else f"{value:.4f}x ({count})"
 
 
-def _row(label: str, cells: list[dict[str, Any]]) -> str:
+def _relative_row(label: str, cells: list[dict[str, Any]]) -> str:
+    default, default_n = relative_to_fla(cells, "default")
+    fla, fla_n = relative_to_fla(cells, "fla_triton")
+    seed, seed_n = relative_to_fla(cells, "seed")
+    tuned, tuned_n = relative_to_fla(cells, "aot_tuned")
+    return (
+        f"| {label} | {len(cells)} | {_fmt(default, default_n)} | "
+        f"{_fmt(fla, fla_n)} | {_fmt(seed, seed_n)} | "
+        f"{_fmt(tuned, tuned_n)} |"
+    )
+
+
+def _seed_row(label: str, cells: list[dict[str, Any]]) -> str:
     default, default_n = seed_speedup(cells, "default")
     fla, fla_n = seed_speedup(cells, "fla_triton")
     tuned, tuned_n = seed_speedup(cells, "aot_tuned")
@@ -32,21 +45,62 @@ def render(data: dict[str, Any]) -> str:
         "# Linear-Attention Performance",
         "",
         (
-            "Each Helion arm is normalized to FLA timed in the same process, "
-            "then compared with seed; values above `1.0x` favor seed. Counts "
-            "are correct common cells."
+            "All arms in a cell share one process and one FLA timing. Values "
+            "are higher-is-better geometric means; counts are correct common "
+            "cells."
         ),
         "",
-        "| Population | Discovered | Default / seed | FLA Triton / seed | AOT-tuned / seed |",
-        "|---|---:|---:|---:|---:|",
-        _row("Overall", cells),
+        "## Performance vs FLA",
+        "",
+        "| Population | Discovered | Default | FLA Triton | Seed | AOT-tuned |",
+        "|---|---:|---:|---:|---:|---:|",
+        _relative_row("Overall", cells),
     ]
     for mode in ("forward", "forward_backward"):
         selected = [cell for cell in cells if cell.get("mode") == mode]
         if selected:
-            lines.append(_row(display_name(mode), selected))
+            lines.append(_relative_row(display_name(mode), selected))
 
-    lines.extend(["", "## Per Kernel", ""])
+    lines.extend(["", "### Per Kernel", ""])
+    lines.extend(
+        [
+            "| Kernel | Mode | Shapes | Default | FLA Triton | Seed | AOT-tuned |",
+            "|---|---|---:|---:|---:|---:|---:|",
+        ]
+    )
+    for variant in variants(cells):
+        for mode in ("forward", "forward_backward"):
+            selected = [
+                cell
+                for cell in cells
+                if cell.get("variant") == variant and cell.get("mode") == mode
+            ]
+            if selected:
+                lines.append(
+                    _relative_row(
+                        f"{display_name(variant)} | {display_name(mode)}",
+                        selected,
+                    )
+                )
+
+    lines.extend(
+        [
+            "",
+            "## Seed Comparisons",
+            "",
+            "Values above `1.0x` favor the heuristic seed.",
+            "",
+            "| Population | Discovered | Default / seed | FLA Triton / seed | AOT-tuned / seed |",
+            "|---|---:|---:|---:|---:|",
+            _seed_row("Overall", cells),
+        ]
+    )
+    for mode in ("forward", "forward_backward"):
+        selected = [cell for cell in cells if cell.get("mode") == mode]
+        if selected:
+            lines.append(_seed_row(display_name(mode), selected))
+
+    lines.extend(["", "### Per Kernel", ""])
     lines.extend(
         [
             "| Kernel | Mode | Shapes | Default / seed | FLA Triton / seed | AOT-tuned / seed |",

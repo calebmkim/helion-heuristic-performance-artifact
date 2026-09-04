@@ -98,7 +98,7 @@ def relative_to_fla(
 def seed_speedup(
     cells: Iterable[dict[str, Any]], baseline: str
 ) -> tuple[float | None, int]:
-    """Compare seed with an arm after normalizing each to its paired FLA run."""
+    """Compare seed with an arm after normalizing to the cell's FLA timing."""
     ratios: list[float] = []
     for cell in cells:
         seed = performance_vs_fla(cell, "seed")

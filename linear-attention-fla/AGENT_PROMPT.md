@@ -49,12 +49,12 @@ Use the current benchmark population rather than a shape list copied from this
 artifact. Include forward and forward-plus-backward operation measurements
 where the current workload supports them.
 
-For each arm, verify enough runtime state to know which configuration actually
-ran. In particular:
+First materialize a benchmark replay manifest. Use isolated discovery
+processes for the three Helion config sources, execute complete workload cells,
+and record every constituent kernel call and selected config:
 
 - `default` must not accidentally receive a compiler heuristic or cached tuned
   result;
-- `fla_triton` must actually use FLA's Triton path;
 - `seed` should use the compiler-selected configuration without running a
   search;
 - `aot_tuned` must use Helion's checked-in architecture-specific AOT selector
@@ -64,19 +64,25 @@ ran. In particular:
   consulting `AOTAutotuneCache`. Audit selected bound configs against AOT cache
   results rather than inferring selection from correctness or timing.
 
-Run each Helion arm in one long-lived process covering the full workload.
-Separate processes are appropriate between arms because Helion selection and
-bound-kernel caches are process state; a fresh process per shape is unnecessary.
-Time FLA beside each arm and normalize that arm using its paired
-`FLA latency / arm latency` ratio.
+Do not tune a replacement AOT table. The materialized file is a benchmark
+replay manifest for the selected revision and workload, not a production AOT
+selector.
 
-Use Helion's existing correctness references and its current linear-attention
-timing helper rather than introducing a new timing protocol. Apply that method
-consistently to every arm and report what it does. At the reference revision,
-the helper used CUDA device events and cleared L2 before each timed call; it did
-not use CUDA Graph replay here. Its default summary statistic was the mean; do
-not silently replace that with nested median rounds. Save absolute per-shape
-latencies before computing ratios.
+Measure one workload cell per fresh process. In that process, explicitly replay
+the materialized default, seed, and AOT configs and time FLA as a fourth arm.
+Compile and audit every replay arm before timing, reject unplanned constituent
+calls, and interleave cold-L2 device-event samples across the four arms in
+rotated forward/reverse order. Clear backward gradients before each start
+event. This is important: do not benchmark the Helion arms in separate
+processes and then combine their results through separately observed FLA
+timings.
+
+Use Helion's existing correctness references and timing conventions. At the
+reference revision, the helper used CUDA device events, cleared L2 before each
+timed call, did not use CUDA Graph replay here, and reported the mean. Preserve
+those choices in the narrow interleaved adapter; do not silently replace the
+mean with nested median rounds. Save absolute per-shape latencies before
+computing ratios.
 
 Make all aggregate tables and plots higher-is-better. For a comparison against
 the heuristic seed, use:
@@ -91,14 +97,16 @@ kernel family separately. Include a four-way common-population comparison when
 useful.
 
 Create a clustered per-kernel bar graph with separate forward and
-forward-plus-backward panels. Use FLA Triton as a `1.00x` horizontal reference
-and plot default, seed, and AOT-tuned as `FLA latency / arm latency`.
+forward-plus-backward panels. Use the cell's shared FLA Triton measurement as a
+`1.00x` horizontal reference and plot default, seed, and AOT-tuned as
+`FLA latency / arm latency`.
 
 Make reasonable implementation decisions when APIs have moved. Record the
 important adaptations and any unsupported or failed cells instead of blocking
 the entire run. Leave `OUTPUT_DIR` with:
 
 - the adapted runner;
+- the materialized config replay manifest;
 - raw per-shape results;
 - a short Markdown summary;
 - the per-kernel bar graph;
