@@ -7,7 +7,7 @@ flat per-cell geomean.
 
 Usage:
     python plot_blog_figures.py \
-        --summary ../generated/h100-main-torch213-triton371-liger-mixed/summary.json \
+        --summary ../generated/h100-fa2f62eb-torch213-triton371-liger-mixed/summary.json \
         --gpu H100 --outdir <where>
 """
 

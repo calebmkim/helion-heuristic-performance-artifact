@@ -15,19 +15,25 @@ The results comparisons are generated from this repo's own data by the scripts
 that sit with each comparison:
 
     cd ../linear-attention-fla/scripts
-    python plot_blog_figures.py --h100 ../generated/h100-same-process/results.json \
+    python plot_blog_figures.py \
+        --h100 ../generated/h100-fa2f62eb-torch213-triton371-interleaved/results.json \
         --b200 <path>/linear_attention_e2e_per_cell.csv \
         --outdir ../../blog/figures
 
     cd ../vllm-reductions/scripts
     python plot_blog_figures.py \
-        --summary ../generated/h100-main-torch213-triton371-vllm024-curated/summary.json \
+        --summary ../generated/h100-fa2f62eb-torch213-triton371-vllm024-curated/summary.json \
         --gpu H100 --outdir ../../blog/figures
 
     cd ../example-reductions/scripts
     python plot_blog_figures.py \
-        --summary ../generated/h100-main-torch213-triton371-liger-mixed/summary.json \
+        --summary ../generated/h100-fa2f62eb-torch213-triton371-liger-mixed/summary.json \
         --gpu H100 --outdir ../generated/blog-figures
+
+    cd ../other-matmul-kernels/scripts
+    python plot_blog_figures.py \
+        --summary ../generated/h100-fa2f62eb-torch213-triton371/results.json \
+        --gpu H100 --outdir ../generated/h100-fa2f62eb-torch213-triton371/blog-figures
 
 The rest are self-contained:
 

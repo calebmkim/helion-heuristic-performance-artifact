@@ -31,13 +31,23 @@ Use [scripts/run_native_harness.sh](scripts/run_native_harness.sh) when the goal
 is to reproduce a performance claim made with Helion's own linear-attention
 runner. It invokes the checkout's runner directly and preserves its workload,
 timing order, and output format. The native runner measures FLA against the one
-Helion configuration selected by that checkout and its environment; it does
-not compare default, seed, and AOT in one invocation.
+Helion configuration selected by that checkout and its environment; the
+artifact launcher defaults to the checked-in AOT selector used by Helion's
+current benchmark workflow. It does not compare default, seed, and AOT in one
+invocation.
 
-Pin the Helion, FLA, PyTorch, and Triton revisions used by the claim. Also
-preserve its Helion configuration environment: the native runner does not
-label or change the active config. Do not combine separate native invocations
-into a four-arm result and describe it as same-process measurement.
+The pinned main AOT table has one syntactically stale no-op field on the varlen
+KDA output kernel: `range_num_stages: [0]` remains after the kernel stopped
+accepting a staged range. Both artifact workflows narrowly normalize it to
+`[]`, reject any unexpected source value, and record the repair. No
+performance-bearing AOT setting or heuristic seed is changed.
+
+Pin the Helion, FLA, PyTorch, and Triton revisions used by the claim. The
+artifact launcher selects and labels the checked-in AOT configuration by
+default; an explicitly different native configuration must override both the
+selection environment and its output label. Do not combine separate native
+invocations into a four-arm result and describe it as same-process
+measurement.
 
 ### Controlled Four-Arm Comparison
 
@@ -97,45 +107,54 @@ fail before benchmark imports when the Helion checkout is dirty or any required
 revision differs. Required revisions may be overridden only for an explicitly
 labeled historical run.
 
-## Historical PyTorch-Stack Compatibility Check
+## Fresh H100 Results
 
-An 8-cell H100 check reran four representative variants in both forward and
-forward-plus-backward while holding the earlier Helion and FLA revisions fixed
-against the existing PyTorch 2.12 result. All cells completed, all Helion arms
-passed correctness, and aggregate performance-versus-FLA moved by at most
-`0.05%` across default, seed, and AOT.
+Both timing workflows were rerun on an NVIDIA H100 80GB HBM3 with the primary
+software stack and FLA `0.5.2` at
+`6bd90692588c81fe102ee6e12ac70686359658a2`.
 
-The [compatibility artifact](generated/h100-torch213-triton371-compatibility-smoke/)
-also verifies the separate native Helion timing workflow. This bounded check
-validates the PyTorch/Triton transition at the historical Helion revision; it
-does not replace a run at the current shared Helion pin.
+### Controlled Four-Arm Result
 
-## Included Full H100 Reference Run
+All 96 workload cells completed all four arms, and all 288 replayed Helion
+arm-cells passed correctness.
 
-The checked-in 96-cell H100 reference run predates the unified PyTorch pin and
-used:
+| Population | Cells | Default | Seed | AOT-tuned | FLA Triton |
+|---|---:|---:|---:|---:|---:|
+| Overall | 96 | 0.5445x | 1.1573x | 1.2888x | 1.0000x |
+| Forward | 54 | 0.5235x | 1.1843x | 1.2612x | 1.0000x |
+| Forward + backward | 42 | 0.5729x | 1.1235x | 1.3252x | 1.0000x |
 
-| Component | Version or revision |
-|---|---|
-| Helion | `eacfee67c0fdbc5a1c068f16a3b2f9f15ce23eb7` |
-| FLA | `0.5.2` at `6bd90692588c81fe102ee6e12ac70686359658a2` |
-| PyTorch | `2.12.0+cu132` |
-| Triton | `3.7.1` |
-| PyTorch CUDA build | `13.2` |
-| GPU | NVIDIA H100 80GB HBM3, compute capability 9.0 |
+- [summary](generated/h100-fa2f62eb-torch213-triton371-interleaved/summary.md)
+- [per-kernel graph](generated/h100-fa2f62eb-torch213-triton371-interleaved/per-kernel-bars.png)
+- [blog-style graph](generated/h100-fa2f62eb-torch213-triton371-interleaved/blog-figures/results-linattn-h100.png)
+- [combined raw results](generated/h100-fa2f62eb-torch213-triton371-interleaved/results.json)
+- [replay manifest](generated/h100-fa2f62eb-torch213-triton371-interleaved/config-replay.json)
 
-All 96 workload cells completed successfully, with all replayed Helion arms
-passing correctness. This is a controlled four-arm run, not a native-harness
-run. Its recorded PyTorch version is historical and must not be relabeled.
-It includes the
-[summary](generated/h100-same-process/summary.md),
-[per-kernel graph](generated/h100-same-process/per-kernel-bars.png),
-[blog-style graph](generated/h100-same-process/blog-figures/results-linattn-h100.png),
-[combined raw results](generated/h100-same-process/results.json), and
-[replay manifest](generated/h100-same-process/config-replay.json).
+### Native Helion Result
 
-[H100_SUPERSEDED_RUNS.md](reference-results/H100_SUPERSEDED_RUNS.md) records
-why the earlier H100 artifacts must not be used. The plotting script also
-accepts the B200
+The native block-ordered harness accepted all 96 cells and recorded a positive
+Helion latency for every cell. Its single active Helion arm is the checked-in
+H100 AOT selector, with the recorded no-op compatibility repair described
+above.
+
+| Population | Cells | Active Helion / FLA |
+|---|---:|---:|
+| Overall | 96 | 1.2860x |
+| Forward | 54 | 1.2409x |
+| Forward + backward | 42 | 1.3464x |
+
+- [summary](generated/h100-fa2f62eb-torch213-triton371-native/summary.md)
+- [per-kernel graph](generated/h100-fa2f62eb-torch213-triton371-native/per-kernel-bars.png)
+- [native raw output](generated/h100-fa2f62eb-torch213-triton371-native/helionbench.json)
+- [provenance](generated/h100-fa2f62eb-torch213-triton371-native/provenance.json)
+
+These results must remain separate. The native path measures one selected
+Helion configuration in blocks using Helion's own harness; the controlled path
+interleaves four arms per sample and shares one FLA denominator within each
+cell. Their AOT overall geomeans agree closely (`1.2860x` native versus
+`1.2888x` controlled), but that agreement does not make their per-cell samples
+interchangeable.
+
+The plotting script also accepts the B200
 [per-cell CSV](https://github.com/calebmkim/helion/blob/pytorch-blog-heuristics-results/PYTORCH_BLOG_RAW_DATA/linear_attention_e2e_per_cell.csv)
 to regenerate the cross-GPU blog figures.

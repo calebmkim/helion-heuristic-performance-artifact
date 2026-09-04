@@ -7,7 +7,7 @@ macro-geometric mean.
 
 Usage:
     python plot_blog_figures.py \
-        --summary ../generated/h100-eacfee67/results.json \
+        --summary ../generated/h100-fa2f62eb-torch213-triton371/results.json \
         --gpu H100 --outdir <where>
 """
 

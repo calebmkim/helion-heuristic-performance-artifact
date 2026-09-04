@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 #
-# THIN NATIVE-HARNESS STARTING POINT, NOT A STABLE BENCHMARK INTERFACE.
+# NATIVE-HARNESS STARTING POINT, NOT A STABLE BENCHMARK INTERFACE.
 #
-# This intentionally does not select a Helion config or alter the native
-# benchmark methodology. Pin the target revisions and configuration environment
-# before using its output to reproduce a claim.
+# This preserves the native benchmark methodology and defaults to the checked-in
+# AOT selector used by Helion's current linear-attention benchmark workflow.
 
 set -euo pipefail
 
@@ -27,6 +26,8 @@ PYTHON_BIN="$(command -v "${PYTHON_BIN:-python}")"
   --helion-root "$HELION_ROOT"
 
 NATIVE_MODULE="${HELION_LINATTN_MODULE:-benchmarks.run_linattn}"
+NATIVE_AUTOTUNE_CACHE="${HELION_AUTOTUNE_CACHE:-AOTAutotuneCache}"
+NATIVE_CONFIG_LABEL="${NATIVE_CONFIG_LABEL:-H100 AOT (compat-repaired)}"
 OUTPUT_FILE="${OUTPUT_FILE:-$OUTPUT_DIR/helionbench.json}"
 if [[ "$OUTPUT_FILE" != /* ]]; then
   OUTPUT_FILE="$PWD/$OUTPUT_FILE"
@@ -44,11 +45,28 @@ fi
 
 (
   cd -- "$HELION_ROOT"
-  PYTHONPATH="$python_path" "$PYTHON_BIN" -m "$NATIVE_MODULE" \
+  PYTHONPATH="$python_path" \
+  HELION_AUTOTUNE_CACHE="$NATIVE_AUTOTUNE_CACHE" \
+  "$PYTHON_BIN" "$SCRIPT_DIR/run_native_module.py" "$NATIVE_MODULE" \
     --output "$OUTPUT_FILE" \
     "$@"
 )
 
 if [[ -e "$OUTPUT_FILE" ]]; then
+  render_args=(
+    "$OUTPUT_FILE"
+    --summary "$OUTPUT_DIR/summary.md"
+    --plot "$OUTPUT_DIR/per-kernel-bars.png"
+    --provenance "$OUTPUT_DIR/provenance.json"
+    --helion-root "$HELION_ROOT"
+    --config-label "$NATIVE_CONFIG_LABEL"
+    --aot-compat-repair
+  )
+  if [[ -n "${FLA_ROOT:-}" ]]; then
+    render_args+=(--fla-root "$FLA_ROOT")
+  fi
+  "$PYTHON_BIN" "$SCRIPT_DIR/render_native_results.py" "${render_args[@]}"
   printf 'Native Helion result: %s\n' "$OUTPUT_FILE"
+  printf 'Native summary: %s\n' "$OUTPUT_DIR/summary.md"
+  printf 'Native graph: %s\n' "$OUTPUT_DIR/per-kernel-bars.png"
 fi

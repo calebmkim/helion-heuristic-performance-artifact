@@ -1,0 +1,2528 @@
+{
+  "schema_version": 1,
+  "profile": "liger-mixed",
+  "manifest_sha256": "fc3ff4d195af7d9a493816638ab38a0abb364a196d55d202ac94e701fdf0d0ec",
+  "helion_git": {
+    "commit": "fa2f62eb686ef846c76f8b9e18beec30fbc5bee1",
+    "branch": "main",
+    "dirty": false
+  },
+  "environment": {
+    "torch": "2.13.0+cu132",
+    "triton": "3.7.1",
+    "cuda_runtime": "13.2",
+    "gpu": "NVIDIA H100 80GB HBM3",
+    "compute_capability": [
+      9,
+      0
+    ]
+  },
+  "arms": [
+    "default",
+    "seed",
+    "torch_compile"
+  ],
+  "reference_arm": "torch_compile",
+  "normalization": "torch_compile = 1.00; higher is faster",
+  "torch_compile_mode": "max-autotune-no-cudagraphs",
+  "timing": "all arms in one cell process; shared balanced cold-L2 CUDA-event timing of pre-captured graphs; CPU launch overhead excluded",
+  "overall": {
+    "cells": 80,
+    "valid_cells": 80,
+    "normalized_performance": {
+      "default": 0.26887171329442433,
+      "seed": 1.0902027060398132,
+      "torch_compile": 1.0
+    },
+    "latency_us_geomean": {
+      "default": 458.13114931228154,
+      "seed": 112.98679259069688,
+      "torch_compile": 123.17850702913681
+    }
+  },
+  "kernels": {
+    "cross_entropy": {
+      "cells": 8,
+      "valid_cells": 8,
+      "normalized_performance": {
+        "default": 0.7764987763586629,
+        "seed": 0.9541756621419674,
+        "torch_compile": 1.0
+      },
+      "latency_us_geomean": {
+        "default": 347.87638793586035,
+        "seed": 283.09838562626874,
+        "torch_compile": 270.125589556267
+      }
+    },
+    "fused_linear_jsd": {
+      "cells": 8,
+      "valid_cells": 8,
+      "normalized_performance": {
+        "default": 0.9213639071050534,
+        "seed": 1.2302321749057072,
+        "torch_compile": 1.0
+      },
+      "latency_us_geomean": {
+        "default": 3179.612515247677,
+        "seed": 2381.323029820179,
+        "torch_compile": 2929.580210128727
+      }
+    },
+    "grpo": {
+      "cells": 8,
+      "valid_cells": 8,
+      "normalized_performance": {
+        "default": 0.12781668194316106,
+        "seed": 1.158414486831798,
+        "torch_compile": 1.0
+      },
+      "latency_us_geomean": {
+        "default": 2526.788021708799,
+        "seed": 278.79974273443065,
+        "torch_compile": 322.96566090854276
+      }
+    },
+    "jsd": {
+      "cells": 8,
+      "valid_cells": 8,
+      "normalized_performance": {
+        "default": 0.09394036866732798,
+        "seed": 0.8554443899785316,
+        "torch_compile": 1.0
+      },
+      "latency_us_geomean": {
+        "default": 4564.928080577506,
+        "seed": 501.29620563652327,
+        "torch_compile": 428.83102682928825
+      }
+    },
+    "kl_div": {
+      "cells": 8,
+      "valid_cells": 8,
+      "normalized_performance": {
+        "default": 0.0676047705171132,
+        "seed": 0.9629460720503228,
+        "torch_compile": 1.0
+      },
+      "latency_us_geomean": {
+        "default": 4802.067714504862,
+        "seed": 337.1348565299242,
+        "torch_compile": 324.6426858467396
+      }
+    },
+    "layer_norm": {
+      "cells": 8,
+      "valid_cells": 8,
+      "normalized_performance": {
+        "default": 1.1405497605221186,
+        "seed": 1.2107600598520019,
+        "torch_compile": 1.0
+      },
+      "latency_us_geomean": {
+        "default": 19.16009469482223,
+        "seed": 18.049027334476026,
+        "torch_compile": 21.85304141576061
+      }
+    },
+    "layer_norm_bwd": {
+      "cells": 8,
+      "valid_cells": 8,
+      "normalized_performance": {
+        "default": 0.045865868554800064,
+        "seed": 1.0823102635361312,
+        "torch_compile": 1.0
+      },
+      "latency_us_geomean": {
+        "default": 1090.5555465827535,
+        "seed": 46.21528505869414,
+        "torch_compile": 50.019277351272706
+      }
+    },
+    "rms_norm": {
+      "cells": 8,
+      "valid_cells": 8,
+      "normalized_performance": {
+        "default": 1.004310465833071,
+        "seed": 1.0775460990169188,
+        "torch_compile": 1.0
+      },
+      "latency_us_geomean": {
+        "default": 18.38520853496143,
+        "seed": 17.135654210089946,
+        "torch_compile": 18.464457348185267
+      }
+    },
+    "rms_norm_bwd": {
+      "cells": 8,
+      "valid_cells": 8,
+      "normalized_performance": {
+        "default": 0.05620661475996153,
+        "seed": 1.0829460427890465,
+        "torch_compile": 1.0
+      },
+      "latency_us_geomean": {
+        "default": 738.0462120832932,
+        "seed": 38.30576730376883,
+        "torch_compile": 41.48307911761451
+      }
+    },
+    "softmax": {
+      "cells": 8,
+      "valid_cells": 8,
+      "normalized_performance": {
+        "default": 1.151337777324615,
+        "seed": 1.3846718759685641,
+        "torch_compile": 1.0
+      },
+      "latency_us_geomean": {
+        "default": 23.44609266850412,
+        "seed": 19.495140103874927,
+        "torch_compile": 26.994372219902484
+      }
+    }
+  },
+  "shape_groups": {
+    "grpo": {
+      "cells": 8,
+      "valid_cells": 8,
+      "normalized_performance": {
+        "default": 0.12781668194316106,
+        "seed": 1.158414486831798,
+        "torch_compile": 1.0
+      },
+      "latency_us_geomean": {
+        "default": 2526.788021708799,
+        "seed": 278.79974273443065,
+        "torch_compile": 322.96566090854276
+      }
+    },
+    "normalization": {
+      "cells": 32,
+      "valid_cells": 32,
+      "normalized_performance": {
+        "default": 0.23311210139360652,
+        "seed": 1.1120213748652732,
+        "torch_compile": 1.0
+      },
+      "latency_us_geomean": {
+        "default": 129.76255540583202,
+        "seed": 27.20201486821477,
+        "torch_compile": 30.24922197285779
+      }
+    },
+    "softmax": {
+      "cells": 8,
+      "valid_cells": 8,
+      "normalized_performance": {
+        "default": 1.151337777324615,
+        "seed": 1.3846718759685641,
+        "torch_compile": 1.0
+      },
+      "latency_us_geomean": {
+        "default": 23.44609266850412,
+        "seed": 19.495140103874927,
+        "torch_compile": 26.994372219902484
+      }
+    },
+    "vocabulary": {
+      "cells": 32,
+      "valid_cells": 32,
+      "normalized_performance": {
+        "default": 0.25962732192272103,
+        "seed": 0.9916360143939402,
+        "torch_compile": 1.0
+      },
+      "latency_us_geomean": {
+        "default": 2219.041080745173,
+        "seed": 580.9830267030796,
+        "torch_compile": 576.1236930303695
+      }
+    }
+  },
+  "status_counts": {
+    "default": {
+      "ok": 80
+    },
+    "seed": {
+      "ok": 80
+    },
+    "torch_compile": {
+      "ok": 80
+    }
+  },
+  "cells": [
+    {
+      "cell_key": "rms_norm:2048x2048",
+      "kernel": "rms_norm",
+      "shape_group": "normalization",
+      "shape": [
+        2048,
+        2048
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "deepseek_v2_lite"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 10.208000428974628,
+        "seed": 9.79200005531311,
+        "torch_compile": 9.727999567985535
+      },
+      "normalized_performance": {
+        "default": 0.9529779740578137,
+        "seed": 0.9934640025565717,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "rms_norm:2048x3584",
+      "kernel": "rms_norm",
+      "shape_group": "normalization",
+      "shape": [
+        2048,
+        3584
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "qwen2.5_7b"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 14.336000196635723,
+        "seed": 13.87199992313981,
+        "torch_compile": 15.584000386297703
+      },
+      "normalized_performance": {
+        "default": 1.0870535834642951,
+        "seed": 1.1234141055827223,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "rms_norm:2048x4096",
+      "kernel": "rms_norm",
+      "shape_group": "normalization",
+      "shape": [
+        2048,
+        4096
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "llama_3_8b"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 16.367999836802483,
+        "seed": 15.728000551462173,
+        "torch_compile": 17.823999747633934
+      },
+      "normalized_performance": {
+        "default": 1.0889540521351742,
+        "seed": 1.1332654579527532,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "rms_norm:2048x5120",
+      "kernel": "rms_norm",
+      "shape_group": "normalization",
+      "shape": [
+        2048,
+        5120
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "qwen2.5_14b"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 20.015999674797058,
+        "seed": 18.17600056529045,
+        "torch_compile": 19.967999309301376
+      },
+      "normalized_performance": {
+        "default": 0.9976019001660896,
+        "seed": 1.0985914771279768,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "rms_norm:2048x7168",
+      "kernel": "rms_norm",
+      "shape_group": "normalization",
+      "shape": [
+        2048,
+        7168
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "deepseek_v3"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 26.688000187277794,
+        "seed": 23.679999634623528,
+        "torch_compile": 26.11199952661991
+      },
+      "normalized_performance": {
+        "default": 0.9784172415836364,
+        "seed": 1.1027026997264162,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "rms_norm:2048x8192",
+      "kernel": "rms_norm",
+      "shape_group": "normalization",
+      "shape": [
+        2048,
+        8192
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "qwen2.5_72b"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 30.719999223947525,
+        "seed": 26.399999856948853,
+        "torch_compile": 28.672000393271446
+      },
+      "normalized_performance": {
+        "default": 0.9333333697131223,
+        "seed": 1.0860606268421842,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "rms_norm:128x4096",
+      "kernel": "rms_norm",
+      "shape_group": "normalization",
+      "shape": [
+        128,
+        4096
+      ],
+      "provenance": {
+        "source": "model_anchored_supplement",
+        "basis": "Llama hidden size",
+        "reason": "Liger's fixed model sweep does not cover a small row population."
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 6.84799998998642,
+        "seed": 6.415999960154295,
+        "torch_compile": 6.496000103652477
+      },
+      "normalized_performance": {
+        "default": 0.9485981473643897,
+        "seed": 1.0124688503732875,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "rms_norm:8192x4096",
+      "kernel": "rms_norm",
+      "shape_group": "normalization",
+      "shape": [
+        8192,
+        4096
+      ],
+      "provenance": {
+        "source": "model_anchored_supplement",
+        "basis": "Llama hidden size",
+        "reason": "Liger's fixed model sweep does not cover a large row population."
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 48.49600046873093,
+        "seed": 47.72799834609032,
+        "torch_compile": 51.4880008995533
+      },
+      "normalized_performance": {
+        "default": 1.0616958182510647,
+        "seed": 1.078779808157846,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "layer_norm:2048x2048",
+      "kernel": "layer_norm",
+      "shape_group": "normalization",
+      "shape": [
+        2048,
+        2048
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "deepseek_v2_lite"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 10.479999706149101,
+        "seed": 10.479999706149101,
+        "torch_compile": 14.688000082969666
+      },
+      "normalized_performance": {
+        "default": 1.401526764771905,
+        "seed": 1.401526764771905,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "layer_norm:2048x3584",
+      "kernel": "layer_norm",
+      "shape_group": "normalization",
+      "shape": [
+        2048,
+        3584
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "qwen2.5_7b"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 14.527999795973301,
+        "seed": 14.015999622642994,
+        "torch_compile": 17.72800087928772
+      },
+      "normalized_performance": {
+        "default": 1.2202643948412883,
+        "seed": 1.2648402794366482,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "layer_norm:2048x4096",
+      "kernel": "layer_norm",
+      "shape_group": "normalization",
+      "shape": [
+        2048,
+        4096
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "llama_3_8b"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 16.656000167131424,
+        "seed": 15.503999777138233,
+        "torch_compile": 18.52799952030182
+      },
+      "normalized_performance": {
+        "default": 1.1123918908733297,
+        "seed": 1.1950464258663556,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "layer_norm:2048x5120",
+      "kernel": "layer_norm",
+      "shape_group": "normalization",
+      "shape": [
+        2048,
+        5120
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "qwen2.5_14b"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 23.360000923275948,
+        "seed": 21.056000143289566,
+        "torch_compile": 25.71200020611286
+      },
+      "normalized_performance": {
+        "default": 1.1006848968269252,
+        "seed": 1.2211246215396299,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "layer_norm:2048x7168",
+      "kernel": "layer_norm",
+      "shape_group": "normalization",
+      "shape": [
+        2048,
+        7168
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "deepseek_v3"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 28.07999961078167,
+        "seed": 25.439999997615814,
+        "torch_compile": 29.823999851942062
+      },
+      "normalized_performance": {
+        "default": 1.0621082715574812,
+        "seed": 1.1723270383151378,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "layer_norm:2048x8192",
+      "kernel": "layer_norm",
+      "shape_group": "normalization",
+      "shape": [
+        2048,
+        8192
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "qwen2.5_72b"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 31.231999397277832,
+        "seed": 28.303999453783035,
+        "torch_compile": 33.984001725912094
+      },
+      "normalized_performance": {
+        "default": 1.088114830358063,
+        "seed": 1.2006784334985523,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "layer_norm:128x4096",
+      "kernel": "layer_norm",
+      "shape_group": "normalization",
+      "shape": [
+        128,
+        4096
+      ],
+      "provenance": {
+        "source": "model_anchored_supplement",
+        "basis": "Llama hidden size",
+        "reason": "Liger's fixed model sweep does not cover a small row population."
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 7.2639998979866505,
+        "seed": 6.800000090152025,
+        "torch_compile": 7.7760000713169575
+      },
+      "normalized_performance": {
+        "default": 1.0704846063492122,
+        "seed": 1.1435294070919801,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "layer_norm:8192x4096",
+      "kernel": "layer_norm",
+      "shape_group": "normalization",
+      "shape": [
+        8192,
+        4096
+      ],
+      "provenance": {
+        "source": "model_anchored_supplement",
+        "basis": "Llama hidden size",
+        "reason": "Liger's fixed model sweep does not cover a large row population."
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 48.128001391887665,
+        "seed": 47.968000173568726,
+        "torch_compile": 53.199999034404755
+      },
+      "normalized_performance": {
+        "default": 1.10538558626646,
+        "seed": 1.1090726910003423,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "softmax:2048x2048",
+      "kernel": "softmax",
+      "shape_group": "softmax",
+      "shape": [
+        2048,
+        2048
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "deepseek_v2_lite"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 9.775999933481216,
+        "seed": 9.727999567985535,
+        "torch_compile": 14.208000153303146
+      },
+      "normalized_performance": {
+        "default": 1.453355181053454,
+        "seed": 1.4605263964095063,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "softmax:2048x3584",
+      "kernel": "softmax",
+      "shape_group": "softmax",
+      "shape": [
+        2048,
+        3584
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "qwen2.5_7b"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 14.543999917805195,
+        "seed": 14.527999795973301,
+        "torch_compile": 25.248000398278236
+      },
+      "normalized_performance": {
+        "default": 1.7359736345548853,
+        "seed": 1.7378855143759142,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "softmax:2048x5120",
+      "kernel": "softmax",
+      "shape_group": "softmax",
+      "shape": [
+        2048,
+        5120
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "qwen2.5_14b"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 32.76799991726875,
+        "seed": 21.199999377131462,
+        "torch_compile": 29.472000896930695
+      },
+      "normalized_performance": {
+        "default": 0.8994140921429549,
+        "seed": 1.3901887623979026,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "softmax:2048x8192",
+      "kernel": "softmax",
+      "shape_group": "softmax",
+      "shape": [
+        2048,
+        8192
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "qwen2.5_72b"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 37.79200091958046,
+        "seed": 26.464000344276428,
+        "torch_compile": 45.60000076889992
+      },
+      "normalized_performance": {
+        "default": 1.2066045633819311,
+        "seed": 1.7230955326359862,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "softmax:128x4096",
+      "kernel": "softmax",
+      "shape_group": "softmax",
+      "shape": [
+        128,
+        4096
+      ],
+      "provenance": {
+        "source": "model_anchored_supplement",
+        "basis": "Llama hidden size",
+        "reason": "Liger's fixed softmax sweep does not cover a small row population."
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 6.6559999249875546,
+        "seed": 6.87999976798892,
+        "torch_compile": 7.74399982765317
+      },
+      "normalized_performance": {
+        "default": 1.163461525680178,
+        "seed": 1.1255814082558906,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "softmax:8192x4096",
+      "kernel": "softmax",
+      "shape_group": "softmax",
+      "shape": [
+        8192,
+        4096
+      ],
+      "provenance": {
+        "source": "model_anchored_supplement",
+        "basis": "Llama hidden size",
+        "reason": "Liger's fixed softmax sweep does not cover a large row population."
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 47.359999269247055,
+        "seed": 47.887999564409256,
+        "torch_compile": 70.30399888753891
+      },
+      "normalized_performance": {
+        "default": 1.4844594588748317,
+        "seed": 1.4680922052920624,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "softmax:4096x256",
+      "kernel": "softmax",
+      "shape_group": "softmax",
+      "shape": [
+        4096,
+        256
+      ],
+      "provenance": {
+        "source": "synthetic_real_regime",
+        "basis": "short attention context",
+        "reason": "Liger treats hidden size as the softmax width and omits short attention reductions."
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 8.832000195980072,
+        "seed": 7.519999984651804,
+        "torch_compile": 8.224000222980976
+      },
+      "normalized_performance": {
+        "default": 0.9311594248745794,
+        "seed": 1.0936170531603757,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "softmax:2048x32768",
+      "kernel": "softmax",
+      "shape_group": "softmax",
+      "shape": [
+        2048,
+        32768
+      ],
+      "provenance": {
+        "source": "model_anchored_supplement",
+        "basis": "Qwen 2.5 maximum context length",
+        "reason": "Liger's softmax benchmark does not exercise a long-context reduction width."
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 186.2879991531372,
+        "seed": 106.20799660682678,
+        "torch_compile": 130.62399625778198
+      },
+      "normalized_performance": {
+        "default": 0.7011938334814747,
+        "seed": 1.2298885246968851,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "cross_entropy:2048x32000",
+      "kernel": "cross_entropy",
+      "shape_group": "vocabulary",
+      "shape": [
+        2048,
+        32000
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "llama_2_7b"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 110.99200323224068,
+        "seed": 81.77599683403969,
+        "torch_compile": 96.76799923181534
+      },
+      "normalized_performance": {
+        "default": 0.8718465872657248,
+        "seed": 1.1833301088117725,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "cross_entropy:2048x102400",
+      "kernel": "cross_entropy",
+      "shape_group": "vocabulary",
+      "shape": [
+        2048,
+        102400
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "deepseek_v2_lite"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 306.319996714592,
+        "seed": 310.2079927921295,
+        "torch_compile": 260.8480006456375
+      },
+      "normalized_performance": {
+        "default": 0.8515539417711533,
+        "seed": 0.8408809789128543,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "cross_entropy:2048x128256",
+      "kernel": "cross_entropy",
+      "shape_group": "vocabulary",
+      "shape": [
+        2048,
+        128256
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "llama_3_8b"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 390.5920088291168,
+        "seed": 354.17601466178894,
+        "torch_compile": 330.3520083427429
+      },
+      "normalized_performance": {
+        "default": 0.8457725731077904,
+        "seed": 0.9327339928939115,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "cross_entropy:2048x129280",
+      "kernel": "cross_entropy",
+      "shape_group": "vocabulary",
+      "shape": [
+        2048,
+        129280
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "deepseek_v3"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 384.70399379730225,
+        "seed": 353.11999917030334,
+        "torch_compile": 333.99999141693115
+      },
+      "normalized_performance": {
+        "default": 0.8681999584150751,
+        "seed": 0.9458540785050497,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "cross_entropy:2048x152064",
+      "kernel": "cross_entropy",
+      "shape_group": "vocabulary",
+      "shape": [
+        2048,
+        152064
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "qwen2.5"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 473.9840030670166,
+        "seed": 408.04800391197205,
+        "torch_compile": 385.0879967212677
+      },
+      "normalized_performance": {
+        "default": 0.8124493532049015,
+        "seed": 0.9437320928650897,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "cross_entropy:128x128256",
+      "kernel": "cross_entropy",
+      "shape_group": "vocabulary",
+      "shape": [
+        128,
+        128256
+      ],
+      "provenance": {
+        "source": "model_anchored_supplement",
+        "basis": "Llama 3 vocabulary",
+        "reason": "Liger's fixed model sweep does not cover a small token population."
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 84.06399935483932,
+        "seed": 34.63999927043915,
+        "torch_compile": 34.33600068092346
+      },
+      "normalized_performance": {
+        "default": 0.40845071546012324,
+        "seed": 0.9912240590092879,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "cross_entropy:8192x128256",
+      "kernel": "cross_entropy",
+      "shape_group": "vocabulary",
+      "shape": [
+        8192,
+        128256
+      ],
+      "provenance": {
+        "source": "model_anchored_supplement",
+        "basis": "Llama 3 vocabulary",
+        "reason": "Liger's fixed model sweep does not cover a large token population."
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 1419.1360473632812,
+        "seed": 1223.695993423462,
+        "torch_compile": 1241.5040135383606
+      },
+      "normalized_performance": {
+        "default": 0.8748308633587623,
+        "seed": 1.0145526505035602,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "cross_entropy:2048x256000",
+      "kernel": "cross_entropy",
+      "shape_group": "vocabulary",
+      "shape": [
+        2048,
+        256000
+      ],
+      "provenance": {
+        "source": "synthetic_real_regime",
+        "basis": "256k-vocabulary language models",
+        "reason": "Liger's model registry tops out at 152064 and omits this common wider-vocabulary regime."
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 742.4800097942352,
+        "seed": 751.8239915370941,
+        "torch_compile": 620.0480163097382
+      },
+      "normalized_performance": {
+        "default": 0.8351039868151778,
+        "seed": 0.8247249666003053,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "kl_div:2048x32000",
+      "kernel": "kl_div",
+      "shape_group": "vocabulary",
+      "shape": [
+        2048,
+        32000
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "llama_2_7b"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 1321.23202085495,
+        "seed": 118.65600198507309,
+        "torch_compile": 113.93600329756737
+      },
+      "normalized_performance": {
+        "default": 0.08623466696170522,
+        "seed": 0.9602211552003961,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "kl_div:2048x102400",
+      "kernel": "kl_div",
+      "shape_group": "vocabulary",
+      "shape": [
+        2048,
+        102400
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "deepseek_v2_lite"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 4164.608001708984,
+        "seed": 353.2800078392029,
+        "torch_compile": 341.5040075778961
+      },
+      "normalized_performance": {
+        "default": 0.08200147707485479,
+        "seed": 0.9666666666666667,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "kl_div:2048x128256",
+      "kernel": "kl_div",
+      "shape_group": "vocabulary",
+      "shape": [
+        2048,
+        128256
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "llama_3_8b"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 5229.680061340332,
+        "seed": 401.42399072647095,
+        "torch_compile": 416.3519889116287
+      },
+      "normalized_performance": {
+        "default": 0.0796132811239165,
+        "seed": 1.0371876084390026,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "kl_div:2048x129280",
+      "kernel": "kl_div",
+      "shape_group": "vocabulary",
+      "shape": [
+        2048,
+        129280
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "deepseek_v3"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 5251.568078994751,
+        "seed": 401.4720022678375,
+        "torch_compile": 416.4000004529953
+      },
+      "normalized_performance": {
+        "default": 0.079290603147375,
+        "seed": 1.0371831612187958,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "kl_div:2048x152064",
+      "kernel": "kl_div",
+      "shape_group": "vocabulary",
+      "shape": [
+        2048,
+        152064
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "qwen2.5"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 6164.144039154053,
+        "seed": 471.45599126815796,
+        "torch_compile": 467.3440009355545
+      },
+      "normalized_performance": {
+        "default": 0.0758165282911999,
+        "seed": 0.9912781035584197,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "kl_div:128x128256",
+      "kernel": "kl_div",
+      "shape_group": "vocabulary",
+      "shape": [
+        128,
+        128256
+      ],
+      "provenance": {
+        "source": "model_anchored_supplement",
+        "basis": "Llama 3 vocabulary",
+        "reason": "Liger's fixed model sweep does not cover a small token population."
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 5233.520030975342,
+        "seed": 44.064000248909,
+        "torch_compile": 34.71999987959862
+      },
+      "normalized_performance": {
+        "default": 0.0066341582097906,
+        "seed": 0.7879448003692826,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "kl_div:8192x128256",
+      "kernel": "kl_div",
+      "shape_group": "vocabulary",
+      "shape": [
+        8192,
+        128256
+      ],
+      "provenance": {
+        "source": "model_anchored_supplement",
+        "basis": "Llama 3 vocabulary",
+        "reason": "Liger's fixed model sweep does not cover a large token population."
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 5573.855876922607,
+        "seed": 1506.6879987716675,
+        "torch_compile": 1478.2079458236694
+      },
+      "normalized_performance": {
+        "default": 0.26520383347977877,
+        "seed": 0.981097577619775,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "kl_div:2048x256000",
+      "kernel": "kl_div",
+      "shape_group": "vocabulary",
+      "shape": [
+        2048,
+        256000
+      ],
+      "provenance": {
+        "source": "synthetic_real_regime",
+        "basis": "256k-vocabulary language models",
+        "reason": "Liger's model registry tops out at 152064 and omits this common wider-vocabulary regime."
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 10406.0640335083,
+        "seed": 789.247989654541,
+        "torch_compile": 762.5440061092377
+      },
+      "normalized_performance": {
+        "default": 0.07327881162885307,
+        "seed": 0.9661652815143794,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "jsd:2048x32000",
+      "kernel": "jsd",
+      "shape_group": "vocabulary",
+      "shape": [
+        2048,
+        32000
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "llama_2_7b"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 1256.1759948730469,
+        "seed": 183.53600054979324,
+        "torch_compile": 146.40000462532043
+      },
+      "normalized_performance": {
+        "default": 0.11654418268048188,
+        "seed": 0.7976636964234283,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "jsd:2048x102400",
+      "kernel": "jsd",
+      "shape_group": "vocabulary",
+      "shape": [
+        2048,
+        102400
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "deepseek_v2_lite"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 3961.392045021057,
+        "seed": 513.5839879512787,
+        "torch_compile": 416.3680076599121
+      },
+      "normalized_performance": {
+        "default": 0.10510648855955353,
+        "seed": 0.8107106479717803,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "jsd:2048x128256",
+      "kernel": "jsd",
+      "shape_group": "vocabulary",
+      "shape": [
+        2048,
+        128256
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "llama_3_8b"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 4952.703952789307,
+        "seed": 623.1359839439392,
+        "torch_compile": 532.4319899082184
+      },
+      "normalized_performance": {
+        "default": 0.10750329415679262,
+        "seed": 0.8544394861268659,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "jsd:2048x129280",
+      "kernel": "jsd",
+      "shape_group": "vocabulary",
+      "shape": [
+        2048,
+        129280
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "deepseek_v3"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 4991.199970245361,
+        "seed": 624.5120167732239,
+        "torch_compile": 540.2560234069824
+      },
+      "normalized_performance": {
+        "default": 0.1082417107364312,
+        "seed": 0.8650850726594794,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "jsd:2048x152064",
+      "kernel": "jsd",
+      "shape_group": "vocabulary",
+      "shape": [
+        2048,
+        152064
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "qwen2.5"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 5859.888076782227,
+        "seed": 733.7439954280853,
+        "torch_compile": 630.8960020542145
+      },
+      "normalized_performance": {
+        "default": 0.10766349011919203,
+        "seed": 0.859831229945716,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "jsd:128x128256",
+      "kernel": "jsd",
+      "shape_group": "vocabulary",
+      "shape": [
+        128,
+        128256
+      ],
+      "provenance": {
+        "source": "model_anchored_supplement",
+        "basis": "Llama 3 vocabulary",
+        "reason": "Liger's fixed model sweep does not cover a small token population."
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 4971.247911453247,
+        "seed": 50.97600072622299,
+        "torch_compile": 49.92000013589859
+      },
+      "normalized_performance": {
+        "default": 0.010041744251154325,
+        "seed": 0.9792843578295625,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "jsd:8192x128256",
+      "kernel": "jsd",
+      "shape_group": "vocabulary",
+      "shape": [
+        8192,
+        128256
+      ],
+      "provenance": {
+        "source": "model_anchored_supplement",
+        "basis": "Llama 3 vocabulary",
+        "reason": "Liger's fixed model sweep does not cover a large token population."
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 5304.512023925781,
+        "seed": 2415.839910507202,
+        "torch_compile": 2030.4958820343018
+      },
+      "normalized_performance": {
+        "default": 0.3827865547058494,
+        "seed": 0.8404927301693604,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "jsd:2048x256000",
+      "kernel": "jsd",
+      "shape_group": "vocabulary",
+      "shape": [
+        2048,
+        256000
+      ],
+      "provenance": {
+        "source": "synthetic_real_regime",
+        "basis": "256k-vocabulary language models",
+        "reason": "Liger's model registry tops out at 152064 and omits this common wider-vocabulary regime."
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 9920.3200340271,
+        "seed": 1203.1520009040833,
+        "torch_compile": 1019.9360251426697
+      },
+      "normalized_performance": {
+        "default": 0.10281281467172912,
+        "seed": 0.8477200090896746,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "fused_linear_jsd:2048x32000",
+      "kernel": "fused_linear_jsd",
+      "shape_group": "vocabulary",
+      "shape": [
+        2048,
+        32000
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "llama_2_7b"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 793.9359843730927,
+        "seed": 671.1680293083191,
+        "torch_compile": 891.9840157032013
+      },
+      "normalized_performance": {
+        "default": 1.123496142333855,
+        "seed": 1.3290025399786205,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "fused_linear_jsd:2048x102400",
+      "kernel": "fused_linear_jsd",
+      "shape_group": "vocabulary",
+      "shape": [
+        2048,
+        102400
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "deepseek_v2_lite"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 2394.976019859314,
+        "seed": 2505.1519870758057,
+        "torch_compile": 2836.176037788391
+      },
+      "normalized_performance": {
+        "default": 1.1842189709920328,
+        "seed": 1.1321373123947585,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "fused_linear_jsd:2048x128256",
+      "kernel": "fused_linear_jsd",
+      "shape_group": "vocabulary",
+      "shape": [
+        2048,
+        128256
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "llama_3_8b"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 4332.0159912109375,
+        "seed": 3138.543963432312,
+        "torch_compile": 3844.9599742889404
+      },
+      "normalized_performance": {
+        "default": 0.8875682781619074,
+        "seed": 1.2250776216892918,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "fused_linear_jsd:2048x129280",
+      "kernel": "fused_linear_jsd",
+      "shape_group": "vocabulary",
+      "shape": [
+        2048,
+        129280
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "deepseek_v3"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 3395.9999084472656,
+        "seed": 3149.616003036499,
+        "torch_compile": 3875.4559755325317
+      },
+      "normalized_performance": {
+        "default": 1.1411825912870786,
+        "seed": 1.2304534812485906,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "fused_linear_jsd:2048x152064",
+      "kernel": "fused_linear_jsd",
+      "shape_group": "vocabulary",
+      "shape": [
+        2048,
+        152064
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "qwen2.5"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 5229.696035385132,
+        "seed": 3821.344017982483,
+        "torch_compile": 4538.991928100586
+      },
+      "normalized_performance": {
+        "default": 0.8679265290733709,
+        "seed": 1.187799870082619,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "fused_linear_jsd:128x128256",
+      "kernel": "fused_linear_jsd",
+      "shape_group": "vocabulary",
+      "shape": [
+        128,
+        128256
+      ],
+      "provenance": {
+        "source": "model_anchored_supplement",
+        "basis": "Llama 3 vocabulary",
+        "reason": "Liger's fixed model sweep does not cover a small token population."
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 543.8880026340485,
+        "seed": 203.3279985189438,
+        "torch_compile": 295.3439950942993
+      },
+      "normalized_performance": {
+        "default": 0.5430235520253232,
+        "seed": 1.4525495615242705,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "fused_linear_jsd:8192x128256",
+      "kernel": "fused_linear_jsd",
+      "shape_group": "vocabulary",
+      "shape": [
+        8192,
+        128256
+      ],
+      "provenance": {
+        "source": "model_anchored_supplement",
+        "basis": "Llama 3 vocabulary",
+        "reason": "Liger's fixed model sweep does not cover a large token population."
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 16129.216194152832,
+        "seed": 12365.743637084961,
+        "torch_compile": 14058.480262756348
+      },
+      "normalized_performance": {
+        "default": 0.8716158363512315,
+        "seed": 1.1368891896314959,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "fused_linear_jsd:2048x256000",
+      "kernel": "fused_linear_jsd",
+      "shape_group": "vocabulary",
+      "shape": [
+        2048,
+        256000
+      ],
+      "provenance": {
+        "source": "synthetic_real_regime",
+        "basis": "256k-vocabulary language models",
+        "reason": "Liger's model registry tops out at 152064 and omits this common wider-vocabulary regime."
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 8140.480041503906,
+        "seed": 6475.327968597412,
+        "torch_compile": 7636.816024780273
+      },
+      "normalized_performance": {
+        "default": 0.9381284624302594,
+        "seed": 1.1793713093476632,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "grpo:2x512x32000",
+      "kernel": "grpo",
+      "shape_group": "grpo",
+      "shape": [
+        2,
+        512,
+        32000
+      ],
+      "provenance": {
+        "source": "liger_grpo_kernel"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 1068.8000321388245,
+        "seed": 47.568000853061676,
+        "torch_compile": 46.52800038456917
+      },
+      "normalized_performance": {
+        "default": 0.043532933182514846,
+        "seed": 0.9781365529380752,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "grpo:4x512x32000",
+      "kernel": "grpo",
+      "shape_group": "grpo",
+      "shape": [
+        4,
+        512,
+        32000
+      ],
+      "provenance": {
+        "source": "liger_grpo_kernel"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 1156.063973903656,
+        "seed": 80.04799857735634,
+        "torch_compile": 95.15200182795525
+      },
+      "normalized_performance": {
+        "default": 0.08230686534297714,
+        "seed": 1.1886868318887795,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "grpo:8x512x32000",
+      "kernel": "grpo",
+      "shape_group": "grpo",
+      "shape": [
+        8,
+        512,
+        32000
+      ],
+      "provenance": {
+        "source": "liger_grpo_kernel"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 1456.1439752578735,
+        "seed": 142.19199866056442,
+        "torch_compile": 173.8239973783493
+      },
+      "normalized_performance": {
+        "default": 0.11937280951051987,
+        "seed": 1.2224597657797585,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "grpo:16x512x32000",
+      "kernel": "grpo",
+      "shape_group": "grpo",
+      "shape": [
+        16,
+        512,
+        32000
+      ],
+      "provenance": {
+        "source": "liger_grpo_kernel"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 2616.192102432251,
+        "seed": 261.24799251556396,
+        "torch_compile": 263.279989361763
+      },
+      "normalized_performance": {
+        "default": 0.10063480778685704,
+        "seed": 1.0077780381262758,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "grpo:4x1024x102400",
+      "kernel": "grpo",
+      "shape_group": "grpo",
+      "shape": [
+        4,
+        1024,
+        102400
+      ],
+      "provenance": {
+        "source": "model_anchored_supplement",
+        "basis": "DeepSeek V2 Lite vocabulary",
+        "reason": "Liger's low-level GRPO benchmark fixes both sequence length and vocabulary."
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 3289.375901222229,
+        "seed": 402.319997549057,
+        "torch_compile": 443.2480037212372
+      },
+      "normalized_performance": {
+        "default": 0.13475139875516814,
+        "seed": 1.1017299821572741,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "grpo:4x1024x128256",
+      "kernel": "grpo",
+      "shape_group": "grpo",
+      "shape": [
+        4,
+        1024,
+        128256
+      ],
+      "provenance": {
+        "source": "model_anchored_supplement",
+        "basis": "Llama 3 vocabulary",
+        "reason": "Liger's low-level GRPO benchmark fixes both sequence length and vocabulary."
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 4076.9121646881104,
+        "seed": 514.8960053920746,
+        "torch_compile": 660.7680022716522
+      },
+      "normalized_performance": {
+        "default": 0.16207560417780106,
+        "seed": 1.2833038037817004,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "grpo:8x1024x152064",
+      "kernel": "grpo",
+      "shape_group": "grpo",
+      "shape": [
+        8,
+        1024,
+        152064
+      ],
+      "provenance": {
+        "source": "model_anchored_supplement",
+        "basis": "Qwen 2.5 vocabulary",
+        "reason": "Liger's low-level GRPO benchmark fixes both sequence length and vocabulary."
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 6499.056100845337,
+        "seed": 1197.6799964904785,
+        "torch_compile": 1539.9999618530273
+      },
+      "normalized_performance": {
+        "default": 0.23695748089522084,
+        "seed": 1.2858192224681364,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "grpo:4x2048x128256",
+      "kernel": "grpo",
+      "shape_group": "grpo",
+      "shape": [
+        4,
+        2048,
+        128256
+      ],
+      "provenance": {
+        "source": "model_anchored_supplement",
+        "basis": "Llama 3 vocabulary with a longer completion",
+        "reason": "Liger's low-level GRPO benchmark fixes the completion length at 512."
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 4050.447940826416,
+        "seed": 1040.1920080184937,
+        "torch_compile": 1295.311987400055
+      },
+      "normalized_performance": {
+        "default": 0.31979475019144954,
+        "seed": 1.245262391380559,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "rms_norm_bwd:2048x2048",
+      "kernel": "rms_norm_bwd",
+      "shape_group": "normalization",
+      "shape": [
+        2048,
+        2048
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "deepseek_v2_lite"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 203.80799472332,
+        "seed": 22.512000054121017,
+        "torch_compile": 22.175999358296394
+      },
+      "normalized_performance": {
+        "default": 0.10880828982396629,
+        "seed": 0.9850745959924998,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "rms_norm_bwd:2048x3584",
+      "kernel": "rms_norm_bwd",
+      "shape_group": "normalization",
+      "shape": [
+        2048,
+        3584
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "qwen2.5_7b"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 682.59197473526,
+        "seed": 33.36000069975853,
+        "torch_compile": 35.679999738931656
+      },
+      "normalized_performance": {
+        "default": 0.052271343730300915,
+        "seed": 1.0695443342478683,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "rms_norm_bwd:2048x4096",
+      "kernel": "rms_norm_bwd",
+      "shape_group": "normalization",
+      "shape": [
+        2048,
+        4096
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "llama_3_8b"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 693.664014339447,
+        "seed": 34.78400036692619,
+        "torch_compile": 37.31200098991394
+      },
+      "normalized_performance": {
+        "default": 0.05378973136648137,
+        "seed": 1.0726771100598151,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "rms_norm_bwd:2048x5120",
+      "kernel": "rms_norm_bwd",
+      "shape_group": "normalization",
+      "shape": [
+        2048,
+        5120
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "qwen2.5_14b"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 946.7999935150146,
+        "seed": 47.39199951291084,
+        "torch_compile": 50.863999873399734
+      },
+      "normalized_performance": {
+        "default": 0.05372201121861659,
+        "seed": 1.0732613182852313,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "rms_norm_bwd:2048x7168",
+      "kernel": "rms_norm_bwd",
+      "shape_group": "normalization",
+      "shape": [
+        2048,
+        7168
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "deepseek_v3"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 1368.2080507278442,
+        "seed": 52.89600044488907,
+        "torch_compile": 59.29600074887276
+      },
+      "normalized_performance": {
+        "default": 0.043338438709909013,
+        "seed": 1.1209921402403888,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "rms_norm_bwd:2048x8192",
+      "kernel": "rms_norm_bwd",
+      "shape_group": "normalization",
+      "shape": [
+        2048,
+        8192
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "qwen2.5_72b"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 1512.2079849243164,
+        "seed": 55.776000022888184,
+        "torch_compile": 73.21599870920181
+      },
+      "normalized_performance": {
+        "default": 0.04841661956497747,
+        "seed": 1.3126792649016956,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "rms_norm_bwd:128x4096",
+      "kernel": "rms_norm_bwd",
+      "shape_group": "normalization",
+      "shape": [
+        128,
+        4096
+      ],
+      "provenance": {
+        "source": "model_anchored_supplement",
+        "basis": "Llama hidden size",
+        "reason": "Liger's fixed model sweep does not cover a small row population."
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 351.80799663066864,
+        "seed": 13.439999893307686,
+        "torch_compile": 15.072000212967396
+      },
+      "normalized_performance": {
+        "default": 0.042841550951981694,
+        "seed": 1.1214285961767267,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "rms_norm_bwd:8192x4096",
+      "kernel": "rms_norm_bwd",
+      "shape_group": "normalization",
+      "shape": [
+        8192,
+        4096
+      ],
+      "provenance": {
+        "source": "model_anchored_supplement",
+        "basis": "Llama hidden size",
+        "reason": "Liger's fixed model sweep does not cover a large row population."
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 1323.7600326538086,
+        "seed": 94.43199634552002,
+        "torch_compile": 89.24800157546997
+      },
+      "normalized_performance": {
+        "default": 0.06742007567379867,
+        "seed": 0.9451034080537472,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "layer_norm_bwd:2048x2048",
+      "kernel": "layer_norm_bwd",
+      "shape_group": "normalization",
+      "shape": [
+        2048,
+        2048
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "deepseek_v2_lite"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 512.6399993896484,
+        "seed": 27.583999559283257,
+        "torch_compile": 29.23200000077486
+      },
+      "normalized_performance": {
+        "default": 0.05702247197951509,
+        "seed": 1.0597447965422757,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "layer_norm_bwd:2048x3584",
+      "kernel": "layer_norm_bwd",
+      "shape_group": "normalization",
+      "shape": [
+        2048,
+        3584
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "qwen2.5_7b"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 919.8240041732788,
+        "seed": 41.18400067090988,
+        "torch_compile": 40.591999888420105
+      },
+      "normalized_performance": {
+        "default": 0.044130181104485806,
+        "seed": 0.9856254668598058,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "layer_norm_bwd:2048x4096",
+      "kernel": "layer_norm_bwd",
+      "shape_group": "normalization",
+      "shape": [
+        2048,
+        4096
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "llama_3_8b"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 868.1760132312775,
+        "seed": 42.81600005924702,
+        "torch_compile": 50.416000187397
+      },
+      "normalized_performance": {
+        "default": 0.05807117383922291,
+        "seed": 1.1775037396681947,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "layer_norm_bwd:2048x5120",
+      "kernel": "layer_norm_bwd",
+      "shape_group": "normalization",
+      "shape": [
+        2048,
+        5120
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "qwen2.5_14b"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 1485.8400225639343,
+        "seed": 54.9440011382103,
+        "torch_compile": 62.17600032687187
+      },
+      "normalized_performance": {
+        "default": 0.04184568956460216,
+        "seed": 1.1316249097052407,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "layer_norm_bwd:2048x7168",
+      "kernel": "layer_norm_bwd",
+      "shape_group": "normalization",
+      "shape": [
+        2048,
+        7168
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "deepseek_v3"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 1963.648021221161,
+        "seed": 61.3120011985302,
+        "torch_compile": 79.05599847435951
+      },
+      "normalized_performance": {
+        "default": 0.040259760211606495,
+        "seed": 1.2894049603498292,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "layer_norm_bwd:2048x8192",
+      "kernel": "layer_norm_bwd",
+      "shape_group": "normalization",
+      "shape": [
+        2048,
+        8192
+      ],
+      "provenance": {
+        "source": "liger_model_config",
+        "model": "qwen2.5_72b"
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 2406.272053718567,
+        "seed": 63.77600133419037,
+        "torch_compile": 87.37600222229958
+      },
+      "normalized_performance": {
+        "default": 0.036311772015667064,
+        "seed": 1.3700451642373073,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "layer_norm_bwd:128x4096",
+      "kernel": "layer_norm_bwd",
+      "shape_group": "normalization",
+      "shape": [
+        128,
+        4096
+      ],
+      "provenance": {
+        "source": "model_anchored_supplement",
+        "basis": "Llama hidden size",
+        "reason": "Liger's fixed model sweep does not cover a small row population."
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 440.3519928455353,
+        "seed": 19.311999902129173,
+        "torch_compile": 16.96000061929226
+      },
+      "normalized_performance": {
+        "default": 0.038514644863300106,
+        "seed": 0.878210475623625,
+        "torch_compile": 1.0
+      }
+    },
+    {
+      "cell_key": "layer_norm_bwd:8192x4096",
+      "kernel": "layer_norm_bwd",
+      "shape_group": "normalization",
+      "shape": [
+        8192,
+        4096
+      ],
+      "provenance": {
+        "source": "model_anchored_supplement",
+        "basis": "Llama hidden size",
+        "reason": "Liger's fixed model sweep does not cover a large row population."
+      },
+      "status": {
+        "default": "ok",
+        "seed": "ok",
+        "torch_compile": "ok"
+      },
+      "latency_us": {
+        "default": 1580.7999968528748,
+        "seed": 103.12000289559364,
+        "torch_compile": 89.91999924182892
+      },
+      "normalized_performance": {
+        "default": 0.05688259072674946,
+        "seed": 0.8719937618007111,
+        "torch_compile": 1.0
+      }
+    }
+  ]
+}

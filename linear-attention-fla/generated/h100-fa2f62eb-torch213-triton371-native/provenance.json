@@ -1,0 +1,25 @@
+{
+  "source": "/home/dev/helion-heuristic-performance-artifact/linear-attention-fla/generated/h100-fa2f62eb-torch213-triton371-native/helionbench.json",
+  "measurement": "Helion native block-ordered linear-attention harness",
+  "helion_configuration": "H100 AOT (compat-repaired)",
+  "aot_compatibility_repairs": [
+    {
+      "kernel": "chunk_fwd_o_diag_anchored_varlen_helion",
+      "field": "range_num_stages",
+      "from": [
+        0
+      ],
+      "to": [],
+      "reason": "the pinned main AOT table retained a zero-valued entry for a range that no longer accepts range_num_stages"
+    }
+  ],
+  "helion_revision": "fa2f62eb686ef846c76f8b9e18beec30fbc5bee1",
+  "fla_version": "0.5.2",
+  "fla_revision": "6bd90692588c81fe102ee6e12ac70686359658a2",
+  "python": "3.12.3",
+  "torch": "2.13.0+cu132",
+  "cuda": "13.2",
+  "triton": "3.7.1",
+  "gpu": "NVIDIA H100 80GB HBM3",
+  "cells": 96
+}

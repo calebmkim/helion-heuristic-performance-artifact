@@ -13,13 +13,13 @@ We sort kernels by what they contain -- a matmul, a reduction, or neither, which
 
 Highlights:
 
-- **Linear attention.** Over 96 kernel-and-shape cells spanning nine linear-attention variants, the computed config beats the hand-written Triton in [Flash Linear Attention](https://github.com/fla-org/flash-linear-attention) (FLA) by **1.18x** on H100 and **1.30x** on B200 in the forward pass, and by **1.13x** and **1.44x** with backward included. On H100 it is **2.27x** faster than Helion's no-autotune default in forward and **1.93x** with backward included.
+- **Linear attention.** Over 96 kernel-and-shape cells spanning nine linear-attention variants, the computed config beats the hand-written Triton in [Flash Linear Attention](https://github.com/fla-org/flash-linear-attention) (FLA) by **1.18x** on H100 and **1.30x** on B200 in the forward pass, and by **1.12x** and **1.44x** with backward included. On H100 it is **2.26x** faster than Helion's no-autotune default in forward and **1.96x** with backward included.
 - **vLLM's reduction kernels.** Over 153 cells across six production kernels on H100, the computed config is **1.27x** faster than vLLM's own handwritten CUDA/C++ operators, and **2.2x** faster than Helion's previous default. [B200 run pending.]
 - **And it costs nothing.** This is static analysis, not search: nothing is compiled and nothing is benchmarked, so it adds tens of milliseconds to compile time rather than hours of GPU time.
 
 Limitations: 
 
-- **The honest ceiling.** Full autotuning still wins. On linear attention it is **1.06x to 1.17x** faster depending on the part and on whether backward is included, so we leave between **6%** and **15%** of the tuned config's performance on the table. On the vLLM kernels the gap is **1.03x**, or about **3%**. [B200 vLLM run pending.]
+- **The honest ceiling.** Full autotuning still wins. On linear attention it is **1.06x to 1.18x** faster depending on the part and on whether backward is included, so we leave between **6%** and **15%** of the tuned config's performance on the table. On the vLLM kernels the gap is **1.03x**, or about **3%**. [B200 vLLM run pending.]
 - **Not every kernel gets a config.** Everything these heuristics compute is arithmetic on extents -- block sizes, CTA counts, loop trip counts, live bytes -- so when a matmul dimension is not known at compile time we lose every estimate at once, and we decline to seed rather than guess. A loop tiled over a range that is only determined at runtime is enough to trigger this. That is conservatism rather than a fundamental limit: a fallback extent, a hint from the author, or any sort of default behavior, would let these kernels be seeded too.
 
 ## Background: Finding a Good Config Is Hard
@@ -146,20 +146,20 @@ All three Helion arms run the same kernel source; only the config differs.
 Every arm is checked for numerical agreement before it is timed.
 On H100, we materialize those configs first and then co-measure all four arms
 in one process per cell, with cold-L2 samples interleaved in rotated
-forward/reverse order.
-The retained full H100 sweep used PyTorch 2.12.0+cu132. A matched eight-cell
-forward/backward compatibility check on PyTorch 2.13.0+cu132, CUDA 13.2, and
-Triton 3.7.1 changed aggregate performance-versus-FLA by at most 0.05% across
-the three Helion arms, with every sampled arm passing correctness.
+forward/reverse order. The fresh full sweep uses Helion
+`fa2f62eb686ef846c76f8b9e18beec30fbc5bee1`, FLA
+`6bd90692588c81fe102ee6e12ac70686359658a2`, PyTorch `2.13.0+cu132`, CUDA
+13.2, and Triton 3.7.1. All 96 cells completed and all 288 Helion arm-cells
+passed correctness.
 
 [FIGURE: `figures/results-linattn-summary.png` -- geomeans for both parts and both modes, normalized to handwritten FLA Triton at 1.00x.
 Then optionally the two per-variant breakdowns, `figures/results-linattn-h100.png` and `figures/results-linattn-b200.png`.]
 
 [FIGURE: `figures/diagrams/diagram-D-tradeoff-space.png` -- schematic of the tradeoff, if it is not already used up top.]
 
-Before this work the choice was binary: take Helion's no-autotune default and run at **0.52x** of handwritten FLA Triton on H100, or spend GPU-hours autotuning and reach **1.26x**.
+Before this work the choice was binary: take Helion's no-autotune default and run at **0.54x** of handwritten FLA Triton on H100, or spend GPU-hours autotuning and reach **1.29x**.
 Neither is a good answer if you have not budgeted for tuning -- the first is a regression against a hand-written kernel you could have used instead, the second a bill that comes due again on every new shape and every new GPU.
-The heuristic adds a third option that did not exist before: **1.18x** on H100 and **1.30x** on B200, with no autotuning price.
+The heuristic adds a third option that did not exist before: **1.16x** on H100 and **1.30x** on B200, with no autotuning price.
 That is most of what autotuning finds, available immediately, and it moves Helion's out-of-the-box behaviour from *losing* to handwritten Triton to *beating* it, at least for this narrow set of kernels.
 
 ### vLLM's reduction kernels
@@ -182,17 +182,17 @@ Both comparisons above are specialist libraries -- linear-attention variants and
 
 The reference is what you would otherwise reach for rather than something hand-written: `torch.compile(mode="max-autotune-no-cudagraphs")`, the strongest setting Inductor offers, with everything normalized to it at 1.00x. There is no tuned-config arm in this section, for the mundane reason that we do not have pre-tuned configs for these kernels -- so unlike the two sections above, this one reports no ceiling.
 
-On a suite of ten reduction kernels -- RMSNorm and LayerNorm forward and backward, softmax, cross entropy, KL divergence, JSD, fused linear JSD, GRPO -- over 80 cells, the computed config comes out at **1.088x** of max-autotune `torch.compile`, with no tuning of its own. Helion's unseeded default is **0.268x**. Seven of the ten kernels beat `torch.compile` and three trail it, the largest win being softmax at 1.377x and the largest loss JSD at 0.856x. This primary result uses PyTorch 2.13.0+cu132, CUDA 13.2, and Triton 3.7.1; the artifact retains the earlier PyTorch 2.12.0+cu132 / Triton 3.7.0 dataset separately.
+On a suite of ten reduction kernels -- RMSNorm and LayerNorm forward and backward, softmax, cross entropy, KL divergence, JSD, fused linear JSD, GRPO -- over 80 cells, the computed config comes out at **1.090x** of max-autotune `torch.compile`, with no tuning of its own. Helion's unseeded default is **0.269x**. Seven of the ten kernels beat `torch.compile` and three trail it, the largest win being softmax at 1.385x and the largest loss JSD at 0.855x. This primary result uses PyTorch 2.13.0+cu132, CUDA 13.2, and Triton 3.7.1.
 
 [FIGURE: `example-reductions/generated/blog-figures/results-example-reductions-h100.png` -- ten reduction kernels on H100 using PyTorch 2.13.0+cu132 and Triton 3.7.1, normalized to max-autotune `torch.compile` at 1.00x.]
 
-The other corpus is a breadth sweep: thirteen kernel families over 69 shapes -- plain and broadcast matmul, a BF16 x INT16 GEMM, gather GEMV, dense, causal, biased and backward attention, Mamba-2 chunk state and chunk scan, squeeze-and-excitation, jagged HSTU, and a gated-delta-net recurrence. The computed config comes out at **2.38x** of max-autotune `torch.compile` overall, against **0.65x** for Helion's default.
+The other corpus is a breadth sweep: thirteen kernel families over 70 shapes -- plain and broadcast matmul, a BF16 x INT16 GEMM, gather GEMV, dense, causal, biased and backward attention, Mamba-2 chunk state and chunk scan, squeeze-and-excitation, jagged HSTU, and a gated-delta-net recurrence. Giving every family equal weight, the computed config comes out at **1.88x** of max-autotune `torch.compile` overall, against **0.51x** for Helion's default.
 
-One caveat on that 2.38x: for some of these kernels the Helion implementation and the PyTorch reference are not the same algorithm. Where the reference materializes intermediates that the Helion kernel fuses, Inductor is implementing a different algorithm, and the ratio reflects that as much as it reflects the config. The gated-delta-net kernel is the extreme, at 13.6x.
+One caveat on that 1.88x: for some of these kernels the Helion implementation and the PyTorch reference are not the same algorithm. Where the reference materializes intermediates that the Helion kernel fuses, Inductor is implementing a different algorithm, and the ratio reflects that as much as it reflects the config. The gated-delta-net kernel is the extreme, at 8.62x.
 
-Two families go the other way. On the BF16 x INT16 GEMM the computed config lands at 0.848x, slower than `torch.compile`; and on jagged HSTU it is slower than Helion's own default, the one family in the sweep where the heuristic actively hurts.
+Three families trail `torch.compile`: BF16 x INT16 GEMM at 0.767x, gather GEMV at 0.942x, and biased attention at 0.971x. Jagged HSTU is slower than Helion's own default at 0.877x, the one family in the sweep where the heuristic actively hurts.
 
-[FIGURE: `other-matmul-kernels/generated/h100-eacfee67-torch-compile/blog-figures/results-matmul-vs-torch-compile-h100.png` -- thirteen kernel families over 69 shapes on H100, normalized to max-autotune `torch.compile`.]
+[FIGURE: `other-matmul-kernels/generated/h100-fa2f62eb-torch213-triton371/blog-figures/results-matmul-vs-torch-compile-h100.png` -- thirteen kernel families over 70 shapes on H100, normalized to max-autotune `torch.compile`.]
 
 ## Result 2: Does the Seed Make the Search Faster?
 
@@ -466,8 +466,10 @@ OPEN QUESTIONS FOR THE AUTHOR BEFORE PUBLICATION
     "1.51x of Triton" SGLang decode ceiling; the 12-of-16 SGLang CUDA-kernel routing caveat; and the
     off-corpus worst family (4.33x). The dq-only backward gate (B14) is now IN the body, in the
     linear-attention scope sentence, so no gradient claim is left implicit.
- 1. RE-RUN THE HEADLINES. Both big tables are snapshots at trees that have been rebased away
-    (149-cell at ccfcfbdd, 96-cell at 375363d8). B15. Everything else here is downstream of that.
+ 1. RESOLVED 2026-09-04: the H100 headline datasets were rerun at Helion
+    fa2f62eb686ef846c76f8b9e18beec30fbc5bee1 with torch 2.13.0+cu132, CUDA 13.2,
+    and Triton 3.7.1. Linear attention pins FLA 6bd90692588c; vLLM pins
+    ee0da84ab9e04ac7610e28580af62c365e898389. The body and figures use these runs.
  2. PUBLICATION HYGIENE, three placeholders left on purpose: the bracketed byline on line 3, the
     "[NAMES TO BE FILLED IN.]" marker in Acknowledgements, and the Acknowledgements section itself. No
     engineering post in this series carries one (the intro post's italic "Helion is the work of many
@@ -478,11 +480,10 @@ OPEN QUESTIONS FOR THE AUTHOR BEFORE PUBLICATION
     public repro command safe to print, so there is none, and nothing in the body now references one —
     Result 1's auditability need is met instead by the absolute-latency anchor sentence under the
     linear-attention table. Add a Resources H2 if you have a public link.
- 4. The primary H100 reduction runs and the linear-attention compatibility check now use
-    torch 2.13.0+cu132 / CUDA 13.2 / Triton 3.7.1. The retained full 96-cell H100
-    linear-attention artifact used torch 2.12.0+cu132 / Triton 3.7.1, while pointwise used
-    torch 2.12.0+cu132 / Triton 3.7.0. The SGLang run was on physical GPU 0 while everything
-    else was GPU 1. Confirm whether you want the full historical matrix stated.
+ 4. The four primary H100 artifacts now share torch 2.13.0+cu132 / CUDA 13.2 /
+    Triton 3.7.1 and Helion fa2f62eb. The separate pointwise and SGLang research
+    datasets still use their recorded historical stacks; state those stacks if
+    numbers from those sections are promoted into the main result narrative.
  5. Measure the multi-matmul front end's config-selection cost on GPU. The +34 ms figure covers the
     single-contraction path only, and the post headlines the other one. research/14 SS3e calls this a
     one-afternoon job on the B200 box. The gap is now DISCLOSED in the body (TL;DR bullet 4 and the

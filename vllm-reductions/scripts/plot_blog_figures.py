@@ -9,7 +9,7 @@ is a comparison against production code rather than against another Helion arm.
 
 Usage:
     python plot_blog_figures.py \
-        --summary ../generated/h100-main-torch213-triton371-vllm024-curated/summary.json \
+        --summary ../generated/h100-fa2f62eb-torch213-triton371-vllm024-curated/summary.json \
         --gpu H100 --outdir <where>
 """
 

@@ -6,7 +6,6 @@ import argparse
 import csv
 from datetime import datetime
 from datetime import timezone
-import importlib
 import json
 import os
 from pathlib import Path
@@ -17,7 +16,8 @@ from typing import Any
 
 from benchmark_paths import add_checkout
 from benchmark_paths import checkout_path
-from benchmark_paths import linear_aot_module
+from aot_adapter import install_linear_aot_module
+from aot_adapter import repair_metadata
 
 ARMS = ("default", "seed", "aot_tuned")
 
@@ -50,18 +50,9 @@ def _set_arm_environment(arm: str) -> None:
     )
 
 
-def _install_aot_module(explicit: str | None) -> None:
-    module = importlib.import_module(linear_aot_module(explicit))
-    from helion.autotuner.aot_cache import AOTAutotuneCache
-
-    module_path = Path(module.__file__)
-    AOTAutotuneCache._heuristic_modules[module_path] = module
-    AOTAutotuneCache._heuristic_modules[module_path.resolve()] = module
-
-
 def _configure_arm(arm: str, aot_module: str | None) -> None:
     if arm == "aot_tuned":
-        _install_aot_module(aot_module)
+        install_linear_aot_module(aot_module)
         return
     import helion.autotuner.aot_cache as aot_cache
 
@@ -94,7 +85,7 @@ def _child(args: argparse.Namespace) -> None:
     with recorder.patched():
         for index, row in enumerate(rows):
             key = row["cell_key"]
-            if key in prior:
+            if key in prior and "error" not in prior[key]:
                 print(f"[{index + 1}/{len(rows)}] cached {key}", flush=True)
                 continue
             recorder.reset()
@@ -195,6 +186,7 @@ def _parent(args: argparse.Namespace) -> None:
         "discovery_outputs": {
             arm: str(path) for arm, path in arm_outputs.items()
         },
+        "aot_compatibility_repairs": repair_metadata(),
         "cells": cells,
         "errors": errors,
     }

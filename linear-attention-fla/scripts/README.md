@@ -10,9 +10,18 @@ revisions only for an explicitly labeled historical run.
 
 `run_native_harness.sh` is a thin launcher for the target checkout's own
 `benchmarks.run_linattn` entry point. Use it to reproduce results that were
-claimed using Helion's native benchmark methodology. It deliberately leaves
-Helion config selection to the caller's environment and produces the native
-`helionbench.json` format.
+claimed using Helion's native benchmark methodology. It defaults to
+`HELION_AUTOTUNE_CACHE=AOTAutotuneCache`, matching Helion's current benchmark
+workflow and selecting the checked-in architecture-specific AOT table. Override
+that variable and `NATIVE_CONFIG_LABEL` together only for an explicitly labeled
+alternative. The launcher retains the native `helionbench.json` and also writes
+`summary.md`, `per-kernel-bars.png`, and `provenance.json`.
+
+At the pinned main revision, the checked-in varlen KDA output row retains
+`range_num_stages: [0]` after that kernel stopped accepting a staged range.
+`aot_adapter.py` normalizes only that stale no-op field to `[]`; it rejects an
+unexpected source value and leaves every performance-bearing AOT field
+unchanged. Both workflows record this compatibility repair in their output.
 
 The native harness measures one active Helion configuration against FLA. It
 does not co-measure default, seed, and AOT, and separate native invocations
@@ -68,6 +77,3 @@ unchanged.
 The plot has separate forward and forward-plus-backward panels. Each kernel is
 a cluster with default, seed, and AOT-tuned bars, where bar height is
 `shared FLA latency / arm latency`; the FLA reference is the `1.00x` line.
-
-`combine_results.py` remains only for reading older separate-arm runs. It is not
-part of the current reproduction path.

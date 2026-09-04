@@ -1,0 +1,1538 @@
+[
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "vanilla_linear_attn"
+    },
+    "metric": {
+      "name": "helion_accuracy",
+      "benchmark_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "vanilla_linear_attn"
+    },
+    "metric": {
+      "name": "helion_latency_ms",
+      "benchmark_values": [
+        0.6802511745029025,
+        0.4590231206390884,
+        0.17255653983157404,
+        0.8965550914849385,
+        1.2704517220797604,
+        0.1504885254840201
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "vanilla_linear_attn"
+    },
+    "metric": {
+      "name": "helion_speedup",
+      "benchmark_values": [
+        1.07519814463759,
+        1.3539088286163272,
+        1.0530892921963877,
+        1.0617200601870418,
+        1.0534642141318504,
+        1.1520974555914034
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "vanilla_linear_attn-bwd"
+    },
+    "metric": {
+      "name": "helion_accuracy",
+      "benchmark_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "vanilla_linear_attn-bwd"
+    },
+    "metric": {
+      "name": "helion_latency_ms",
+      "benchmark_values": [
+        2.4503432243101058,
+        1.63582051836926,
+        0.9233705197509966,
+        3.2360146840413413,
+        4.945914030075073,
+        0.9504677888594175
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "vanilla_linear_attn-bwd"
+    },
+    "metric": {
+      "name": "helion_speedup",
+      "benchmark_values": [
+        1.3650109481991897,
+        1.5782978467213309,
+        1.400862110173251,
+        1.3818572045209536,
+        1.875674424339197,
+        1.564622409097292
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "simple_gla"
+    },
+    "metric": {
+      "name": "helion_accuracy",
+      "benchmark_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "simple_gla"
+    },
+    "metric": {
+      "name": "helion_latency_ms",
+      "benchmark_values": [
+        0.7046426236629486,
+        0.47503337880660745,
+        0.23427209908563656,
+        0.9224527846906603,
+        1.2880746672550838,
+        0.23357708260367807
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "simple_gla"
+    },
+    "metric": {
+      "name": "helion_speedup",
+      "benchmark_values": [
+        1.143947027217347,
+        1.1425018769893966,
+        1.116733914154216,
+        1.0992810957433057,
+        1.1059120005100107,
+        1.0943925184743708
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "simple_gla-bwd"
+    },
+    "metric": {
+      "name": "helion_accuracy",
+      "benchmark_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "simple_gla-bwd"
+    },
+    "metric": {
+      "name": "helion_latency_ms",
+      "benchmark_values": [
+        2.598132260640462,
+        1.7778102897462391,
+        0.983221092007377,
+        3.4326525149138076,
+        5.157895982265472,
+        1.0026088660413568
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "simple_gla-bwd"
+    },
+    "metric": {
+      "name": "helion_speedup",
+      "benchmark_values": [
+        1.803123664380469,
+        1.6511046686551223,
+        1.4279946915538477,
+        1.5351784172468645,
+        1.7261990982044462,
+        1.7097502935685616
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "retention"
+    },
+    "metric": {
+      "name": "helion_accuracy",
+      "benchmark_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "retention"
+    },
+    "metric": {
+      "name": "helion_latency_ms",
+      "benchmark_values": [
+        0.7049058879294047,
+        0.47479577002854184,
+        0.2331945351453928,
+        0.9219733327627182,
+        1.288522665699323,
+        0.23367163412321626
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "retention"
+    },
+    "metric": {
+      "name": "helion_speedup",
+      "benchmark_values": [
+        1.4172168784545671,
+        1.895640812835088,
+        1.8089487397365802,
+        1.3611321748028438,
+        1.2304833024325705,
+        1.635498732007288
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "retention-bwd"
+    },
+    "metric": {
+      "name": "helion_accuracy",
+      "benchmark_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "retention-bwd"
+    },
+    "metric": {
+      "name": "helion_latency_ms",
+      "benchmark_values": [
+        2.598095989227295,
+        1.781009168159671,
+        1.1309703546411851,
+        3.433156168979147,
+        5.157727986574173,
+        0.9566587164716901
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "retention-bwd"
+    },
+    "metric": {
+      "name": "helion_speedup",
+      "benchmark_values": [
+        1.3374289193242834,
+        1.5804594640182072,
+        1.368837106316859,
+        1.3515721320340721,
+        1.7491137059759634,
+        1.3727115417867293
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "full_gla"
+    },
+    "metric": {
+      "name": "helion_accuracy",
+      "benchmark_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "full_gla"
+    },
+    "metric": {
+      "name": "helion_latency_ms",
+      "benchmark_values": [
+        1.5780067706512193,
+        1.0872670159620397,
+        0.31861521279225585,
+        2.0802629564119424,
+        2.6513093378808765,
+        0.31274371010711394
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "full_gla"
+    },
+    "metric": {
+      "name": "helion_speedup",
+      "benchmark_values": [
+        1.5341121648374818,
+        1.7043321773918982,
+        1.4080851436981212,
+        1.5404473028733447,
+        1.3709559495051746,
+        1.2422771132025532
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "full_gla-bwd"
+    },
+    "metric": {
+      "name": "helion_accuracy",
+      "benchmark_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "full_gla-bwd"
+    },
+    "metric": {
+      "name": "helion_latency_ms",
+      "benchmark_values": [
+        4.661868413289388,
+        3.2763483065825243,
+        1.217980207022974,
+        6.299337863922119,
+        8.237779140472412,
+        1.4047446193603368
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "full_gla-bwd"
+    },
+    "metric": {
+      "name": "helion_speedup",
+      "benchmark_values": [
+        2.1912450553939085,
+        2.322077908927051,
+        1.55095561692951,
+        2.2424384412326126,
+        1.9895117787087484,
+        1.2894275982074208
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "delta_rule"
+    },
+    "metric": {
+      "name": "helion_accuracy",
+      "benchmark_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "delta_rule"
+    },
+    "metric": {
+      "name": "helion_latency_ms",
+      "benchmark_values": [
+        1.381680239492388,
+        0.9538310728575053,
+        0.318303870648025,
+        1.9365720821886647,
+        2.3262290896438973,
+        0.31338480923339906
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "delta_rule"
+    },
+    "metric": {
+      "name": "helion_speedup",
+      "benchmark_values": [
+        1.2947267814981331,
+        1.2447459583408724,
+        1.3362061196591242,
+        1.1941482463665332,
+        1.0842630413267045,
+        1.3373478253398643
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "delta_rule-bwd"
+    },
+    "metric": {
+      "name": "helion_accuracy",
+      "benchmark_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "delta_rule-bwd"
+    },
+    "metric": {
+      "name": "helion_latency_ms",
+      "benchmark_values": [
+        5.715833536783854,
+        3.8862632513046265,
+        1.5984431091619997,
+        7.621349854902788,
+        9.355751249525282,
+        1.6737184971570969
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "delta_rule-bwd"
+    },
+    "metric": {
+      "name": "helion_speedup",
+      "benchmark_values": [
+        0.9716913451218283,
+        0.9199565481001082,
+        1.1440340586271467,
+        0.935172221178824,
+        1.030932923372195,
+        1.1685557979706855
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "gated_delta_rule"
+    },
+    "metric": {
+      "name": "helion_accuracy",
+      "benchmark_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "gated_delta_rule"
+    },
+    "metric": {
+      "name": "helion_latency_ms",
+      "benchmark_values": [
+        1.3969270279913237,
+        1.0360258208079771,
+        0.3834899350654247,
+        2.0014345417631434,
+        2.3077916110434185,
+        0.37609388651150577
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "gated_delta_rule"
+    },
+    "metric": {
+      "name": "helion_speedup",
+      "benchmark_values": [
+        1.1632984819241245,
+        1.0221484939980936,
+        1.245293478012536,
+        1.0230282899854468,
+        1.0534860434865239,
+        1.24436279760186
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "gated_delta_rule-bwd"
+    },
+    "metric": {
+      "name": "helion_accuracy",
+      "benchmark_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "gated_delta_rule-bwd"
+    },
+    "metric": {
+      "name": "helion_latency_ms",
+      "benchmark_values": [
+        6.287833145686558,
+        4.390191984176636,
+        1.3730672221434743,
+        8.280291175842285,
+        10.887592077255249,
+        1.3519837526174692
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "gated_delta_rule-bwd"
+    },
+    "metric": {
+      "name": "helion_speedup",
+      "benchmark_values": [
+        0.9332627613812566,
+        0.8727137397766496,
+        1.1734941431004913,
+        0.8964663249222126,
+        1.1107400410378996,
+        1.2190226822455736
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "kda"
+    },
+    "metric": {
+      "name": "helion_accuracy",
+      "benchmark_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "kda"
+    },
+    "metric": {
+      "name": "helion_latency_ms",
+      "benchmark_values": [
+        2.4708202136190316,
+        1.7720978035117096,
+        0.48669684687081505,
+        3.2102442661921184,
+        3.964809318383535,
+        0.502908876938064
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "kda"
+    },
+    "metric": {
+      "name": "helion_speedup",
+      "benchmark_values": [
+        1.2914202239208035,
+        1.2579082144299825,
+        1.2529191038651923,
+        1.2715580141540936,
+        1.104890270161163,
+        1.2136392366490376
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "kda-bwd"
+    },
+    "metric": {
+      "name": "helion_accuracy",
+      "benchmark_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "kda-bwd"
+    },
+    "metric": {
+      "name": "helion_latency_ms",
+      "benchmark_values": [
+        14.393066565195719,
+        10.088305897182888,
+        2.59929689679827,
+        18.98276481628418,
+        22.620543479919434,
+        1.3659085716520036
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "kda-bwd"
+    },
+    "metric": {
+      "name": "helion_speedup",
+      "benchmark_values": [
+        1.1296603742247182,
+        1.0788860031162795,
+        1.0790806540782407,
+        1.1120411849328382,
+        1.0359895897692681,
+        1.3081698889944586
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "kda_fused"
+    },
+    "metric": {
+      "name": "helion_accuracy",
+      "benchmark_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "kda_fused"
+    },
+    "metric": {
+      "name": "helion_latency_ms",
+      "benchmark_values": [
+        2.7593545028141566,
+        1.9809666723012924,
+        0.6166541446810183,
+        3.6172740547745317,
+        4.354049379175359,
+        0.6172139280133968
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "kda_fused"
+    },
+    "metric": {
+      "name": "helion_speedup",
+      "benchmark_values": [
+        1.2590027669360249,
+        1.2217181619075277,
+        1.434979375479497,
+        1.2299092624647314,
+        1.0892154051839817,
+        1.4264750061530815
+      ]
+    },
+    "shape": [
+      "B1_T8192_H96_D128",
+      "B2_T16384_H16_D128",
+      "B4_T2048_H16_D128",
+      "B4_T4096_H64_D128",
+      "B8_T2048_H32_D256",
+      "B8_T1024_H8_D64"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "kda_varlen"
+    },
+    "metric": {
+      "name": "helion_accuracy",
+      "benchmark_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "shape": [
+      "fixed_T8192_H96_D128",
+      "fixed_T8192_H64_D128",
+      "ragged_T8192_H96_D128",
+      "ragged_T8192_H64_D128",
+      "uniform_T8192_H96_D128",
+      "uniform_T8192_H64_D128"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "kda_varlen"
+    },
+    "metric": {
+      "name": "helion_latency_ms",
+      "benchmark_values": [
+        2.9099568525950112,
+        2.0702713002329287,
+        3.101100383266326,
+        2.1203519980112713,
+        2.926496982574463,
+        2.087588988410102
+      ]
+    },
+    "shape": [
+      "fixed_T8192_H96_D128",
+      "fixed_T8192_H64_D128",
+      "ragged_T8192_H96_D128",
+      "ragged_T8192_H64_D128",
+      "uniform_T8192_H96_D128",
+      "uniform_T8192_H64_D128"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Linear-Attention Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100 80GB HBM3",
+        "backend": "triton",
+        "baseline_label": "FLA"
+      }
+    },
+    "model": {
+      "name": "kda_varlen"
+    },
+    "metric": {
+      "name": "helion_speedup",
+      "benchmark_values": [
+        1.1933863526216824,
+        1.1222335903923406,
+        1.1157433063880726,
+        1.1054107953063292,
+        1.1709012189683972,
+        1.1165784040112885
+      ]
+    },
+    "shape": [
+      "fixed_T8192_H96_D128",
+      "fixed_T8192_H64_D128",
+      "ragged_T8192_H96_D128",
+      "ragged_T8192_H64_D128",
+      "uniform_T8192_H96_D128",
+      "uniform_T8192_H64_D128"
+    ]
+  }
+]

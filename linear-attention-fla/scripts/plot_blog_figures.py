@@ -15,7 +15,7 @@ per-cell CSV. Both are normalized to the same shape as this artifact's
 
 Usage:
     python plot_blog_figures.py \
-        --h100 ../generated/h100-same-process/results.json \
+        --h100 ../generated/h100-fa2f62eb-torch213-triton371-interleaved/results.json \
         --b200 /path/to/linear_attention_e2e_per_cell.csv \
         --outdir ../generated/blog-figures
 

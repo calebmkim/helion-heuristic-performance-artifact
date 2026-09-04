@@ -71,19 +71,14 @@ H100 using:
 - vLLM stable-extension SHA-256
   `686ece5394839c1eb214ba91fdf0219e47fab4ccce0a69a10d3fba39db9a47fb`
 
-The heuristic seed reached `1.269x` and exact AOT reached `1.310x` versus
+The heuristic seed reached `1.268x` and exact AOT reached `1.308x` versus
 vLLM CUDA. The base default reached `0.578x`.
 
-- [report](generated/h100-main-torch213-triton371-vllm024-curated/REPORT.md)
-- [per-kernel graph](generated/h100-main-torch213-triton371-vllm024-curated/per-kernel-performance.png)
+- [report](generated/h100-fa2f62eb-torch213-triton371-vllm024-curated/REPORT.md)
+- [per-kernel graph](generated/h100-fa2f62eb-torch213-triton371-vllm024-curated/per-kernel-performance.png)
 - [blog graph](../blog/figures/results-vllm-h100.png)
-- [combined raw results](generated/h100-main-torch213-triton371-vllm024-curated/benchmark.json)
-- [per-cell CSV](generated/h100-main-torch213-triton371-vllm024-curated/per_cell.csv)
-
-The former primary run is retained under
-[generated/historical](generated/historical/). It used a PyTorch 2.13
-development build with Triton 3.7.0 and reproduces the new normalized
-geomeans to within 0.8% for every arm and kernel.
+- [combined raw results](generated/h100-fa2f62eb-torch213-triton371-vllm024-curated/benchmark.json)
+- [per-cell CSV](generated/h100-fa2f62eb-torch213-triton371-vllm024-curated/per_cell.csv)
 
 ## vLLM Baseline
 

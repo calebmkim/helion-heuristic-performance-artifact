@@ -77,24 +77,35 @@ benchmark imports when the Helion checkout is dirty or any required revision
 differs. Required revisions may be overridden only for an explicitly labeled
 historical run.
 
+## Fresh H100 Results
+
+All 70 shapes completed successfully, including the deferred large jagged HSTU
+case, without reaching the 30-minute per-cell compile timeout.
+
+| Normalization | Population | Helion default | Heuristic seed | Reference |
+|---|---|---:|---:|---:|
+| Per-cell geomean | 70 shapes | 1.000x | 3.610x | Helion default = 1.000x |
+| Family macro-geomean | 13 families | 1.000x | 3.686x | Helion default = 1.000x |
+| Per-cell geomean | 70 shapes | 0.544x | 1.964x | `torch.compile` = 1.000x |
+| Family macro-geomean | 13 families | 0.510x | 1.878x | `torch.compile` = 1.000x |
+
+The run used the primary software stack above, three balanced outer timing
+rounds, and Triton-only `torch.compile` max-autotune references. All 70
+generated TorchInductor sources passed the dispatch audit.
+
+- [report](generated/h100-fa2f62eb-torch213-triton371/summary.md)
+- [raw benchmark output](generated/h100-fa2f62eb-torch213-triton371/raw-results.json)
+- [summary JSON](generated/h100-fa2f62eb-torch213-triton371/results.json)
+- [per-shape CSV](generated/h100-fa2f62eb-torch213-triton371/per-shape.csv)
+- [graph versus Helion default](generated/h100-fa2f62eb-torch213-triton371/per-family-bars.png)
+- [graph versus torch.compile](generated/h100-fa2f62eb-torch213-triton371/per-family-vs-torch-compile-bars.png)
+- [blog-style graphs](generated/h100-fa2f62eb-torch213-triton371/blog-figures/)
+
 ## Reproduce
 
 Give [AGENT_PROMPT.md](AGENT_PROMPT.md) to an agent with the Helion revision
 and H100 to measure. The files under [scripts](scripts/README.md) are adaptable
 starting points and should be updated when Helion APIs move.
-
-The included historical H100 run used Helion `eacfee67` and contains the
-[report](generated/h100-eacfee67/summary.md),
-[raw benchmark output](generated/h100-eacfee67/raw-results.json),
-[summary JSON](generated/h100-eacfee67/results.json),
-[per-shape CSV](generated/h100-eacfee67/per-shape.csv), and
-[combined graph](generated/h100-eacfee67/per-family-bars.png).
-The [blog-style graph](generated/h100-eacfee67/blog-figures/results-matmul-h100.png)
-uses the same visual conventions as the other compile-time-heuristics figures.
-
-A focused historical rerun of the six optimized GDN reference shapes is in
-[generated/h100-eacfee67-gdn-optimized](generated/h100-eacfee67-gdn-optimized),
-including raw output, summaries, and both graph styles.
 
 Kernels that need workload or compiler work before they belong in the timed
 population are tracked in [to-do-work](to-do-work/README.md).
