@@ -12,7 +12,7 @@ adaptations with the results.
 
 | Comparison | Baselines | Status |
 |---|---|---|
-| [Linear attention vs FLA](linear-attention-fla/README.md) | Helion default, FLA Triton, heuristic seed, AOT-tuned Helion | Ready |
+| [Linear attention vs FLA](linear-attention-fla/README.md) | Helion default, FLA Triton, heuristic seed, AOT-tuned Helion | Ready; same-process interleaved H100 run |
 | [vLLM reductions](vllm-reductions/README.md) | Helion default, heuristic seed, exact AOT-tuned Helion, vLLM CUDA/C++ | Ready |
 | [Example reductions](example-reductions/README.md) | Helion default, heuristic seed, torch.compile max-autotune | Ready |
 | [Other matmul kernels](other-matmul-kernels/README.md) | Helion raw default, formula/multi-matmul heuristic seed, Triton-only torch.compile max-autotune | Ready |

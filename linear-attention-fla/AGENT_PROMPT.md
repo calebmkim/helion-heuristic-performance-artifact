@@ -19,6 +19,10 @@ Helion revision. They are not a stable API and may be wrong for the requested
 environment. Inspect the current checkouts and adapt them. Do not stop merely
 because a command, module, or output format has changed.
 
+Use a fresh `OUTPUT_DIR` for a new revision or environment. Set `RESUME=1` only
+when continuing the same run with the same Helion, FLA, and workload
+revisions; replaying stale materialized configs invalidates the comparison.
+
 ## Task
 
 Reproduce the current Helion linear-attention workload on the requested GPU and
@@ -76,6 +80,11 @@ rotated forward/reverse order. Clear backward gradients before each start
 event. This is important: do not benchmark the Helion arms in separate
 processes and then combine their results through separately observed FLA
 timings.
+
+The older separate-arm adapter also measured every dense backward FLA block
+before its Helion block because of workload row parity. Do not restore that
+fixed ordering: rotate the first arm and alternate forward/reverse order at
+the retained-sample level.
 
 Use Helion's existing correctness references and timing conventions. At the
 reference revision, the helper used CUDA device events, cleared L2 before each

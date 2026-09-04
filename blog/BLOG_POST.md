@@ -13,13 +13,13 @@ We sort kernels by what they contain -- a matmul, a reduction, or neither, which
 
 Highlights:
 
-- **Linear attention.** Over 96 kernel-and-shape cells spanning nine linear-attention variants, the computed config beats the hand-written Triton in [Flash Linear Attention](https://github.com/fla-org/flash-linear-attention) (FLA) by **1.18x** on H100 and **1.30x** on B200 in the forward pass, and by **1.17x** and **1.44x** with backward included. Against Helion's own previous no-autotune default it is **2.1x** / **1.9x**.
+- **Linear attention.** Over 96 kernel-and-shape cells spanning nine linear-attention variants, the computed config beats the hand-written Triton in [Flash Linear Attention](https://github.com/fla-org/flash-linear-attention) (FLA) by **1.18x** on H100 and **1.30x** on B200 in the forward pass, and by **1.13x** and **1.44x** with backward included. On H100 it is **2.27x** faster than Helion's no-autotune default in forward and **1.93x** with backward included.
 - **vLLM's reduction kernels.** Over 153 cells across six production kernels on H100, the computed config is **1.27x** faster than vLLM's own handwritten CUDA/C++ operators, and **2.2x** faster than Helion's previous default. [B200 run pending.]
 - **And it costs nothing.** This is static analysis, not search: nothing is compiled and nothing is benchmarked, so it adds tens of milliseconds to compile time rather than hours of GPU time.
 
 Limitations: 
 
-- **The honest ceiling.** Full autotuning still wins. On linear attention it is **1.05x to 1.18x** faster depending on the part and on whether backward is included, so we leave between **4%** and **15%** of the tuned config's performance on the table. On the vLLM kernels the gap is **1.03x**, or about **3%**. [B200 vLLM run pending.]
+- **The honest ceiling.** Full autotuning still wins. On linear attention it is **1.06x to 1.17x** faster depending on the part and on whether backward is included, so we leave between **6%** and **15%** of the tuned config's performance on the table. On the vLLM kernels the gap is **1.03x**, or about **3%**. [B200 vLLM run pending.]
 - **Not every kernel gets a config.** Everything these heuristics compute is arithmetic on extents -- block sizes, CTA counts, loop trip counts, live bytes -- so when a matmul dimension is not known at compile time we lose every estimate at once, and we decline to seed rather than guess. A loop tiled over a range that is only determined at runtime is enough to trigger this. That is conservatism rather than a fundamental limit: a fallback extent, a hint from the author, or any sort of default behavior, would let these kernels be seeded too.
 
 ## Background: Finding a Good Config Is Hard
@@ -144,13 +144,16 @@ The six shapes span batch 1 to 8, 8 to 96 heads, sequence 1024 to 16384 and head
 The baseline is [Flash Linear Attention](https://github.com/fla-org/flash-linear-attention) (FLA), an open-source, widely used library of hand-written Triton kernels for these models, tuned by its authors; we warm it first so its own Triton autotuner has converged, and feed it inputs in its native layout.
 All three Helion arms run the same kernel source; only the config differs.
 Every arm is checked for numerical agreement before it is timed.
+On H100, we materialize those configs first and then co-measure all four arms
+in one process per cell, with cold-L2 samples interleaved in rotated
+forward/reverse order.
 
 [FIGURE: `figures/results-linattn-summary.png` -- geomeans for both parts and both modes, normalized to handwritten FLA Triton at 1.00x.
 Then optionally the two per-variant breakdowns, `figures/results-linattn-h100.png` and `figures/results-linattn-b200.png`.]
 
 [FIGURE: `figures/diagrams/diagram-D-tradeoff-space.png` -- schematic of the tradeoff, if it is not already used up top.]
 
-Before this work the choice was binary: take Helion's no-autotune default and run at **0.53x** of handwritten FLA Triton on H100, or spend GPU-hours autotuning and reach **1.23x**.
+Before this work the choice was binary: take Helion's no-autotune default and run at **0.52x** of handwritten FLA Triton on H100, or spend GPU-hours autotuning and reach **1.26x**.
 Neither is a good answer if you have not budgeted for tuning -- the first is a regression against a hand-written kernel you could have used instead, the second a bill that comes due again on every new shape and every new GPU.
 The heuristic adds a third option that did not exist before: **1.18x** on H100 and **1.30x** on B200, with no autotuning price.
 That is most of what autotuning finds, available immediately, and it moves Helion's out-of-the-box behaviour from *losing* to handwritten Triton to *beating* it, at least for this narrow set of kernels.
@@ -525,4 +528,3 @@ OPEN QUESTIONS FOR THE AUTHOR BEFORE PUBLICATION
     configurations" — the source's own "(10^16)" parenthetical is internally inconsistent (8
     quadrillion is 8x10^15), so do not reproduce it.
 ============================================================================================ -->
-

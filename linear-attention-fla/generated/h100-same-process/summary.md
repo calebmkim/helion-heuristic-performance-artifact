@@ -1,6 +1,11 @@
 # Linear-Attention Performance
 
-All arms in a cell share one process and one FLA timing. Values are higher-is-better geometric means; counts are correct common cells.
+All arms in a cell share one process and one FLA timing. Cold-L2 CUDA-event samples are interleaved in rotated forward/reverse order with equal counts.
+
+Validation: 96/96 cells completed all four arms; 288/288 Helion arm-cells passed correctness.
+Environment: NVIDIA H100 80GB HBM3, Helion `eacfee67c0fd`, FLA `0.5.2` (`6bd90692588c`).
+
+Values are higher-is-better geometric means; counts are correct common cells.
 
 ## Performance vs FLA
 

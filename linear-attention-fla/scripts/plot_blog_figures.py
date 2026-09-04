@@ -9,14 +9,14 @@ rather than about the data:
   named on the line, in the legend and on the axis rather than only in prose;
 * H100 and B200 go through one code path, so the two figures are directly comparable.
 
-The B200 end-to-end run uses a different result schema (``records`` with ``timings``
-and arms ``pre_change`` / ``post_change`` / ``pretuned``) than this artifact's
-``cells`` / ``arms`` layout, so both are normalized to a common shape first.
+The B200 source may be either the original ``records`` JSON or the published
+per-cell CSV. Both are normalized to the same shape as this artifact's
+``cells`` / ``arms`` layout.
 
 Usage:
     python plot_blog_figures.py \
         --h100 ../generated/h100-same-process/results.json \
-        --b200 /path/to/e2e_fla_v3/results.json \
+        --b200 /path/to/linear_attention_e2e_per_cell.csv \
         --outdir ../generated/blog-figures
 
 Either --h100 or --b200 may be omitted; the summary figure needs both.
@@ -25,6 +25,7 @@ Either --h100 or --b200 may be omitted; the summary figure needs both.
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import math
 from pathlib import Path
@@ -106,7 +107,46 @@ def load_records_schema(path: Path) -> dict[tuple[str, str], list[dict[str, floa
     return out
 
 
+def load_csv_schema(path: Path) -> dict[tuple[str, str], list[dict[str, float]]]:
+    """Published B200 per-cell CSV with absolute latency columns."""
+    latency_columns = {
+        "default": "pre_change_default_latency_us",
+        "heuristic": "post_heuristic_latency_us",
+        "aot": "pretuned_aot_latency_us",
+    }
+    out: dict[tuple[str, str], list[dict[str, float]]] = {}
+    with path.open(newline="") as handle:
+        reader = csv.DictReader(handle)
+        required = {
+            "mode",
+            "variant",
+            "fla_triton_latency_us",
+            *latency_columns.values(),
+        }
+        missing = required.difference(reader.fieldnames or ())
+        if missing:
+            raise ValueError(
+                f"{path} is missing B200 CSV columns: {sorted(missing)}"
+            )
+        for row in reader:
+            fla = float(row["fla_triton_latency_us"])
+            latencies = {
+                key: float(row[column])
+                for key, column in latency_columns.items()
+            }
+            if fla <= 0 or any(value <= 0 for value in latencies.values()):
+                raise ValueError(
+                    f"{path}:{reader.line_num} contains a non-positive latency"
+                )
+            out.setdefault((row["mode"], row["variant"]), []).append(
+                {key: fla / value for key, value in latencies.items()}
+            )
+    return out
+
+
 def load_any(path: Path) -> dict[tuple[str, str], list[dict[str, float]]]:
+    if path.suffix.lower() == ".csv":
+        return load_csv_schema(path)
     data = _load(path)
     return load_cells_schema(path) if "cells" in data else load_records_schema(path)
 
@@ -217,8 +257,8 @@ def summary_figure(h100, b200, path: Path):
     plt.close(fig)
 
 
-H100_NOTE = ("Helion arms all run the same kernel source; only the config differs. "
-             "The default arm is Helion's unseeded base config -- no heuristic fired.")
+H100_NOTE = ("H100 uses same-process, cold-L2 samples interleaved in rotated "
+             "forward/reverse order; all Helion arms use the same kernel source.")
 B200_NOTE = ("The default arm here is Helion's previous compiler-selected default, not the "
              "unseeded base config. Delta-rule and gated-delta-rule backward remain FLA wins.")
 
@@ -226,7 +266,11 @@ B200_NOTE = ("The default arm here is Helion's previous compiler-selected defaul
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--h100", type=Path, help="results.json from an H100 run")
-    parser.add_argument("--b200", type=Path, help="results.json from a B200 run")
+    parser.add_argument(
+        "--b200",
+        type=Path,
+        help="results.json or published per-cell CSV from a B200 run",
+    )
     parser.add_argument("--outdir", type=Path, required=True)
     args = parser.parse_args()
     if not args.h100 and not args.b200:

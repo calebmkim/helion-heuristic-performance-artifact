@@ -39,15 +39,62 @@ def _seed_row(label: str, cells: list[dict[str, Any]]) -> str:
     )
 
 
+def _run_metadata(data: dict[str, Any]) -> list[str]:
+    cells = data["cells"]
+    complete = sum(
+        all(
+            cell.get("arms", {}).get(arm, {}).get("status") == "ok"
+            for arm in ("default", "seed", "aot_tuned", "fla_triton")
+        )
+        for cell in cells
+    )
+    helion_arms = ("default", "seed", "aot_tuned")
+    correct = sum(
+        cell.get("arms", {}).get(arm, {}).get("correct") is True
+        for cell in cells
+        for arm in helion_arms
+    )
+    lines = [
+        (
+            f"Validation: {complete}/{len(cells)} cells completed all four "
+            f"arms; {correct}/{len(cells) * len(helion_arms)} Helion "
+            "arm-cells passed correctness."
+        )
+    ]
+    environment = data.get("provenance", {}).get("environment", {})
+    if not isinstance(environment, dict):
+        return lines
+    details = []
+    if gpu := environment.get("gpu"):
+        details.append(str(gpu))
+    if revision := environment.get("helion_revision"):
+        details.append(f"Helion `{str(revision)[:12]}`")
+    if version := environment.get("fla_version"):
+        fla = f"FLA `{version}`"
+        if revision := environment.get("fla_revision"):
+            fla += f" (`{str(revision)[:12]}`)"
+        details.append(fla)
+    if details:
+        lines.append("Environment: " + ", ".join(details) + ".")
+    return lines
+
+
 def render(data: dict[str, Any]) -> str:
     cells = data["cells"]
     lines = [
         "# Linear-Attention Performance",
         "",
         (
-            "All arms in a cell share one process and one FLA timing. Values "
-            "are higher-is-better geometric means; counts are correct common "
-            "cells."
+            "All arms in a cell share one process and one FLA timing. Cold-L2 "
+            "CUDA-event samples are interleaved in rotated forward/reverse "
+            "order with equal counts."
+        ),
+        "",
+        *_run_metadata(data),
+        "",
+        (
+            "Values are higher-is-better geometric means; counts are correct "
+            "common cells."
         ),
         "",
         "## Performance vs FLA",

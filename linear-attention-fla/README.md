@@ -27,6 +27,8 @@ No particular checkout layout is required. Script inputs come from command-line
 arguments or environment variables; [scripts/starter.sh](scripts/starter.sh)
 shows one composition of the pipeline.
 
+## Measurement Strategy
+
 The pipeline has two phases:
 
 1. In isolated discovery processes, record the default and heuristic-seed
@@ -36,6 +38,18 @@ The pipeline has two phases:
    Helion config sets beside FLA. All four arms therefore share inputs,
    compilation state, GPU state, and one FLA timing for that cell. Their
    cold-L2 CUDA-event samples are interleaved in rotated forward/reverse order.
+
+The split is intentional. Config discovery must isolate Helion's import-time
+selection state, while performance measurement should hold process and GPU
+state constant across the compared arms. Every replay arm is compiled and
+checked before timing; backward gradients are cleared before the start event,
+and every arm receives the same number of retained samples.
+
+This supersedes the older separate-arm method. That method measured FLA and
+each Helion arm in blocks in different long-lived processes. Its row ordering
+also caused every dense backward cell to time the complete FLA block before
+the Helion block. Per-sample rotation removes that fixed order, and a single
+shared FLA measurement removes cross-process denominator drift.
 
 The resulting report should include:
 
@@ -56,11 +70,19 @@ configuration with another baseline.
 
 ## Included H100 Run
 
-The same-process H100 run includes the
+The authoritative H100 run used Helion
+`eacfee67c0fdbc5a1c068f16a3b2f9f15ce23eb7`, FLA
+`6bd90692588c81fe102ee6e12ac70686359658a2` (`0.5.2`), and an NVIDIA H100
+80GB HBM3. All 96 workload cells completed successfully, with all replayed
+Helion arms passing correctness. It includes the
 [summary](generated/h100-same-process/summary.md),
 [per-kernel graph](generated/h100-same-process/per-kernel-bars.png),
 [blog-style graph](generated/h100-same-process/blog-figures/results-linattn-h100.png),
 [combined raw results](generated/h100-same-process/results.json), and
 [replay manifest](generated/h100-same-process/config-replay.json).
-[H100_PR3546.md](reference-results/H100_PR3546.md) records why the earlier AOT
-comparison was invalidated.
+
+[H100_SUPERSEDED_RUNS.md](reference-results/H100_SUPERSEDED_RUNS.md) records
+why the earlier H100 artifacts must not be used. The plotting script also
+accepts the B200
+[per-cell CSV](https://github.com/calebmkim/helion/blob/pytorch-blog-heuristics-results/PYTORCH_BLOG_RAW_DATA/linear_attention_e2e_per_cell.csv)
+to regenerate the cross-GPU blog figures.

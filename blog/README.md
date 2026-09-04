@@ -15,8 +15,9 @@ The two results comparisons are generated from this repo's own data by the scrip
 that sit with each comparison:
 
     cd ../linear-attention-fla/scripts
-    python plot_blog_figures.py --h100 ../generated/h100-corrected-aot/results.json \
-        --b200 <path>/e2e_fla_v3/results.json --outdir ../../blog/figures
+    python plot_blog_figures.py --h100 ../generated/h100-same-process/results.json \
+        --b200 <path>/linear_attention_e2e_per_cell.csv \
+        --outdir ../../blog/figures
 
     cd ../vllm-reductions/scripts
     python plot_blog_figures.py --summary ../generated/h100-pr3551-curated/summary.json \
@@ -30,6 +31,11 @@ The rest are self-contained:
 `seed_trajectory.py` reads per-cell autotuner CSVs from the seeded-search run, which
 are not in this repo; its paths point at the machine it was run on and need editing to
 reproduce elsewhere.
+
+The B200 linear-attention CSV is published in
+[`PYTORCH_BLOG_RAW_DATA`](https://github.com/calebmkim/helion/blob/pytorch-blog-heuristics-results/PYTORCH_BLOG_RAW_DATA/linear_attention_e2e_per_cell.csv).
+The H100 input is the authoritative same-process, sample-interleaved run in this
+repository.
 
 ## Notes
 

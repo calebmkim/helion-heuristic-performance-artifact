@@ -9,7 +9,9 @@ These scripts form an adaptable pipeline:
    three replayed Helion arms with FLA.
 4. `summarize_results.py` writes higher-is-better tables.
 5. `plot_results.py` plots per-kernel geometric means relative to FLA.
-6. `starter.sh` shows how those pieces are composed.
+6. `plot_blog_figures.py` creates the blog-style H100 figure and can combine it
+   with the B200 per-cell CSV.
+7. `starter.sh` shows how those pieces are composed.
 
 The materializer and runner reuse Helion's example harness for workload
 construction, FLA calls, gradients, tolerances, and timing conventions. The
@@ -25,6 +27,9 @@ backward gradients outside its timed region.
 These are starting points, not stable interfaces. Inspect the current Helion
 harness and adapt moved imports or semantics. Checkout paths are supplied
 through CLI flags or `HELION_ROOT`/`FLA_ROOT`; no checkout layout is assumed.
+Use a fresh output directory for a different revision. `starter.sh` resumes
+only when explicitly invoked with `RESUME=1`; doing so is valid only when the
+checkouts and workload are unchanged.
 
 The plot has separate forward and forward-plus-backward panels. Each kernel is
 a cluster with default, seed, and AOT-tuned bars, where bar height is
