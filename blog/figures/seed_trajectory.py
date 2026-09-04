@@ -3,17 +3,25 @@
 Deliberately spare: two lines, two reference levels, two annotations. The prose
 defines "within X%" and says what the arms are, so the figure does not repeat it.
 
+Reads the committed trajectories in ../data/seeded-search/, so this reproduces
+without access to the machine the search ran on. Each CSV is one autotuner run:
+a row per attempt, with `perf_ms` empty when the attempt failed to compile or to
+produce a timing. Best-so-far is the running minimum over `perf_ms`.
+
 Cell: bf16 x int16 matmul, m=1 k=4096 n=4096 (off-corpus, not linear attention).
 """
 import csv
+import gzip
+from pathlib import Path
+
 import matplotlib
 matplotlib.use("Agg")
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt  # noqa: E402
 
-ROOT = "/home/dev/local/wt-sm100-linattn/matmul_heuristic_perf_results"
+DATA = Path(__file__).resolve().parent.parent / "data" / "seeded-search"
 CELL = "off__off_matmul_bf16xint16__bf16xint16_m1_k4096_n4096_754c795cfa"
-ARMS = {"no seeds": f"{ROOT}/zero_seed_full_autotune/cells/{CELL}/zero_seed/autotune.csv",
-        "compiler seeds": f"{ROOT}/multi_seed_full_autotune_ablation/cells/{CELL}/branch/autotune.csv"}
+ARMS = {"no seeds": DATA / "no-seed" / f"{CELL}.csv.gz",
+        "compiler seeds": DATA / "expanded" / f"{CELL}.csv.gz"}
 
 GREY, GREY_D, BLUE, EDGE = "#9CA3AF", "#6B7280", "#2563EB", "#1F2937"
 plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 10})
@@ -21,7 +29,9 @@ plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 10})
 
 def curve(path):
     best, out = None, []
-    for row in csv.DictReader(open(path)):
+    with gzip.open(path, "rt") as handle:
+        rows = list(csv.DictReader(handle))
+    for row in rows:
         if row["status"] == "started":
             continue
         try:

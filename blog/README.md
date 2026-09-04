@@ -7,6 +7,7 @@ figures it uses and the notes the numbers were checked against.
 |---|---|
 | `BLOG_POST.md` | The draft. An HTML comment at the end lists every number with its source and the open questions before publication. |
 | `figures/` | The figures the draft references, with their generating scripts. |
+| `data/` | Raw per-cell autotuner trajectories behind Result 2, so that result reproduces without the machine it ran on. |
 | `research/` | Notes from a verification pass: every headline number re-derived from raw result files, the heuristic implementation read against the traces, and the voice/positioning of the earlier posts in the series. `research/00-sources.md` links the eight published Helion posts the voice notes are based on. |
 
 ## Regenerating the figures
@@ -40,9 +41,25 @@ The rest are self-contained:
     cd figures/diagrams && python mechanism.py && python framing.py   # diagrams A1, A2, B, C, D, E
     cd figures && python seed_trajectory.py                            # autotune trajectory
 
-`seed_trajectory.py` reads per-cell autotuner CSVs from the seeded-search run, which
-are not in this repo; its paths point at the machine it was run on and need editing to
-reproduce elsewhere.
+`seed_trajectory.py` reads the committed trajectories under `data/seeded-search/`, so it
+runs anywhere.
+
+## The seeded-search data
+
+`data/seeded-search/` holds one gzipped CSV per cell per arm -- 38 cells in `no-seed/`
+and the same 38 in `expanded/` -- plus `per-cell-summary.json`, the merged per-cell
+record the published medians were computed from.
+
+Each CSV is one autotuner run: a row per attempt, with `run_id`, `timestamp_s`,
+`config_id`, `generation`, `status`, `perf_ms`, `compile_time_s`, and the full `config`.
+`perf_ms` is empty when an attempt failed to compile or failed to produce a timing;
+those rows still consumed search budget, which is why the medians in the post count
+them. Best-so-far performance for a cell is the running minimum of `perf_ms` over the
+rows in order, which is what the trajectory figure plots.
+
+Two things are deliberately excluded. The old-seed arm, since the post compares only
+no-seed against the expanded pool. And the Triton and TorchInductor caches the runs
+left behind, which are 1.3 GB of `.cubin`/`.ptx`/`.so` and reproduce nothing.
 
 The B200 linear-attention CSV is published in
 [`PYTORCH_BLOG_RAW_DATA`](https://github.com/calebmkim/helion/blob/pytorch-blog-heuristics-results/PYTORCH_BLOG_RAW_DATA/linear_attention_e2e_per_cell.csv).
