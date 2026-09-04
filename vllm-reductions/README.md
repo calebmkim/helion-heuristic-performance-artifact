@@ -150,6 +150,10 @@ three-arm fallback when reproducing the primary four-arm result.
 Give [AGENT_PROMPT.md](AGENT_PROMPT.md) to the reproducing agent with the
 requested Helion and vLLM revisions. The files under [scripts](scripts/README.md)
 are adaptable starting points rather than a stable benchmark API.
+Change paths, environment setup, module/import locations, or minor
+compatibility plumbing as needed for the reproducing machine. For a comparable
+result, preserve and report the pinned revisions, workload and arms,
+correctness checks, and timing semantics.
 
 The normal pipeline is:
 

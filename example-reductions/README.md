@@ -98,6 +98,10 @@ CUDA device time; CPU launch overhead is excluded.
 
 Give [AGENT_PROMPT.md](AGENT_PROMPT.md) to the reproducing agent. The files
 under [scripts](scripts/README.md) are adaptable starting points:
+change paths, environment setup, module/import locations, or minor
+compatibility plumbing as needed for the reproducing machine. For a comparable
+result, preserve and report the pinned revisions, workload and arms,
+correctness checks, and timing semantics.
 
 ```bash
 export HELION_ROOT=/path/to/helion

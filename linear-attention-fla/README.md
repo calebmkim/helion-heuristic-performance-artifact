@@ -24,6 +24,10 @@ unchanged. FLA is available at
 
 Give [AGENT_PROMPT.md](AGENT_PROMPT.md) to an agent with the requested Helion
 and FLA revisions. There are two intentionally different workflows.
+The launchers are meant to be adapted: change paths, environment setup,
+module/import locations, or minor compatibility plumbing as needed for the
+reproducing machine. For a comparable result, preserve and report the pinned
+revisions, workload and arms, correctness checks, and timing semantics.
 
 ### Native Helion Harness
 

@@ -106,6 +106,10 @@ generated TorchInductor sources passed the dispatch audit.
 Give [AGENT_PROMPT.md](AGENT_PROMPT.md) to an agent with the Helion revision
 and H100 to measure. The files under [scripts](scripts/README.md) are adaptable
 starting points and should be updated when Helion APIs move.
+Change paths, environment setup, module/import locations, or minor
+compatibility plumbing as needed for the reproducing machine. For a comparable
+result, preserve and report the pinned revisions, workload and arms,
+correctness checks, and timing semantics.
 
 Kernels that need workload or compiler work before they belong in the timed
 population are tracked in [to-do-work](to-do-work/README.md).
