@@ -1,5 +1,9 @@
 # Agent Prompt: Reproduce Other Matmul Kernel Performance
 
+**For all new reproductions, use Helion
+`fa2f62eb686ef846c76f8b9e18beec30fbc5bee1`, PyTorch `2.13.0+cu132`
+(CUDA `13.2`) with Triton `3.7.1`.**
+
 ## Inputs
 
 ```text
@@ -8,6 +12,10 @@ HELION_REVISION=<revision to measure>
 ARTIFACT_ROOT=<this repository>
 OUTPUT_DIR=<result directory>
 CUDA_VISIBLE_DEVICES=<H100 index>
+REQUIRED_TORCH_VERSION=2.13.0+cu132
+REQUIRED_CUDA_VERSION=13.2
+REQUIRED_TRITON_VERSION=3.7.1
+REQUIRED_HELION_COMMIT=fa2f62eb686ef846c76f8b9e18beec30fbc5bee1
 ```
 
 ## Task
@@ -19,6 +27,11 @@ Use `other-matmul-kernels/scripts/` as the starting point. These scripts match
 one Helion revision, not a stable API. Inspect the requested checkout and adapt
 imports, configuration APIs, or example-kernel signatures when needed. Keep
 meaningful adaptations with the output.
+
+Unless the request explicitly asks for a historical run, require clean Helion
+`fa2f62eb686ef846c76f8b9e18beec30fbc5bee1`, PyTorch `2.13.0+cu132`, CUDA
+`13.2`, and Triton `3.7.1`. The launcher invokes the repository's shared stack
+checker before importing the benchmark.
 
 For every selected shape, compare these exact arms:
 

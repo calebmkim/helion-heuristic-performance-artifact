@@ -23,7 +23,8 @@ OUTPUT_DIR="$(cd -- "$OUTPUT_DIR" && pwd)"
 
 PYTHON_BIN="$(command -v "${PYTHON_BIN:-python}")"
 "$PYTHON_BIN" "$REPO_ROOT/scripts/check_primary_stack.py" \
-  --context "linear attention native harness"
+  --context "linear attention native harness" \
+  --helion-root "$HELION_ROOT"
 
 NATIVE_MODULE="${HELION_LINATTN_MODULE:-benchmarks.run_linattn}"
 OUTPUT_FILE="${OUTPUT_FILE:-$OUTPUT_DIR/helionbench.json}"

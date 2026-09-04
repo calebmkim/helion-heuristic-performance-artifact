@@ -1,8 +1,9 @@
 # vLLM Reductions: Helion Configurations vs vLLM
 
-> **For all new reproductions, use PyTorch `2.13.0+cu132` (CUDA `13.2`)
-> with Triton `3.7.1`, and load vLLM `0.24.0`'s stable-libtorch extension
-> directly.**
+> **For all new reproductions, use Helion
+> `fa2f62eb686ef846c76f8b9e18beec30fbc5bee1`, PyTorch `2.13.0+cu132`
+> (CUDA `13.2`) with Triton `3.7.1`, and load vLLM `0.24.0`'s
+> stable-libtorch extension directly.**
 
 This comparison measures the reduction-bearing vLLM kernels under
 `pretuned_kernels/` in a Helion checkout:

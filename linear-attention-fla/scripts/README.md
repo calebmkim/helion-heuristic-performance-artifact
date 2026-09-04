@@ -1,9 +1,10 @@
 # Linear-Attention Scripts
 
 Both launchers use the repository's shared primary-stack checker and fail
-before benchmarking unless they import PyTorch `2.13.0+cu132`, CUDA `13.2`,
-and Triton `3.7.1`. Override the required versions only for an explicitly
-labeled historical run.
+before benchmarking unless they use a clean Helion checkout at
+`fa2f62eb686ef846c76f8b9e18beec30fbc5bee1` and import PyTorch
+`2.13.0+cu132`, CUDA `13.2`, and Triton `3.7.1`. Override the required
+revisions only for an explicitly labeled historical run.
 
 ## Native Helion Harness
 

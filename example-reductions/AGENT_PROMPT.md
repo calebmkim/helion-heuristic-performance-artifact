@@ -1,7 +1,8 @@
 # Agent Prompt: Reproduce Example Reduction Performance
 
-**For all new reproductions, use PyTorch `2.13.0+cu132` (CUDA `13.2`)
-with Triton `3.7.1`.**
+**For all new reproductions, use Helion
+`fa2f62eb686ef846c76f8b9e18beec30fbc5bee1`, PyTorch `2.13.0+cu132`
+(CUDA `13.2`) with Triton `3.7.1`.**
 
 ## Inputs
 
@@ -14,13 +15,15 @@ CUDA_VISIBLE_DEVICES=<exactly one GPU index>
 REQUIRED_TORCH_VERSION=2.13.0+cu132
 REQUIRED_CUDA_VERSION=13.2
 REQUIRED_TRITON_VERSION=3.7.1
+REQUIRED_HELION_COMMIT=fa2f62eb686ef846c76f8b9e18beec30fbc5bee1
 ```
 
 ## Important
 
-Unless the request explicitly asks for the historical run, use PyTorch
-`2.13.0+cu132`, its CUDA `13.2` build, and Triton `3.7.1`. PyTorch 2.13 pins
-that exact Triton version. Verify all three imported versions before compiling
+Unless the request explicitly asks for the historical run, use clean Helion
+`fa2f62eb686ef846c76f8b9e18beec30fbc5bee1`, PyTorch `2.13.0+cu132`, its
+CUDA `13.2` build, and Triton `3.7.1`. PyTorch 2.13 pins that exact Triton
+version. Verify the checkout and all three imported versions before compiling
 any cell; a run on a different stack does not replace the primary result.
 
 The retained historical dataset used PyTorch `2.12.0+cu132`, Triton `3.7.0`,
@@ -60,8 +63,8 @@ unsupported cell as a failure.
 
 - Resolve the requested revision to an immutable commit.
 - Record dirty state without discarding changes.
-- Assert PyTorch `2.13.0+cu132`, CUDA `13.2`, and Triton `3.7.1` for the
-  primary run.
+- Assert clean Helion `fa2f62eb686ef846c76f8b9e18beec30fbc5bee1`,
+  PyTorch `2.13.0+cu132`, CUDA `13.2`, and Triton `3.7.1` for the primary run.
 - Verify every body named in `shapes.json`.
 - Record Python, Torch, Triton, CUDA, GPU model, compute capability, and
   imported package paths.

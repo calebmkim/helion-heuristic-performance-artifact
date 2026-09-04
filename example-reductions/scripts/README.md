@@ -10,9 +10,11 @@ The pipeline is:
 4. `starter.sh` runs the complete sequence.
 
 The shared primary-stack checker exits before benchmarking unless the starter
-imports PyTorch `2.13.0+cu132`, CUDA `13.2`, and Triton `3.7.1`. The required
-versions can be changed explicitly only when reproducing a labeled historical
-dataset. Reports and plots include the imported versions.
+uses a clean Helion checkout at
+`fa2f62eb686ef846c76f8b9e18beec30fbc5bee1` and imports PyTorch
+`2.13.0+cu132`, CUDA `13.2`, and Triton `3.7.1`. The required revisions can
+be changed explicitly only when reproducing a labeled historical dataset.
+Reports and plots include the imported versions.
 
 `workloads.py` owns the exact argument construction, Torch references,
 observable outputs, and tolerances for the ten kernels.

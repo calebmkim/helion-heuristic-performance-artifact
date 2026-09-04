@@ -1,5 +1,9 @@
 # Other Matmul Kernels
 
+> **For all new reproductions, use Helion
+> `fa2f62eb686ef846c76f8b9e18beec30fbc5bee1`, PyTorch `2.13.0+cu132`
+> (CUDA `13.2`) with Triton `3.7.1`.**
+
 This comparison measures Helion's H100 formula-matmul and multi-matmul
 compiler heuristics outside the linear-attention corpus.
 
@@ -59,13 +63,27 @@ This remains primarily a seed-quality artifact. A rigorous Helion quality
 ceiling should also autotune every shape against the best same-kernel config.
 Compilation is capped at 30 minutes per shape.
 
+## Primary Software Stack
+
+This comparison shares the repository's primary reproduction stack:
+
+- Helion `fa2f62eb686ef846c76f8b9e18beec30fbc5bee1`
+- PyTorch `2.13.0+cu132`
+- CUDA `13.2`
+- Triton `3.7.1`
+
+The launcher calls the repository's shared stack checker and fails before
+benchmark imports when the Helion checkout is dirty or any required revision
+differs. Required revisions may be overridden only for an explicitly labeled
+historical run.
+
 ## Reproduce
 
 Give [AGENT_PROMPT.md](AGENT_PROMPT.md) to an agent with the Helion revision
 and H100 to measure. The files under [scripts](scripts/README.md) are adaptable
 starting points and should be updated when Helion APIs move.
 
-The included H100 run contains the
+The included historical H100 run used Helion `eacfee67` and contains the
 [report](generated/h100-eacfee67/summary.md),
 [raw benchmark output](generated/h100-eacfee67/raw-results.json),
 [summary JSON](generated/h100-eacfee67/results.json),
@@ -74,7 +92,7 @@ The included H100 run contains the
 The [blog-style graph](generated/h100-eacfee67/blog-figures/results-matmul-h100.png)
 uses the same visual conventions as the other compile-time-heuristics figures.
 
-A focused rerun of the six optimized GDN reference shapes is in
+A focused historical rerun of the six optimized GDN reference shapes is in
 [generated/h100-eacfee67-gdn-optimized](generated/h100-eacfee67-gdn-optimized),
 including raw output, summaries, and both graph styles.
 

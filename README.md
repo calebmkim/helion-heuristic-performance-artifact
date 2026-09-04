@@ -12,15 +12,16 @@ adaptations with the results.
 
 | Comparison | Baselines | Status |
 |---|---|---|
-| [Linear attention vs FLA](linear-attention-fla/README.md) | Native Helion-vs-FLA reproduction; controlled default/FLA/seed/AOT comparison | Ready; unified stack validated with a paired forward/backward H100 sample |
+| [Linear attention vs FLA](linear-attention-fla/README.md) | Native Helion-vs-FLA reproduction; controlled default/FLA/seed/AOT comparison | Ready; new runs pin the shared Helion and compiler stack |
 | [vLLM reductions](vllm-reductions/README.md) | Helion default, heuristic seed, exact AOT-tuned Helion, vLLM 0.24 CUDA/C++ | Ready; primary: Torch 2.13 / CUDA 13.2 / Triton 3.7.1 |
 | [Example reductions](example-reductions/README.md) | Helion default, heuristic seed, torch.compile max-autotune | Ready; primary: Torch 2.13 / CUDA 13.2 / Triton 3.7.1 |
-| [Other matmul kernels](other-matmul-kernels/README.md) | Helion raw default, formula/multi-matmul heuristic seed, Triton-only torch.compile max-autotune | Ready |
+| [Other matmul kernels](other-matmul-kernels/README.md) | Helion raw default, formula/multi-matmul heuristic seed, Triton-only torch.compile max-autotune | Ready; primary: Torch 2.13 / CUDA 13.2 / Triton 3.7.1 |
 
-The three primary launchers share
+The four primary launchers share
 [`scripts/check_primary_stack.py`](scripts/check_primary_stack.py) as their
-single executable stack contract: PyTorch `2.13.0+cu132`, CUDA `13.2`, and
-Triton `3.7.1`.
+single executable stack contract: clean Helion
+`fa2f62eb686ef846c76f8b9e18beec30fbc5bee1` from `pytorch/helion:main`,
+PyTorch `2.13.0+cu132`, CUDA `13.2`, and Triton `3.7.1`.
 
 ## Documentation
 

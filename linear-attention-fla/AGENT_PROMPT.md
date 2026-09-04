@@ -1,7 +1,8 @@
 # Agent Prompt: Reproduce Linear-Attention Performance
 
-**For all new reproductions, use PyTorch `2.13.0+cu132` (CUDA `13.2`)
-with Triton `3.7.1`.**
+**For all new reproductions, use Helion
+`fa2f62eb686ef846c76f8b9e18beec30fbc5bee1`, PyTorch `2.13.0+cu132`
+(CUDA `13.2`) with Triton `3.7.1`.**
 
 ## Inputs
 
@@ -16,6 +17,7 @@ CUDA_VISIBLE_DEVICES=<GPU index>
 REQUIRED_TORCH_VERSION=2.13.0+cu132
 REQUIRED_CUDA_VERSION=13.2
 REQUIRED_TRITON_VERSION=3.7.1
+REQUIRED_HELION_COMMIT=fa2f62eb686ef846c76f8b9e18beec30fbc5bee1
 ```
 
 ## Important
@@ -25,9 +27,10 @@ Helion revision. They are not a stable API and may be wrong for the requested
 environment. Inspect the current checkouts and adapt them. Do not stop merely
 because a command, module, or output format has changed.
 
-Unless the request explicitly asks for a historical run, require PyTorch
-`2.13.0+cu132`, CUDA `13.2`, and Triton `3.7.1`. Both launchers invoke the
-repository's shared stack checker before importing either benchmark.
+Unless the request explicitly asks for a historical run, require clean Helion
+`fa2f62eb686ef846c76f8b9e18beec30fbc5bee1`, PyTorch `2.13.0+cu132`, CUDA
+`13.2`, and Triton `3.7.1`. Both launchers invoke the repository's shared
+stack checker before importing either benchmark.
 
 Use a fresh `OUTPUT_DIR` for a new revision or environment. Set `RESUME=1` only
 when continuing the same run with the same Helion, FLA, and workload
@@ -64,8 +67,8 @@ Start by inspecting Helion's current linear-attention benchmark and its FLA
 integration. Reuse the workload, input generation, correctness checks, and
 timing utilities already present in Helion.
 
-Assert the primary PyTorch, CUDA, and Triton versions before materializing
-configs. Record the imported versions in the result.
+Assert the primary Helion, PyTorch, CUDA, and Triton revisions before
+materializing configs. Record them in the result.
 
 Use mutually compatible FLA and Triton revisions. In particular, do not
 classify backward operations as inherently unavailable when an older FLA

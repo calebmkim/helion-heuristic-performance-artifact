@@ -19,7 +19,8 @@ ROUNDS="${ROUNDS:-1}"
 RESUME="${RESUME:-0}"
 
 "$PYTHON_BIN" "$REPO_ROOT/scripts/check_primary_stack.py" \
-  --context "linear attention"
+  --context "linear attention" \
+  --helion-root "$HELION_ROOT"
 
 mkdir -p "$OUTPUT_DIR"
 MANIFEST="$OUTPUT_DIR/manifest.csv"

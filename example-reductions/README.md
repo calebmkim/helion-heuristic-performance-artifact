@@ -1,7 +1,8 @@
 # Example Reductions
 
-> **For all new reproductions, use PyTorch `2.13.0+cu132` (CUDA `13.2`)
-> with Triton `3.7.1`.**
+> **For all new reproductions, use Helion
+> `fa2f62eb686ef846c76f8b9e18beec30fbc5bee1`, PyTorch `2.13.0+cu132`
+> (CUDA `13.2`) with Triton `3.7.1`.**
 
 This comparison measures ten general reduction kernels from a Helion checkout:
 
@@ -69,13 +70,15 @@ It implements every observable output of the corresponding Helion kernel.
 
 The primary reproduction target is the matched software stack:
 
+- Helion `fa2f62eb686ef846c76f8b9e18beec30fbc5bee1`
 - PyTorch `2.13.0+cu132`
 - CUDA `13.2`
 - Triton `3.7.1`
 
 PyTorch 2.13 declares an exact dependency on Triton 3.7.1. Do not install a
 package into the benchmark environment that replaces either member of this
-pair. The starter script checks both versions before launching.
+pair. The starter script also requires the exact clean Helion revision before
+launching.
 
 ## Primary H100 Run
 
@@ -115,6 +118,7 @@ export CUDA_VISIBLE_DEVICES=<gpu>
 export REQUIRED_TORCH_VERSION=2.13.0+cu132
 export REQUIRED_CUDA_VERSION=13.2
 export REQUIRED_TRITON_VERSION=3.7.1
+export REQUIRED_HELION_COMMIT=fa2f62eb686ef846c76f8b9e18beec30fbc5bee1
 
 example-reductions/scripts/starter.sh
 ```

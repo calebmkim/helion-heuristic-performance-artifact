@@ -16,6 +16,7 @@ VLLM_EXTENSION_PATH=<optional path to _C_stable_libtorch.abi3.so>
 REQUIRED_TORCH_VERSION=2.13.0+cu132
 REQUIRED_CUDA_VERSION=13.2
 REQUIRED_TRITON_VERSION=3.7.1
+REQUIRED_HELION_COMMIT=fa2f62eb686ef846c76f8b9e18beec30fbc5bee1
 ```
 
 ## Important
@@ -69,8 +70,9 @@ copy. Keep pointwise-only kernels out of this reduction comparison.
   back to Triton does not make a contiguous NVIDIA `_C` call a Triton kernel.
 - Record Python, Torch, Triton, CUDA, GPU model, compute capability, and
   imported package paths.
-- For the primary H100 reproduction, require exactly PyTorch `2.13.0+cu132`,
-  CUDA `13.2`, and Triton `3.7.1`. The starter checks all three before doing
+- For the primary H100 reproduction, require clean Helion
+  `fa2f62eb686ef846c76f8b9e18beec30fbc5bee1`, PyTorch `2.13.0+cu132`,
+  CUDA `13.2`, and Triton `3.7.1`. The starter checks all four before doing
   any benchmark work.
 - Do not install vLLM 0.24.0's dependencies into that environment. Its wheel
   declares `torch==2.11.0`, which can replace the primary Torch/Triton pair

@@ -3,6 +3,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 COMPARISON_ROOT="$(cd -- "$SCRIPT_DIR/.." && pwd)"
+REPO_ROOT="$(cd -- "$COMPARISON_ROOT/.." && pwd)"
 PYTHON_BIN="${PYTHON_BIN:-python}"
 HELION_ROOT="${HELION_ROOT:?Set HELION_ROOT to the Helion checkout to measure}"
 GPU="${GPU:-0}"
@@ -11,7 +12,12 @@ ROUNDS="${ROUNDS:-3}"
 INCLUDE_TORCH_COMPILE="${INCLUDE_TORCH_COMPILE:-1}"
 TORCH_COMPILE_MODE="${TORCH_COMPILE_MODE:-max-autotune-no-cudagraphs}"
 CELL_TIMEOUT="${CELL_TIMEOUT:-1800}"
+DEFER_CELLS="${DEFER_CELLS:-}"
 OUTPUT_DIR="${OUTPUT_DIR:-$COMPARISON_ROOT/generated/$(date -u +%Y%m%d-%H%M%S)}"
+
+"$PYTHON_BIN" "$REPO_ROOT/scripts/check_primary_stack.py" \
+  --context "other matmul kernels" \
+  --helion-root "$HELION_ROOT"
 
 mkdir -p "$OUTPUT_DIR"
 
@@ -27,6 +33,9 @@ RUN_ARGS=(
 )
 if [[ "$INCLUDE_TORCH_COMPILE" == "1" ]]; then
   RUN_ARGS+=(--torch-compile)
+fi
+if [[ -n "$DEFER_CELLS" ]]; then
+  RUN_ARGS+=(--defer-cells "$DEFER_CELLS")
 fi
 
 "$PYTHON_BIN" "$SCRIPT_DIR/run_benchmark.py" "${RUN_ARGS[@]}"

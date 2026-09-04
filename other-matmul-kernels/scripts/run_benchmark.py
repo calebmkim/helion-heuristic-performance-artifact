@@ -636,6 +636,25 @@ def _parent(args: argparse.Namespace) -> None:
         cells = cells[: args.limit]
     if not cells:
         raise ValueError("no cells selected")
+    selected_cells = cells
+    deferred = {
+        value.strip()
+        for value in (args.defer_cells or "").split(",")
+        if value.strip()
+    }
+    selected_keys = {cell["cell_key"] for cell in selected_cells}
+    unknown_deferred = deferred - selected_keys
+    if unknown_deferred:
+        raise ValueError(
+            "deferred cells are not in the selected population: "
+            + ", ".join(sorted(unknown_deferred))
+        )
+    cells = [
+        cell for cell in selected_cells if cell["cell_key"] not in deferred
+    ] + [cell for cell in selected_cells if cell["cell_key"] in deferred]
+    row_indices = {
+        cell["cell_key"]: index for index, cell in enumerate(selected_cells)
+    }
 
     started_at = datetime.now(timezone.utc).isoformat()
     args.run_fingerprint = _run_fingerprint(args)
@@ -687,7 +706,7 @@ def _parent(args: argparse.Namespace) -> None:
             "--cell-key",
             key,
             "--row-index",
-            str(index),
+            str(row_indices[key]),
             "--part-output",
             str(part),
             "--torch-compile-mode",
@@ -739,7 +758,11 @@ def _parent(args: argparse.Namespace) -> None:
                 }
                 _atomic_json(part, result)
         prior[key] = result
-        ordered = [prior[cell["cell_key"]] for cell in cells if cell["cell_key"] in prior]
+        ordered = [
+            prior[cell["cell_key"]]
+            for cell in selected_cells
+            if cell["cell_key"] in prior
+        ]
         _atomic_json(
             args.output,
             _document(args, manifest, args.manifest, ordered, started_at),
@@ -747,7 +770,11 @@ def _parent(args: argparse.Namespace) -> None:
         status = "driver_error" if "driver_error" in result else "ok"
         print(f"[{index + 1}/{len(cells)}] {key}: {status}", flush=True)
 
-    ordered = [prior[cell["cell_key"]] for cell in cells if cell["cell_key"] in prior]
+    ordered = [
+        prior[cell["cell_key"]]
+        for cell in selected_cells
+        if cell["cell_key"] in prior
+    ]
     _atomic_json(
         args.output,
         _document(args, manifest, args.manifest, ordered, started_at),
@@ -784,6 +811,13 @@ def main() -> None:
     parser.add_argument("--gpu", default="0")
     parser.add_argument("--families", help="comma-separated family IDs")
     parser.add_argument("--limit", type=int)
+    parser.add_argument(
+        "--defer-cells",
+        help=(
+            "comma-separated cell keys to run after the rest of the selected "
+            "population (useful for known long compiles)"
+        ),
+    )
     parser.add_argument("--resume", action="store_true")
     parser.add_argument("--cell-timeout", type=int, default=1800)
     parser.add_argument(

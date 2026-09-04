@@ -19,7 +19,8 @@ REPETITIONS="${REPETITIONS:-100}"
 REFERENCE="${REFERENCE:-auto}"
 
 "$PYTHON_BIN" "$REPO_ROOT/scripts/check_primary_stack.py" \
-  --context "vLLM reductions"
+  --context "vLLM reductions" \
+  --helion-root "$HELION_ROOT"
 
 mkdir -p "$OUTPUT_DIR"
 
