@@ -5,12 +5,12 @@ Currently we have comparisons for.
 linear attention FLA: 
 - default no-autotune vs. heuristic no-autotune (this work) vs. aot tuned config table vs. handwritten baseline (triton FLA)
 - for both h100 and b200
-- TODO: throw away the existing b200 numbers and re-bench from scratch using this repo's harness. Two reasons. (a) They were produced by a different runner than the h100 numbers, with a different `default` arm -- here `default` is the unseeded base config, whereas the b200 run's baseline was the *previous compiler-selected default*. So h100 and b200 are not currently comparable, and re-running here makes them so. (b) The heuristic has moved since, so configs really are different and a few individual cells got slower -- follow-up work changed the emitted config on 41 of 432 linear-attention cells, and across all 432 that nets out to 0.991x, with the same change buying 1.4x on the off-corpus cells it touched. Point being: don't treat a per-cell drop as a regression you introduced.
+- TODO: re-bench b200 numbers from scratch using this repo's harness. Two reasons. (a) They were produced by a different harness than the h100 numbers, with a different `default` arm -- here `default` is the unseeded base config, whereas the b200 run's baseline was the *previous compiler-selected default*. (b) The heuristic has moved since, so configs really are different and a few individual cells got slower -- follow-up work changed the emitted config on 41 of 432 linear-attention cells, and across all 432 that nets out to 0.991x. So I wouldn't expect perf to change very much -- but still good to have.
 
 vLLM reductions:
 - default no autotune vs. heuristic no-autotune (this work) vs. aot tuned config table vs. handwritten baseline (cuda/c++ vLLM kernels)
 - only for h100
-- TODO: get b200 numbers. Use vLLM's **b200** config table for the aot arm (`nvidia_b200.json`), not the h100 table replayed on blackwell -- an earlier audit made that mistake and it flattered us, 0.987x where the honest b200 number was 0.918x.
+- TODO: get b200 numbers. Use vLLM's **b200** config table for the aot arm (`nvidia_b200.json`), not the h100 table replayed on blackwell. Make sure to use the existing harness (make changes if you need). 
 
 other matmul kernels (attention + variants, mamba, squeeze-excitation, etc.):
 - default no autotune vs. heuristic no-auttoune (this work) vs. torch.compile max-autotune
@@ -25,15 +25,17 @@ example reductions (e.g., rms norm, layer norm, cross entropy, etc.):
 - OPTIONAL TODO (will tkae a long time): run autotuning on each shape and obtain configs for each shape
 
 ## ANOTHER TODO
-- currently there is 1 reduction heuristic: tuned only for h100. it might slightly underperform on b200.
 
-My usually strategy for this sort of thing is that you should keep the *structure* of the heuristic the same, you should just adjust empricially tuned constants. 
-Especially for reductions, I've found heuristics translate reasonably well.
+currently there is 1 reduction heuristic: tuned only for h100. it might slightly underperform on b200.
+
+My usually strategy for porting heuristics from one backend to another, is that you should keep the *structure* of the heuristic the same, you should just adjust empirically tuned constants. 
+Especially for reductions, I've found heuristics translate reasonably well, so the port should (hopefully) be straightforward.
 
 Here is one prompt you can give to create to port the h100 heuristic to b200.
-I already did something similar in: https://github.com/pytorch/helion/pull/3546.
+(as a side note, I already did something similar in: https://github.com/pytorch/helion/pull/3546.)
 
-PROMPT:
+### PROMPT: ###
+
 Your job is to port the existing reduction heuristic in helion, which has been tuned for sm90/h100, to sm100/b200.
 There is already an outline for this in https://github.com/pytorch/helion/pull/3546, which ported matmul/multi-matmul heuristics from b200 to h100.
 Your job is porting reduction heuristics from h100 to b200 -- note that is the *opposite* direction to that PR, so use it as a template for the process, not for which arch is the source.
@@ -44,7 +46,7 @@ NOTE: before https://github.com/pytorch/helion/pull/3551, there were separate h1
 If I remember correctly, the heuristics were similar in structure, it's just that the num warps ramp needed to be adjusted a bit.
 
 However, that PR rewrote and simplified the reduction heuristics. 
-The values are here: https://github.com/calebmkim/helion-heuristic-performance-artifact/blob/main/heuristic-traces/REDUCTION_HEURISTIC_HIGH_LEVEL_TRACE.md.
+The overall structure of the heuristic is specified here: https://github.com/calebmkim/helion-heuristic-performance-artifact/blob/main/heuristic-traces/REDUCTION_HEURISTIC_HIGH_LEVEL_TRACE.md.
 
 When you port the heuristic over, you should keep the same structure. 
 You should only tune constants, cutoffs, ramps, etc. 
@@ -63,7 +65,7 @@ Do not expect to find something broken here: `TritonReductionHeuristic` is regis
 (2) Check performance across the vllm-reduction and examples-reduction cirriculum, and compare performance.
 
 (3) Look at the worst performing kernels and shapes (compare performance relative to aot config or torch.compile baseline for vllm and examples, respectively), and examine why they are losing. 
-If there are aot pre-tuned configs, comapre the configs.
+If there are aot pre-tuned configs, compare the configs.
 Come up with an explanation as to why it is underperforming, based on what's going on the GPU.
 Propose an adjustment to a constants, cutoffs, ramps, etc. that reflect this.
 NOTE: your changes should never smuggle kernel identity into the heuristic, e.g., don't add a gate that specifically checks for a very narrow type of kernel as an escape hatch for a poorly performing cell. 
