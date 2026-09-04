@@ -1,5 +1,8 @@
 # vLLM Reductions: Helion Configurations vs vLLM
 
+> **For all new reproductions, use PyTorch `2.13.0+cu132` with Triton
+> `3.7.1`, and load vLLM `0.24.0`'s stable-libtorch extension directly.**
+
 This comparison measures the reduction-bearing vLLM kernels under
 `pretuned_kernels/` in a Helion checkout:
 
@@ -53,20 +56,36 @@ pretuned-dashboard precedent. `all` is useful for an exhaustive selector audit,
 but its dense tuning grid gives repeated powers-of-two token counts more weight
 than a normal performance report should.
 
-## Included H100 Run
+## Primary H100 Run
 
-The included four-arm run measured all 153 curated cells successfully on an
-H100 using Helion commit `746ee7c8a94fcc5fe5eab18356bde1aab69f9c43` and
-vLLM commit `fc7fc421e98863c4ffb1aa02d46bd6e4d0202c26`:
+The primary four-arm run measured all 153 curated cells successfully on an
+H100 using:
 
-- [report](generated/h100-pr3551-curated/REPORT.md)
-- [per-kernel graph](generated/h100-pr3551-curated/per-kernel-performance.png)
-- [combined raw results](generated/h100-pr3551-curated/benchmark.json)
-- [per-cell CSV](generated/h100-pr3551-curated/per_cell.csv)
+- Helion main `fa2f62eb686ef846c76f8b9e18beec30fbc5bee1`
+- PyTorch `2.13.0+cu132`
+- Triton `3.7.1`
+- vLLM `0.24.0` at `ee0da84ab9e04ac7610e28580af62c365e898389`
+- vLLM stable-extension SHA-256
+  `686ece5394839c1eb214ba91fdf0219e47fab4ccce0a69a10d3fba39db9a47fb`
+
+The heuristic seed reached `1.269x` and exact AOT reached `1.310x` versus
+vLLM CUDA. The base default reached `0.578x`.
+
+- [report](generated/h100-main-torch213-triton371-vllm024-curated/REPORT.md)
+- [per-kernel graph](generated/h100-main-torch213-triton371-vllm024-curated/per-kernel-performance.png)
+- [blog graph](../blog/figures/results-vllm-h100.png)
+- [combined raw results](generated/h100-main-torch213-triton371-vllm024-curated/benchmark.json)
+- [per-cell CSV](generated/h100-main-torch213-triton371-vllm024-curated/per_cell.csv)
+
+The former primary run is retained under
+[generated/historical](generated/historical/). It used a PyTorch 2.13
+development build with Triton 3.7.0 and reproduces the new normalized
+geomeans to within 0.8% for every arm and kernel.
 
 ## vLLM Baseline
 
-At vLLM commit `fc7fc421e98863c4ffb1aa02d46bd6e4d0202c26`, all six matching
+At vLLM `0.24.0` commit `ee0da84ab9e04ac7610e28580af62c365e898389`,
+all six matching
 NVIDIA operators are compiled CUDA/C++ extension kernels:
 
 | Kernel | vLLM entry point | Implementation |
@@ -91,6 +110,42 @@ because source-only environments may not have vLLM's
 that extension directly and verifies all six operators without requiring the
 full vLLM server dependency stack.
 
+### Toolchain compatibility footgun
+
+Keep the benchmark environment on the exact PyTorch `2.13.0+cu132` / Triton
+`3.7.1` pair. The vLLM 0.24.0 wheel declares `torch==2.11.0`; installing it
+normally in that environment can replace Torch and consequently Triton with
+3.6.0. In our diagnostic run that older compiler stack reduced the
+`fused_qk_norm_rope` seed geomean from about `1.04x` to `0.69x` versus vLLM
+CUDA.
+
+The wheel dependency pin is not a binary requirement of
+`_C_stable_libtorch.abi3.so`. vLLM 0.24.0 builds that CUDA extension against
+the PyTorch 2.11 C-shim and documents it as ABI-compatible with PyTorch 2.11
+and newer. We verified the v0.24.0 extension above under PyTorch 2.13.0 and
+Triton 3.7.1: all six operators loaded, executed, passed correctness, and
+completed all 153 cells.
+
+Therefore, do not install vLLM's dependencies into the benchmark environment.
+Download the platform wheel without dependencies, extract it, and pass the
+stable extension's path explicitly:
+
+```bash
+python -m pip download --only-binary=:all: --no-deps \
+  vllm==0.24.0 --dest /path/to/wheelhouse
+python -m zipfile -e /path/to/wheelhouse/<downloaded-wheel>.whl \
+  /path/to/extracted-vllm-wheel
+
+export VLLM_EXTENSION_PATH=/path/to/extracted-vllm-wheel/vllm/_C_stable_libtorch.abi3.so
+```
+
+This stable guarantee covers the libtorch interface; the wheel must still
+target the machine's supported GPU/CUDA platform. The preflight probe loads
+the binary, verifies all six registrations, and records its SHA-256. Every arm
+then receives a real execution and correctness check in each benchmark cell.
+Do not force Triton 3.7 into a Torch 2.11 environment or accept a silent
+three-arm fallback when reproducing the primary four-arm result.
+
 ## Reproduce
 
 Give [AGENT_PROMPT.md](AGENT_PROMPT.md) to the reproducing agent with the
@@ -104,10 +159,13 @@ export HELION_ROOT=/path/to/helion
 export VLLM_ROOT=/path/to/vllm
 export OUTPUT_DIR=/path/to/results
 export CUDA_VISIBLE_DEVICES=<gpu>
-# Optional: explicit path to _C_stable_libtorch.abi3.so
+# Primary stack, checked by starter.sh:
+export REQUIRED_TORCH_VERSION=2.13.0+cu132
+export REQUIRED_TRITON_VERSION=3.7.1
+# Extracted from the vLLM 0.24.0 wheel with --no-deps:
 export VLLM_EXTENSION_PATH=/path/to/_C_stable_libtorch.abi3.so
-# auto (default), vllm_cuda, or aot_tuned
-export REFERENCE=auto
+# Require the external baseline; do not silently emit a three-arm report:
+export REFERENCE=vllm_cuda
 
 vllm-reductions/scripts/starter.sh
 ```

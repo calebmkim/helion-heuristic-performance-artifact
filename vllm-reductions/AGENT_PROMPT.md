@@ -13,6 +13,8 @@ CUDA_VISIBLE_DEVICES=<GPU index>
 PROFILE=curated
 REFERENCE=auto
 VLLM_EXTENSION_PATH=<optional path to _C_stable_libtorch.abi3.so>
+REQUIRED_TORCH_VERSION=2.13.0+cu132
+REQUIRED_TRITON_VERSION=3.7.1
 ```
 
 ## Important
@@ -66,6 +68,22 @@ copy. Keep pointwise-only kernels out of this reduction comparison.
   back to Triton does not make a contiguous NVIDIA `_C` call a Triton kernel.
 - Record Python, Torch, Triton, CUDA, GPU model, compute capability, and
   imported package paths.
+- For the primary H100 reproduction, require exactly PyTorch `2.13.0+cu132`
+  and Triton `3.7.1`. The starter checks both before doing any benchmark work.
+- Do not install vLLM 0.24.0's dependencies into that environment. Its wheel
+  declares `torch==2.11.0`, which can replace the primary Torch/Triton pair
+  with Torch 2.11.0 and Triton 3.6.0 and substantially regress
+  `fused_qk_norm_rope`.
+- Instead, download the vLLM 0.24.0 platform wheel with `pip download
+  --no-deps`, extract it, and pass `_C_stable_libtorch.abi3.so` through
+  `VLLM_EXTENSION_PATH`. vLLM builds this extension against the PyTorch 2.11
+  C-shim and documents it as ABI-compatible with PyTorch 2.11 and newer.
+- The stable guarantee covers libtorch, not arbitrary GPU/CUDA platforms.
+  Require the probe and per-cell execution checks to pass. Record the wheel
+  version, extension SHA-256, and exact vLLM source revision.
+- Do not force only a newer Triton into the old Torch 2.11 environment. For an
+  exact historical reproduction, use every version recorded in that raw
+  dataset rather than the primary versions above.
 
 At the reference vLLM revision, all six external calls are CUDA/C++ extension
 kernels. If this changes, update the arm name and report rather than preserving
@@ -122,8 +140,10 @@ For `aot_tuned`:
 For `vllm_cuda`:
 
 - run `scripts/probe_vllm_cuda.py`;
-- load `_C_stable_libtorch` directly from an explicit path, the vLLM source
-  tree, or an installed exact-revision wheel;
+- preferably load `_C_stable_libtorch` directly from an explicitly supplied
+  path extracted from the exact wheel without installing its dependencies;
+- the vLLM source tree or an installed exact-revision wheel remains a valid
+  fallback when it does not alter the benchmark's Torch/Triton pair;
 - call the matching `torch.ops._C` operator directly through the existing
   Helion pretuned module's vLLM baseline adapter;
 - verify the op is registered by the requested vLLM build;

@@ -15,6 +15,17 @@ These scripts form an adaptable pipeline:
    `1.00x`.
 7. `starter.sh` auto-selects the four-arm CUDA path or three-arm AOT path.
 
+For the primary result, `starter.sh` requires PyTorch `2.13.0+cu132` and
+Triton `3.7.1`. Override the required values only when intentionally creating
+a separately labeled historical or diagnostic dataset.
+
+vLLM 0.24.0's wheel declares `torch==2.11.0`, so do not install its
+dependencies into the benchmark environment. Download the wheel with
+`pip download --no-deps`, extract it, and set `VLLM_EXTENSION_PATH` to
+`vllm/_C_stable_libtorch.abi3.so`. The probe loads that stable-ABI binary
+directly and records its distribution version and SHA-256 when wheel metadata
+is available beside it.
+
 The benchmark runner deliberately reuses each target Helion module's
 `_bench_shapes()`, `correctness_check()`, `main()` call construction, and Torch
 reference. This keeps argument semantics and mutation behavior owned by Helion

@@ -41,6 +41,11 @@ def main() -> None:
     import numpy as np
 
     summary = json.loads(args.summary.expanduser().resolve().read_text())
+    environment = summary.get("environment", {})
+    extension = summary.get("vllm_extension") or {}
+    torch_version = environment.get("torch", "unknown")
+    triton_version = environment.get("triton", "unknown")
+    vllm_version = extension.get("distribution_version", "unknown")
     arms = tuple(summary["arms"])
     plotted_arms = tuple(arm for arm in arms if arm != "vllm_cuda")
     reference_arm = summary["reference_arm"]
@@ -87,7 +92,9 @@ def main() -> None:
     axis.set_ylabel("Normalized performance (higher is faster)")
     axis.set_title(
         f"vLLM Reduction Kernels - {summary['profile']} profile "
-        f"({LABELS[reference_arm]} = 1.00x)"
+        f"({LABELS[reference_arm]} = 1.00x)\n"
+        f"Torch {torch_version} / Triton {triton_version} / "
+        f"vLLM stable ABI {vllm_version}"
     )
     axis.axhline(1.0, color="#333333", linewidth=1.0, linestyle="--", zorder=0)
     axis.grid(axis="y", color="#D9DDE3", linewidth=0.8, alpha=0.8)

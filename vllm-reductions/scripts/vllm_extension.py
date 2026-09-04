@@ -27,6 +27,29 @@ def _sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def _distribution_provenance(path: Path) -> dict[str, str]:
+    """Read wheel metadata beside an installed or fully extracted extension."""
+    site_packages = path.parent.parent
+    for metadata_path in sorted(site_packages.glob("vllm-*.dist-info/METADATA")):
+        fields: dict[str, str] = {}
+        try:
+            for line in metadata_path.read_text(errors="replace").splitlines():
+                if not line:
+                    break
+                name, separator, value = line.partition(":")
+                if separator and name in {"Name", "Version"}:
+                    fields[name] = value.strip()
+        except OSError:
+            continue
+        if fields.get("Name", "").lower() == "vllm" and fields.get("Version"):
+            return {
+                "distribution": fields["Name"],
+                "distribution_version": fields["Version"],
+                "distribution_metadata": str(metadata_path.resolve()),
+            }
+    return {}
+
+
 def extension_candidates(
     explicit: Path | None,
     vllm_root: Path | None,
@@ -98,6 +121,7 @@ def load_vllm_extension(
         "path": str(path),
         "required_ops": list(REQUIRED_OPS),
     }
+    result.update(_distribution_provenance(path))
     if include_sha256:
         result["sha256"] = _sha256(path)
     return result

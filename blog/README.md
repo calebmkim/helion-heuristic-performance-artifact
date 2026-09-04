@@ -11,7 +11,7 @@ figures it uses and the notes the numbers were checked against.
 
 ## Regenerating the figures
 
-The two results comparisons are generated from this repo's own data by the scripts
+The results comparisons are generated from this repo's own data by the scripts
 that sit with each comparison:
 
     cd ../linear-attention-fla/scripts
@@ -20,8 +20,14 @@ that sit with each comparison:
         --outdir ../../blog/figures
 
     cd ../vllm-reductions/scripts
-    python plot_blog_figures.py --summary ../generated/h100-pr3551-curated/summary.json \
+    python plot_blog_figures.py \
+        --summary ../generated/h100-main-torch213-triton371-vllm024-curated/summary.json \
         --gpu H100 --outdir ../../blog/figures
+
+    cd ../example-reductions/scripts
+    python plot_blog_figures.py \
+        --summary ../generated/h100-main-torch213-triton371-liger-mixed/summary.json \
+        --gpu H100 --outdir ../generated/blog-figures
 
 The rest are self-contained:
 

@@ -14,6 +14,13 @@ from typing import Any
 
 
 ARMS = ("default", "seed", "torch_compile")
+ENVIRONMENT_KEYS = (
+    "torch",
+    "triton",
+    "cuda_runtime",
+    "gpu",
+    "compute_capability",
+)
 LABELS = {
     "default": "Default",
     "seed": "Heuristic seed",
@@ -63,6 +70,21 @@ def _group(cells: list[dict[str, Any]]) -> dict[str, object]:
     }
 
 
+def _environment(document: dict[str, Any]) -> dict[str, object]:
+    environments = [
+        {
+            key: record.get("environment", {}).get(key)
+            for key in ENVIRONMENT_KEYS
+        }
+        for record in document["records"]
+    ]
+    if not environments:
+        return {key: None for key in ENVIRONMENT_KEYS}
+    if any(environment != environments[0] for environment in environments[1:]):
+        raise ValueError("benchmark records have inconsistent environments")
+    return environments[0]
+
+
 def summarize(document: dict[str, Any]) -> dict[str, object]:
     if tuple(document["arms"]) != ARMS:
         raise ValueError(f"expected arms {ARMS}, found {document['arms']}")
@@ -102,6 +124,7 @@ def summarize(document: dict[str, Any]) -> dict[str, object]:
         "profile": document["profile"],
         "manifest_sha256": document["manifest_sha256"],
         "helion_git": document["helion_git"],
+        "environment": _environment(document),
         "arms": list(ARMS),
         "reference_arm": "torch_compile",
         "normalization": "torch_compile = 1.00; higher is faster",
@@ -138,12 +161,22 @@ def _latency_text(value: object) -> str:
 def _write_markdown(summary: dict[str, Any], path: Path) -> None:
     overall = summary["overall"]
     git = summary["helion_git"]
+    environment = summary["environment"]
     lines = [
         "# Example Reduction Performance",
         "",
         f"- Profile: `{summary['profile']}`",
         f"- Helion commit: `{git.get('commit')}`",
         f"- Helion worktree dirty: `{git.get('dirty')}`",
+        (
+            f"- Software: Torch `{environment.get('torch')}`, "
+            f"Triton `{environment.get('triton')}`, "
+            f"CUDA runtime `{environment.get('cuda_runtime')}`."
+        ),
+        (
+            f"- GPU: `{environment.get('gpu')}`, compute capability "
+            f"`{environment.get('compute_capability')}`."
+        ),
         (
             f"- Torch reference: `torch.compile(mode="
             f"\"{summary['torch_compile_mode']}\")`."

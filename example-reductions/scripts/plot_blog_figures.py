@@ -7,7 +7,7 @@ flat per-cell geomean.
 
 Usage:
     python plot_blog_figures.py \
-        --summary ../generated/h100-pr3551-liger-mixed/summary.json \
+        --summary ../generated/h100-main-torch213-triton371-liger-mixed/summary.json \
         --gpu H100 --outdir <where>
 """
 
@@ -88,6 +88,9 @@ def _geomean(values: list[float]) -> float | None:
 
 def build(summary_path: Path, gpu: str, output: Path) -> None:
     data: dict[str, Any] = json.loads(summary_path.read_text())
+    environment = data.get("environment", {})
+    torch_version = environment.get("torch", "unknown")
+    triton_version = environment.get("triton", "unknown")
     cells = [
         cell
         for cell in data["cells"]
@@ -121,13 +124,22 @@ def build(summary_path: Path, gpu: str, output: Path) -> None:
     counts = {kernel: len(by_kernel[kernel]) for kernel in kernels}
     groups = [*kernels, "__overall__"]
 
-    figure, axis = plt.subplots(figsize=(13.0, 5.6))
+    figure, axis = plt.subplots(figsize=(13.0, 6.0))
     figure.suptitle(
         f"Example reduction kernels on {gpu}: a config computed at compile "
         "time matches torch.compile max-autotune",
-        fontsize=14,
+        fontsize=13,
         fontweight="bold",
         y=0.985,
+    )
+    figure.text(
+        0.5,
+        0.93,
+        f"Torch {torch_version} / Triton {triton_version}",
+        ha="center",
+        fontsize=11,
+        fontweight="bold",
+        color=EDGE,
     )
 
     width = 0.30
@@ -214,25 +226,26 @@ def build(summary_path: Path, gpu: str, output: Path) -> None:
     for spine in ("top", "right"):
         axis.spines[spine].set_visible(False)
 
-    figure.legend(
+    axis.legend(
         handles=LEGEND,
-        loc="upper center",
-        bbox_to_anchor=(0.5, 0.955),
-        ncol=2,
+        loc="upper right",
+        bbox_to_anchor=(0.96, 0.98),
+        ncol=1,
         frameon=False,
-        fontsize=9.4,
+        fontsize=8.6,
     )
     figure.text(
         0.5,
         0.005,
         "CUDA device time; geometric mean across correct common shapes. "
-        "torch.compile mode: max-autotune-no-cudagraphs.",
+        "torch.compile mode: max-autotune-no-cudagraphs. "
+        f"Torch {torch_version}; Triton {triton_version}.",
         ha="center",
         fontsize=8.4,
         style="italic",
         color="#4B5563",
     )
-    figure.tight_layout(rect=(0, 0.035, 1, 0.885))
+    figure.tight_layout(rect=(0, 0.035, 1, 0.84))
     figure.savefig(
         output,
         dpi=165,

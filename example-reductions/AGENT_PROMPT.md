@@ -1,5 +1,8 @@
 # Agent Prompt: Reproduce Example Reduction Performance
 
+**For all new reproductions, use PyTorch `2.13.0+cu132` with Triton
+`3.7.1`.**
+
 ## Inputs
 
 ```text
@@ -8,9 +11,19 @@ HELION_REVISION=<revision to measure>
 ARTIFACT_ROOT=<this repository>
 OUTPUT_DIR=<directory for adapted scripts, raw results, and report>
 CUDA_VISIBLE_DEVICES=<exactly one GPU index>
+REQUIRED_TORCH_VERSION=2.13.0+cu132
+REQUIRED_TRITON_VERSION=3.7.1
 ```
 
 ## Important
+
+Unless the request explicitly asks for the historical run, use PyTorch
+`2.13.0+cu132` with Triton `3.7.1`. PyTorch 2.13 pins that exact Triton
+version. Verify the imported versions before compiling any cell; a run on a
+different pair does not replace the primary result.
+
+The retained historical dataset used PyTorch `2.12.0+cu132`, Triton `3.7.0`,
+and Helion commit `6ca445ca0605f703d44967dbedd153a0a89a5e00`.
 
 The scripts reflect one Helion revision. Inspect the requested checkout and
 adapt imports or kernel APIs when they change. Do not edit Helion's production
@@ -46,6 +59,7 @@ unsupported cell as a failure.
 
 - Resolve the requested revision to an immutable commit.
 - Record dirty state without discarding changes.
+- Assert PyTorch `2.13.0+cu132` and Triton `3.7.1` for the primary run.
 - Verify every body named in `shapes.json`.
 - Record Python, Torch, Triton, CUDA, GPU model, compute capability, and
   imported package paths.

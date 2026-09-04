@@ -3,9 +3,19 @@
   "profile": "liger-mixed",
   "manifest_sha256": "fc3ff4d195af7d9a493816638ab38a0abb364a196d55d202ac94e701fdf0d0ec",
   "helion_git": {
-    "commit": "6ca445ca0605f703d44967dbedd153a0a89a5e00",
-    "branch": "reduction-rewrite-on-pr3546",
+    "commit": "fa2f62eb686ef846c76f8b9e18beec30fbc5bee1",
+    "branch": "main",
     "dirty": false
+  },
+  "environment": {
+    "torch": "2.13.0+cu132",
+    "triton": "3.7.1",
+    "cuda_runtime": "13.2",
+    "gpu": "NVIDIA H100 80GB HBM3",
+    "compute_capability": [
+      9,
+      0
+    ]
   },
   "arms": [
     "default",
@@ -20,14 +30,14 @@
     "cells": 80,
     "valid_cells": 80,
     "normalized_performance": {
-      "default": 0.25285707925242284,
-      "seed": 1.0728579021861147,
+      "default": 0.2675877469036313,
+      "seed": 1.0878385248659352,
       "torch_compile": 1.0
     },
     "latency_us_geomean": {
-      "default": 478.8409000004342,
-      "seed": 112.85586949958183,
-      "torch_compile": 121.07831140071123
+      "default": 459.6545148611441,
+      "seed": 113.06633583411053,
+      "torch_compile": 122.99791598577525
     }
   },
   "kernels": {
@@ -35,140 +45,140 @@
       "cells": 8,
       "valid_cells": 8,
       "normalized_performance": {
-        "default": 0.7911861146717839,
-        "seed": 0.9741886346655203,
+        "default": 0.777208730213358,
+        "seed": 0.9557558730186282,
         "torch_compile": 1.0
       },
       "latency_us_geomean": {
-        "default": 347.4867658909828,
-        "seed": 282.21095424660155,
-        "torch_compile": 274.9267042051505
+        "default": 347.6568651672059,
+        "seed": 282.7102174880326,
+        "torch_compile": 270.2019507265607
       }
     },
     "fused_linear_jsd": {
       "cells": 8,
       "valid_cells": 8,
       "normalized_performance": {
-        "default": 0.6676400498411071,
-        "seed": 0.9271672348963358,
+        "default": 0.9208559509493401,
+        "seed": 1.2287215978178552,
         "torch_compile": 1.0
       },
       "latency_us_geomean": {
-        "default": 3306.494108675905,
-        "seed": 2380.9597755711557,
-        "torch_compile": 2207.5478915157073
+        "default": 3181.3098609551353,
+        "seed": 2384.2082067060946,
+        "torch_compile": 2929.5281172743557
       }
     },
     "grpo": {
       "cells": 8,
       "valid_cells": 8,
       "normalized_performance": {
-        "default": 0.12604257549628023,
-        "seed": 1.1445806757934132,
+        "default": 0.12747776907757644,
+        "seed": 1.1552070180427079,
         "torch_compile": 1.0
       },
       "latency_us_geomean": {
-        "default": 2527.760850830718,
-        "seed": 278.36000957863286,
-        "torch_compile": 318.60548787737247
+        "default": 2536.848107223249,
+        "seed": 279.94267014186056,
+        "torch_compile": 323.39173719749203
       }
     },
     "jsd": {
       "cells": 8,
       "valid_cells": 8,
       "normalized_performance": {
-        "default": 0.09371007491574981,
-        "seed": 0.8544864934509682,
+        "default": 0.09387410141393433,
+        "seed": 0.8559016368279198,
         "torch_compile": 1.0
       },
       "latency_us_geomean": {
-        "default": 4579.268774748536,
-        "seed": 502.20058857567324,
-        "torch_compile": 429.1236199410391
+        "default": 4576.04266829828,
+        "seed": 501.893996967188,
+        "torch_compile": 429.5718935183234
       }
     },
     "kl_div": {
       "cells": 8,
       "valid_cells": 8,
       "normalized_performance": {
-        "default": 0.06859840727874683,
-        "seed": 0.9773132196788196,
+        "default": 0.06766829121230447,
+        "seed": 0.963367409773989,
         "torch_compile": 1.0
       },
       "latency_us_geomean": {
-        "default": 4802.671766677243,
-        "seed": 337.1034252303836,
-        "torch_compile": 329.45563387666425
+        "default": 4805.683143750954,
+        "seed": 337.55798996946953,
+        "torch_compile": 325.1923664454022
       }
     },
     "layer_norm": {
       "cells": 8,
       "valid_cells": 8,
       "normalized_performance": {
-        "default": 1.1334036811886576,
-        "seed": 1.2030852318670036,
+        "default": 1.1183129362329893,
+        "seed": 1.1901187025463302,
         "torch_compile": 1.0
       },
       "latency_us_geomean": {
-        "default": 19.183219284197577,
-        "seed": 18.072145495475844,
-        "torch_compile": 21.74233135375878
+        "default": 19.31292487751555,
+        "seed": 18.147680295092893,
+        "torch_compile": 21.597893727021553
       }
     },
     "layer_norm_bwd": {
       "cells": 8,
       "valid_cells": 8,
       "normalized_performance": {
-        "default": 0.043973346183103695,
-        "seed": 1.2588495183976072,
+        "default": 0.045812323207372614,
+        "seed": 1.084664712980306,
         "torch_compile": 1.0
       },
       "latency_us_geomean": {
-        "default": 1322.636930505286,
-        "seed": 46.2015282761514,
-        "torch_compile": 58.16077161966663
+        "default": 1092.470875589579,
+        "seed": 46.14202734560596,
+        "torch_compile": 50.04862884715112
       }
     },
     "rms_norm": {
       "cells": 8,
       "valid_cells": 8,
       "normalized_performance": {
-        "default": 1.0177972495584937,
-        "seed": 1.0907047217594565,
+        "default": 0.9995046439467569,
+        "seed": 1.074823115018744,
         "torch_compile": 1.0
       },
       "latency_us_geomean": {
-        "default": 18.31641011832872,
-        "seed": 17.092061186044557,
-        "torch_compile": 18.642391840220338
+        "default": 18.627101508830673,
+        "seed": 17.32180318900122,
+        "torch_compile": 18.617874461343906
       }
     },
     "rms_norm_bwd": {
       "cells": 8,
       "valid_cells": 8,
       "normalized_performance": {
-        "default": 0.044689486508188006,
-        "seed": 1.0615059303179353,
+        "default": 0.05611601256620391,
+        "seed": 1.086108815350359,
         "torch_compile": 1.0
       },
       "latency_us_geomean": {
-        "default": 905.1687646374501,
-        "seed": 38.107679043095644,
-        "torch_compile": 40.451527294898526
+        "default": 737.1448782320845,
+        "seed": 38.08608370114435,
+        "torch_compile": 41.36563124998451
       }
     },
     "softmax": {
       "cells": 8,
       "valid_cells": 8,
       "normalized_performance": {
-        "default": 1.1012141317699762,
-        "seed": 1.334552589933308,
+        "default": 1.1301865037671417,
+        "seed": 1.3768040272685824,
         "torch_compile": 1.0
       },
       "latency_us_geomean": {
-        "default": 23.586270948147373,
-        "seed": 19.46235396025383,
-        "torch_compile": 25.973534883855514
+        "default": 23.553898836221876,
+        "seed": 19.3348494401241,
+        "torch_compile": 26.620298575794546
       }
     }
   },
@@ -177,56 +187,56 @@
       "cells": 8,
       "valid_cells": 8,
       "normalized_performance": {
-        "default": 0.12604257549628023,
-        "seed": 1.1445806757934132,
+        "default": 0.12747776907757644,
+        "seed": 1.1552070180427079,
         "torch_compile": 1.0
       },
       "latency_us_geomean": {
-        "default": 2527.760850830718,
-        "seed": 278.36000957863286,
-        "torch_compile": 318.60548787737247
+        "default": 2536.848107223249,
+        "seed": 279.94267014186056,
+        "torch_compile": 323.39173719749203
       }
     },
     "normalization": {
       "cells": 32,
       "valid_cells": 32,
       "normalized_performance": {
-        "default": 0.21820273648839703,
-        "seed": 1.1507340340875858,
+        "default": 0.2315284270056519,
+        "seed": 1.1079598735342484,
         "torch_compile": 1.0
       },
       "latency_us_geomean": {
-        "default": 143.21318836227556,
-        "seed": 27.156153095493025,
-        "torch_compile": 31.249509601876778
+        "default": 130.46349634168791,
+        "seed": 27.26272747883493,
+        "torch_compile": 30.20600808964863
       }
     },
     "softmax": {
       "cells": 8,
       "valid_cells": 8,
       "normalized_performance": {
-        "default": 1.1012141317699762,
-        "seed": 1.334552589933308,
+        "default": 1.1301865037671417,
+        "seed": 1.3768040272685824,
         "torch_compile": 1.0
       },
       "latency_us_geomean": {
-        "default": 23.586270948147373,
-        "seed": 19.46235396025383,
-        "torch_compile": 25.973534883855514
+        "default": 23.553898836221876,
+        "seed": 19.3348494401241,
+        "torch_compile": 26.620298575794546
       }
     },
     "vocabulary": {
       "cells": 32,
       "valid_cells": 32,
       "normalized_performance": {
-        "default": 0.24139614970588316,
-        "seed": 0.9319337231750532,
+        "default": 0.2596660029945522,
+        "seed": 0.991982632568328,
         "torch_compile": 1.0
       },
       "latency_us_geomean": {
-        "default": 2242.055019158856,
-        "seed": 580.7531540008835,
-        "torch_compile": 541.2234490536982
+        "default": 2220.7542140029946,
+        "seed": 581.3149862215413,
+        "torch_compile": 576.6543703834658
       }
     }
   },
@@ -260,13 +270,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 10.208000428974628,
-        "seed": 9.64799989014864,
-        "torch_compile": 10.432000271975994
+        "default": 10.27199998497963,
+        "seed": 9.664000011980534,
+        "torch_compile": 9.952000342309475
       },
       "normalized_performance": {
-        "default": 1.021943557365609,
-        "seed": 1.0812604053434827,
+        "default": 0.9688473867661528,
+        "seed": 1.029801358647755,
         "torch_compile": 1.0
       }
     },
@@ -289,12 +299,12 @@
       },
       "latency_us": {
         "default": 14.527999795973301,
-        "seed": 13.952000066637993,
-        "torch_compile": 15.71200042963028
+        "seed": 14.015999622642994,
+        "torch_compile": 15.615999698638916
       },
       "normalized_performance": {
-        "default": 1.0814978421176153,
-        "seed": 1.1261468144055415,
+        "default": 1.074889862193361,
+        "seed": 1.1141552596370725,
         "torch_compile": 1.0
       }
     },
@@ -317,12 +327,12 @@
       },
       "latency_us": {
         "default": 16.3199994713068,
-        "seed": 15.584000386297703,
-        "torch_compile": 17.503999173641205
+        "seed": 15.615999698638916,
+        "torch_compile": 17.983999103307724
       },
       "normalized_performance": {
-        "default": 1.0725490037187848,
-        "seed": 1.1232032045527713,
+        "default": 1.1019607650678238,
+        "seed": 1.1516393090655095,
         "torch_compile": 1.0
       }
     },
@@ -344,13 +354,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 19.791999831795692,
-        "seed": 18.751999363303185,
-        "torch_compile": 20.51199972629547
+        "default": 19.967999309301376,
+        "seed": 18.112000077962875,
+        "torch_compile": 20.047999918460846
       },
       "normalized_performance": {
-        "default": 1.0363783296593962,
-        "seed": 1.0938566778343928,
+        "default": 1.0040064409017786,
+        "seed": 1.1068904500974206,
         "torch_compile": 1.0
       }
     },
@@ -372,13 +382,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 26.464000344276428,
-        "seed": 23.296000435948372,
-        "torch_compile": 26.464000344276428
+        "default": 26.784000918269157,
+        "seed": 23.77600036561489,
+        "torch_compile": 26.11199952661991
       },
       "normalized_performance": {
-        "default": 1.0,
-        "seed": 1.1359890045090948,
+        "default": 0.9749103431671824,
+        "seed": 1.0982502996754395,
         "torch_compile": 1.0
       }
     },
@@ -400,13 +410,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 30.719999223947525,
-        "seed": 26.319999247789383,
-        "torch_compile": 28.704000636935234
+        "default": 31.007999554276466,
+        "seed": 26.59199945628643,
+        "torch_compile": 29.120000079274178
       },
       "normalized_performance": {
-        "default": 0.9343750443378678,
-        "seed": 1.090577562966537,
+        "default": 0.9391125031559185,
+        "seed": 1.0950662106903029,
         "torch_compile": 1.0
       }
     },
@@ -429,13 +439,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 6.688000168651342,
-        "seed": 6.304000038653612,
-        "torch_compile": 6.351999938488007
+        "default": 7.391999941319227,
+        "seed": 6.991999922320247,
+        "torch_compile": 6.544000003486872
       },
       "normalized_performance": {
-        "default": 0.9497607324027488,
-        "seed": 1.0076141972620682,
+        "default": 0.8852813927808263,
+        "seed": 0.9359267843520357,
         "torch_compile": 1.0
       }
     },
@@ -458,13 +468,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 48.64000156521797,
-        "seed": 47.90399968624115,
-        "torch_compile": 51.37600004673004
+        "default": 48.54400083422661,
+        "seed": 47.85599932074547,
+        "torch_compile": 51.77599936723709
       },
       "normalized_performance": {
-        "default": 1.056249966970983,
-        "seed": 1.0724782979131096,
+        "default": 1.0665787425319035,
+        "seed": 1.081912406012433,
         "torch_compile": 1.0
       }
     },
@@ -486,13 +496,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 10.4479999281466,
-        "seed": 10.4160001501441,
-        "torch_compile": 14.047999866306782
+        "default": 10.591999627649784,
+        "seed": 10.623999871313572,
+        "torch_compile": 14.655999839305878
       },
       "normalized_performance": {
-        "default": 1.3445635492839054,
-        "seed": 1.3486942841597822,
+        "default": 1.383685834074924,
+        "seed": 1.379518073873412,
         "torch_compile": 1.0
       }
     },
@@ -514,13 +524,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 14.70400020480156,
-        "seed": 14.4640002399683,
-        "torch_compile": 17.88800023496151
+        "default": 14.399999752640724,
+        "seed": 14.047999866306782,
+        "torch_compile": 17.216000705957413
       },
       "normalized_performance": {
-        "default": 1.2165397161188982,
-        "seed": 1.2367256594432077,
+        "default": 1.1955556251173045,
+        "seed": 1.2255125903901007,
         "torch_compile": 1.0
       }
     },
@@ -542,13 +552,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 16.92800037562847,
-        "seed": 15.776000916957855,
-        "torch_compile": 18.112000077962875
+        "default": 16.863999888300896,
+        "seed": 15.584000386297703,
+        "torch_compile": 18.65600049495697
       },
       "normalized_performance": {
-        "default": 1.0699432700887122,
-        "seed": 1.1480729605241098,
+        "default": 1.1062618962598099,
+        "seed": 1.1971252587596402,
         "torch_compile": 1.0
       }
     },
@@ -570,13 +580,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 23.296000435948372,
-        "seed": 20.896000787615776,
-        "torch_compile": 25.696000084280968
+        "default": 22.975999861955643,
+        "seed": 20.59200033545494,
+        "torch_compile": 25.18399991095066
       },
       "normalized_performance": {
-        "default": 1.1030219609984693,
-        "seed": 1.2297089929049945,
+        "default": 1.096100281261365,
+        "seed": 1.2229991987514344,
         "torch_compile": 1.0
       }
     },
@@ -598,13 +608,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 27.936000376939774,
-        "seed": 25.008000433444977,
-        "torch_compile": 28.880000114440918
+        "default": 28.063999488949776,
+        "seed": 25.151999667286873,
+        "torch_compile": 29.888000339269638
       },
       "normalized_performance": {
-        "default": 1.0337915136298603,
-        "seed": 1.154830438814998,
+        "default": 1.064994330228593,
+        "seed": 1.1882951946020615,
         "torch_compile": 1.0
       }
     },
@@ -626,13 +636,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 31.15200065076351,
-        "seed": 28.00000086426735,
-        "torch_compile": 30.208000913262367
+        "default": 31.007999554276466,
+        "seed": 27.79199928045273,
+        "torch_compile": 33.695999532938
       },
       "normalized_performance": {
-        "default": 0.9696969787563866,
-        "seed": 1.0788571421729058,
+        "default": 1.086687307059472,
+        "seed": 1.2124352477454836,
         "torch_compile": 1.0
       }
     },
@@ -655,13 +665,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 7.071999832987785,
-        "seed": 6.719999946653843,
-        "torch_compile": 8.767999708652496
+        "default": 7.871999870985746,
+        "seed": 7.360000163316727,
+        "torch_compile": 7.519999984651804
       },
       "normalized_performance": {
-        "default": 1.2398189926071002,
-        "seed": 1.3047618717643643,
+        "default": 0.9552845665519727,
+        "seed": 1.0217391056772713,
         "torch_compile": 1.0
       }
     },
@@ -684,13 +694,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 49.18399825692177,
-        "seed": 48.688000068068504,
-        "torch_compile": 55.824000388383865
+        "default": 47.807998955249786,
+        "seed": 47.74399846792221,
+        "torch_compile": 52.73599922657013
       },
       "normalized_performance": {
-        "default": 1.1350033012114389,
-        "seed": 1.146565895299434,
+        "default": 1.1030789905248524,
+        "seed": 1.1045576599957772,
         "torch_compile": 1.0
       }
     },
@@ -712,13 +722,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 9.952000342309475,
-        "seed": 9.855999611318111,
-        "torch_compile": 14.688000082969666
+        "default": 9.79200005531311,
+        "seed": 9.759999811649323,
+        "torch_compile": 14.368000440299511
       },
       "normalized_performance": {
-        "default": 1.4758842019453897,
-        "seed": 1.490259807447916,
+        "default": 1.4673202981145284,
+        "seed": 1.472131221063158,
         "torch_compile": 1.0
       }
     },
@@ -740,13 +750,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 14.399999752640724,
+        "default": 14.655999839305878,
         "seed": 14.431999996304512,
-        "torch_compile": 25.248000398278236
+        "torch_compile": 25.21600015461445
       },
       "normalized_performance": {
-        "default": 1.7533333911098274,
-        "seed": 1.7494457043197957,
+        "default": 1.7205240468813148,
+        "seed": 1.7472283925354288,
         "torch_compile": 1.0
       }
     },
@@ -768,13 +778,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 32.127998769283295,
-        "seed": 21.263999864459038,
-        "torch_compile": 29.055999591946602
+        "default": 32.655999064445496,
+        "seed": 21.088000386953354,
+        "torch_compile": 29.40800040960312
       },
       "normalized_performance": {
-        "default": 0.9043824920625387,
-        "seed": 1.366440922552451,
+        "default": 0.900538989836674,
+        "seed": 1.3945371713762464,
         "torch_compile": 1.0
       }
     },
@@ -796,13 +806,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 38.015998899936676,
-        "seed": 26.367999613285065,
-        "torch_compile": 39.5519994199276
+        "default": 37.408001720905304,
+        "seed": 25.919999927282333,
+        "torch_compile": 44.68800127506256
       },
       "normalized_performance": {
-        "default": 1.0404040552514189,
-        "seed": 1.5,
+        "default": 1.1946107575719251,
+        "seed": 1.724074128103133,
         "torch_compile": 1.0
       }
     },
@@ -825,13 +835,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 6.816000211983919,
-        "seed": 6.591999903321266,
-        "torch_compile": 6.943999789655209
+        "default": 6.6559999249875546,
+        "seed": 6.463999859988689,
+        "torch_compile": 6.976000033318996
       },
       "normalized_performance": {
-        "default": 1.01877928017758,
-        "seed": 1.053398041792536,
+        "default": 1.048076939894503,
+        "seed": 1.0792079493224498,
         "torch_compile": 1.0
       }
     },
@@ -854,13 +864,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 47.37599939107895,
-        "seed": 47.439999878406525,
-        "torch_compile": 70.25599852204323
+        "default": 47.31199890375137,
+        "seed": 47.42399975657463,
+        "torch_compile": 69.99999657273293
       },
       "normalized_performance": {
-        "default": 1.4829449388939466,
-        "seed": 1.4809443234004298,
+        "default": 1.4795400362418976,
+        "seed": 1.4760458192484802,
         "torch_compile": 1.0
       }
     },
@@ -883,13 +893,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 9.088000282645226,
-        "seed": 7.7760000713169575,
-        "torch_compile": 7.584000006318092
+        "default": 9.216000325977802,
+        "seed": 7.807999849319458,
+        "torch_compile": 8.287999778985977
       },
       "normalized_performance": {
-        "default": 0.8345070169947918,
-        "seed": 0.9753086338428559,
+        "default": 0.8993054997647946,
+        "seed": 1.0614754020145576,
         "torch_compile": 1.0
       }
     },
@@ -912,13 +922,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 186.46400421857834,
-        "seed": 106.1440035700798,
-        "torch_compile": 131.3599944114685
+        "default": 186.19199842214584,
+        "seed": 105.98400235176086,
+        "torch_compile": 130.8640018105507
       },
       "normalized_performance": {
-        "default": 0.7044791028808146,
-        "seed": 1.237563969638099,
+        "default": 0.7028443913784514,
+        "seed": 1.2347524051433076,
         "torch_compile": 1.0
       }
     },
@@ -940,13 +950,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 110.89600250124931,
-        "seed": 81.69599995017052,
-        "torch_compile": 98.43199700117111
+        "default": 110.44799908995628,
+        "seed": 81.37600123882294,
+        "torch_compile": 96.47999703884125
       },
       "normalized_performance": {
-        "default": 0.8876063589403254,
-        "seed": 1.2048569949717063,
+        "default": 0.8735332268017046,
+        "seed": 1.1856074957000036,
         "torch_compile": 1.0
       }
     },
@@ -968,13 +978,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 306.0480058193207,
-        "seed": 309.63200330734253,
-        "torch_compile": 261.9520127773285
+        "default": 306.2080144882202,
+        "seed": 309.87200140953064,
+        "torch_compile": 260.71999967098236
       },
       "normalized_performance": {
-        "default": 0.8559180514052269,
-        "seed": 0.8460107804725644,
+        "default": 0.8514473408109056,
+        "seed": 0.841379661553906,
         "torch_compile": 1.0
       }
     },
@@ -996,13 +1006,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 389.96800780296326,
-        "seed": 352.06401348114014,
-        "torch_compile": 330.24001121520996
+        "default": 390.3680145740509,
+        "seed": 353.2159924507141,
+        "torch_compile": 329.8240005970001
       },
       "normalized_performance": {
-        "default": 0.846838726786194,
-        "seed": 0.938011266615583,
+        "default": 0.8449052900937255,
+        "seed": 0.9337742561105072,
         "torch_compile": 1.0
       }
     },
@@ -1024,13 +1034,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 384.0320110321045,
-        "seed": 352.08000242710114,
-        "torch_compile": 331.4560055732727
+        "default": 384.6080005168915,
+        "seed": 353.37600111961365,
+        "torch_compile": 333.98398756980896
       },
       "normalized_performance": {
-        "default": 0.8630947318231852,
-        "seed": 0.9414224133388585,
+        "default": 0.8683750393152334,
+        "seed": 0.9451235695452881,
         "torch_compile": 1.0
       }
     },
@@ -1052,13 +1062,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 473.63199293613434,
-        "seed": 408.2239866256714,
-        "torch_compile": 388.35200667381287
+        "default": 474.12799298763275,
+        "seed": 409.85600650310516,
+        "torch_compile": 387.4880075454712
       },
       "normalized_performance": {
-        "default": 0.8199446246575222,
-        "seed": 0.9513208909742962,
+        "default": 0.8172645641607972,
+        "seed": 0.9454247379500964,
         "torch_compile": 1.0
       }
     },
@@ -1081,13 +1091,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 83.82399752736092,
-        "seed": 34.36800092458725,
-        "torch_compile": 38.896000012755394
+        "default": 83.95199850201607,
+        "seed": 34.32000055909157,
+        "torch_compile": 34.143999218940735
       },
       "normalized_performance": {
-        "default": 0.46401986495644504,
-        "seed": 1.1317504354735035,
+        "default": 0.4067085933412387,
+        "seed": 0.9948717559066528,
         "torch_compile": 1.0
       }
     },
@@ -1110,13 +1120,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 1418.336033821106,
-        "seed": 1216.655969619751,
-        "torch_compile": 1233.407974243164
+        "default": 1418.944001197815,
+        "seed": 1223.7600088119507,
+        "torch_compile": 1241.1360144615173
       },
       "normalized_performance": {
-        "default": 0.8696161874420326,
-        "seed": 1.0137688919807368,
+        "default": 0.874689919696479,
+        "seed": 1.0141988670363853,
         "torch_compile": 1.0
       }
     },
@@ -1139,13 +1149,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 742.7040040493011,
-        "seed": 751.7279982566833,
-        "torch_compile": 620.7039952278137
+        "default": 744.1279888153076,
+        "seed": 753.1840205192566,
+        "torch_compile": 624.4480013847351
       },
       "normalized_performance": {
-        "default": 0.8357353560014078,
-        "seed": 0.8257029093864741,
+        "default": 0.8391674695355706,
+        "seed": 0.8290776017184102,
         "torch_compile": 1.0
       }
     },
@@ -1167,13 +1177,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 1321.5839862823486,
-        "seed": 118.72000247240067,
-        "torch_compile": 114.43199962377548
+        "default": 1324.4159817695618,
+        "seed": 119.21599879860878,
+        "torch_compile": 114.9120032787323
       },
       "normalized_performance": {
-        "default": 0.08658700529935731,
-        "seed": 0.9638813783749538,
+        "default": 0.08676428317121146,
+        "seed": 0.9638975006437919,
         "torch_compile": 1.0
       }
     },
@@ -1195,13 +1205,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 4165.199995040894,
-        "seed": 353.520005941391,
-        "torch_compile": 341.43999218940735
+        "default": 4164.528131484985,
+        "seed": 353.2640039920807,
+        "torch_compile": 341.47199988365173
       },
       "normalized_performance": {
-        "default": 0.08197445323055973,
-        "seed": 0.9658293348354765,
+        "default": 0.08199536396501417,
+        "seed": 0.9666198537774222,
         "torch_compile": 1.0
       }
     },
@@ -1223,13 +1233,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 5230.352163314819,
-        "seed": 400.9439945220947,
-        "torch_compile": 415.69599509239197
+        "default": 5230.080127716064,
+        "seed": 401.19999647140503,
+        "torch_compile": 416.159987449646
       },
       "normalized_performance": {
-        "default": 0.07947763020777897,
-        "seed": 1.0367931700483028,
+        "default": 0.07957048023877597,
+        "seed": 1.0372881134342364,
         "torch_compile": 1.0
       }
     },
@@ -1251,13 +1261,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 5250.992059707642,
-        "seed": 401.2320041656494,
-        "torch_compile": 416.4000004529953
+        "default": 5251.199960708618,
+        "seed": 401.311993598938,
+        "torch_compile": 416.3680076599121
       },
       "normalized_performance": {
-        "default": 0.07929930110695675,
-        "seed": 1.0378035553741216,
+        "default": 0.07929006908427187,
+        "seed": 1.0375169800582156,
         "torch_compile": 1.0
       }
     },
@@ -1279,13 +1289,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 6165.088176727295,
-        "seed": 471.2640047073364,
-        "torch_compile": 467.0239984989166
+        "default": 6165.791988372803,
+        "seed": 471.50400280952454,
+        "torch_compile": 467.3919975757599
       },
       "normalized_performance": {
-        "default": 0.07575301197830295,
-        "seed": 0.9910029067230524,
+        "default": 0.07580404892950468,
+        "seed": 0.9912789600740128,
         "torch_compile": 1.0
       }
     },
@@ -1308,13 +1318,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 5233.727931976318,
-        "seed": 44.08000037074089,
-        "torch_compile": 38.975998759269714
+        "default": 5234.0638637542725,
+        "seed": 44.096000492572784,
+        "torch_compile": 34.73600000143051
       },
       "normalized_performance": {
-        "default": 0.0074470815575145705,
-        "seed": 0.884210490731777,
+        "default": 0.006636525824985862,
+        "seed": 0.7877358402896697,
         "torch_compile": 1.0
       }
     },
@@ -1337,13 +1347,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 5576.128005981445,
-        "seed": 1506.223976612091,
-        "torch_compile": 1478.6080121994019
+        "default": 5592.048168182373,
+        "seed": 1514.3840312957764,
+        "torch_compile": 1485.040009021759
       },
       "normalized_performance": {
-        "default": 0.2651675159919781,
-        "seed": 0.9816654330023314,
+        "default": 0.26556280710730235,
+        "seed": 0.9806231301521918,
         "torch_compile": 1.0
       }
     },
@@ -1366,13 +1376,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 10405.840396881104,
-        "seed": 789.3920242786407,
-        "torch_compile": 762.4959945678711
+        "default": 10406.032085418701,
+        "seed": 789.5680069923401,
+        "torch_compile": 762.8960013389587
       },
       "normalized_performance": {
-        "default": 0.07327577259366871,
-        "seed": 0.9659281714489735,
+        "default": 0.07331286268163208,
+        "seed": 0.9662194954491867,
         "torch_compile": 1.0
       }
     },
@@ -1394,13 +1404,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 1257.0399641990662,
-        "seed": 183.56800079345703,
-        "torch_compile": 146.32000029087067
+        "default": 1255.8399438858032,
+        "seed": 183.4239959716797,
+        "torch_compile": 146.5280055999756
       },
       "normalized_performance": {
-        "default": 0.11640043630919858,
-        "seed": 0.797088815362236,
+        "default": 0.11667729340300372,
+        "seed": 0.7988486175091247,
         "torch_compile": 1.0
       }
     },
@@ -1422,13 +1432,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 3964.2720222473145,
-        "seed": 513.8719975948334,
-        "torch_compile": 416.6879951953888
+        "default": 3961.2640142440796,
+        "seed": 513.4400129318237,
+        "torch_compile": 416.3520038127899
       },
       "normalized_performance": {
-        "default": 0.1051108483113557,
-        "seed": 0.8108789681976987,
+        "default": 0.10510584558758364,
+        "seed": 0.8109068115578957,
         "torch_compile": 1.0
       }
     },
@@ -1450,13 +1460,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 4958.431959152222,
-        "seed": 624.0639984607697,
-        "torch_compile": 533.2159996032715
+        "default": 4953.136205673218,
+        "seed": 623.1359839439392,
+        "torch_compile": 532.3679745197296
       },
       "normalized_performance": {
-        "default": 0.10753722225008391,
-        "seed": 0.8544251886319811,
+        "default": 0.10748098828979638,
+        "seed": 0.8543367551176829,
         "torch_compile": 1.0
       }
     },
@@ -1478,13 +1488,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 5029.280185699463,
-        "seed": 628.3519864082336,
-        "torch_compile": 543.1360006332397
+        "default": 5026.19194984436,
+        "seed": 628.4800171852112,
+        "torch_compile": 543.5999929904938
       },
       "normalized_performance": {
-        "default": 0.10799477869171478,
-        "seed": 0.8643817675152061,
+        "default": 0.10815344865755211,
+        "seed": 0.8649439570491491,
         "torch_compile": 1.0
       }
     },
@@ -1506,13 +1516,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 5904.335975646973,
+        "default": 5901.344060897827,
         "seed": 738.6559844017029,
-        "torch_compile": 634.9440217018127
+        "torch_compile": 635.2799832820892
       },
       "normalized_performance": {
-        "default": 0.10753859948361733,
-        "seed": 0.8595936878736659,
+        "default": 0.10765005001003757,
+        "seed": 0.8600485160851351,
         "torch_compile": 1.0
       }
     },
@@ -1535,13 +1545,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 4971.072196960449,
-        "seed": 50.624001771211624,
-        "torch_compile": 49.26399886608124
+        "default": 4998.672008514404,
+        "seed": 50.84799975156784,
+        "torch_compile": 49.936000257730484
       },
       "normalized_performance": {
-        "default": 0.009910135462567532,
-        "seed": 0.9731352153613471,
+        "default": 0.009989853339581559,
+        "seed": 0.982064201182088,
         "torch_compile": 1.0
       }
     },
@@ -1564,13 +1574,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 5305.935859680176,
-        "seed": 2416.192054748535,
-        "torch_compile": 2028.7680625915527
+        "default": 5305.183887481689,
+        "seed": 2415.9040451049805,
+        "torch_compile": 2030.3840637207031
       },
       "normalized_performance": {
-        "default": 0.3823581958478179,
-        "seed": 0.8396551336241757,
+        "default": 0.3827170003497284,
+        "seed": 0.8404241334976014,
         "torch_compile": 1.0
       }
     },
@@ -1593,13 +1603,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 9991.328239440918,
-        "seed": 1210.6080055236816,
-        "torch_compile": 1026.2080430984497
+        "default": 9920.3519821167,
+        "seed": 1203.0400037765503,
+        "torch_compile": 1019.6639895439148
       },
       "normalized_performance": {
-        "default": 0.10270987185141993,
-        "seed": 0.8476798752495737,
+        "default": 0.10278506159681138,
+        "seed": 0.847572804181917,
         "torch_compile": 1.0
       }
     },
@@ -1621,13 +1631,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 929.5519888401031,
-        "seed": 674.239993095398,
-        "torch_compile": 614.9759888648987
+        "default": 796.7680096626282,
+        "seed": 675.4239797592163,
+        "torch_compile": 892.4640119075775
       },
       "normalized_performance": {
-        "default": 0.6615832102433206,
-        "seed": 0.9121025082501832,
+        "default": 1.120105226470462,
+        "seed": 1.3213389495376435,
         "torch_compile": 1.0
       }
     },
@@ -1649,13 +1659,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 2401.5040397644043,
-        "seed": 2514.8160457611084,
-        "torch_compile": 2358.9919805526733
+        "default": 2395.359992980957,
+        "seed": 2505.136013031006,
+        "torch_compile": 2835.503935813904
       },
       "normalized_performance": {
-        "default": 0.9822977357073688,
-        "seed": 0.9380375890828727,
+        "default": 1.1837485572618254,
+        "seed": 1.1318762418744603,
         "torch_compile": 1.0
       }
     },
@@ -1677,13 +1687,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 4281.407833099365,
-        "seed": 3126.9280910491943,
-        "torch_compile": 3030.160069465637
+        "default": 4332.560062408447,
+        "seed": 3141.9520378112793,
+        "torch_compile": 3846.351981163025
       },
       "normalized_performance": {
-        "default": 0.707748522819903,
-        "seed": 0.96905332685438,
+        "default": 0.8877781094221826,
+        "seed": 1.2241918192495513,
         "torch_compile": 1.0
       }
     },
@@ -1705,13 +1715,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 3395.6639766693115,
-        "seed": 3150.0959396362305,
-        "torch_compile": 3055.967926979065
+        "default": 3396.575927734375,
+        "seed": 3152.0639657974243,
+        "torch_compile": 3874.799966812134
       },
       "normalized_performance": {
-        "default": 0.8999618183588818,
-        "seed": 0.9701190013063427,
+        "default": 1.1407959219085526,
+        "seed": 1.2292897634239057,
         "torch_compile": 1.0
       }
     },
@@ -1733,13 +1743,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 5231.40811920166,
-        "seed": 3821.344017982483,
-        "torch_compile": 3588.063955307007
+        "default": 5231.1999797821045,
+        "seed": 3825.31201839447,
+        "torch_compile": 4538.127899169922
       },
       "normalized_performance": {
-        "default": 0.685869630804978,
-        "seed": 0.9389533992287251,
+        "default": 0.8675118360431996,
+        "seed": 1.1863418924646647,
         "torch_compile": 1.0
       }
     },
@@ -1762,13 +1772,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 538.9760136604309,
-        "seed": 202.65600085258484,
-        "torch_compile": 168.7999963760376
+        "default": 543.6480045318604,
+        "seed": 203.2800018787384,
+        "torch_compile": 295.26400566101074
       },
       "normalized_performance": {
-        "default": 0.31318647230632796,
-        "seed": 0.8329385543279588,
+        "default": 0.5431161398546196,
+        "seed": 1.4524990305595487,
         "torch_compile": 1.0
       }
     },
@@ -1791,13 +1801,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 15905.119895935059,
-        "seed": 12323.087692260742,
-        "torch_compile": 11890.463829040527
+        "default": 16131.407737731934,
+        "seed": 12370.896339416504,
+        "torch_compile": 14058.351993560791
       },
       "normalized_performance": {
-        "default": 0.7475871861914996,
-        "seed": 0.9648932253000264,
+        "default": 0.8714894708586287,
+        "seed": 1.136405286071929,
         "torch_compile": 1.0
       }
     },
@@ -1820,13 +1830,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 9816.320419311523,
-        "seed": 6479.759931564331,
-        "torch_compile": 5829.7600746154785
+        "default": 8142.687797546387,
+        "seed": 6477.216005325317,
+        "torch_compile": 7635.551929473877
       },
       "normalized_performance": {
-        "default": 0.5938844521768732,
-        "seed": 0.8996876637693688,
+        "default": 0.9377188613045776,
+        "seed": 1.1788323753903251,
         "torch_compile": 1.0
       }
     },
@@ -1848,13 +1858,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 1072.0000267028809,
+        "default": 1072.0799565315247,
         "seed": 47.55200073122978,
-        "torch_compile": 47.15200141072273
+        "torch_compile": 46.431999653577805
       },
       "normalized_performance": {
-        "default": 0.04398507484719638,
-        "seed": 0.9915881705426466,
+        "default": 0.043310202164210006,
+        "seed": 0.9764468148462907,
         "torch_compile": 1.0
       }
     },
@@ -1876,13 +1886,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 1156.8000316619873,
-        "seed": 80.20799979567528,
-        "torch_compile": 98.63999858498573
+        "default": 1159.824013710022,
+        "seed": 80.57600259780884,
+        "torch_compile": 95.40800005197525
       },
       "normalized_performance": {
-        "default": 0.08526970598649497,
-        "seed": 1.2298024989560241,
+        "default": 0.08226075587690759,
+        "seed": 1.1840746249004135,
         "torch_compile": 1.0
       }
     },
@@ -1904,13 +1914,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 1456.272006034851,
-        "seed": 141.56799763441086,
-        "torch_compile": 168.60799491405487
+        "default": 1462.5760316848755,
+        "seed": 142.56000518798828,
+        "torch_compile": 174.27200078964233
       },
       "normalized_performance": {
-        "default": 0.1157805644929906,
-        "seed": 1.1910036006122857,
+        "default": 0.11915414789676433,
+        "seed": 1.2224466501655684,
         "torch_compile": 1.0
       }
     },
@@ -1932,13 +1942,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 2617.8719997406006,
-        "seed": 260.5599910020828,
-        "torch_compile": 232.04799741506577
+        "default": 2625.599980354309,
+        "seed": 262.57599890232086,
+        "torch_compile": 264.49599862098694
       },
       "normalized_performance": {
-        "default": 0.08863993252460736,
-        "seed": 0.8905741688224531,
+        "default": 0.10073735549971126,
+        "seed": 1.0073121676264871,
         "torch_compile": 1.0
       }
     },
@@ -1962,13 +1972,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 3289.83998298645,
-        "seed": 402.0000100135803,
-        "torch_compile": 442.9760128259659
+        "default": 3310.431957244873,
+        "seed": 404.65599298477173,
+        "torch_compile": 443.9679980278015
       },
       "normalized_performance": {
-        "default": 0.1346497140033666,
-        "seed": 1.101930352715666,
+        "default": 0.13411180285889235,
+        "seed": 1.0971491976507295,
         "torch_compile": 1.0
       }
     },
@@ -1992,13 +2002,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 4078.4480571746826,
-        "seed": 514.6239995956421,
-        "torch_compile": 660.5599820613861
+        "default": 4097.408056259155,
+        "seed": 517.9999768733978,
+        "torch_compile": 661.0240042209625
       },
       "normalized_performance": {
-        "default": 0.16196356378729623,
-        "seed": 1.2835778793457184,
+        "default": 0.16132735503636,
+        "seed": 1.2761081732297463,
         "torch_compile": 1.0
       }
     },
@@ -2022,13 +2032,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 6497.776031494141,
-        "seed": 1196.0639953613281,
-        "torch_compile": 1539.680004119873
+        "default": 6529.327869415283,
+        "seed": 1203.8400173187256,
+        "torch_compile": 1540.7679677009583
       },
       "normalized_performance": {
-        "default": 0.2369549206770411,
-        "seed": 1.2872889829400302,
+        "default": 0.23597650455236485,
+        "seed": 1.279877679371933,
         "torch_compile": 1.0
       }
     },
@@ -2052,13 +2062,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 4043.9839363098145,
-        "seed": 1035.4399681091309,
-        "torch_compile": 1295.0719594955444
+        "default": 4056.272029876709,
+        "seed": 1042.1760082244873,
+        "torch_compile": 1295.6160306930542
       },
       "normalized_performance": {
-        "default": 0.3202465637579445,
-        "seed": 1.2507455761636677,
+        "default": 0.3194105378411799,
+        "seed": 1.2431835126394266,
         "torch_compile": 1.0
       }
     },
@@ -2080,13 +2090,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 196.3840052485466,
-        "seed": 21.983999758958817,
-        "torch_compile": 23.80800060927868
+        "default": 202.35200226306915,
+        "seed": 22.0320001244545,
+        "torch_compile": 21.776000037789345
       },
       "normalized_performance": {
-        "default": 0.121231872112736,
-        "seed": 1.0829694719031533,
+        "default": 0.10761445300392582,
+        "seed": 0.9883805335321778,
         "torch_compile": 1.0
       }
     },
@@ -2108,13 +2118,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 681.663990020752,
-        "seed": 33.24799984693527,
-        "torch_compile": 35.8240008354187
+        "default": 681.520015001297,
+        "seed": 33.663999289274216,
+        "torch_compile": 35.9519999474287
       },
       "normalized_performance": {
-        "default": 0.05255375281643983,
-        "seed": 1.0774783746493815,
+        "default": 0.05275266926292735,
+        "seed": 1.0679658004532895,
         "torch_compile": 1.0
       }
     },
@@ -2136,13 +2146,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 1023.7759947776794,
-        "seed": 34.63999927043915,
-        "torch_compile": 39.51999917626381
+        "default": 692.8800046443939,
+        "seed": 34.7680002450943,
+        "torch_compile": 37.31200098991394
       },
       "normalized_performance": {
-        "default": 0.038602193622293196,
-        "seed": 1.1408775984007922,
+        "default": 0.05385059568729154,
+        "seed": 1.0731707526140677,
         "torch_compile": 1.0
       }
     },
@@ -2164,13 +2174,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 947.3919868469238,
-        "seed": 47.600001096725464,
-        "torch_compile": 50.60800164937973
+        "default": 945.7440078258514,
+        "seed": 47.31199890375137,
+        "torch_compile": 50.92800036072731
       },
       "normalized_performance": {
-        "default": 0.05341822851786141,
-        "seed": 1.0631932874653063,
+        "default": 0.05384966749914122,
+        "seed": 1.0764288455521,
         "torch_compile": 1.0
       }
     },
@@ -2192,13 +2202,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 1368.4160113334656,
-        "seed": 53.727999329566956,
-        "torch_compile": 65.21599739789963
+        "default": 1368.2079911231995,
+        "seed": 53.21599915623665,
+        "torch_compile": 59.36000123620033
       },
       "normalized_performance": {
-        "default": 0.0476580198256737,
-        "seed": 1.2138177153752816,
+        "default": 0.04338521746790126,
+        "seed": 1.115454039713236,
         "torch_compile": 1.0
       }
     },
@@ -2220,13 +2230,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 2752.3839473724365,
-        "seed": 55.63199892640114,
-        "torch_compile": 73.66400212049484
+        "default": 1511.7440223693848,
+        "seed": 55.824000388383865,
+        "torch_compile": 73.37599992752075
       },
       "normalized_performance": {
-        "default": 0.026763708671829083,
-        "seed": 1.3241300607937765,
+        "default": 0.04853731772163198,
+        "seed": 1.314416727877302,
         "torch_compile": 1.0
       }
     },
@@ -2249,13 +2259,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 513.2160186767578,
-        "seed": 13.055999763309956,
-        "torch_compile": 9.79200005531311
+        "default": 352.09599137306213,
+        "seed": 12.896000407636166,
+        "torch_compile": 14.816000126302242
       },
       "normalized_performance": {
-        "default": 0.01907968515978935,
-        "seed": 0.7500000178332298,
+        "default": 0.0420794342716728,
+        "seed": 1.1488833481681018,
         "torch_compile": 1.0
       }
     },
@@ -2278,13 +2288,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 1795.5520153045654,
-        "seed": 94.55999732017517,
-        "torch_compile": 89.34400230646133
+        "default": 1324.6880173683167,
+        "seed": 94.71999853849411,
+        "torch_compile": 89.29600194096565
       },
       "normalized_performance": {
-        "default": 0.04975851523371581,
-        "seed": 0.9448393066673558,
+        "default": 0.06740908105922556,
+        "seed": 0.9427365215242888,
         "torch_compile": 1.0
       }
     },
@@ -2306,13 +2316,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 483.5039973258972,
-        "seed": 27.92000025510788,
-        "torch_compile": 29.279999434947968
+        "default": 513.9360129833221,
+        "seed": 27.583999559283257,
+        "torch_compile": 29.472000896930695
       },
       "normalized_performance": {
-        "default": 0.06055792629820247,
-        "seed": 1.0487105718987693,
+        "default": 0.05734566201315629,
+        "seed": 1.068445525225222,
         "torch_compile": 1.0
       }
     },
@@ -2334,13 +2344,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 918.6719954013824,
-        "seed": 41.200000792741776,
-        "torch_compile": 57.792000472545624
+        "default": 921.343982219696,
+        "seed": 41.29600152373314,
+        "torch_compile": 40.720000863075256
       },
       "normalized_performance": {
-        "default": 0.06290819874975657,
-        "seed": 1.4027184310813623,
+        "default": 0.044196306318702916,
+        "seed": 0.9860519023778404,
         "torch_compile": 1.0
       }
     },
@@ -2362,13 +2372,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 1377.7920007705688,
+        "default": 868.6079978942871,
         "seed": 43.10400038957596,
-        "torch_compile": 52.15999856591225
+        "torch_compile": 50.65599828958511
       },
       "normalized_performance": {
-        "default": 0.03785767266520658,
-        "seed": 1.210096466557344,
+        "default": 0.05831859528393399,
+        "seed": 1.1752041070841186,
         "torch_compile": 1.0
       }
     },
@@ -2390,13 +2400,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 1483.295977115631,
-        "seed": 54.83200028538704,
-        "torch_compile": 58.94400179386139
+        "default": 1488.8800382614136,
+        "seed": 55.03999814391136,
+        "torch_compile": 62.32000142335892
       },
       "normalized_performance": {
-        "default": 0.039738530073062,
-        "seed": 1.0749927321103079,
+        "default": 0.041856966190594425,
+        "seed": 1.1322675059038476,
         "torch_compile": 1.0
       }
     },
@@ -2418,13 +2428,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 1967.919945716858,
-        "seed": 60.975998640060425,
-        "torch_compile": 96.47999703884125
+        "default": 1969.536006450653,
+        "seed": 61.20000034570694,
+        "torch_compile": 79.00799810886383
       },
       "normalized_performance": {
-        "default": 0.04902638303393805,
-        "seed": 1.5822618602502914,
+        "default": 0.04011503107843455,
+        "seed": 1.290980353963447,
         "torch_compile": 1.0
       }
     },
@@ -2446,13 +2456,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 3604.9439907073975,
-        "seed": 64.12799656391144,
-        "torch_compile": 86.2400010228157
+        "default": 2410.799980163574,
+        "seed": 64.01600316166878,
+        "torch_compile": 87.67999708652496
       },
       "normalized_performance": {
-        "default": 0.02392270205726354,
-        "seed": 1.3448104672483716,
+        "default": 0.03636966890989265,
+        "seed": 1.36965747244629,
         "torch_compile": 1.0
       }
     },
@@ -2475,13 +2485,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 620.5440163612366,
-        "seed": 18.94400082528591,
-        "torch_compile": 33.535998314619064
+        "default": 441.1360025405884,
+        "seed": 18.799999728798866,
+        "torch_compile": 16.64000004529953
       },
       "normalized_performance": {
-        "default": 0.05404290014956295,
-        "seed": 1.7702701041828595,
+        "default": 0.03772079347291203,
+        "seed": 0.8851063981564569,
         "torch_compile": 1.0
       }
     },
@@ -2504,13 +2514,13 @@
         "torch_compile": "ok"
       },
       "latency_us": {
-        "default": 2343.551993370056,
-        "seed": 103.08800265192986,
-        "torch_compile": 90.19200131297112
+        "default": 1581.8560123443604,
+        "seed": 103.2319962978363,
+        "torch_compile": 90.14400094747543
       },
       "normalized_performance": {
-        "default": 0.038485171896388747,
-        "seed": 0.8749029857285986,
+        "default": 0.05698622393189832,
+        "seed": 0.8732176474375204,
         "torch_compile": 1.0
       }
     }

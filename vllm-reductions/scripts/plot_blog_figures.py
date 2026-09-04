@@ -9,7 +9,7 @@ is a comparison against production code rather than against another Helion arm.
 
 Usage:
     python plot_blog_figures.py \
-        --summary ../generated/h100-pr3551-curated/summary.json \
+        --summary ../generated/h100-main-torch213-triton371-vllm024-curated/summary.json \
         --gpu H100 --outdir <where>
 """
 
@@ -61,6 +61,11 @@ def geo(values):
 
 def build(summary_path: Path, gpu: str, out: Path) -> None:
     data = json.loads(summary_path.read_text())
+    environment = data.get("environment", {})
+    extension = data.get("vllm_extension") or {}
+    torch_version = environment.get("torch", "unknown")
+    triton_version = environment.get("triton", "unknown")
+    vllm_version = extension.get("distribution_version", "unknown")
     cells = [c for c in data["cells"]
              if all(c["status"].get(k) == "ok" for k in (*KEYS, "vllm_cuda"))]
 
@@ -75,10 +80,12 @@ def build(summary_path: Path, gpu: str, out: Path) -> None:
     counts = {k: len(by_kernel[k]) for k in kernels}
 
     groups = [*kernels, "__overall__"]
-    fig, ax = plt.subplots(figsize=(13.0, 5.6))
+    fig, ax = plt.subplots(figsize=(13.0, 5.9))
     fig.suptitle(f"vLLM's reduction kernels on {gpu}: a config computed at compile time "
-                 "beats vLLM's handwritten CUDA",
-                 fontsize=14, fontweight="bold", y=0.985)
+                 "beats vLLM's handwritten CUDA\n"
+                 f"Torch {torch_version} / Triton {triton_version} / "
+                 f"vLLM stable ABI {vllm_version}",
+                 fontsize=13.5, fontweight="bold", y=0.99)
     width = 0.26
     for gi, group in enumerate(groups):
         if group == "__overall__":
@@ -111,11 +118,11 @@ def build(summary_path: Path, gpu: str, out: Path) -> None:
     ax.set_axisbelow(True)
     for spine in ("top", "right"):
         ax.spines[spine].set_visible(False)
-    fig.legend(handles=LEGEND, loc="upper center", bbox_to_anchor=(0.5, 0.955),
+    fig.legend(handles=LEGEND, loc="upper center", bbox_to_anchor=(0.5, 0.91),
                ncol=2, frameon=False, fontsize=9.4)
     fig.text(0.5, 0.005, data["timing"], ha="center", fontsize=8.4, style="italic",
              color="#4B5563")
-    fig.tight_layout(rect=(0, 0.035, 1, 0.885))
+    fig.tight_layout(rect=(0, 0.035, 1, 0.84))
     fig.savefig(out, dpi=165, bbox_inches="tight", facecolor="white")
     plt.close(fig)
     print(f"{gpu} overall (n={len(cells)}): " +

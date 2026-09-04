@@ -21,6 +21,13 @@ LABELS = {
     "aot_tuned": "AOT tuned",
     "vllm_cuda": "vLLM CUDA",
 }
+ENVIRONMENT_KEYS = (
+    "torch",
+    "triton",
+    "cuda_runtime",
+    "gpu",
+    "compute_capability",
+)
 
 
 def _geomean(values: list[float]) -> float | None:
@@ -73,7 +80,25 @@ def _fmt(value: object, digits: int = 3) -> str:
     return "-" if value is None else f"{float(value):.{digits}f}x"
 
 
-def summarize(document: dict[str, Any]) -> dict[str, object]:
+def _environment(document: dict[str, Any]) -> dict[str, object]:
+    environments = [
+        {
+            key: record.get("environment", {}).get(key)
+            for key in ENVIRONMENT_KEYS
+        }
+        for record in document["records"]
+    ]
+    if not environments:
+        return {key: None for key in ENVIRONMENT_KEYS}
+    if any(environment != environments[0] for environment in environments[1:]):
+        raise ValueError("benchmark records have inconsistent environments")
+    return environments[0]
+
+
+def summarize(
+    document: dict[str, Any],
+    extension_document: dict[str, Any] | None = None,
+) -> dict[str, object]:
     arms = tuple(document["arms"])
     missing = set(REQUIRED_ARMS) - set(arms)
     unknown = set(arms) - {*REQUIRED_ARMS, OPTIONAL_ARM}
@@ -116,6 +141,14 @@ def summarize(document: dict[str, Any]) -> dict[str, object]:
         "schema_version": 2,
         "profile": document["profile"],
         "manifest_sha256": document["manifest_sha256"],
+        "helion_git": document.get("helion_git", {}),
+        "vllm_git": document.get("vllm_git", {}),
+        "environment": _environment(document),
+        "vllm_extension": (
+            extension_document.get("extension")
+            if extension_document and extension_document.get("available")
+            else None
+        ),
         "arms": list(arms),
         "reference_arm": reference_arm,
         "normalization": f"{reference_arm} = 1.00; higher is faster",
@@ -142,12 +175,29 @@ def _write_markdown(summary: dict[str, Any], path: Path) -> None:
     overall = summary["overall"]
     arms = tuple(summary["arms"])
     reference_arm = summary["reference_arm"]
+    helion_git = summary["helion_git"]
+    vllm_git = summary["vllm_git"]
+    environment = summary["environment"]
+    extension = summary.get("vllm_extension") or {}
     header = "| Kernel | Valid | " + " | ".join(LABELS[arm] for arm in arms) + " |"
     separator = "|---|---:|" + "---:|" * len(arms)
     lines = [
         "# vLLM Reduction Performance",
         "",
         f"- Profile: `{summary['profile']}`",
+        f"- Helion commit: `{helion_git.get('commit')}`",
+        f"- Helion worktree dirty: `{helion_git.get('dirty')}`",
+        f"- vLLM commit: `{vllm_git.get('commit')}`",
+        f"- vLLM worktree dirty: `{vllm_git.get('dirty')}`",
+        (
+            f"- Software: Torch `{environment.get('torch')}`, "
+            f"Triton `{environment.get('triton')}`, "
+            f"CUDA runtime `{environment.get('cuda_runtime')}`."
+        ),
+        (
+            f"- GPU: `{environment.get('gpu')}`, compute capability "
+            f"`{environment.get('compute_capability')}`."
+        ),
         (
             "- Timing: all arms are compiled and captured in one process per cell, "
             "then timed together with balanced ordering, cold L2, and CUDA events."
@@ -159,6 +209,13 @@ def _write_markdown(summary: dict[str, Any], path: Path) -> None:
             f"{overall['valid_cells']}/{overall['cells']} cells."
         ),
     ]
+    if extension:
+        version = extension.get("distribution_version", "unrecorded")
+        digest = extension.get("sha256", "unrecorded")
+        lines.append(
+            "- vLLM CUDA baseline: directly loaded stable-libtorch extension, "
+            f"distribution version `{version}`, SHA-256 `{digest}`."
+        )
     if reference_arm == "aot_tuned":
         lines.append(
             "- External vLLM CUDA extension unavailable or intentionally omitted."
@@ -237,13 +294,19 @@ def _write_csv(summary: dict[str, Any], path: Path) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--input", type=Path, required=True)
+    parser.add_argument("--extension-metadata", type=Path)
     parser.add_argument("--json-output", type=Path, required=True)
     parser.add_argument("--markdown-output", type=Path, required=True)
     parser.add_argument("--csv-output", type=Path, required=True)
     args = parser.parse_args()
 
     document = json.loads(args.input.expanduser().resolve().read_text())
-    summary = summarize(document)
+    extension_document = (
+        json.loads(args.extension_metadata.expanduser().resolve().read_text())
+        if args.extension_metadata
+        else None
+    )
+    summary = summarize(document, extension_document)
     json_output = args.json_output.expanduser().resolve()
     json_output.parent.mkdir(parents=True, exist_ok=True)
     json_output.write_text(json.dumps(summary, indent=2) + "\n")

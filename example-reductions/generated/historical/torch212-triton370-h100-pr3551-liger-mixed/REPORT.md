@@ -3,6 +3,8 @@
 - Profile: `liger-mixed`
 - Helion commit: `6ca445ca0605f703d44967dbedd153a0a89a5e00`
 - Helion worktree dirty: `False`
+- Software: Torch `2.12.0+cu132`, Triton `3.7.0`, CUDA runtime `13.2`.
+- GPU: `NVIDIA H100 80GB HBM3`, compute capability `[9, 0]`.
 - Torch reference: `torch.compile(mode="max-autotune-no-cudagraphs")`.
 - Timing: all arms are compiled and captured in one process per cell, then timed together with balanced ordering, cold L2, and CUDA events.
 - CPU launch overhead is excluded.

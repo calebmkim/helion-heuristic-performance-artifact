@@ -42,6 +42,9 @@ def main() -> None:
     import numpy as np
 
     summary = json.loads(args.summary.expanduser().resolve().read_text())
+    environment = summary.get("environment", {})
+    torch_version = environment.get("torch", "unknown")
+    triton_version = environment.get("triton", "unknown")
     kernels = list(summary["kernels"])
     groups = [*kernels, "__overall__"]
     x = np.arange(len(groups))
@@ -112,7 +115,8 @@ def main() -> None:
     axis.set_ylabel("Normalized performance (higher is faster)")
     axis.set_title(
         "Example Reduction Kernels - Liger-Mixed Profile "
-        "(torch.compile max-autotune = 1.00x)"
+        "(torch.compile max-autotune = 1.00x)\n"
+        f"Torch {torch_version} / Triton {triton_version}"
     )
     axis.grid(axis="y", color="#D9DDE3", linewidth=0.8, alpha=0.8)
     axis.set_axisbelow(True)

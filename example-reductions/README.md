@@ -1,5 +1,8 @@
 # Example Reductions
 
+> **For all new reproductions, use PyTorch `2.13.0+cu132` with Triton
+> `3.7.1`.**
+
 This comparison measures ten general reduction kernels from a Helion checkout:
 
 | Arm | Meaning |
@@ -62,16 +65,41 @@ torch.compile(reference, mode="max-autotune-no-cudagraphs")
 
 It implements every observable output of the corresponding Helion kernel.
 
-## Included H100 Run
+## Primary Software Stack
 
-The included run measured all 80 cells successfully on an H100 using Helion
-commit `6ca445ca0605f703d44967dbedd153a0a89a5e00`. The reported values are CUDA
-device time; CPU launch overhead is excluded.
+The primary reproduction target is the matched package pair:
 
-- [report](generated/h100-pr3551-liger-mixed/REPORT.md)
-- [per-kernel graph](generated/h100-pr3551-liger-mixed/per-kernel-performance.png)
-- [combined raw results](generated/h100-pr3551-liger-mixed/benchmark.json)
-- [per-cell CSV](generated/h100-pr3551-liger-mixed/per_cell.csv)
+- PyTorch `2.13.0+cu132`
+- Triton `3.7.1`
+
+PyTorch 2.13 declares an exact dependency on Triton 3.7.1. Do not install a
+package into the benchmark environment that replaces either member of this
+pair. The starter script checks both versions before launching.
+
+## Primary H100 Run
+
+The primary run measured all 80 cells successfully on an H100 using Helion
+main commit `fa2f62eb686ef846c76f8b9e18beec30fbc5bee1`, PyTorch `2.13.0+cu132`,
+and Triton `3.7.1`. The heuristic seed reached `1.088x` versus
+`torch.compile`; the base default reached `0.268x`. The reported values are
+CUDA device time; CPU launch overhead is excluded.
+
+- [report](generated/h100-main-torch213-triton371-liger-mixed/REPORT.md)
+- [per-kernel graph](generated/h100-main-torch213-triton371-liger-mixed/per-kernel-performance.png)
+- [blog graph](generated/blog-figures/results-example-reductions-h100.png)
+- [combined raw results](generated/h100-main-torch213-triton371-liger-mixed/benchmark.json)
+- [per-cell CSV](generated/h100-main-torch213-triton371-liger-mixed/per_cell.csv)
+
+## Historical H100 Run
+
+The former primary dataset is retained at
+[generated/historical/torch212-triton370-h100-pr3551-liger-mixed](generated/historical/torch212-triton370-h100-pr3551-liger-mixed/).
+It used Helion commit `6ca445ca0605f703d44967dbedd153a0a89a5e00`,
+PyTorch `2.12.0+cu132`, and Triton `3.7.0`, and reported a `1.073x`
+heuristic seed and `0.253x` base default. Treat it as a historical result, not
+the default reproduction target. In particular, the `torch.compile`
+performance of fused JSD and LayerNorm backward changed materially between
+the two software stacks.
 
 ## Reproduce
 
@@ -82,6 +110,9 @@ under [scripts](scripts/README.md) are adaptable starting points:
 export HELION_ROOT=/path/to/helion
 export OUTPUT_DIR=/path/to/results
 export CUDA_VISIBLE_DEVICES=<gpu>
+# Defaults enforced by starter.sh:
+export REQUIRED_TORCH_VERSION=2.13.0+cu132
+export REQUIRED_TRITON_VERSION=3.7.1
 
 example-reductions/scripts/starter.sh
 ```

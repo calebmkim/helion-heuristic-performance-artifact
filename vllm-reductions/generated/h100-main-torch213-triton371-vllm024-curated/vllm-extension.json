@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "available": true,
+  "candidates": [
+    "/home/dev/.venvs/vllm/lib/python3.12/site-packages/vllm/_C_stable_libtorch.abi3.so"
+  ],
+  "extension": {
+    "path": "/home/dev/.venvs/vllm/lib/python3.12/site-packages/vllm/_C_stable_libtorch.abi3.so",
+    "required_ops": [
+      "dynamic_per_token_scaled_fp8_quant",
+      "per_token_group_fp8_quant",
+      "rms_norm_dynamic_per_token_quant",
+      "rms_norm_per_block_quant",
+      "silu_and_mul_per_block_quant",
+      "fused_qk_norm_rope"
+    ],
+    "distribution": "vllm",
+    "distribution_version": "0.24.0",
+    "distribution_metadata": "/home/dev/.venvs/vllm/lib/python3.12/site-packages/vllm-0.24.0.dist-info/METADATA",
+    "sha256": "686ece5394839c1eb214ba91fdf0219e47fab4ccce0a69a10d3fba39db9a47fb"
+  },
+  "torch": "2.13.0+cu132",
+  "cuda_runtime": "13.2",
+  "cuda_visible_devices": "0",
+  "gpu": "NVIDIA H100 80GB HBM3"
+}

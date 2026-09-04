@@ -1,0 +1,4943 @@
+{
+  "schema_version": 1,
+  "profile": "curated",
+  "compute_capability": "sm90",
+  "helion_root": "/home/dev/helion-vllm-repro",
+  "helion_git": {
+    "commit": "fa2f62eb686ef846c76f8b9e18beec30fbc5bee1",
+    "branch": "main",
+    "dirty": false
+  },
+  "selected_cell_count": 153,
+  "inventory": {
+    "dynamic_per_token_scaled_fp8_quant": {
+      "source_file": "/home/dev/helion-vllm-repro/pretuned_kernels/dynamic_per_token_scaled_fp8_quant/dynamic_per_token_scaled_fp8_quant.py",
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/dynamic_per_token_scaled_fp8_quant/_helion_aot_dynamic_per_token_scaled_fp8_quant_cuda_sm90.py",
+      "aot_file_sha256": "4ca5f7bba99e27d3094878c74f3fe0a9b3568b5c96884003b37932d2bac73c45",
+      "key_fields": [
+        "hidden_size",
+        "num_tokens"
+      ],
+      "exact_key_count": 115,
+      "exact_keys": [
+        [
+          512,
+          1
+        ],
+        [
+          2048,
+          1
+        ],
+        [
+          4096,
+          1
+        ],
+        [
+          6144,
+          1
+        ],
+        [
+          8192,
+          1
+        ],
+        [
+          12288,
+          1
+        ],
+        [
+          28672,
+          1
+        ],
+        [
+          512,
+          2
+        ],
+        [
+          2048,
+          2
+        ],
+        [
+          4096,
+          2
+        ],
+        [
+          6144,
+          2
+        ],
+        [
+          8192,
+          2
+        ],
+        [
+          12288,
+          2
+        ],
+        [
+          28672,
+          2
+        ],
+        [
+          512,
+          4
+        ],
+        [
+          2048,
+          4
+        ],
+        [
+          4096,
+          4
+        ],
+        [
+          6144,
+          4
+        ],
+        [
+          8192,
+          4
+        ],
+        [
+          12288,
+          4
+        ],
+        [
+          28672,
+          4
+        ],
+        [
+          512,
+          8
+        ],
+        [
+          2048,
+          8
+        ],
+        [
+          4096,
+          8
+        ],
+        [
+          6144,
+          8
+        ],
+        [
+          8192,
+          8
+        ],
+        [
+          12288,
+          8
+        ],
+        [
+          28672,
+          8
+        ],
+        [
+          512,
+          16
+        ],
+        [
+          2048,
+          16
+        ],
+        [
+          4096,
+          16
+        ],
+        [
+          6144,
+          16
+        ],
+        [
+          8192,
+          16
+        ],
+        [
+          12288,
+          16
+        ],
+        [
+          28672,
+          16
+        ],
+        [
+          512,
+          32
+        ],
+        [
+          2048,
+          32
+        ],
+        [
+          4096,
+          32
+        ],
+        [
+          6144,
+          32
+        ],
+        [
+          8192,
+          32
+        ],
+        [
+          12288,
+          32
+        ],
+        [
+          28672,
+          32
+        ],
+        [
+          512,
+          64
+        ],
+        [
+          2048,
+          64
+        ],
+        [
+          4096,
+          64
+        ],
+        [
+          6144,
+          64
+        ],
+        [
+          8192,
+          64
+        ],
+        [
+          12288,
+          64
+        ],
+        [
+          28672,
+          64
+        ],
+        [
+          512,
+          128
+        ],
+        [
+          2048,
+          128
+        ],
+        [
+          4096,
+          128
+        ],
+        [
+          6144,
+          128
+        ],
+        [
+          8192,
+          128
+        ],
+        [
+          12288,
+          128
+        ],
+        [
+          28672,
+          128
+        ],
+        [
+          512,
+          256
+        ],
+        [
+          2048,
+          256
+        ],
+        [
+          4096,
+          256
+        ],
+        [
+          6144,
+          256
+        ],
+        [
+          8192,
+          256
+        ],
+        [
+          12288,
+          256
+        ],
+        [
+          28672,
+          256
+        ],
+        [
+          512,
+          512
+        ],
+        [
+          2048,
+          512
+        ],
+        [
+          4096,
+          512
+        ],
+        [
+          6144,
+          512
+        ],
+        [
+          8192,
+          512
+        ],
+        [
+          12288,
+          512
+        ],
+        [
+          28672,
+          512
+        ],
+        [
+          512,
+          1024
+        ],
+        [
+          2048,
+          1024
+        ],
+        [
+          4096,
+          1024
+        ],
+        [
+          6144,
+          1024
+        ],
+        [
+          8192,
+          1024
+        ],
+        [
+          12288,
+          1024
+        ],
+        [
+          28672,
+          1024
+        ],
+        [
+          512,
+          2048
+        ],
+        [
+          2048,
+          2048
+        ],
+        [
+          4096,
+          2048
+        ],
+        [
+          6144,
+          2048
+        ],
+        [
+          8192,
+          2048
+        ],
+        [
+          12288,
+          2048
+        ],
+        [
+          28672,
+          2048
+        ],
+        [
+          512,
+          4096
+        ],
+        [
+          2048,
+          4096
+        ],
+        [
+          4096,
+          4096
+        ],
+        [
+          6144,
+          4096
+        ],
+        [
+          8192,
+          4096
+        ],
+        [
+          12288,
+          4096
+        ],
+        [
+          28672,
+          4096
+        ],
+        [
+          512,
+          8192
+        ],
+        [
+          2048,
+          8192
+        ],
+        [
+          4096,
+          8192
+        ],
+        [
+          6144,
+          8192
+        ],
+        [
+          8192,
+          8192
+        ],
+        [
+          12288,
+          8192
+        ],
+        [
+          28672,
+          8192
+        ],
+        [
+          5120,
+          1
+        ],
+        [
+          5120,
+          2
+        ],
+        [
+          5120,
+          4
+        ],
+        [
+          5120,
+          8
+        ],
+        [
+          5120,
+          16
+        ],
+        [
+          5120,
+          32
+        ],
+        [
+          5120,
+          64
+        ],
+        [
+          5120,
+          128
+        ],
+        [
+          5120,
+          256
+        ],
+        [
+          5120,
+          512
+        ],
+        [
+          5120,
+          1024
+        ],
+        [
+          5120,
+          2048
+        ],
+        [
+          5120,
+          4096
+        ],
+        [
+          5120,
+          8192
+        ],
+        [
+          5120,
+          16384
+        ],
+        [
+          2048,
+          16384
+        ],
+        [
+          4096,
+          16384
+        ]
+      ],
+      "curated_shape_count": 24,
+      "curated_exact_count": 24,
+      "curated_nonexact_keys": [],
+      "core_exact_count": 9,
+      "selected_count": 24
+    },
+    "per_token_group_fp8_quant": {
+      "source_file": "/home/dev/helion-vllm-repro/pretuned_kernels/per_token_group_fp8_quant/per_token_group_fp8_quant.py",
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/per_token_group_fp8_quant/_helion_aot_per_token_group_fp8_quant_cuda_sm90.py",
+      "aot_file_sha256": "5a07ca61236119d840d549d1a6f23a62481ceac23afd251f3659ab4ea4cdd5f1",
+      "key_fields": [
+        "hidden_size",
+        "group_size",
+        "num_tokens"
+      ],
+      "exact_key_count": 42,
+      "exact_keys": [
+        [
+          5120,
+          128,
+          16
+        ],
+        [
+          2048,
+          128,
+          1
+        ],
+        [
+          2048,
+          128,
+          2
+        ],
+        [
+          2048,
+          128,
+          4
+        ],
+        [
+          2048,
+          128,
+          8
+        ],
+        [
+          2048,
+          128,
+          16
+        ],
+        [
+          2048,
+          128,
+          32
+        ],
+        [
+          2048,
+          128,
+          64
+        ],
+        [
+          2048,
+          128,
+          128
+        ],
+        [
+          2048,
+          128,
+          256
+        ],
+        [
+          2048,
+          128,
+          512
+        ],
+        [
+          2048,
+          128,
+          1024
+        ],
+        [
+          2048,
+          128,
+          2048
+        ],
+        [
+          2048,
+          128,
+          4096
+        ],
+        [
+          2048,
+          128,
+          8192
+        ],
+        [
+          4096,
+          128,
+          1
+        ],
+        [
+          4096,
+          128,
+          2
+        ],
+        [
+          4096,
+          128,
+          4
+        ],
+        [
+          4096,
+          128,
+          8
+        ],
+        [
+          4096,
+          128,
+          16
+        ],
+        [
+          4096,
+          128,
+          32
+        ],
+        [
+          4096,
+          128,
+          64
+        ],
+        [
+          4096,
+          128,
+          128
+        ],
+        [
+          4096,
+          128,
+          256
+        ],
+        [
+          4096,
+          128,
+          512
+        ],
+        [
+          4096,
+          128,
+          1024
+        ],
+        [
+          4096,
+          128,
+          2048
+        ],
+        [
+          4096,
+          128,
+          4096
+        ],
+        [
+          4096,
+          128,
+          8192
+        ],
+        [
+          5120,
+          128,
+          1
+        ],
+        [
+          5120,
+          128,
+          2
+        ],
+        [
+          5120,
+          128,
+          4
+        ],
+        [
+          5120,
+          128,
+          8
+        ],
+        [
+          5120,
+          128,
+          32
+        ],
+        [
+          5120,
+          128,
+          64
+        ],
+        [
+          5120,
+          128,
+          128
+        ],
+        [
+          5120,
+          128,
+          256
+        ],
+        [
+          5120,
+          128,
+          512
+        ],
+        [
+          5120,
+          128,
+          1024
+        ],
+        [
+          5120,
+          128,
+          2048
+        ],
+        [
+          5120,
+          128,
+          4096
+        ],
+        [
+          5120,
+          128,
+          8192
+        ]
+      ],
+      "curated_shape_count": 24,
+      "curated_exact_count": 24,
+      "curated_nonexact_keys": [],
+      "core_exact_count": 9,
+      "selected_count": 24
+    },
+    "rms_norm_dynamic_per_token_quant": {
+      "source_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_dynamic_per_token_quant/rms_norm_dynamic_per_token_quant.py",
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_dynamic_per_token_quant/_helion_aot_rms_norm_dynamic_per_token_quant_cuda_sm90.py",
+      "aot_file_sha256": "4ee3a34ac5e68fac4974da6c25c093de44c83b6992fb9d2c259ffe3272cca332",
+      "key_fields": [
+        "hidden_size",
+        "num_tokens"
+      ],
+      "exact_key_count": 59,
+      "exact_keys": [
+        [
+          2048,
+          1
+        ],
+        [
+          4096,
+          1
+        ],
+        [
+          8192,
+          1
+        ],
+        [
+          2048,
+          2
+        ],
+        [
+          4096,
+          2
+        ],
+        [
+          8192,
+          2
+        ],
+        [
+          2048,
+          4
+        ],
+        [
+          4096,
+          4
+        ],
+        [
+          8192,
+          4
+        ],
+        [
+          2048,
+          8
+        ],
+        [
+          4096,
+          8
+        ],
+        [
+          8192,
+          8
+        ],
+        [
+          2048,
+          16
+        ],
+        [
+          4096,
+          16
+        ],
+        [
+          8192,
+          16
+        ],
+        [
+          2048,
+          32
+        ],
+        [
+          4096,
+          32
+        ],
+        [
+          8192,
+          32
+        ],
+        [
+          2048,
+          64
+        ],
+        [
+          4096,
+          64
+        ],
+        [
+          8192,
+          64
+        ],
+        [
+          2048,
+          128
+        ],
+        [
+          4096,
+          128
+        ],
+        [
+          8192,
+          128
+        ],
+        [
+          2048,
+          256
+        ],
+        [
+          4096,
+          256
+        ],
+        [
+          8192,
+          256
+        ],
+        [
+          2048,
+          512
+        ],
+        [
+          4096,
+          512
+        ],
+        [
+          8192,
+          512
+        ],
+        [
+          2048,
+          1024
+        ],
+        [
+          4096,
+          1024
+        ],
+        [
+          8192,
+          1024
+        ],
+        [
+          2048,
+          2048
+        ],
+        [
+          4096,
+          2048
+        ],
+        [
+          8192,
+          2048
+        ],
+        [
+          2048,
+          4096
+        ],
+        [
+          4096,
+          4096
+        ],
+        [
+          8192,
+          4096
+        ],
+        [
+          2048,
+          8192
+        ],
+        [
+          4096,
+          8192
+        ],
+        [
+          8192,
+          8192
+        ],
+        [
+          5120,
+          1
+        ],
+        [
+          5120,
+          2
+        ],
+        [
+          5120,
+          4
+        ],
+        [
+          5120,
+          8
+        ],
+        [
+          5120,
+          16
+        ],
+        [
+          5120,
+          32
+        ],
+        [
+          5120,
+          64
+        ],
+        [
+          5120,
+          128
+        ],
+        [
+          5120,
+          256
+        ],
+        [
+          5120,
+          512
+        ],
+        [
+          5120,
+          1024
+        ],
+        [
+          5120,
+          2048
+        ],
+        [
+          5120,
+          4096
+        ],
+        [
+          5120,
+          8192
+        ],
+        [
+          5120,
+          16384
+        ],
+        [
+          2048,
+          16384
+        ],
+        [
+          4096,
+          16384
+        ]
+      ],
+      "curated_shape_count": 36,
+      "curated_exact_count": 36,
+      "curated_nonexact_keys": [],
+      "core_exact_count": 9,
+      "selected_count": 36
+    },
+    "rms_norm_per_block_quant": {
+      "source_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_per_block_quant/rms_norm_per_block_quant.py",
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_per_block_quant/_helion_aot_rms_norm_per_block_quant_cuda_sm90.py",
+      "aot_file_sha256": "c8a42953020d0e49e49911065a410c09bac5f11384b37af9ab97bfdbd40e06ed",
+      "key_fields": [
+        "hidden_size",
+        "group_size",
+        "num_tokens"
+      ],
+      "exact_key_count": 96,
+      "exact_keys": [
+        [
+          2048,
+          64,
+          1
+        ],
+        [
+          2048,
+          64,
+          1024
+        ],
+        [
+          2048,
+          64,
+          128
+        ],
+        [
+          2048,
+          64,
+          16
+        ],
+        [
+          2048,
+          64,
+          2
+        ],
+        [
+          2048,
+          64,
+          2048
+        ],
+        [
+          2048,
+          64,
+          256
+        ],
+        [
+          2048,
+          64,
+          32
+        ],
+        [
+          2048,
+          64,
+          4
+        ],
+        [
+          2048,
+          64,
+          4096
+        ],
+        [
+          2048,
+          64,
+          512
+        ],
+        [
+          2048,
+          64,
+          64
+        ],
+        [
+          2048,
+          64,
+          8
+        ],
+        [
+          4096,
+          64,
+          1
+        ],
+        [
+          4096,
+          64,
+          1024
+        ],
+        [
+          4096,
+          64,
+          128
+        ],
+        [
+          4096,
+          64,
+          16
+        ],
+        [
+          4096,
+          64,
+          2
+        ],
+        [
+          4096,
+          64,
+          2048
+        ],
+        [
+          4096,
+          64,
+          256
+        ],
+        [
+          4096,
+          64,
+          32
+        ],
+        [
+          4096,
+          64,
+          4
+        ],
+        [
+          4096,
+          64,
+          4096
+        ],
+        [
+          4096,
+          64,
+          512
+        ],
+        [
+          4096,
+          64,
+          64
+        ],
+        [
+          4096,
+          64,
+          8
+        ],
+        [
+          8192,
+          64,
+          1
+        ],
+        [
+          8192,
+          64,
+          1024
+        ],
+        [
+          8192,
+          64,
+          128
+        ],
+        [
+          8192,
+          64,
+          16
+        ],
+        [
+          8192,
+          64,
+          2
+        ],
+        [
+          8192,
+          64,
+          2048
+        ],
+        [
+          8192,
+          64,
+          256
+        ],
+        [
+          8192,
+          64,
+          32
+        ],
+        [
+          8192,
+          64,
+          4
+        ],
+        [
+          8192,
+          64,
+          4096
+        ],
+        [
+          8192,
+          64,
+          512
+        ],
+        [
+          8192,
+          64,
+          64
+        ],
+        [
+          8192,
+          64,
+          8
+        ],
+        [
+          2048,
+          128,
+          1
+        ],
+        [
+          2048,
+          128,
+          1024
+        ],
+        [
+          2048,
+          128,
+          128
+        ],
+        [
+          2048,
+          128,
+          16
+        ],
+        [
+          2048,
+          128,
+          2
+        ],
+        [
+          2048,
+          128,
+          2048
+        ],
+        [
+          2048,
+          128,
+          256
+        ],
+        [
+          2048,
+          128,
+          32
+        ],
+        [
+          2048,
+          128,
+          4
+        ],
+        [
+          2048,
+          128,
+          4096
+        ],
+        [
+          2048,
+          128,
+          512
+        ],
+        [
+          2048,
+          128,
+          64
+        ],
+        [
+          2048,
+          128,
+          8
+        ],
+        [
+          4096,
+          128,
+          1
+        ],
+        [
+          4096,
+          128,
+          1024
+        ],
+        [
+          4096,
+          128,
+          128
+        ],
+        [
+          4096,
+          128,
+          16
+        ],
+        [
+          4096,
+          128,
+          2
+        ],
+        [
+          4096,
+          128,
+          2048
+        ],
+        [
+          4096,
+          128,
+          256
+        ],
+        [
+          4096,
+          128,
+          32
+        ],
+        [
+          4096,
+          128,
+          4
+        ],
+        [
+          4096,
+          128,
+          4096
+        ],
+        [
+          4096,
+          128,
+          512
+        ],
+        [
+          4096,
+          128,
+          64
+        ],
+        [
+          4096,
+          128,
+          8
+        ],
+        [
+          8192,
+          128,
+          1
+        ],
+        [
+          8192,
+          128,
+          1024
+        ],
+        [
+          8192,
+          128,
+          128
+        ],
+        [
+          8192,
+          128,
+          16
+        ],
+        [
+          8192,
+          128,
+          2
+        ],
+        [
+          8192,
+          128,
+          2048
+        ],
+        [
+          8192,
+          128,
+          256
+        ],
+        [
+          8192,
+          128,
+          32
+        ],
+        [
+          8192,
+          128,
+          4
+        ],
+        [
+          8192,
+          128,
+          4096
+        ],
+        [
+          8192,
+          128,
+          512
+        ],
+        [
+          8192,
+          128,
+          64
+        ],
+        [
+          8192,
+          128,
+          8
+        ],
+        [
+          2048,
+          128,
+          8192
+        ],
+        [
+          2048,
+          128,
+          16384
+        ],
+        [
+          4096,
+          128,
+          8192
+        ],
+        [
+          4096,
+          128,
+          16384
+        ],
+        [
+          5120,
+          128,
+          1
+        ],
+        [
+          5120,
+          128,
+          2
+        ],
+        [
+          5120,
+          128,
+          4
+        ],
+        [
+          5120,
+          128,
+          8
+        ],
+        [
+          5120,
+          128,
+          16
+        ],
+        [
+          5120,
+          128,
+          32
+        ],
+        [
+          5120,
+          128,
+          64
+        ],
+        [
+          5120,
+          128,
+          128
+        ],
+        [
+          5120,
+          128,
+          256
+        ],
+        [
+          5120,
+          128,
+          512
+        ],
+        [
+          5120,
+          128,
+          1024
+        ],
+        [
+          5120,
+          128,
+          2048
+        ],
+        [
+          5120,
+          128,
+          4096
+        ],
+        [
+          5120,
+          128,
+          8192
+        ]
+      ],
+      "curated_shape_count": 24,
+      "curated_exact_count": 24,
+      "curated_nonexact_keys": [],
+      "core_exact_count": 9,
+      "selected_count": 24
+    },
+    "silu_and_mul_per_block_quant": {
+      "source_file": "/home/dev/helion-vllm-repro/pretuned_kernels/silu_and_mul_per_block_quant/silu_and_mul_per_block_quant.py",
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/silu_and_mul_per_block_quant/_helion_aot_silu_and_mul_per_block_quant_cuda_sm90.py",
+      "aot_file_sha256": "50a7837fb1f8c8144b8e5124cb7aca1dda56f1eed775b67ea36c248c717fc659",
+      "key_fields": [
+        "intermediate_size",
+        "group_size",
+        "num_tokens"
+      ],
+      "exact_key_count": 45,
+      "exact_keys": [
+        [
+          6144,
+          128,
+          1
+        ],
+        [
+          12288,
+          128,
+          1
+        ],
+        [
+          25600,
+          128,
+          1
+        ],
+        [
+          6144,
+          128,
+          2
+        ],
+        [
+          12288,
+          128,
+          2
+        ],
+        [
+          25600,
+          128,
+          2
+        ],
+        [
+          6144,
+          128,
+          4
+        ],
+        [
+          12288,
+          128,
+          4
+        ],
+        [
+          25600,
+          128,
+          4
+        ],
+        [
+          6144,
+          128,
+          8
+        ],
+        [
+          12288,
+          128,
+          8
+        ],
+        [
+          25600,
+          128,
+          8
+        ],
+        [
+          6144,
+          128,
+          16
+        ],
+        [
+          12288,
+          128,
+          16
+        ],
+        [
+          25600,
+          128,
+          16
+        ],
+        [
+          6144,
+          128,
+          32
+        ],
+        [
+          12288,
+          128,
+          32
+        ],
+        [
+          25600,
+          128,
+          32
+        ],
+        [
+          6144,
+          128,
+          64
+        ],
+        [
+          12288,
+          128,
+          64
+        ],
+        [
+          25600,
+          128,
+          64
+        ],
+        [
+          6144,
+          128,
+          128
+        ],
+        [
+          12288,
+          128,
+          128
+        ],
+        [
+          25600,
+          128,
+          128
+        ],
+        [
+          6144,
+          128,
+          256
+        ],
+        [
+          12288,
+          128,
+          256
+        ],
+        [
+          25600,
+          128,
+          256
+        ],
+        [
+          6144,
+          128,
+          512
+        ],
+        [
+          12288,
+          128,
+          512
+        ],
+        [
+          25600,
+          128,
+          512
+        ],
+        [
+          6144,
+          128,
+          1024
+        ],
+        [
+          12288,
+          128,
+          1024
+        ],
+        [
+          25600,
+          128,
+          1024
+        ],
+        [
+          6144,
+          128,
+          2048
+        ],
+        [
+          12288,
+          128,
+          2048
+        ],
+        [
+          25600,
+          128,
+          2048
+        ],
+        [
+          6144,
+          128,
+          4096
+        ],
+        [
+          12288,
+          128,
+          4096
+        ],
+        [
+          25600,
+          128,
+          4096
+        ],
+        [
+          6144,
+          128,
+          8192
+        ],
+        [
+          12288,
+          128,
+          8192
+        ],
+        [
+          25600,
+          128,
+          8192
+        ],
+        [
+          6144,
+          128,
+          16384
+        ],
+        [
+          12288,
+          128,
+          16384
+        ],
+        [
+          25600,
+          128,
+          16384
+        ]
+      ],
+      "curated_shape_count": 24,
+      "curated_exact_count": 24,
+      "curated_nonexact_keys": [],
+      "core_exact_count": 9,
+      "selected_count": 24
+    },
+    "fused_qk_norm_rope": {
+      "source_file": "/home/dev/helion-vllm-repro/pretuned_kernels/fused_qk_norm_rope/fused_qk_norm_rope.py",
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/fused_qk_norm_rope/_helion_aot_fused_qk_norm_rope_cuda_sm90.py",
+      "aot_file_sha256": "3843f04b0387292be2558e180fe3d08f40a4b9843b3ba9c21783fa4968187514",
+      "key_fields": [
+        "q_heads",
+        "kv_heads",
+        "num_tokens"
+      ],
+      "exact_key_count": 45,
+      "exact_keys": [
+        [
+          16,
+          8,
+          1
+        ],
+        [
+          32,
+          8,
+          1
+        ],
+        [
+          64,
+          8,
+          1
+        ],
+        [
+          16,
+          8,
+          2
+        ],
+        [
+          32,
+          8,
+          2
+        ],
+        [
+          64,
+          8,
+          2
+        ],
+        [
+          16,
+          8,
+          4
+        ],
+        [
+          32,
+          8,
+          4
+        ],
+        [
+          64,
+          8,
+          4
+        ],
+        [
+          16,
+          8,
+          8
+        ],
+        [
+          32,
+          8,
+          8
+        ],
+        [
+          64,
+          8,
+          8
+        ],
+        [
+          16,
+          8,
+          16
+        ],
+        [
+          32,
+          8,
+          16
+        ],
+        [
+          64,
+          8,
+          16
+        ],
+        [
+          16,
+          8,
+          32
+        ],
+        [
+          32,
+          8,
+          32
+        ],
+        [
+          64,
+          8,
+          32
+        ],
+        [
+          16,
+          8,
+          64
+        ],
+        [
+          32,
+          8,
+          64
+        ],
+        [
+          64,
+          8,
+          64
+        ],
+        [
+          16,
+          8,
+          128
+        ],
+        [
+          32,
+          8,
+          128
+        ],
+        [
+          64,
+          8,
+          128
+        ],
+        [
+          16,
+          8,
+          256
+        ],
+        [
+          32,
+          8,
+          256
+        ],
+        [
+          64,
+          8,
+          256
+        ],
+        [
+          16,
+          8,
+          512
+        ],
+        [
+          32,
+          8,
+          512
+        ],
+        [
+          64,
+          8,
+          512
+        ],
+        [
+          16,
+          8,
+          1024
+        ],
+        [
+          32,
+          8,
+          1024
+        ],
+        [
+          64,
+          8,
+          1024
+        ],
+        [
+          16,
+          8,
+          2048
+        ],
+        [
+          32,
+          8,
+          2048
+        ],
+        [
+          64,
+          8,
+          2048
+        ],
+        [
+          16,
+          8,
+          4096
+        ],
+        [
+          32,
+          8,
+          4096
+        ],
+        [
+          64,
+          8,
+          4096
+        ],
+        [
+          16,
+          8,
+          8192
+        ],
+        [
+          32,
+          8,
+          8192
+        ],
+        [
+          64,
+          8,
+          8192
+        ],
+        [
+          16,
+          8,
+          16384
+        ],
+        [
+          32,
+          8,
+          16384
+        ],
+        [
+          64,
+          8,
+          16384
+        ]
+      ],
+      "curated_shape_count": 21,
+      "curated_exact_count": 21,
+      "curated_nonexact_keys": [],
+      "core_exact_count": 9,
+      "selected_count": 21
+    }
+  },
+  "cells": [
+    {
+      "cell_key": "dynamic_per_token_scaled_fp8_quant::hidden_size=2048,num_tokens=1",
+      "kernel": "dynamic_per_token_scaled_fp8_quant",
+      "aot_key": [
+        2048,
+        1
+      ],
+      "aot_index": 1,
+      "shape": {
+        "hidden_size": 2048,
+        "num_tokens": 1
+      },
+      "bench_shape": [
+        1,
+        2048
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/dynamic_per_token_scaled_fp8_quant/_helion_aot_dynamic_per_token_scaled_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "dynamic_per_token_scaled_fp8_quant::hidden_size=4096,num_tokens=1",
+      "kernel": "dynamic_per_token_scaled_fp8_quant",
+      "aot_key": [
+        4096,
+        1
+      ],
+      "aot_index": 2,
+      "shape": {
+        "hidden_size": 4096,
+        "num_tokens": 1
+      },
+      "bench_shape": [
+        1,
+        4096
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/dynamic_per_token_scaled_fp8_quant/_helion_aot_dynamic_per_token_scaled_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "dynamic_per_token_scaled_fp8_quant::hidden_size=2048,num_tokens=4",
+      "kernel": "dynamic_per_token_scaled_fp8_quant",
+      "aot_key": [
+        2048,
+        4
+      ],
+      "aot_index": 15,
+      "shape": {
+        "hidden_size": 2048,
+        "num_tokens": 4
+      },
+      "bench_shape": [
+        4,
+        2048
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/dynamic_per_token_scaled_fp8_quant/_helion_aot_dynamic_per_token_scaled_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "dynamic_per_token_scaled_fp8_quant::hidden_size=4096,num_tokens=4",
+      "kernel": "dynamic_per_token_scaled_fp8_quant",
+      "aot_key": [
+        4096,
+        4
+      ],
+      "aot_index": 16,
+      "shape": {
+        "hidden_size": 4096,
+        "num_tokens": 4
+      },
+      "bench_shape": [
+        4,
+        4096
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/dynamic_per_token_scaled_fp8_quant/_helion_aot_dynamic_per_token_scaled_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "dynamic_per_token_scaled_fp8_quant::hidden_size=2048,num_tokens=16",
+      "kernel": "dynamic_per_token_scaled_fp8_quant",
+      "aot_key": [
+        2048,
+        16
+      ],
+      "aot_index": 29,
+      "shape": {
+        "hidden_size": 2048,
+        "num_tokens": 16
+      },
+      "bench_shape": [
+        16,
+        2048
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/dynamic_per_token_scaled_fp8_quant/_helion_aot_dynamic_per_token_scaled_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "dynamic_per_token_scaled_fp8_quant::hidden_size=4096,num_tokens=16",
+      "kernel": "dynamic_per_token_scaled_fp8_quant",
+      "aot_key": [
+        4096,
+        16
+      ],
+      "aot_index": 30,
+      "shape": {
+        "hidden_size": 4096,
+        "num_tokens": 16
+      },
+      "bench_shape": [
+        16,
+        4096
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/dynamic_per_token_scaled_fp8_quant/_helion_aot_dynamic_per_token_scaled_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "dynamic_per_token_scaled_fp8_quant::hidden_size=2048,num_tokens=64",
+      "kernel": "dynamic_per_token_scaled_fp8_quant",
+      "aot_key": [
+        2048,
+        64
+      ],
+      "aot_index": 43,
+      "shape": {
+        "hidden_size": 2048,
+        "num_tokens": 64
+      },
+      "bench_shape": [
+        64,
+        2048
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/dynamic_per_token_scaled_fp8_quant/_helion_aot_dynamic_per_token_scaled_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "dynamic_per_token_scaled_fp8_quant::hidden_size=4096,num_tokens=64",
+      "kernel": "dynamic_per_token_scaled_fp8_quant",
+      "aot_key": [
+        4096,
+        64
+      ],
+      "aot_index": 44,
+      "shape": {
+        "hidden_size": 4096,
+        "num_tokens": 64
+      },
+      "bench_shape": [
+        64,
+        4096
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/dynamic_per_token_scaled_fp8_quant/_helion_aot_dynamic_per_token_scaled_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "dynamic_per_token_scaled_fp8_quant::hidden_size=2048,num_tokens=256",
+      "kernel": "dynamic_per_token_scaled_fp8_quant",
+      "aot_key": [
+        2048,
+        256
+      ],
+      "aot_index": 57,
+      "shape": {
+        "hidden_size": 2048,
+        "num_tokens": 256
+      },
+      "bench_shape": [
+        256,
+        2048
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/dynamic_per_token_scaled_fp8_quant/_helion_aot_dynamic_per_token_scaled_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "dynamic_per_token_scaled_fp8_quant::hidden_size=4096,num_tokens=256",
+      "kernel": "dynamic_per_token_scaled_fp8_quant",
+      "aot_key": [
+        4096,
+        256
+      ],
+      "aot_index": 58,
+      "shape": {
+        "hidden_size": 4096,
+        "num_tokens": 256
+      },
+      "bench_shape": [
+        256,
+        4096
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/dynamic_per_token_scaled_fp8_quant/_helion_aot_dynamic_per_token_scaled_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "dynamic_per_token_scaled_fp8_quant::hidden_size=2048,num_tokens=1024",
+      "kernel": "dynamic_per_token_scaled_fp8_quant",
+      "aot_key": [
+        2048,
+        1024
+      ],
+      "aot_index": 71,
+      "shape": {
+        "hidden_size": 2048,
+        "num_tokens": 1024
+      },
+      "bench_shape": [
+        1024,
+        2048
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/dynamic_per_token_scaled_fp8_quant/_helion_aot_dynamic_per_token_scaled_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "dynamic_per_token_scaled_fp8_quant::hidden_size=4096,num_tokens=1024",
+      "kernel": "dynamic_per_token_scaled_fp8_quant",
+      "aot_key": [
+        4096,
+        1024
+      ],
+      "aot_index": 72,
+      "shape": {
+        "hidden_size": 4096,
+        "num_tokens": 1024
+      },
+      "bench_shape": [
+        1024,
+        4096
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/dynamic_per_token_scaled_fp8_quant/_helion_aot_dynamic_per_token_scaled_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "dynamic_per_token_scaled_fp8_quant::hidden_size=2048,num_tokens=2048",
+      "kernel": "dynamic_per_token_scaled_fp8_quant",
+      "aot_key": [
+        2048,
+        2048
+      ],
+      "aot_index": 78,
+      "shape": {
+        "hidden_size": 2048,
+        "num_tokens": 2048
+      },
+      "bench_shape": [
+        2048,
+        2048
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/dynamic_per_token_scaled_fp8_quant/_helion_aot_dynamic_per_token_scaled_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "dynamic_per_token_scaled_fp8_quant::hidden_size=4096,num_tokens=2048",
+      "kernel": "dynamic_per_token_scaled_fp8_quant",
+      "aot_key": [
+        4096,
+        2048
+      ],
+      "aot_index": 79,
+      "shape": {
+        "hidden_size": 4096,
+        "num_tokens": 2048
+      },
+      "bench_shape": [
+        2048,
+        4096
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/dynamic_per_token_scaled_fp8_quant/_helion_aot_dynamic_per_token_scaled_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "dynamic_per_token_scaled_fp8_quant::hidden_size=2048,num_tokens=4096",
+      "kernel": "dynamic_per_token_scaled_fp8_quant",
+      "aot_key": [
+        2048,
+        4096
+      ],
+      "aot_index": 85,
+      "shape": {
+        "hidden_size": 2048,
+        "num_tokens": 4096
+      },
+      "bench_shape": [
+        4096,
+        2048
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/dynamic_per_token_scaled_fp8_quant/_helion_aot_dynamic_per_token_scaled_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "dynamic_per_token_scaled_fp8_quant::hidden_size=4096,num_tokens=4096",
+      "kernel": "dynamic_per_token_scaled_fp8_quant",
+      "aot_key": [
+        4096,
+        4096
+      ],
+      "aot_index": 86,
+      "shape": {
+        "hidden_size": 4096,
+        "num_tokens": 4096
+      },
+      "bench_shape": [
+        4096,
+        4096
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/dynamic_per_token_scaled_fp8_quant/_helion_aot_dynamic_per_token_scaled_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "dynamic_per_token_scaled_fp8_quant::hidden_size=5120,num_tokens=1",
+      "kernel": "dynamic_per_token_scaled_fp8_quant",
+      "aot_key": [
+        5120,
+        1
+      ],
+      "aot_index": 98,
+      "shape": {
+        "hidden_size": 5120,
+        "num_tokens": 1
+      },
+      "bench_shape": [
+        1,
+        5120
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/dynamic_per_token_scaled_fp8_quant/_helion_aot_dynamic_per_token_scaled_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "dynamic_per_token_scaled_fp8_quant::hidden_size=5120,num_tokens=4",
+      "kernel": "dynamic_per_token_scaled_fp8_quant",
+      "aot_key": [
+        5120,
+        4
+      ],
+      "aot_index": 100,
+      "shape": {
+        "hidden_size": 5120,
+        "num_tokens": 4
+      },
+      "bench_shape": [
+        4,
+        5120
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/dynamic_per_token_scaled_fp8_quant/_helion_aot_dynamic_per_token_scaled_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "dynamic_per_token_scaled_fp8_quant::hidden_size=5120,num_tokens=16",
+      "kernel": "dynamic_per_token_scaled_fp8_quant",
+      "aot_key": [
+        5120,
+        16
+      ],
+      "aot_index": 102,
+      "shape": {
+        "hidden_size": 5120,
+        "num_tokens": 16
+      },
+      "bench_shape": [
+        16,
+        5120
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/dynamic_per_token_scaled_fp8_quant/_helion_aot_dynamic_per_token_scaled_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "dynamic_per_token_scaled_fp8_quant::hidden_size=5120,num_tokens=64",
+      "kernel": "dynamic_per_token_scaled_fp8_quant",
+      "aot_key": [
+        5120,
+        64
+      ],
+      "aot_index": 104,
+      "shape": {
+        "hidden_size": 5120,
+        "num_tokens": 64
+      },
+      "bench_shape": [
+        64,
+        5120
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/dynamic_per_token_scaled_fp8_quant/_helion_aot_dynamic_per_token_scaled_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "dynamic_per_token_scaled_fp8_quant::hidden_size=5120,num_tokens=256",
+      "kernel": "dynamic_per_token_scaled_fp8_quant",
+      "aot_key": [
+        5120,
+        256
+      ],
+      "aot_index": 106,
+      "shape": {
+        "hidden_size": 5120,
+        "num_tokens": 256
+      },
+      "bench_shape": [
+        256,
+        5120
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/dynamic_per_token_scaled_fp8_quant/_helion_aot_dynamic_per_token_scaled_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "dynamic_per_token_scaled_fp8_quant::hidden_size=5120,num_tokens=1024",
+      "kernel": "dynamic_per_token_scaled_fp8_quant",
+      "aot_key": [
+        5120,
+        1024
+      ],
+      "aot_index": 108,
+      "shape": {
+        "hidden_size": 5120,
+        "num_tokens": 1024
+      },
+      "bench_shape": [
+        1024,
+        5120
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/dynamic_per_token_scaled_fp8_quant/_helion_aot_dynamic_per_token_scaled_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "dynamic_per_token_scaled_fp8_quant::hidden_size=5120,num_tokens=2048",
+      "kernel": "dynamic_per_token_scaled_fp8_quant",
+      "aot_key": [
+        5120,
+        2048
+      ],
+      "aot_index": 109,
+      "shape": {
+        "hidden_size": 5120,
+        "num_tokens": 2048
+      },
+      "bench_shape": [
+        2048,
+        5120
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/dynamic_per_token_scaled_fp8_quant/_helion_aot_dynamic_per_token_scaled_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "dynamic_per_token_scaled_fp8_quant::hidden_size=5120,num_tokens=4096",
+      "kernel": "dynamic_per_token_scaled_fp8_quant",
+      "aot_key": [
+        5120,
+        4096
+      ],
+      "aot_index": 110,
+      "shape": {
+        "hidden_size": 5120,
+        "num_tokens": 4096
+      },
+      "bench_shape": [
+        4096,
+        5120
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/dynamic_per_token_scaled_fp8_quant/_helion_aot_dynamic_per_token_scaled_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "per_token_group_fp8_quant::hidden_size=5120,group_size=128,num_tokens=16",
+      "kernel": "per_token_group_fp8_quant",
+      "aot_key": [
+        5120,
+        128,
+        16
+      ],
+      "aot_index": 0,
+      "shape": {
+        "hidden_size": 5120,
+        "group_size": 128,
+        "num_tokens": 16
+      },
+      "bench_shape": [
+        16,
+        5120
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/per_token_group_fp8_quant/_helion_aot_per_token_group_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "per_token_group_fp8_quant::hidden_size=2048,group_size=128,num_tokens=1",
+      "kernel": "per_token_group_fp8_quant",
+      "aot_key": [
+        2048,
+        128,
+        1
+      ],
+      "aot_index": 1,
+      "shape": {
+        "hidden_size": 2048,
+        "group_size": 128,
+        "num_tokens": 1
+      },
+      "bench_shape": [
+        1,
+        2048
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/per_token_group_fp8_quant/_helion_aot_per_token_group_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "per_token_group_fp8_quant::hidden_size=2048,group_size=128,num_tokens=4",
+      "kernel": "per_token_group_fp8_quant",
+      "aot_key": [
+        2048,
+        128,
+        4
+      ],
+      "aot_index": 3,
+      "shape": {
+        "hidden_size": 2048,
+        "group_size": 128,
+        "num_tokens": 4
+      },
+      "bench_shape": [
+        4,
+        2048
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/per_token_group_fp8_quant/_helion_aot_per_token_group_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "per_token_group_fp8_quant::hidden_size=2048,group_size=128,num_tokens=16",
+      "kernel": "per_token_group_fp8_quant",
+      "aot_key": [
+        2048,
+        128,
+        16
+      ],
+      "aot_index": 5,
+      "shape": {
+        "hidden_size": 2048,
+        "group_size": 128,
+        "num_tokens": 16
+      },
+      "bench_shape": [
+        16,
+        2048
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/per_token_group_fp8_quant/_helion_aot_per_token_group_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "per_token_group_fp8_quant::hidden_size=2048,group_size=128,num_tokens=64",
+      "kernel": "per_token_group_fp8_quant",
+      "aot_key": [
+        2048,
+        128,
+        64
+      ],
+      "aot_index": 7,
+      "shape": {
+        "hidden_size": 2048,
+        "group_size": 128,
+        "num_tokens": 64
+      },
+      "bench_shape": [
+        64,
+        2048
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/per_token_group_fp8_quant/_helion_aot_per_token_group_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "per_token_group_fp8_quant::hidden_size=2048,group_size=128,num_tokens=256",
+      "kernel": "per_token_group_fp8_quant",
+      "aot_key": [
+        2048,
+        128,
+        256
+      ],
+      "aot_index": 9,
+      "shape": {
+        "hidden_size": 2048,
+        "group_size": 128,
+        "num_tokens": 256
+      },
+      "bench_shape": [
+        256,
+        2048
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/per_token_group_fp8_quant/_helion_aot_per_token_group_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "per_token_group_fp8_quant::hidden_size=2048,group_size=128,num_tokens=1024",
+      "kernel": "per_token_group_fp8_quant",
+      "aot_key": [
+        2048,
+        128,
+        1024
+      ],
+      "aot_index": 11,
+      "shape": {
+        "hidden_size": 2048,
+        "group_size": 128,
+        "num_tokens": 1024
+      },
+      "bench_shape": [
+        1024,
+        2048
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/per_token_group_fp8_quant/_helion_aot_per_token_group_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "per_token_group_fp8_quant::hidden_size=2048,group_size=128,num_tokens=2048",
+      "kernel": "per_token_group_fp8_quant",
+      "aot_key": [
+        2048,
+        128,
+        2048
+      ],
+      "aot_index": 12,
+      "shape": {
+        "hidden_size": 2048,
+        "group_size": 128,
+        "num_tokens": 2048
+      },
+      "bench_shape": [
+        2048,
+        2048
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/per_token_group_fp8_quant/_helion_aot_per_token_group_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "per_token_group_fp8_quant::hidden_size=2048,group_size=128,num_tokens=8192",
+      "kernel": "per_token_group_fp8_quant",
+      "aot_key": [
+        2048,
+        128,
+        8192
+      ],
+      "aot_index": 14,
+      "shape": {
+        "hidden_size": 2048,
+        "group_size": 128,
+        "num_tokens": 8192
+      },
+      "bench_shape": [
+        8192,
+        2048
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/per_token_group_fp8_quant/_helion_aot_per_token_group_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "per_token_group_fp8_quant::hidden_size=4096,group_size=128,num_tokens=1",
+      "kernel": "per_token_group_fp8_quant",
+      "aot_key": [
+        4096,
+        128,
+        1
+      ],
+      "aot_index": 15,
+      "shape": {
+        "hidden_size": 4096,
+        "group_size": 128,
+        "num_tokens": 1
+      },
+      "bench_shape": [
+        1,
+        4096
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/per_token_group_fp8_quant/_helion_aot_per_token_group_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "per_token_group_fp8_quant::hidden_size=4096,group_size=128,num_tokens=4",
+      "kernel": "per_token_group_fp8_quant",
+      "aot_key": [
+        4096,
+        128,
+        4
+      ],
+      "aot_index": 17,
+      "shape": {
+        "hidden_size": 4096,
+        "group_size": 128,
+        "num_tokens": 4
+      },
+      "bench_shape": [
+        4,
+        4096
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/per_token_group_fp8_quant/_helion_aot_per_token_group_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "per_token_group_fp8_quant::hidden_size=4096,group_size=128,num_tokens=16",
+      "kernel": "per_token_group_fp8_quant",
+      "aot_key": [
+        4096,
+        128,
+        16
+      ],
+      "aot_index": 19,
+      "shape": {
+        "hidden_size": 4096,
+        "group_size": 128,
+        "num_tokens": 16
+      },
+      "bench_shape": [
+        16,
+        4096
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/per_token_group_fp8_quant/_helion_aot_per_token_group_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "per_token_group_fp8_quant::hidden_size=4096,group_size=128,num_tokens=64",
+      "kernel": "per_token_group_fp8_quant",
+      "aot_key": [
+        4096,
+        128,
+        64
+      ],
+      "aot_index": 21,
+      "shape": {
+        "hidden_size": 4096,
+        "group_size": 128,
+        "num_tokens": 64
+      },
+      "bench_shape": [
+        64,
+        4096
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/per_token_group_fp8_quant/_helion_aot_per_token_group_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "per_token_group_fp8_quant::hidden_size=4096,group_size=128,num_tokens=256",
+      "kernel": "per_token_group_fp8_quant",
+      "aot_key": [
+        4096,
+        128,
+        256
+      ],
+      "aot_index": 23,
+      "shape": {
+        "hidden_size": 4096,
+        "group_size": 128,
+        "num_tokens": 256
+      },
+      "bench_shape": [
+        256,
+        4096
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/per_token_group_fp8_quant/_helion_aot_per_token_group_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "per_token_group_fp8_quant::hidden_size=4096,group_size=128,num_tokens=1024",
+      "kernel": "per_token_group_fp8_quant",
+      "aot_key": [
+        4096,
+        128,
+        1024
+      ],
+      "aot_index": 25,
+      "shape": {
+        "hidden_size": 4096,
+        "group_size": 128,
+        "num_tokens": 1024
+      },
+      "bench_shape": [
+        1024,
+        4096
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/per_token_group_fp8_quant/_helion_aot_per_token_group_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "per_token_group_fp8_quant::hidden_size=4096,group_size=128,num_tokens=2048",
+      "kernel": "per_token_group_fp8_quant",
+      "aot_key": [
+        4096,
+        128,
+        2048
+      ],
+      "aot_index": 26,
+      "shape": {
+        "hidden_size": 4096,
+        "group_size": 128,
+        "num_tokens": 2048
+      },
+      "bench_shape": [
+        2048,
+        4096
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/per_token_group_fp8_quant/_helion_aot_per_token_group_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "per_token_group_fp8_quant::hidden_size=4096,group_size=128,num_tokens=8192",
+      "kernel": "per_token_group_fp8_quant",
+      "aot_key": [
+        4096,
+        128,
+        8192
+      ],
+      "aot_index": 28,
+      "shape": {
+        "hidden_size": 4096,
+        "group_size": 128,
+        "num_tokens": 8192
+      },
+      "bench_shape": [
+        8192,
+        4096
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/per_token_group_fp8_quant/_helion_aot_per_token_group_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "per_token_group_fp8_quant::hidden_size=5120,group_size=128,num_tokens=1",
+      "kernel": "per_token_group_fp8_quant",
+      "aot_key": [
+        5120,
+        128,
+        1
+      ],
+      "aot_index": 29,
+      "shape": {
+        "hidden_size": 5120,
+        "group_size": 128,
+        "num_tokens": 1
+      },
+      "bench_shape": [
+        1,
+        5120
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/per_token_group_fp8_quant/_helion_aot_per_token_group_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "per_token_group_fp8_quant::hidden_size=5120,group_size=128,num_tokens=4",
+      "kernel": "per_token_group_fp8_quant",
+      "aot_key": [
+        5120,
+        128,
+        4
+      ],
+      "aot_index": 31,
+      "shape": {
+        "hidden_size": 5120,
+        "group_size": 128,
+        "num_tokens": 4
+      },
+      "bench_shape": [
+        4,
+        5120
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/per_token_group_fp8_quant/_helion_aot_per_token_group_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "per_token_group_fp8_quant::hidden_size=5120,group_size=128,num_tokens=64",
+      "kernel": "per_token_group_fp8_quant",
+      "aot_key": [
+        5120,
+        128,
+        64
+      ],
+      "aot_index": 34,
+      "shape": {
+        "hidden_size": 5120,
+        "group_size": 128,
+        "num_tokens": 64
+      },
+      "bench_shape": [
+        64,
+        5120
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/per_token_group_fp8_quant/_helion_aot_per_token_group_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "per_token_group_fp8_quant::hidden_size=5120,group_size=128,num_tokens=256",
+      "kernel": "per_token_group_fp8_quant",
+      "aot_key": [
+        5120,
+        128,
+        256
+      ],
+      "aot_index": 36,
+      "shape": {
+        "hidden_size": 5120,
+        "group_size": 128,
+        "num_tokens": 256
+      },
+      "bench_shape": [
+        256,
+        5120
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/per_token_group_fp8_quant/_helion_aot_per_token_group_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "per_token_group_fp8_quant::hidden_size=5120,group_size=128,num_tokens=1024",
+      "kernel": "per_token_group_fp8_quant",
+      "aot_key": [
+        5120,
+        128,
+        1024
+      ],
+      "aot_index": 38,
+      "shape": {
+        "hidden_size": 5120,
+        "group_size": 128,
+        "num_tokens": 1024
+      },
+      "bench_shape": [
+        1024,
+        5120
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/per_token_group_fp8_quant/_helion_aot_per_token_group_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "per_token_group_fp8_quant::hidden_size=5120,group_size=128,num_tokens=2048",
+      "kernel": "per_token_group_fp8_quant",
+      "aot_key": [
+        5120,
+        128,
+        2048
+      ],
+      "aot_index": 39,
+      "shape": {
+        "hidden_size": 5120,
+        "group_size": 128,
+        "num_tokens": 2048
+      },
+      "bench_shape": [
+        2048,
+        5120
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/per_token_group_fp8_quant/_helion_aot_per_token_group_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "per_token_group_fp8_quant::hidden_size=5120,group_size=128,num_tokens=8192",
+      "kernel": "per_token_group_fp8_quant",
+      "aot_key": [
+        5120,
+        128,
+        8192
+      ],
+      "aot_index": 41,
+      "shape": {
+        "hidden_size": 5120,
+        "group_size": 128,
+        "num_tokens": 8192
+      },
+      "bench_shape": [
+        8192,
+        5120
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/per_token_group_fp8_quant/_helion_aot_per_token_group_fp8_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_dynamic_per_token_quant::hidden_size=2048,num_tokens=1",
+      "kernel": "rms_norm_dynamic_per_token_quant",
+      "aot_key": [
+        2048,
+        1
+      ],
+      "aot_index": 0,
+      "shape": {
+        "hidden_size": 2048,
+        "num_tokens": 1
+      },
+      "bench_shape": [
+        2048,
+        1
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_dynamic_per_token_quant/_helion_aot_rms_norm_dynamic_per_token_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_dynamic_per_token_quant::hidden_size=4096,num_tokens=1",
+      "kernel": "rms_norm_dynamic_per_token_quant",
+      "aot_key": [
+        4096,
+        1
+      ],
+      "aot_index": 1,
+      "shape": {
+        "hidden_size": 4096,
+        "num_tokens": 1
+      },
+      "bench_shape": [
+        4096,
+        1
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_dynamic_per_token_quant/_helion_aot_rms_norm_dynamic_per_token_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_dynamic_per_token_quant::hidden_size=2048,num_tokens=2",
+      "kernel": "rms_norm_dynamic_per_token_quant",
+      "aot_key": [
+        2048,
+        2
+      ],
+      "aot_index": 3,
+      "shape": {
+        "hidden_size": 2048,
+        "num_tokens": 2
+      },
+      "bench_shape": [
+        2048,
+        2
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_dynamic_per_token_quant/_helion_aot_rms_norm_dynamic_per_token_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_dynamic_per_token_quant::hidden_size=4096,num_tokens=2",
+      "kernel": "rms_norm_dynamic_per_token_quant",
+      "aot_key": [
+        4096,
+        2
+      ],
+      "aot_index": 4,
+      "shape": {
+        "hidden_size": 4096,
+        "num_tokens": 2
+      },
+      "bench_shape": [
+        4096,
+        2
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_dynamic_per_token_quant/_helion_aot_rms_norm_dynamic_per_token_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_dynamic_per_token_quant::hidden_size=2048,num_tokens=4",
+      "kernel": "rms_norm_dynamic_per_token_quant",
+      "aot_key": [
+        2048,
+        4
+      ],
+      "aot_index": 6,
+      "shape": {
+        "hidden_size": 2048,
+        "num_tokens": 4
+      },
+      "bench_shape": [
+        2048,
+        4
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_dynamic_per_token_quant/_helion_aot_rms_norm_dynamic_per_token_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_dynamic_per_token_quant::hidden_size=4096,num_tokens=4",
+      "kernel": "rms_norm_dynamic_per_token_quant",
+      "aot_key": [
+        4096,
+        4
+      ],
+      "aot_index": 7,
+      "shape": {
+        "hidden_size": 4096,
+        "num_tokens": 4
+      },
+      "bench_shape": [
+        4096,
+        4
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_dynamic_per_token_quant/_helion_aot_rms_norm_dynamic_per_token_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_dynamic_per_token_quant::hidden_size=2048,num_tokens=8",
+      "kernel": "rms_norm_dynamic_per_token_quant",
+      "aot_key": [
+        2048,
+        8
+      ],
+      "aot_index": 9,
+      "shape": {
+        "hidden_size": 2048,
+        "num_tokens": 8
+      },
+      "bench_shape": [
+        2048,
+        8
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_dynamic_per_token_quant/_helion_aot_rms_norm_dynamic_per_token_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_dynamic_per_token_quant::hidden_size=4096,num_tokens=8",
+      "kernel": "rms_norm_dynamic_per_token_quant",
+      "aot_key": [
+        4096,
+        8
+      ],
+      "aot_index": 10,
+      "shape": {
+        "hidden_size": 4096,
+        "num_tokens": 8
+      },
+      "bench_shape": [
+        4096,
+        8
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_dynamic_per_token_quant/_helion_aot_rms_norm_dynamic_per_token_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_dynamic_per_token_quant::hidden_size=2048,num_tokens=16",
+      "kernel": "rms_norm_dynamic_per_token_quant",
+      "aot_key": [
+        2048,
+        16
+      ],
+      "aot_index": 12,
+      "shape": {
+        "hidden_size": 2048,
+        "num_tokens": 16
+      },
+      "bench_shape": [
+        2048,
+        16
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_dynamic_per_token_quant/_helion_aot_rms_norm_dynamic_per_token_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_dynamic_per_token_quant::hidden_size=4096,num_tokens=16",
+      "kernel": "rms_norm_dynamic_per_token_quant",
+      "aot_key": [
+        4096,
+        16
+      ],
+      "aot_index": 13,
+      "shape": {
+        "hidden_size": 4096,
+        "num_tokens": 16
+      },
+      "bench_shape": [
+        4096,
+        16
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_dynamic_per_token_quant/_helion_aot_rms_norm_dynamic_per_token_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_dynamic_per_token_quant::hidden_size=2048,num_tokens=32",
+      "kernel": "rms_norm_dynamic_per_token_quant",
+      "aot_key": [
+        2048,
+        32
+      ],
+      "aot_index": 15,
+      "shape": {
+        "hidden_size": 2048,
+        "num_tokens": 32
+      },
+      "bench_shape": [
+        2048,
+        32
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_dynamic_per_token_quant/_helion_aot_rms_norm_dynamic_per_token_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_dynamic_per_token_quant::hidden_size=4096,num_tokens=32",
+      "kernel": "rms_norm_dynamic_per_token_quant",
+      "aot_key": [
+        4096,
+        32
+      ],
+      "aot_index": 16,
+      "shape": {
+        "hidden_size": 4096,
+        "num_tokens": 32
+      },
+      "bench_shape": [
+        4096,
+        32
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_dynamic_per_token_quant/_helion_aot_rms_norm_dynamic_per_token_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_dynamic_per_token_quant::hidden_size=2048,num_tokens=64",
+      "kernel": "rms_norm_dynamic_per_token_quant",
+      "aot_key": [
+        2048,
+        64
+      ],
+      "aot_index": 18,
+      "shape": {
+        "hidden_size": 2048,
+        "num_tokens": 64
+      },
+      "bench_shape": [
+        2048,
+        64
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_dynamic_per_token_quant/_helion_aot_rms_norm_dynamic_per_token_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_dynamic_per_token_quant::hidden_size=4096,num_tokens=64",
+      "kernel": "rms_norm_dynamic_per_token_quant",
+      "aot_key": [
+        4096,
+        64
+      ],
+      "aot_index": 19,
+      "shape": {
+        "hidden_size": 4096,
+        "num_tokens": 64
+      },
+      "bench_shape": [
+        4096,
+        64
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_dynamic_per_token_quant/_helion_aot_rms_norm_dynamic_per_token_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_dynamic_per_token_quant::hidden_size=2048,num_tokens=128",
+      "kernel": "rms_norm_dynamic_per_token_quant",
+      "aot_key": [
+        2048,
+        128
+      ],
+      "aot_index": 21,
+      "shape": {
+        "hidden_size": 2048,
+        "num_tokens": 128
+      },
+      "bench_shape": [
+        2048,
+        128
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_dynamic_per_token_quant/_helion_aot_rms_norm_dynamic_per_token_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_dynamic_per_token_quant::hidden_size=4096,num_tokens=128",
+      "kernel": "rms_norm_dynamic_per_token_quant",
+      "aot_key": [
+        4096,
+        128
+      ],
+      "aot_index": 22,
+      "shape": {
+        "hidden_size": 4096,
+        "num_tokens": 128
+      },
+      "bench_shape": [
+        4096,
+        128
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_dynamic_per_token_quant/_helion_aot_rms_norm_dynamic_per_token_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_dynamic_per_token_quant::hidden_size=2048,num_tokens=256",
+      "kernel": "rms_norm_dynamic_per_token_quant",
+      "aot_key": [
+        2048,
+        256
+      ],
+      "aot_index": 24,
+      "shape": {
+        "hidden_size": 2048,
+        "num_tokens": 256
+      },
+      "bench_shape": [
+        2048,
+        256
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_dynamic_per_token_quant/_helion_aot_rms_norm_dynamic_per_token_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_dynamic_per_token_quant::hidden_size=4096,num_tokens=256",
+      "kernel": "rms_norm_dynamic_per_token_quant",
+      "aot_key": [
+        4096,
+        256
+      ],
+      "aot_index": 25,
+      "shape": {
+        "hidden_size": 4096,
+        "num_tokens": 256
+      },
+      "bench_shape": [
+        4096,
+        256
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_dynamic_per_token_quant/_helion_aot_rms_norm_dynamic_per_token_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_dynamic_per_token_quant::hidden_size=2048,num_tokens=512",
+      "kernel": "rms_norm_dynamic_per_token_quant",
+      "aot_key": [
+        2048,
+        512
+      ],
+      "aot_index": 27,
+      "shape": {
+        "hidden_size": 2048,
+        "num_tokens": 512
+      },
+      "bench_shape": [
+        2048,
+        512
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_dynamic_per_token_quant/_helion_aot_rms_norm_dynamic_per_token_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_dynamic_per_token_quant::hidden_size=4096,num_tokens=512",
+      "kernel": "rms_norm_dynamic_per_token_quant",
+      "aot_key": [
+        4096,
+        512
+      ],
+      "aot_index": 28,
+      "shape": {
+        "hidden_size": 4096,
+        "num_tokens": 512
+      },
+      "bench_shape": [
+        4096,
+        512
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_dynamic_per_token_quant/_helion_aot_rms_norm_dynamic_per_token_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_dynamic_per_token_quant::hidden_size=2048,num_tokens=1024",
+      "kernel": "rms_norm_dynamic_per_token_quant",
+      "aot_key": [
+        2048,
+        1024
+      ],
+      "aot_index": 30,
+      "shape": {
+        "hidden_size": 2048,
+        "num_tokens": 1024
+      },
+      "bench_shape": [
+        2048,
+        1024
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_dynamic_per_token_quant/_helion_aot_rms_norm_dynamic_per_token_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_dynamic_per_token_quant::hidden_size=4096,num_tokens=1024",
+      "kernel": "rms_norm_dynamic_per_token_quant",
+      "aot_key": [
+        4096,
+        1024
+      ],
+      "aot_index": 31,
+      "shape": {
+        "hidden_size": 4096,
+        "num_tokens": 1024
+      },
+      "bench_shape": [
+        4096,
+        1024
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_dynamic_per_token_quant/_helion_aot_rms_norm_dynamic_per_token_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_dynamic_per_token_quant::hidden_size=2048,num_tokens=2048",
+      "kernel": "rms_norm_dynamic_per_token_quant",
+      "aot_key": [
+        2048,
+        2048
+      ],
+      "aot_index": 33,
+      "shape": {
+        "hidden_size": 2048,
+        "num_tokens": 2048
+      },
+      "bench_shape": [
+        2048,
+        2048
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_dynamic_per_token_quant/_helion_aot_rms_norm_dynamic_per_token_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_dynamic_per_token_quant::hidden_size=4096,num_tokens=2048",
+      "kernel": "rms_norm_dynamic_per_token_quant",
+      "aot_key": [
+        4096,
+        2048
+      ],
+      "aot_index": 34,
+      "shape": {
+        "hidden_size": 4096,
+        "num_tokens": 2048
+      },
+      "bench_shape": [
+        4096,
+        2048
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_dynamic_per_token_quant/_helion_aot_rms_norm_dynamic_per_token_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_dynamic_per_token_quant::hidden_size=5120,num_tokens=1",
+      "kernel": "rms_norm_dynamic_per_token_quant",
+      "aot_key": [
+        5120,
+        1
+      ],
+      "aot_index": 42,
+      "shape": {
+        "hidden_size": 5120,
+        "num_tokens": 1
+      },
+      "bench_shape": [
+        5120,
+        1
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_dynamic_per_token_quant/_helion_aot_rms_norm_dynamic_per_token_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_dynamic_per_token_quant::hidden_size=5120,num_tokens=2",
+      "kernel": "rms_norm_dynamic_per_token_quant",
+      "aot_key": [
+        5120,
+        2
+      ],
+      "aot_index": 43,
+      "shape": {
+        "hidden_size": 5120,
+        "num_tokens": 2
+      },
+      "bench_shape": [
+        5120,
+        2
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_dynamic_per_token_quant/_helion_aot_rms_norm_dynamic_per_token_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_dynamic_per_token_quant::hidden_size=5120,num_tokens=4",
+      "kernel": "rms_norm_dynamic_per_token_quant",
+      "aot_key": [
+        5120,
+        4
+      ],
+      "aot_index": 44,
+      "shape": {
+        "hidden_size": 5120,
+        "num_tokens": 4
+      },
+      "bench_shape": [
+        5120,
+        4
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_dynamic_per_token_quant/_helion_aot_rms_norm_dynamic_per_token_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_dynamic_per_token_quant::hidden_size=5120,num_tokens=8",
+      "kernel": "rms_norm_dynamic_per_token_quant",
+      "aot_key": [
+        5120,
+        8
+      ],
+      "aot_index": 45,
+      "shape": {
+        "hidden_size": 5120,
+        "num_tokens": 8
+      },
+      "bench_shape": [
+        5120,
+        8
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_dynamic_per_token_quant/_helion_aot_rms_norm_dynamic_per_token_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_dynamic_per_token_quant::hidden_size=5120,num_tokens=16",
+      "kernel": "rms_norm_dynamic_per_token_quant",
+      "aot_key": [
+        5120,
+        16
+      ],
+      "aot_index": 46,
+      "shape": {
+        "hidden_size": 5120,
+        "num_tokens": 16
+      },
+      "bench_shape": [
+        5120,
+        16
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_dynamic_per_token_quant/_helion_aot_rms_norm_dynamic_per_token_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_dynamic_per_token_quant::hidden_size=5120,num_tokens=32",
+      "kernel": "rms_norm_dynamic_per_token_quant",
+      "aot_key": [
+        5120,
+        32
+      ],
+      "aot_index": 47,
+      "shape": {
+        "hidden_size": 5120,
+        "num_tokens": 32
+      },
+      "bench_shape": [
+        5120,
+        32
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_dynamic_per_token_quant/_helion_aot_rms_norm_dynamic_per_token_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_dynamic_per_token_quant::hidden_size=5120,num_tokens=64",
+      "kernel": "rms_norm_dynamic_per_token_quant",
+      "aot_key": [
+        5120,
+        64
+      ],
+      "aot_index": 48,
+      "shape": {
+        "hidden_size": 5120,
+        "num_tokens": 64
+      },
+      "bench_shape": [
+        5120,
+        64
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_dynamic_per_token_quant/_helion_aot_rms_norm_dynamic_per_token_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_dynamic_per_token_quant::hidden_size=5120,num_tokens=128",
+      "kernel": "rms_norm_dynamic_per_token_quant",
+      "aot_key": [
+        5120,
+        128
+      ],
+      "aot_index": 49,
+      "shape": {
+        "hidden_size": 5120,
+        "num_tokens": 128
+      },
+      "bench_shape": [
+        5120,
+        128
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_dynamic_per_token_quant/_helion_aot_rms_norm_dynamic_per_token_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_dynamic_per_token_quant::hidden_size=5120,num_tokens=256",
+      "kernel": "rms_norm_dynamic_per_token_quant",
+      "aot_key": [
+        5120,
+        256
+      ],
+      "aot_index": 50,
+      "shape": {
+        "hidden_size": 5120,
+        "num_tokens": 256
+      },
+      "bench_shape": [
+        5120,
+        256
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_dynamic_per_token_quant/_helion_aot_rms_norm_dynamic_per_token_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_dynamic_per_token_quant::hidden_size=5120,num_tokens=512",
+      "kernel": "rms_norm_dynamic_per_token_quant",
+      "aot_key": [
+        5120,
+        512
+      ],
+      "aot_index": 51,
+      "shape": {
+        "hidden_size": 5120,
+        "num_tokens": 512
+      },
+      "bench_shape": [
+        5120,
+        512
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_dynamic_per_token_quant/_helion_aot_rms_norm_dynamic_per_token_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_dynamic_per_token_quant::hidden_size=5120,num_tokens=1024",
+      "kernel": "rms_norm_dynamic_per_token_quant",
+      "aot_key": [
+        5120,
+        1024
+      ],
+      "aot_index": 52,
+      "shape": {
+        "hidden_size": 5120,
+        "num_tokens": 1024
+      },
+      "bench_shape": [
+        5120,
+        1024
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_dynamic_per_token_quant/_helion_aot_rms_norm_dynamic_per_token_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_dynamic_per_token_quant::hidden_size=5120,num_tokens=2048",
+      "kernel": "rms_norm_dynamic_per_token_quant",
+      "aot_key": [
+        5120,
+        2048
+      ],
+      "aot_index": 53,
+      "shape": {
+        "hidden_size": 5120,
+        "num_tokens": 2048
+      },
+      "bench_shape": [
+        5120,
+        2048
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_dynamic_per_token_quant/_helion_aot_rms_norm_dynamic_per_token_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_per_block_quant::hidden_size=2048,group_size=128,num_tokens=1",
+      "kernel": "rms_norm_per_block_quant",
+      "aot_key": [
+        2048,
+        128,
+        1
+      ],
+      "aot_index": 39,
+      "shape": {
+        "hidden_size": 2048,
+        "group_size": 128,
+        "num_tokens": 1
+      },
+      "bench_shape": [
+        2048,
+        128,
+        1
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_per_block_quant/_helion_aot_rms_norm_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_per_block_quant::hidden_size=2048,group_size=128,num_tokens=1024",
+      "kernel": "rms_norm_per_block_quant",
+      "aot_key": [
+        2048,
+        128,
+        1024
+      ],
+      "aot_index": 40,
+      "shape": {
+        "hidden_size": 2048,
+        "group_size": 128,
+        "num_tokens": 1024
+      },
+      "bench_shape": [
+        2048,
+        128,
+        1024
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_per_block_quant/_helion_aot_rms_norm_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_per_block_quant::hidden_size=2048,group_size=128,num_tokens=128",
+      "kernel": "rms_norm_per_block_quant",
+      "aot_key": [
+        2048,
+        128,
+        128
+      ],
+      "aot_index": 41,
+      "shape": {
+        "hidden_size": 2048,
+        "group_size": 128,
+        "num_tokens": 128
+      },
+      "bench_shape": [
+        2048,
+        128,
+        128
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_per_block_quant/_helion_aot_rms_norm_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_per_block_quant::hidden_size=2048,group_size=128,num_tokens=256",
+      "kernel": "rms_norm_per_block_quant",
+      "aot_key": [
+        2048,
+        128,
+        256
+      ],
+      "aot_index": 45,
+      "shape": {
+        "hidden_size": 2048,
+        "group_size": 128,
+        "num_tokens": 256
+      },
+      "bench_shape": [
+        2048,
+        128,
+        256
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_per_block_quant/_helion_aot_rms_norm_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_per_block_quant::hidden_size=2048,group_size=128,num_tokens=32",
+      "kernel": "rms_norm_per_block_quant",
+      "aot_key": [
+        2048,
+        128,
+        32
+      ],
+      "aot_index": 46,
+      "shape": {
+        "hidden_size": 2048,
+        "group_size": 128,
+        "num_tokens": 32
+      },
+      "bench_shape": [
+        2048,
+        128,
+        32
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_per_block_quant/_helion_aot_rms_norm_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_per_block_quant::hidden_size=2048,group_size=128,num_tokens=4096",
+      "kernel": "rms_norm_per_block_quant",
+      "aot_key": [
+        2048,
+        128,
+        4096
+      ],
+      "aot_index": 48,
+      "shape": {
+        "hidden_size": 2048,
+        "group_size": 128,
+        "num_tokens": 4096
+      },
+      "bench_shape": [
+        2048,
+        128,
+        4096
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_per_block_quant/_helion_aot_rms_norm_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_per_block_quant::hidden_size=2048,group_size=128,num_tokens=64",
+      "kernel": "rms_norm_per_block_quant",
+      "aot_key": [
+        2048,
+        128,
+        64
+      ],
+      "aot_index": 50,
+      "shape": {
+        "hidden_size": 2048,
+        "group_size": 128,
+        "num_tokens": 64
+      },
+      "bench_shape": [
+        2048,
+        128,
+        64
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_per_block_quant/_helion_aot_rms_norm_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_per_block_quant::hidden_size=2048,group_size=128,num_tokens=8",
+      "kernel": "rms_norm_per_block_quant",
+      "aot_key": [
+        2048,
+        128,
+        8
+      ],
+      "aot_index": 51,
+      "shape": {
+        "hidden_size": 2048,
+        "group_size": 128,
+        "num_tokens": 8
+      },
+      "bench_shape": [
+        2048,
+        128,
+        8
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_per_block_quant/_helion_aot_rms_norm_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_per_block_quant::hidden_size=4096,group_size=128,num_tokens=1",
+      "kernel": "rms_norm_per_block_quant",
+      "aot_key": [
+        4096,
+        128,
+        1
+      ],
+      "aot_index": 52,
+      "shape": {
+        "hidden_size": 4096,
+        "group_size": 128,
+        "num_tokens": 1
+      },
+      "bench_shape": [
+        4096,
+        128,
+        1
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_per_block_quant/_helion_aot_rms_norm_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_per_block_quant::hidden_size=4096,group_size=128,num_tokens=1024",
+      "kernel": "rms_norm_per_block_quant",
+      "aot_key": [
+        4096,
+        128,
+        1024
+      ],
+      "aot_index": 53,
+      "shape": {
+        "hidden_size": 4096,
+        "group_size": 128,
+        "num_tokens": 1024
+      },
+      "bench_shape": [
+        4096,
+        128,
+        1024
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_per_block_quant/_helion_aot_rms_norm_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_per_block_quant::hidden_size=4096,group_size=128,num_tokens=128",
+      "kernel": "rms_norm_per_block_quant",
+      "aot_key": [
+        4096,
+        128,
+        128
+      ],
+      "aot_index": 54,
+      "shape": {
+        "hidden_size": 4096,
+        "group_size": 128,
+        "num_tokens": 128
+      },
+      "bench_shape": [
+        4096,
+        128,
+        128
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_per_block_quant/_helion_aot_rms_norm_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_per_block_quant::hidden_size=4096,group_size=128,num_tokens=256",
+      "kernel": "rms_norm_per_block_quant",
+      "aot_key": [
+        4096,
+        128,
+        256
+      ],
+      "aot_index": 58,
+      "shape": {
+        "hidden_size": 4096,
+        "group_size": 128,
+        "num_tokens": 256
+      },
+      "bench_shape": [
+        4096,
+        128,
+        256
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_per_block_quant/_helion_aot_rms_norm_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_per_block_quant::hidden_size=4096,group_size=128,num_tokens=32",
+      "kernel": "rms_norm_per_block_quant",
+      "aot_key": [
+        4096,
+        128,
+        32
+      ],
+      "aot_index": 59,
+      "shape": {
+        "hidden_size": 4096,
+        "group_size": 128,
+        "num_tokens": 32
+      },
+      "bench_shape": [
+        4096,
+        128,
+        32
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_per_block_quant/_helion_aot_rms_norm_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_per_block_quant::hidden_size=4096,group_size=128,num_tokens=4096",
+      "kernel": "rms_norm_per_block_quant",
+      "aot_key": [
+        4096,
+        128,
+        4096
+      ],
+      "aot_index": 61,
+      "shape": {
+        "hidden_size": 4096,
+        "group_size": 128,
+        "num_tokens": 4096
+      },
+      "bench_shape": [
+        4096,
+        128,
+        4096
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_per_block_quant/_helion_aot_rms_norm_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_per_block_quant::hidden_size=4096,group_size=128,num_tokens=64",
+      "kernel": "rms_norm_per_block_quant",
+      "aot_key": [
+        4096,
+        128,
+        64
+      ],
+      "aot_index": 63,
+      "shape": {
+        "hidden_size": 4096,
+        "group_size": 128,
+        "num_tokens": 64
+      },
+      "bench_shape": [
+        4096,
+        128,
+        64
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_per_block_quant/_helion_aot_rms_norm_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_per_block_quant::hidden_size=4096,group_size=128,num_tokens=8",
+      "kernel": "rms_norm_per_block_quant",
+      "aot_key": [
+        4096,
+        128,
+        8
+      ],
+      "aot_index": 64,
+      "shape": {
+        "hidden_size": 4096,
+        "group_size": 128,
+        "num_tokens": 8
+      },
+      "bench_shape": [
+        4096,
+        128,
+        8
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_per_block_quant/_helion_aot_rms_norm_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_per_block_quant::hidden_size=5120,group_size=128,num_tokens=1",
+      "kernel": "rms_norm_per_block_quant",
+      "aot_key": [
+        5120,
+        128,
+        1
+      ],
+      "aot_index": 82,
+      "shape": {
+        "hidden_size": 5120,
+        "group_size": 128,
+        "num_tokens": 1
+      },
+      "bench_shape": [
+        5120,
+        128,
+        1
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_per_block_quant/_helion_aot_rms_norm_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_per_block_quant::hidden_size=5120,group_size=128,num_tokens=8",
+      "kernel": "rms_norm_per_block_quant",
+      "aot_key": [
+        5120,
+        128,
+        8
+      ],
+      "aot_index": 85,
+      "shape": {
+        "hidden_size": 5120,
+        "group_size": 128,
+        "num_tokens": 8
+      },
+      "bench_shape": [
+        5120,
+        128,
+        8
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_per_block_quant/_helion_aot_rms_norm_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_per_block_quant::hidden_size=5120,group_size=128,num_tokens=32",
+      "kernel": "rms_norm_per_block_quant",
+      "aot_key": [
+        5120,
+        128,
+        32
+      ],
+      "aot_index": 87,
+      "shape": {
+        "hidden_size": 5120,
+        "group_size": 128,
+        "num_tokens": 32
+      },
+      "bench_shape": [
+        5120,
+        128,
+        32
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_per_block_quant/_helion_aot_rms_norm_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_per_block_quant::hidden_size=5120,group_size=128,num_tokens=64",
+      "kernel": "rms_norm_per_block_quant",
+      "aot_key": [
+        5120,
+        128,
+        64
+      ],
+      "aot_index": 88,
+      "shape": {
+        "hidden_size": 5120,
+        "group_size": 128,
+        "num_tokens": 64
+      },
+      "bench_shape": [
+        5120,
+        128,
+        64
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_per_block_quant/_helion_aot_rms_norm_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_per_block_quant::hidden_size=5120,group_size=128,num_tokens=128",
+      "kernel": "rms_norm_per_block_quant",
+      "aot_key": [
+        5120,
+        128,
+        128
+      ],
+      "aot_index": 89,
+      "shape": {
+        "hidden_size": 5120,
+        "group_size": 128,
+        "num_tokens": 128
+      },
+      "bench_shape": [
+        5120,
+        128,
+        128
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_per_block_quant/_helion_aot_rms_norm_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_per_block_quant::hidden_size=5120,group_size=128,num_tokens=256",
+      "kernel": "rms_norm_per_block_quant",
+      "aot_key": [
+        5120,
+        128,
+        256
+      ],
+      "aot_index": 90,
+      "shape": {
+        "hidden_size": 5120,
+        "group_size": 128,
+        "num_tokens": 256
+      },
+      "bench_shape": [
+        5120,
+        128,
+        256
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_per_block_quant/_helion_aot_rms_norm_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_per_block_quant::hidden_size=5120,group_size=128,num_tokens=1024",
+      "kernel": "rms_norm_per_block_quant",
+      "aot_key": [
+        5120,
+        128,
+        1024
+      ],
+      "aot_index": 92,
+      "shape": {
+        "hidden_size": 5120,
+        "group_size": 128,
+        "num_tokens": 1024
+      },
+      "bench_shape": [
+        5120,
+        128,
+        1024
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_per_block_quant/_helion_aot_rms_norm_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "rms_norm_per_block_quant::hidden_size=5120,group_size=128,num_tokens=4096",
+      "kernel": "rms_norm_per_block_quant",
+      "aot_key": [
+        5120,
+        128,
+        4096
+      ],
+      "aot_index": 94,
+      "shape": {
+        "hidden_size": 5120,
+        "group_size": 128,
+        "num_tokens": 4096
+      },
+      "bench_shape": [
+        5120,
+        128,
+        4096
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/rms_norm_per_block_quant/_helion_aot_rms_norm_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "silu_and_mul_per_block_quant::intermediate_size=6144,group_size=128,num_tokens=1",
+      "kernel": "silu_and_mul_per_block_quant",
+      "aot_key": [
+        6144,
+        128,
+        1
+      ],
+      "aot_index": 0,
+      "shape": {
+        "intermediate_size": 6144,
+        "group_size": 128,
+        "num_tokens": 1
+      },
+      "bench_shape": [
+        1,
+        6144
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/silu_and_mul_per_block_quant/_helion_aot_silu_and_mul_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "silu_and_mul_per_block_quant::intermediate_size=12288,group_size=128,num_tokens=1",
+      "kernel": "silu_and_mul_per_block_quant",
+      "aot_key": [
+        12288,
+        128,
+        1
+      ],
+      "aot_index": 1,
+      "shape": {
+        "intermediate_size": 12288,
+        "group_size": 128,
+        "num_tokens": 1
+      },
+      "bench_shape": [
+        1,
+        12288
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/silu_and_mul_per_block_quant/_helion_aot_silu_and_mul_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "silu_and_mul_per_block_quant::intermediate_size=25600,group_size=128,num_tokens=1",
+      "kernel": "silu_and_mul_per_block_quant",
+      "aot_key": [
+        25600,
+        128,
+        1
+      ],
+      "aot_index": 2,
+      "shape": {
+        "intermediate_size": 25600,
+        "group_size": 128,
+        "num_tokens": 1
+      },
+      "bench_shape": [
+        1,
+        25600
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/silu_and_mul_per_block_quant/_helion_aot_silu_and_mul_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "silu_and_mul_per_block_quant::intermediate_size=6144,group_size=128,num_tokens=8",
+      "kernel": "silu_and_mul_per_block_quant",
+      "aot_key": [
+        6144,
+        128,
+        8
+      ],
+      "aot_index": 9,
+      "shape": {
+        "intermediate_size": 6144,
+        "group_size": 128,
+        "num_tokens": 8
+      },
+      "bench_shape": [
+        8,
+        6144
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/silu_and_mul_per_block_quant/_helion_aot_silu_and_mul_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "silu_and_mul_per_block_quant::intermediate_size=12288,group_size=128,num_tokens=8",
+      "kernel": "silu_and_mul_per_block_quant",
+      "aot_key": [
+        12288,
+        128,
+        8
+      ],
+      "aot_index": 10,
+      "shape": {
+        "intermediate_size": 12288,
+        "group_size": 128,
+        "num_tokens": 8
+      },
+      "bench_shape": [
+        8,
+        12288
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/silu_and_mul_per_block_quant/_helion_aot_silu_and_mul_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "silu_and_mul_per_block_quant::intermediate_size=25600,group_size=128,num_tokens=8",
+      "kernel": "silu_and_mul_per_block_quant",
+      "aot_key": [
+        25600,
+        128,
+        8
+      ],
+      "aot_index": 11,
+      "shape": {
+        "intermediate_size": 25600,
+        "group_size": 128,
+        "num_tokens": 8
+      },
+      "bench_shape": [
+        8,
+        25600
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/silu_and_mul_per_block_quant/_helion_aot_silu_and_mul_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "silu_and_mul_per_block_quant::intermediate_size=6144,group_size=128,num_tokens=32",
+      "kernel": "silu_and_mul_per_block_quant",
+      "aot_key": [
+        6144,
+        128,
+        32
+      ],
+      "aot_index": 15,
+      "shape": {
+        "intermediate_size": 6144,
+        "group_size": 128,
+        "num_tokens": 32
+      },
+      "bench_shape": [
+        32,
+        6144
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/silu_and_mul_per_block_quant/_helion_aot_silu_and_mul_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "silu_and_mul_per_block_quant::intermediate_size=12288,group_size=128,num_tokens=32",
+      "kernel": "silu_and_mul_per_block_quant",
+      "aot_key": [
+        12288,
+        128,
+        32
+      ],
+      "aot_index": 16,
+      "shape": {
+        "intermediate_size": 12288,
+        "group_size": 128,
+        "num_tokens": 32
+      },
+      "bench_shape": [
+        32,
+        12288
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/silu_and_mul_per_block_quant/_helion_aot_silu_and_mul_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "silu_and_mul_per_block_quant::intermediate_size=25600,group_size=128,num_tokens=32",
+      "kernel": "silu_and_mul_per_block_quant",
+      "aot_key": [
+        25600,
+        128,
+        32
+      ],
+      "aot_index": 17,
+      "shape": {
+        "intermediate_size": 25600,
+        "group_size": 128,
+        "num_tokens": 32
+      },
+      "bench_shape": [
+        32,
+        25600
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/silu_and_mul_per_block_quant/_helion_aot_silu_and_mul_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "silu_and_mul_per_block_quant::intermediate_size=6144,group_size=128,num_tokens=64",
+      "kernel": "silu_and_mul_per_block_quant",
+      "aot_key": [
+        6144,
+        128,
+        64
+      ],
+      "aot_index": 18,
+      "shape": {
+        "intermediate_size": 6144,
+        "group_size": 128,
+        "num_tokens": 64
+      },
+      "bench_shape": [
+        64,
+        6144
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/silu_and_mul_per_block_quant/_helion_aot_silu_and_mul_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "silu_and_mul_per_block_quant::intermediate_size=12288,group_size=128,num_tokens=64",
+      "kernel": "silu_and_mul_per_block_quant",
+      "aot_key": [
+        12288,
+        128,
+        64
+      ],
+      "aot_index": 19,
+      "shape": {
+        "intermediate_size": 12288,
+        "group_size": 128,
+        "num_tokens": 64
+      },
+      "bench_shape": [
+        64,
+        12288
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/silu_and_mul_per_block_quant/_helion_aot_silu_and_mul_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "silu_and_mul_per_block_quant::intermediate_size=25600,group_size=128,num_tokens=64",
+      "kernel": "silu_and_mul_per_block_quant",
+      "aot_key": [
+        25600,
+        128,
+        64
+      ],
+      "aot_index": 20,
+      "shape": {
+        "intermediate_size": 25600,
+        "group_size": 128,
+        "num_tokens": 64
+      },
+      "bench_shape": [
+        64,
+        25600
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/silu_and_mul_per_block_quant/_helion_aot_silu_and_mul_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "silu_and_mul_per_block_quant::intermediate_size=6144,group_size=128,num_tokens=128",
+      "kernel": "silu_and_mul_per_block_quant",
+      "aot_key": [
+        6144,
+        128,
+        128
+      ],
+      "aot_index": 21,
+      "shape": {
+        "intermediate_size": 6144,
+        "group_size": 128,
+        "num_tokens": 128
+      },
+      "bench_shape": [
+        128,
+        6144
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/silu_and_mul_per_block_quant/_helion_aot_silu_and_mul_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "silu_and_mul_per_block_quant::intermediate_size=12288,group_size=128,num_tokens=128",
+      "kernel": "silu_and_mul_per_block_quant",
+      "aot_key": [
+        12288,
+        128,
+        128
+      ],
+      "aot_index": 22,
+      "shape": {
+        "intermediate_size": 12288,
+        "group_size": 128,
+        "num_tokens": 128
+      },
+      "bench_shape": [
+        128,
+        12288
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/silu_and_mul_per_block_quant/_helion_aot_silu_and_mul_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "silu_and_mul_per_block_quant::intermediate_size=25600,group_size=128,num_tokens=128",
+      "kernel": "silu_and_mul_per_block_quant",
+      "aot_key": [
+        25600,
+        128,
+        128
+      ],
+      "aot_index": 23,
+      "shape": {
+        "intermediate_size": 25600,
+        "group_size": 128,
+        "num_tokens": 128
+      },
+      "bench_shape": [
+        128,
+        25600
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/silu_and_mul_per_block_quant/_helion_aot_silu_and_mul_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "silu_and_mul_per_block_quant::intermediate_size=6144,group_size=128,num_tokens=256",
+      "kernel": "silu_and_mul_per_block_quant",
+      "aot_key": [
+        6144,
+        128,
+        256
+      ],
+      "aot_index": 24,
+      "shape": {
+        "intermediate_size": 6144,
+        "group_size": 128,
+        "num_tokens": 256
+      },
+      "bench_shape": [
+        256,
+        6144
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/silu_and_mul_per_block_quant/_helion_aot_silu_and_mul_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "silu_and_mul_per_block_quant::intermediate_size=12288,group_size=128,num_tokens=256",
+      "kernel": "silu_and_mul_per_block_quant",
+      "aot_key": [
+        12288,
+        128,
+        256
+      ],
+      "aot_index": 25,
+      "shape": {
+        "intermediate_size": 12288,
+        "group_size": 128,
+        "num_tokens": 256
+      },
+      "bench_shape": [
+        256,
+        12288
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/silu_and_mul_per_block_quant/_helion_aot_silu_and_mul_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "silu_and_mul_per_block_quant::intermediate_size=25600,group_size=128,num_tokens=256",
+      "kernel": "silu_and_mul_per_block_quant",
+      "aot_key": [
+        25600,
+        128,
+        256
+      ],
+      "aot_index": 26,
+      "shape": {
+        "intermediate_size": 25600,
+        "group_size": 128,
+        "num_tokens": 256
+      },
+      "bench_shape": [
+        256,
+        25600
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/silu_and_mul_per_block_quant/_helion_aot_silu_and_mul_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "silu_and_mul_per_block_quant::intermediate_size=6144,group_size=128,num_tokens=1024",
+      "kernel": "silu_and_mul_per_block_quant",
+      "aot_key": [
+        6144,
+        128,
+        1024
+      ],
+      "aot_index": 30,
+      "shape": {
+        "intermediate_size": 6144,
+        "group_size": 128,
+        "num_tokens": 1024
+      },
+      "bench_shape": [
+        1024,
+        6144
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/silu_and_mul_per_block_quant/_helion_aot_silu_and_mul_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "silu_and_mul_per_block_quant::intermediate_size=12288,group_size=128,num_tokens=1024",
+      "kernel": "silu_and_mul_per_block_quant",
+      "aot_key": [
+        12288,
+        128,
+        1024
+      ],
+      "aot_index": 31,
+      "shape": {
+        "intermediate_size": 12288,
+        "group_size": 128,
+        "num_tokens": 1024
+      },
+      "bench_shape": [
+        1024,
+        12288
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/silu_and_mul_per_block_quant/_helion_aot_silu_and_mul_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "silu_and_mul_per_block_quant::intermediate_size=25600,group_size=128,num_tokens=1024",
+      "kernel": "silu_and_mul_per_block_quant",
+      "aot_key": [
+        25600,
+        128,
+        1024
+      ],
+      "aot_index": 32,
+      "shape": {
+        "intermediate_size": 25600,
+        "group_size": 128,
+        "num_tokens": 1024
+      },
+      "bench_shape": [
+        1024,
+        25600
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/silu_and_mul_per_block_quant/_helion_aot_silu_and_mul_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "silu_and_mul_per_block_quant::intermediate_size=6144,group_size=128,num_tokens=4096",
+      "kernel": "silu_and_mul_per_block_quant",
+      "aot_key": [
+        6144,
+        128,
+        4096
+      ],
+      "aot_index": 36,
+      "shape": {
+        "intermediate_size": 6144,
+        "group_size": 128,
+        "num_tokens": 4096
+      },
+      "bench_shape": [
+        4096,
+        6144
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/silu_and_mul_per_block_quant/_helion_aot_silu_and_mul_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "silu_and_mul_per_block_quant::intermediate_size=12288,group_size=128,num_tokens=4096",
+      "kernel": "silu_and_mul_per_block_quant",
+      "aot_key": [
+        12288,
+        128,
+        4096
+      ],
+      "aot_index": 37,
+      "shape": {
+        "intermediate_size": 12288,
+        "group_size": 128,
+        "num_tokens": 4096
+      },
+      "bench_shape": [
+        4096,
+        12288
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/silu_and_mul_per_block_quant/_helion_aot_silu_and_mul_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "silu_and_mul_per_block_quant::intermediate_size=25600,group_size=128,num_tokens=4096",
+      "kernel": "silu_and_mul_per_block_quant",
+      "aot_key": [
+        25600,
+        128,
+        4096
+      ],
+      "aot_index": 38,
+      "shape": {
+        "intermediate_size": 25600,
+        "group_size": 128,
+        "num_tokens": 4096
+      },
+      "bench_shape": [
+        4096,
+        25600
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/silu_and_mul_per_block_quant/_helion_aot_silu_and_mul_per_block_quant_cuda_sm90.py"
+    },
+    {
+      "cell_key": "fused_qk_norm_rope::q_heads=16,kv_heads=8,num_tokens=1",
+      "kernel": "fused_qk_norm_rope",
+      "aot_key": [
+        16,
+        8,
+        1
+      ],
+      "aot_index": 0,
+      "shape": {
+        "q_heads": 16,
+        "kv_heads": 8,
+        "num_tokens": 1
+      },
+      "bench_shape": [
+        1,
+        16,
+        8
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/fused_qk_norm_rope/_helion_aot_fused_qk_norm_rope_cuda_sm90.py"
+    },
+    {
+      "cell_key": "fused_qk_norm_rope::q_heads=32,kv_heads=8,num_tokens=1",
+      "kernel": "fused_qk_norm_rope",
+      "aot_key": [
+        32,
+        8,
+        1
+      ],
+      "aot_index": 1,
+      "shape": {
+        "q_heads": 32,
+        "kv_heads": 8,
+        "num_tokens": 1
+      },
+      "bench_shape": [
+        1,
+        32,
+        8
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/fused_qk_norm_rope/_helion_aot_fused_qk_norm_rope_cuda_sm90.py"
+    },
+    {
+      "cell_key": "fused_qk_norm_rope::q_heads=64,kv_heads=8,num_tokens=1",
+      "kernel": "fused_qk_norm_rope",
+      "aot_key": [
+        64,
+        8,
+        1
+      ],
+      "aot_index": 2,
+      "shape": {
+        "q_heads": 64,
+        "kv_heads": 8,
+        "num_tokens": 1
+      },
+      "bench_shape": [
+        1,
+        64,
+        8
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/fused_qk_norm_rope/_helion_aot_fused_qk_norm_rope_cuda_sm90.py"
+    },
+    {
+      "cell_key": "fused_qk_norm_rope::q_heads=16,kv_heads=8,num_tokens=8",
+      "kernel": "fused_qk_norm_rope",
+      "aot_key": [
+        16,
+        8,
+        8
+      ],
+      "aot_index": 9,
+      "shape": {
+        "q_heads": 16,
+        "kv_heads": 8,
+        "num_tokens": 8
+      },
+      "bench_shape": [
+        8,
+        16,
+        8
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/fused_qk_norm_rope/_helion_aot_fused_qk_norm_rope_cuda_sm90.py"
+    },
+    {
+      "cell_key": "fused_qk_norm_rope::q_heads=32,kv_heads=8,num_tokens=8",
+      "kernel": "fused_qk_norm_rope",
+      "aot_key": [
+        32,
+        8,
+        8
+      ],
+      "aot_index": 10,
+      "shape": {
+        "q_heads": 32,
+        "kv_heads": 8,
+        "num_tokens": 8
+      },
+      "bench_shape": [
+        8,
+        32,
+        8
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/fused_qk_norm_rope/_helion_aot_fused_qk_norm_rope_cuda_sm90.py"
+    },
+    {
+      "cell_key": "fused_qk_norm_rope::q_heads=64,kv_heads=8,num_tokens=8",
+      "kernel": "fused_qk_norm_rope",
+      "aot_key": [
+        64,
+        8,
+        8
+      ],
+      "aot_index": 11,
+      "shape": {
+        "q_heads": 64,
+        "kv_heads": 8,
+        "num_tokens": 8
+      },
+      "bench_shape": [
+        8,
+        64,
+        8
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/fused_qk_norm_rope/_helion_aot_fused_qk_norm_rope_cuda_sm90.py"
+    },
+    {
+      "cell_key": "fused_qk_norm_rope::q_heads=16,kv_heads=8,num_tokens=32",
+      "kernel": "fused_qk_norm_rope",
+      "aot_key": [
+        16,
+        8,
+        32
+      ],
+      "aot_index": 15,
+      "shape": {
+        "q_heads": 16,
+        "kv_heads": 8,
+        "num_tokens": 32
+      },
+      "bench_shape": [
+        32,
+        16,
+        8
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/fused_qk_norm_rope/_helion_aot_fused_qk_norm_rope_cuda_sm90.py"
+    },
+    {
+      "cell_key": "fused_qk_norm_rope::q_heads=32,kv_heads=8,num_tokens=32",
+      "kernel": "fused_qk_norm_rope",
+      "aot_key": [
+        32,
+        8,
+        32
+      ],
+      "aot_index": 16,
+      "shape": {
+        "q_heads": 32,
+        "kv_heads": 8,
+        "num_tokens": 32
+      },
+      "bench_shape": [
+        32,
+        32,
+        8
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/fused_qk_norm_rope/_helion_aot_fused_qk_norm_rope_cuda_sm90.py"
+    },
+    {
+      "cell_key": "fused_qk_norm_rope::q_heads=64,kv_heads=8,num_tokens=32",
+      "kernel": "fused_qk_norm_rope",
+      "aot_key": [
+        64,
+        8,
+        32
+      ],
+      "aot_index": 17,
+      "shape": {
+        "q_heads": 64,
+        "kv_heads": 8,
+        "num_tokens": 32
+      },
+      "bench_shape": [
+        32,
+        64,
+        8
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/fused_qk_norm_rope/_helion_aot_fused_qk_norm_rope_cuda_sm90.py"
+    },
+    {
+      "cell_key": "fused_qk_norm_rope::q_heads=16,kv_heads=8,num_tokens=128",
+      "kernel": "fused_qk_norm_rope",
+      "aot_key": [
+        16,
+        8,
+        128
+      ],
+      "aot_index": 21,
+      "shape": {
+        "q_heads": 16,
+        "kv_heads": 8,
+        "num_tokens": 128
+      },
+      "bench_shape": [
+        128,
+        16,
+        8
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/fused_qk_norm_rope/_helion_aot_fused_qk_norm_rope_cuda_sm90.py"
+    },
+    {
+      "cell_key": "fused_qk_norm_rope::q_heads=32,kv_heads=8,num_tokens=128",
+      "kernel": "fused_qk_norm_rope",
+      "aot_key": [
+        32,
+        8,
+        128
+      ],
+      "aot_index": 22,
+      "shape": {
+        "q_heads": 32,
+        "kv_heads": 8,
+        "num_tokens": 128
+      },
+      "bench_shape": [
+        128,
+        32,
+        8
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/fused_qk_norm_rope/_helion_aot_fused_qk_norm_rope_cuda_sm90.py"
+    },
+    {
+      "cell_key": "fused_qk_norm_rope::q_heads=64,kv_heads=8,num_tokens=128",
+      "kernel": "fused_qk_norm_rope",
+      "aot_key": [
+        64,
+        8,
+        128
+      ],
+      "aot_index": 23,
+      "shape": {
+        "q_heads": 64,
+        "kv_heads": 8,
+        "num_tokens": 128
+      },
+      "bench_shape": [
+        128,
+        64,
+        8
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/fused_qk_norm_rope/_helion_aot_fused_qk_norm_rope_cuda_sm90.py"
+    },
+    {
+      "cell_key": "fused_qk_norm_rope::q_heads=16,kv_heads=8,num_tokens=512",
+      "kernel": "fused_qk_norm_rope",
+      "aot_key": [
+        16,
+        8,
+        512
+      ],
+      "aot_index": 27,
+      "shape": {
+        "q_heads": 16,
+        "kv_heads": 8,
+        "num_tokens": 512
+      },
+      "bench_shape": [
+        512,
+        16,
+        8
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/fused_qk_norm_rope/_helion_aot_fused_qk_norm_rope_cuda_sm90.py"
+    },
+    {
+      "cell_key": "fused_qk_norm_rope::q_heads=32,kv_heads=8,num_tokens=512",
+      "kernel": "fused_qk_norm_rope",
+      "aot_key": [
+        32,
+        8,
+        512
+      ],
+      "aot_index": 28,
+      "shape": {
+        "q_heads": 32,
+        "kv_heads": 8,
+        "num_tokens": 512
+      },
+      "bench_shape": [
+        512,
+        32,
+        8
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/fused_qk_norm_rope/_helion_aot_fused_qk_norm_rope_cuda_sm90.py"
+    },
+    {
+      "cell_key": "fused_qk_norm_rope::q_heads=64,kv_heads=8,num_tokens=512",
+      "kernel": "fused_qk_norm_rope",
+      "aot_key": [
+        64,
+        8,
+        512
+      ],
+      "aot_index": 29,
+      "shape": {
+        "q_heads": 64,
+        "kv_heads": 8,
+        "num_tokens": 512
+      },
+      "bench_shape": [
+        512,
+        64,
+        8
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/fused_qk_norm_rope/_helion_aot_fused_qk_norm_rope_cuda_sm90.py"
+    },
+    {
+      "cell_key": "fused_qk_norm_rope::q_heads=16,kv_heads=8,num_tokens=2048",
+      "kernel": "fused_qk_norm_rope",
+      "aot_key": [
+        16,
+        8,
+        2048
+      ],
+      "aot_index": 33,
+      "shape": {
+        "q_heads": 16,
+        "kv_heads": 8,
+        "num_tokens": 2048
+      },
+      "bench_shape": [
+        2048,
+        16,
+        8
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/fused_qk_norm_rope/_helion_aot_fused_qk_norm_rope_cuda_sm90.py"
+    },
+    {
+      "cell_key": "fused_qk_norm_rope::q_heads=32,kv_heads=8,num_tokens=2048",
+      "kernel": "fused_qk_norm_rope",
+      "aot_key": [
+        32,
+        8,
+        2048
+      ],
+      "aot_index": 34,
+      "shape": {
+        "q_heads": 32,
+        "kv_heads": 8,
+        "num_tokens": 2048
+      },
+      "bench_shape": [
+        2048,
+        32,
+        8
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/fused_qk_norm_rope/_helion_aot_fused_qk_norm_rope_cuda_sm90.py"
+    },
+    {
+      "cell_key": "fused_qk_norm_rope::q_heads=64,kv_heads=8,num_tokens=2048",
+      "kernel": "fused_qk_norm_rope",
+      "aot_key": [
+        64,
+        8,
+        2048
+      ],
+      "aot_index": 35,
+      "shape": {
+        "q_heads": 64,
+        "kv_heads": 8,
+        "num_tokens": 2048
+      },
+      "bench_shape": [
+        2048,
+        64,
+        8
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/fused_qk_norm_rope/_helion_aot_fused_qk_norm_rope_cuda_sm90.py"
+    },
+    {
+      "cell_key": "fused_qk_norm_rope::q_heads=16,kv_heads=8,num_tokens=8192",
+      "kernel": "fused_qk_norm_rope",
+      "aot_key": [
+        16,
+        8,
+        8192
+      ],
+      "aot_index": 39,
+      "shape": {
+        "q_heads": 16,
+        "kv_heads": 8,
+        "num_tokens": 8192
+      },
+      "bench_shape": [
+        8192,
+        16,
+        8
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/fused_qk_norm_rope/_helion_aot_fused_qk_norm_rope_cuda_sm90.py"
+    },
+    {
+      "cell_key": "fused_qk_norm_rope::q_heads=32,kv_heads=8,num_tokens=8192",
+      "kernel": "fused_qk_norm_rope",
+      "aot_key": [
+        32,
+        8,
+        8192
+      ],
+      "aot_index": 40,
+      "shape": {
+        "q_heads": 32,
+        "kv_heads": 8,
+        "num_tokens": 8192
+      },
+      "bench_shape": [
+        8192,
+        32,
+        8
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/fused_qk_norm_rope/_helion_aot_fused_qk_norm_rope_cuda_sm90.py"
+    },
+    {
+      "cell_key": "fused_qk_norm_rope::q_heads=64,kv_heads=8,num_tokens=8192",
+      "kernel": "fused_qk_norm_rope",
+      "aot_key": [
+        64,
+        8,
+        8192
+      ],
+      "aot_index": 41,
+      "shape": {
+        "q_heads": 64,
+        "kv_heads": 8,
+        "num_tokens": 8192
+      },
+      "bench_shape": [
+        8192,
+        64,
+        8
+      ],
+      "aot_file": "/home/dev/helion-vllm-repro/pretuned_kernels/fused_qk_norm_rope/_helion_aot_fused_qk_norm_rope_cuda_sm90.py"
+    }
+  ]
+}
