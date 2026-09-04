@@ -1,5 +1,8 @@
 # Linear Attention: Helion vs FLA
 
+> **For all new reproductions, use PyTorch `2.13.0+cu132` (CUDA `13.2`)
+> with Triton `3.7.1`.**
+
 This comparison measures the current Helion linear-attention workload using
 four configurations:
 
@@ -79,9 +82,35 @@ The resulting report should include:
 Do not silently replace a missing FLA implementation or AOT-tuned
 configuration with another baseline.
 
-## Included H100 Run
+## Primary Software Stack
 
-The authoritative H100 run used:
+Linear attention, vLLM reductions, and example reductions now share one
+primary reproduction stack:
+
+- PyTorch `2.13.0+cu132`
+- CUDA `13.2`
+- Triton `3.7.1`
+
+Both linear-attention launchers call the repository's shared stack checker and
+fail before benchmark imports when the environment differs. Required versions
+may be overridden only for an explicitly labeled historical run.
+
+## Unified-Stack Compatibility Check
+
+An 8-cell H100 check reran four representative variants in both forward and
+forward-plus-backward on the primary stack. It held the Helion and FLA
+revisions fixed against the existing PyTorch 2.12 result. All cells completed,
+all Helion arms passed correctness, and aggregate performance-versus-FLA moved
+by at most `0.05%` across default, seed, and AOT.
+
+The [compatibility artifact](generated/h100-torch213-triton371-compatibility-smoke/)
+also verifies the separate native Helion timing workflow. This bounded check
+validates the stack transition; it does not replace the full-population run.
+
+## Included Full H100 Reference Run
+
+The checked-in 96-cell H100 reference run predates the unified PyTorch pin and
+used:
 
 | Component | Version or revision |
 |---|---|
@@ -94,7 +123,8 @@ The authoritative H100 run used:
 
 All 96 workload cells completed successfully, with all replayed Helion arms
 passing correctness. This is a controlled four-arm run, not a native-harness
-run. It includes the
+run. Its recorded PyTorch version is historical and must not be relabeled.
+It includes the
 [summary](generated/h100-same-process/summary.md),
 [per-kernel graph](generated/h100-same-process/per-kernel-bars.png),
 [blog-style graph](generated/h100-same-process/blog-figures/results-linattn-h100.png),

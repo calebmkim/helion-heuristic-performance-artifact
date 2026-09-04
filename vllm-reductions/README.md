@@ -1,7 +1,8 @@
 # vLLM Reductions: Helion Configurations vs vLLM
 
-> **For all new reproductions, use PyTorch `2.13.0+cu132` with Triton
-> `3.7.1`, and load vLLM `0.24.0`'s stable-libtorch extension directly.**
+> **For all new reproductions, use PyTorch `2.13.0+cu132` (CUDA `13.2`)
+> with Triton `3.7.1`, and load vLLM `0.24.0`'s stable-libtorch extension
+> directly.**
 
 This comparison measures the reduction-bearing vLLM kernels under
 `pretuned_kernels/` in a Helion checkout:
@@ -63,6 +64,7 @@ H100 using:
 
 - Helion main `fa2f62eb686ef846c76f8b9e18beec30fbc5bee1`
 - PyTorch `2.13.0+cu132`
+- CUDA `13.2`
 - Triton `3.7.1`
 - vLLM `0.24.0` at `ee0da84ab9e04ac7610e28580af62c365e898389`
 - vLLM stable-extension SHA-256
@@ -112,8 +114,9 @@ full vLLM server dependency stack.
 
 ### Toolchain compatibility footgun
 
-Keep the benchmark environment on the exact PyTorch `2.13.0+cu132` / Triton
-`3.7.1` pair. The vLLM 0.24.0 wheel declares `torch==2.11.0`; installing it
+Keep the benchmark environment on the exact PyTorch `2.13.0+cu132` / CUDA
+`13.2` / Triton `3.7.1` stack. The vLLM 0.24.0 wheel declares
+`torch==2.11.0`; installing it
 normally in that environment can replace Torch and consequently Triton with
 3.6.0. In our diagnostic run that older compiler stack reduced the
 `fused_qk_norm_rope` seed geomean from about `1.04x` to `0.69x` versus vLLM
@@ -161,6 +164,7 @@ export OUTPUT_DIR=/path/to/results
 export CUDA_VISIBLE_DEVICES=<gpu>
 # Primary stack, checked by starter.sh:
 export REQUIRED_TORCH_VERSION=2.13.0+cu132
+export REQUIRED_CUDA_VERSION=13.2
 export REQUIRED_TRITON_VERSION=3.7.1
 # Extracted from the vLLM 0.24.0 wheel with --no-deps:
 export VLLM_EXTENSION_PATH=/path/to/_C_stable_libtorch.abi3.so

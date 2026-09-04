@@ -15,9 +15,10 @@ These scripts form an adaptable pipeline:
    `1.00x`.
 7. `starter.sh` auto-selects the four-arm CUDA path or three-arm AOT path.
 
-For the primary result, `starter.sh` requires PyTorch `2.13.0+cu132` and
-Triton `3.7.1`. Override the required values only when intentionally creating
-a separately labeled historical or diagnostic dataset.
+For the primary result, the shared primary-stack checker requires PyTorch
+`2.13.0+cu132`, CUDA `13.2`, and Triton `3.7.1`. Override the required values
+only when intentionally creating a separately labeled historical or
+diagnostic dataset.
 
 vLLM 0.24.0's wheel declares `torch==2.11.0`, so do not install its
 dependencies into the benchmark environment. Download the wheel with

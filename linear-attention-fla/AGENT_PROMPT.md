@@ -1,5 +1,8 @@
 # Agent Prompt: Reproduce Linear-Attention Performance
 
+**For all new reproductions, use PyTorch `2.13.0+cu132` (CUDA `13.2`)
+with Triton `3.7.1`.**
+
 ## Inputs
 
 ```text
@@ -10,6 +13,9 @@ FLA_REVISION=<revision or package version to measure>
 ARTIFACT_ROOT=<this repository>
 OUTPUT_DIR=<directory for scripts, raw results, and the report>
 CUDA_VISIBLE_DEVICES=<GPU index>
+REQUIRED_TORCH_VERSION=2.13.0+cu132
+REQUIRED_CUDA_VERSION=13.2
+REQUIRED_TRITON_VERSION=3.7.1
 ```
 
 ## Important
@@ -18,6 +24,10 @@ The paths, flags, and starter script in this artifact reflect one previous
 Helion revision. They are not a stable API and may be wrong for the requested
 environment. Inspect the current checkouts and adapt them. Do not stop merely
 because a command, module, or output format has changed.
+
+Unless the request explicitly asks for a historical run, require PyTorch
+`2.13.0+cu132`, CUDA `13.2`, and Triton `3.7.1`. Both launchers invoke the
+repository's shared stack checker before importing either benchmark.
 
 Use a fresh `OUTPUT_DIR` for a new revision or environment. Set `RESUME=1` only
 when continuing the same run with the same Helion, FLA, and workload
@@ -53,6 +63,9 @@ compare:
 Start by inspecting Helion's current linear-attention benchmark and its FLA
 integration. Reuse the workload, input generation, correctness checks, and
 timing utilities already present in Helion.
+
+Assert the primary PyTorch, CUDA, and Triton versions before materializing
+configs. Record the imported versions in the result.
 
 Use mutually compatible FLA and Triton revisions. In particular, do not
 classify backward operations as inherently unavailable when an older FLA

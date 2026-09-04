@@ -1,7 +1,7 @@
 # Example Reductions
 
-> **For all new reproductions, use PyTorch `2.13.0+cu132` with Triton
-> `3.7.1`.**
+> **For all new reproductions, use PyTorch `2.13.0+cu132` (CUDA `13.2`)
+> with Triton `3.7.1`.**
 
 This comparison measures ten general reduction kernels from a Helion checkout:
 
@@ -67,9 +67,10 @@ It implements every observable output of the corresponding Helion kernel.
 
 ## Primary Software Stack
 
-The primary reproduction target is the matched package pair:
+The primary reproduction target is the matched software stack:
 
 - PyTorch `2.13.0+cu132`
+- CUDA `13.2`
 - Triton `3.7.1`
 
 PyTorch 2.13 declares an exact dependency on Triton 3.7.1. Do not install a
@@ -80,7 +81,7 @@ pair. The starter script checks both versions before launching.
 
 The primary run measured all 80 cells successfully on an H100 using Helion
 main commit `fa2f62eb686ef846c76f8b9e18beec30fbc5bee1`, PyTorch `2.13.0+cu132`,
-and Triton `3.7.1`. The heuristic seed reached `1.088x` versus
+CUDA `13.2`, and Triton `3.7.1`. The heuristic seed reached `1.088x` versus
 `torch.compile`; the base default reached `0.268x`. The reported values are
 CUDA device time; CPU launch overhead is excluded.
 
@@ -112,6 +113,7 @@ export OUTPUT_DIR=/path/to/results
 export CUDA_VISIBLE_DEVICES=<gpu>
 # Defaults enforced by starter.sh:
 export REQUIRED_TORCH_VERSION=2.13.0+cu132
+export REQUIRED_CUDA_VERSION=13.2
 export REQUIRED_TRITON_VERSION=3.7.1
 
 example-reductions/scripts/starter.sh

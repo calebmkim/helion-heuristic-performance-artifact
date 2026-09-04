@@ -1,0 +1,9 @@
+cell_key,variant,mode,shape_name,shape_json,lengths_json,heads,dim
+vanilla_linear_attn::forward::B1_T8192_H96_D128,vanilla_linear_attn,forward,B1_T8192_H96_D128,"[1, 96, 8192, 128, 128]",null,,
+vanilla_linear_attn::forward_backward::B1_T8192_H96_D128,vanilla_linear_attn,forward_backward,B1_T8192_H96_D128,"[1, 96, 8192, 128, 128]",null,,
+full_gla::forward::B1_T8192_H96_D128,full_gla,forward,B1_T8192_H96_D128,"[1, 96, 8192, 128, 128]",null,,
+full_gla::forward_backward::B1_T8192_H96_D128,full_gla,forward_backward,B1_T8192_H96_D128,"[1, 96, 8192, 128, 128]",null,,
+gated_delta_rule::forward::B1_T8192_H96_D128,gated_delta_rule,forward,B1_T8192_H96_D128,"[1, 96, 8192, 128, 128]",null,,
+gated_delta_rule::forward_backward::B1_T8192_H96_D128,gated_delta_rule,forward_backward,B1_T8192_H96_D128,"[1, 96, 8192, 128, 128]",null,,
+kda::forward::B1_T8192_H96_D128,kda,forward,B1_T8192_H96_D128,"[1, 96, 8192, 128, 128]",null,,
+kda::forward_backward::B1_T8192_H96_D128,kda,forward_backward,B1_T8192_H96_D128,"[1, 96, 8192, 128, 128]",null,,

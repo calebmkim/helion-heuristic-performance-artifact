@@ -11,38 +11,15 @@ set -euo pipefail
 : "${CUDA_VISIBLE_DEVICES:?set CUDA_VISIBLE_DEVICES to exactly one GPU}"
 
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd -- "$SCRIPT_DIR/../.." && pwd)"
 PYTHON_BIN="${PYTHON_BIN:-python}"
 PROFILE="${PROFILE:-curated}"
 ROUNDS="${ROUNDS:-3}"
 REPETITIONS="${REPETITIONS:-100}"
 REFERENCE="${REFERENCE:-auto}"
-REQUIRED_TORCH_VERSION="${REQUIRED_TORCH_VERSION:-2.13.0+cu132}"
-REQUIRED_TRITON_VERSION="${REQUIRED_TRITON_VERSION:-3.7.1}"
 
-"$PYTHON_BIN" - "$REQUIRED_TORCH_VERSION" "$REQUIRED_TRITON_VERSION" <<'PY'
-import sys
-
-import torch
-import triton
-
-required_torch, required_triton = sys.argv[1:]
-observed = {
-    "Torch": (torch.__version__, required_torch),
-    "Triton": (triton.__version__, required_triton),
-}
-mismatches = [
-    f"{name} {actual} (required {required})"
-    for name, (actual, required) in observed.items()
-    if actual != required
-]
-if mismatches:
-    raise SystemExit(
-        "Primary vLLM-reduction stack mismatch: " + "; ".join(mismatches)
-    )
-print(
-    f"Version check: Torch {torch.__version__}, Triton {triton.__version__}"
-)
-PY
+"$PYTHON_BIN" "$REPO_ROOT/scripts/check_primary_stack.py" \
+  --context "vLLM reductions"
 
 mkdir -p "$OUTPUT_DIR"
 

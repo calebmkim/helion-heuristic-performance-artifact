@@ -1,5 +1,10 @@
 # Linear-Attention Scripts
 
+Both launchers use the repository's shared primary-stack checker and fail
+before benchmarking unless they import PyTorch `2.13.0+cu132`, CUDA `13.2`,
+and Triton `3.7.1`. Override the required versions only for an explicitly
+labeled historical run.
+
 ## Native Helion Harness
 
 `run_native_harness.sh` is a thin launcher for the target checkout's own
@@ -28,6 +33,17 @@ The remaining scripts form an adaptable pipeline:
 6. `plot_blog_figures.py` creates the blog-style H100 figure and can combine it
    with the B200 per-cell CSV.
 7. `run_interleaved_comparison.sh` shows how those pieces are composed.
+
+For a small compatibility run, set `VARIANTS`, `SHAPE_NAMES`, `MODES`, or
+`LIMIT`; the launcher passes those filters to manifest discovery before config
+materialization. For example, four dense variants at one shape produce eight
+paired forward/forward-backward cells:
+
+```bash
+VARIANTS=vanilla_linear_attn,full_gla,gated_delta_rule,kda \
+SHAPE_NAMES=B1_T8192_H96_D128 \
+linear-attention-fla/scripts/run_interleaved_comparison.sh
+```
 
 The materializer and runner reuse Helion's example harness for workload
 construction, FLA calls, gradients, tolerances, and timing conventions. The

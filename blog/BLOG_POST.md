@@ -147,6 +147,10 @@ Every arm is checked for numerical agreement before it is timed.
 On H100, we materialize those configs first and then co-measure all four arms
 in one process per cell, with cold-L2 samples interleaved in rotated
 forward/reverse order.
+The retained full H100 sweep used PyTorch 2.12.0+cu132. A matched eight-cell
+forward/backward compatibility check on PyTorch 2.13.0+cu132, CUDA 13.2, and
+Triton 3.7.1 changed aggregate performance-versus-FLA by at most 0.05% across
+the three Helion arms, with every sampled arm passing correctness.
 
 [FIGURE: `figures/results-linattn-summary.png` -- geomeans for both parts and both modes, normalized to handwritten FLA Triton at 1.00x.
 Then optionally the two per-variant breakdowns, `figures/results-linattn-h100.png` and `figures/results-linattn-b200.png`.]
@@ -169,7 +173,7 @@ That makes them a good test: production kernels, written by someone else, agains
 Same shape of result, in a different codebase.
 Helion's no-autotune default runs at **0.58x** of vLLM's CUDA; the computed config reaches **1.27x**; full autotuning gets to **1.31x**.
 The interesting number is the last gap: on these kernels autotuning buys only **3%** over the config we compute for free.
-This primary run uses PyTorch 2.13.0+cu132, Triton 3.7.1, and vLLM 0.24.0's stable-ABI CUDA extension loaded directly, without allowing vLLM's wheel dependencies to replace the compiler stack.
+This primary run uses PyTorch 2.13.0+cu132, CUDA 13.2, Triton 3.7.1, and vLLM 0.24.0's stable-ABI CUDA extension loaded directly, without allowing vLLM's wheel dependencies to replace the compiler stack.
 The B200 run is still pending.
 
 ### The everyday kernels, against `torch.compile`
@@ -178,7 +182,7 @@ Both comparisons above are specialist libraries -- linear-attention variants and
 
 The reference is what you would otherwise reach for rather than something hand-written: `torch.compile(mode="max-autotune-no-cudagraphs")`, the strongest setting Inductor offers, with everything normalized to it at 1.00x. There is no tuned-config arm in this section, for the mundane reason that we do not have pre-tuned configs for these kernels -- so unlike the two sections above, this one reports no ceiling.
 
-On a suite of ten reduction kernels -- RMSNorm and LayerNorm forward and backward, softmax, cross entropy, KL divergence, JSD, fused linear JSD, GRPO -- over 80 cells, the computed config comes out at **1.088x** of max-autotune `torch.compile`, with no tuning of its own. Helion's unseeded default is **0.268x**. Seven of the ten kernels beat `torch.compile` and three trail it, the largest win being softmax at 1.377x and the largest loss JSD at 0.856x. This primary result uses PyTorch 2.13.0+cu132 and Triton 3.7.1; the artifact retains the earlier PyTorch 2.12.0+cu132 / Triton 3.7.0 dataset separately.
+On a suite of ten reduction kernels -- RMSNorm and LayerNorm forward and backward, softmax, cross entropy, KL divergence, JSD, fused linear JSD, GRPO -- over 80 cells, the computed config comes out at **1.088x** of max-autotune `torch.compile`, with no tuning of its own. Helion's unseeded default is **0.268x**. Seven of the ten kernels beat `torch.compile` and three trail it, the largest win being softmax at 1.377x and the largest loss JSD at 0.856x. This primary result uses PyTorch 2.13.0+cu132, CUDA 13.2, and Triton 3.7.1; the artifact retains the earlier PyTorch 2.12.0+cu132 / Triton 3.7.0 dataset separately.
 
 [FIGURE: `example-reductions/generated/blog-figures/results-example-reductions-h100.png` -- ten reduction kernels on H100 using PyTorch 2.13.0+cu132 and Triton 3.7.1, normalized to max-autotune `torch.compile` at 1.00x.]
 
@@ -474,10 +478,11 @@ OPEN QUESTIONS FOR THE AUTHOR BEFORE PUBLICATION
     public repro command safe to print, so there is none, and nothing in the body now references one —
     Result 1's auditability need is met instead by the absolute-latency anchor sentence under the
     linear-attention table. Add a Resources H2 if you have a public link.
- 4. Version pins are per-audit, not one build: linear attention ran torch 2.12.0+cu130 / Triton
-    3.7.0, the primary example-reduction result now uses torch 2.13.0+cu132 / Triton 3.7.1, and
-    pointwise used torch 2.12.0+cu132 / Triton 3.7.0. The SGLang run was on physical GPU 0 while
-    everything else was GPU 1. Confirm whether you want the full matrix stated.
+ 4. The primary H100 reduction runs and the linear-attention compatibility check now use
+    torch 2.13.0+cu132 / CUDA 13.2 / Triton 3.7.1. The retained full 96-cell H100
+    linear-attention artifact used torch 2.12.0+cu132 / Triton 3.7.1, while pointwise used
+    torch 2.12.0+cu132 / Triton 3.7.0. The SGLang run was on physical GPU 0 while everything
+    else was GPU 1. Confirm whether you want the full historical matrix stated.
  5. Measure the multi-matmul front end's config-selection cost on GPU. The +34 ms figure covers the
     single-contraction path only, and the post headlines the other one. research/14 SS3e calls this a
     one-afternoon job on the B200 box. The gap is now DISCLOSED in the body (TL;DR bullet 4 and the

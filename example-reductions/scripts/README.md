@@ -9,10 +9,10 @@ The pipeline is:
 3. `plot_results.py` plots those geomeans with Torch compile at `1.00x`.
 4. `starter.sh` runs the complete sequence.
 
-The starter defaults to the primary stack and exits before benchmarking unless
-it imports PyTorch `2.13.0+cu132` and Triton `3.7.1`. The required versions can
-be changed explicitly only when reproducing a labeled historical dataset.
-Reports and plots include the imported versions.
+The shared primary-stack checker exits before benchmarking unless the starter
+imports PyTorch `2.13.0+cu132`, CUDA `13.2`, and Triton `3.7.1`. The required
+versions can be changed explicitly only when reproducing a labeled historical
+dataset. Reports and plots include the imported versions.
 
 `workloads.py` owns the exact argument construction, Torch references,
 observable outputs, and tolerances for the ten kernels.

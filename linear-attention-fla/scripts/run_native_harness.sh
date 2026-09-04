@@ -10,7 +10,10 @@ set -euo pipefail
 
 : "${HELION_ROOT:?set HELION_ROOT to the Helion checkout}"
 : "${OUTPUT_DIR:?set OUTPUT_DIR for the native result}"
+: "${CUDA_VISIBLE_DEVICES:?set CUDA_VISIBLE_DEVICES to exactly one GPU}"
 
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd -- "$SCRIPT_DIR/../.." && pwd)"
 HELION_ROOT="$(cd -- "$HELION_ROOT" && pwd)"
 if [[ -n "${FLA_ROOT:-}" ]]; then
   FLA_ROOT="$(cd -- "$FLA_ROOT" && pwd)"
@@ -18,7 +21,10 @@ fi
 mkdir -p "$OUTPUT_DIR"
 OUTPUT_DIR="$(cd -- "$OUTPUT_DIR" && pwd)"
 
-PYTHON_BIN="$(realpath -- "$(command -v "${PYTHON_BIN:-python}")")"
+PYTHON_BIN="$(command -v "${PYTHON_BIN:-python}")"
+"$PYTHON_BIN" "$REPO_ROOT/scripts/check_primary_stack.py" \
+  --context "linear attention native harness"
+
 NATIVE_MODULE="${HELION_LINATTN_MODULE:-benchmarks.run_linattn}"
 OUTPUT_FILE="${OUTPUT_FILE:-$OUTPUT_DIR/helionbench.json}"
 if [[ "$OUTPUT_FILE" != /* ]]; then

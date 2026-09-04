@@ -11,38 +11,15 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 ARTIFACT_DIR="$(cd -- "$SCRIPT_DIR/.." && pwd)"
+REPO_ROOT="$(cd -- "$ARTIFACT_DIR/.." && pwd)"
 PYTHON_BIN="${PYTHON_BIN:-python}"
 MANIFEST="${MANIFEST:-$ARTIFACT_DIR/shapes.json}"
 ROUNDS="${ROUNDS:-3}"
 REPETITIONS="${REPETITIONS:-100}"
 TORCH_COMPILE_MODE="${TORCH_COMPILE_MODE:-max-autotune-no-cudagraphs}"
-REQUIRED_TORCH_VERSION="${REQUIRED_TORCH_VERSION:-2.13.0+cu132}"
-REQUIRED_TRITON_VERSION="${REQUIRED_TRITON_VERSION:-3.7.1}"
 
-"$PYTHON_BIN" - "$REQUIRED_TORCH_VERSION" "$REQUIRED_TRITON_VERSION" <<'PY'
-import sys
-
-import torch
-import triton
-
-required_torch, required_triton = sys.argv[1:]
-observed = {
-    "Torch": (torch.__version__, required_torch),
-    "Triton": (triton.__version__, required_triton),
-}
-mismatches = [
-    f"{name} {actual} (required {required})"
-    for name, (actual, required) in observed.items()
-    if actual != required
-]
-if mismatches:
-    raise SystemExit(
-        "Primary example-reduction stack mismatch: " + "; ".join(mismatches)
-    )
-print(
-    f"Version check: Torch {torch.__version__}, Triton {triton.__version__}"
-)
-PY
+"$PYTHON_BIN" "$REPO_ROOT/scripts/check_primary_stack.py" \
+  --context "example reductions"
 
 mkdir -p "$OUTPUT_DIR"
 
