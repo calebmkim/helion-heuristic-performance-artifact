@@ -24,7 +24,7 @@ example reductions (e.g., rms norm, layer norm, cross entropy, etc.):
 - TODO: get b200 numbers
 - OPTIONAL TODO (will tkae a long time): run autotuning on each shape and obtain configs for each shape
 
-## ANOTHER TODO
+## ANOTHER TODO (NON-TRIVIAL, COULD TAKE LONGER)
 
 currently there is 1 reduction heuristic: tuned only for h100. it might slightly underperform on b200.
 
