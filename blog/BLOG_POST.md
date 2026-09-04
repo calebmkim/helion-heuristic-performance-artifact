@@ -168,6 +168,24 @@ Helion's no-autotune default runs at **0.58x** of vLLM's CUDA; the computed conf
 The interesting number is the last gap: on these kernels autotuning buys only **3%** over the config we compute for free.
 The B200 run is still pending.
 
+### The everyday kernels, against `torch.compile`
+
+Both comparisons above are specialist libraries -- linear-attention variants and FP8 quantizers. This one is deliberately the opposite: the kernels everybody writes. RMSNorm, LayerNorm, softmax, cross entropy and friends, which is also the suite the [introduction post](https://pytorch.org/blog/helion/) benchmarked when it first measured Helion.
+
+The reference is what you would otherwise reach for rather than something hand-written: `torch.compile(mode="max-autotune-no-cudagraphs")`, the strongest setting Inductor offers, with everything normalized to it at 1.00x. There is no tuned-config arm in this section, for the mundane reason that we do not have pre-tuned configs for these kernels -- so unlike the two sections above, this one reports no ceiling.
+
+On a suite of ten reduction kernels -- RMSNorm and LayerNorm forward and backward, softmax, cross entropy, KL divergence, JSD, fused linear JSD, GRPO -- over 80 cells, the computed config comes out at **1.073x** of max-autotune `torch.compile`, with no tuning of its own. Helion's unseeded default is **0.253x**. Six of the ten kernels beat `torch.compile` and four trail it, the largest win being softmax at 1.335x and the largest loss JSD at 0.854x.
+
+[FIGURE: `example-reductions/generated/blog-figures/results-example-reductions-h100.png` -- ten reduction kernels on H100, normalized to max-autotune `torch.compile` at 1.00x.]
+
+The other corpus is a breadth sweep: thirteen kernel families over 69 shapes -- plain and broadcast matmul, a BF16 x INT16 GEMM, gather GEMV, dense, causal, biased and backward attention, Mamba-2 chunk state and chunk scan, squeeze-and-excitation, jagged HSTU, and a gated-delta-net recurrence. The computed config comes out at **2.38x** of max-autotune `torch.compile` overall, against **0.65x** for Helion's default.
+
+One caveat on that 2.38x: for some of these kernels the Helion implementation and the PyTorch reference are not the same algorithm. Where the reference materializes intermediates that the Helion kernel fuses, Inductor is implementing a different algorithm, and the ratio reflects that as much as it reflects the config. The gated-delta-net kernel is the extreme, at 13.6x.
+
+Two families go the other way. On the BF16 x INT16 GEMM the computed config lands at 0.848x, slower than `torch.compile`; and on jagged HSTU it is slower than Helion's own default, the one family in the sweep where the heuristic actively hurts.
+
+[FIGURE: `other-matmul-kernels/generated/h100-eacfee67-torch-compile/blog-figures/results-matmul-vs-torch-compile-h100.png` -- thirteen kernel families over 69 shapes on H100, normalized to max-autotune `torch.compile`.]
+
 ## Result 2: Does the Seed Make the Search Faster?
 
 Everything above is about the config Helion emits when autotuning is *off*.
