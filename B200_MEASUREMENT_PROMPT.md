@@ -29,3 +29,5 @@ This is an autonomous run. Make implementation decisions using your best judgmen
 At the beginning, create a durable Markdown run log and paste this entire prompt verbatim at its top. Keep a current checkpoint immediately below it with completed work, running jobs and their identifiers, output locations, unresolved issues, and the next action. Record important commands, findings, adaptations, and decisions as you go. Reread the prompt and checkpoint after context compaction, and resume from the saved state. The log should contain everything needed to continue the run without relying on conversational memory.
 
 Please begin and run autonomously until all four experiments, their reports, and their graphs are finished.
+
+After completing all four experiments, open a pull request on https://github.com/calebmkim/helion-heuristic-performance-artifact containing the B200 results, reports, graphs, run log, and any script adaptations needed to reproduce them.
